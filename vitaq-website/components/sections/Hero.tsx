@@ -3,9 +3,13 @@ import React from 'react';
 
 export const Hero = () => {
   return (
-    // This is the one line that needs to change: add pointer-events-none
-    <section className="relative w-full h-screen mx-auto flex items-center justify-center pointer-events-none">
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pointer-events-auto">
+    // This section is now the ONLY part of the page with this special property.
+    // It is positioned relative and has a defined height to fill the screen.
+    // pointer-events-none allows the mouse to "pass through" to the canvas behind it.
+    <section className="relative z-10 h-screen flex items-center justify-center pointer-events-none">
+
+      {/* This inner div re-enables mouse events ONLY for the text and buttons. */}
+      <div className="max-w-7xl mx-auto px-6 text-center pointer-events-auto">
         <h1 className="text-5xl md:text-7xl font-bold text-brand-text leading-tight">
           Unlock Peak Performance.
           <br />
@@ -17,7 +21,7 @@ export const Hero = () => {
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#demo"
-            className="px-8 py-3 bg-brand-primary text-white font-bold rounded-.full transition-transform duration-300 ease-in-out hover:scale-105"
+            className="px-8 py-3 bg-brand-primary text-white font-bold rounded-full transition-transform duration-300 ease-in-out hover:scale-105"
           >
             Request a Demo
           </a>
