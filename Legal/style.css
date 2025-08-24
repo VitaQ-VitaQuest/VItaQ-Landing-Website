@@ -1,0 +1,223 @@
+:root {
+    --background-light: #F9FAFB;
+    --text-light: #1F2937;
+    --header-bg-light: #FFFFFF;
+    --border-light: #E5E7EB;
+    --primary-accent: #FF50DE;
+    --link-light: #D946EF;
+    --metadata-light: #6B7280;
+    --gradient-start-light: rgba(236, 72, 153, 0.1);
+    --gradient-end-light: rgba(139, 92, 246, 0.1);
+
+    --background-dark: #111827;
+    --text-dark: #E5E7EB;
+    --header-bg-dark: #1F2937;
+    --border-dark: #374151;
+    --link-dark: #F472B6;
+    --metadata-dark: #9CA3AF;
+    --gradient-start-dark: rgba(236, 72, 153, 0.15);
+    --gradient-end-dark: rgba(29, 78, 216, 0.2);
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--background-light);
+    color: var(--text-light);
+    line-height: 1.7;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: linear-gradient(135deg, var(--gradient-start-light), var(--gradient-end-light), var(--background-light));
+    background-size: 400% 400%;
+    animation: gradientAnimation 25s ease infinite;
+    transition: background 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--background-dark);
+        color: var(--text-dark);
+    }
+    body::before {
+        background: linear-gradient(135deg, var(--gradient-start-dark), var(--gradient-end-dark), var(--background-dark));
+        background-size: 400% 400%;
+    }
+}
+
+.header {
+    background-color: var(--header-bg-light);
+    border-bottom: 1px solid var(--border-light);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .header {
+        background-color: var(--header-bg-dark);
+        border-bottom-color: var(--border-dark);
+    }
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-light);
+    transition: border-color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .content h2 {
+        border-bottom-color: var(--border-dark);
+    }
+}
+
+.content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.content p, .content li {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.content ul {
+    padding-left: 1.5rem;
+}
+
+.content a {
+    color: var(--link-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .content a {
+        color: var(--link-dark);
+    }
+}
+
+.content a:hover {
+    text-decoration: underline;
+}
+
+.content strong {
+    font-weight: 600;
+}
+
+.metadata {
+    color: var(--metadata-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .metadata {
+        color: var(--metadata-dark);
+    }
+}
+
+.footer {
+    padding: 2rem 1.5rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-light);
+    transition: border-color 0.3s, color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .footer {
+        border-top-color: var(--border-dark);
+    }
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-logo {
+    height: 32px;
+    width: auto;
+}
+
+.footer-text {
+    text-align: left;
+}
+
+.footer-product-name {
+    margin: 0;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.footer-copyright {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--metadata-light);
+}
+
+@media (prefers-color-scheme: dark) {
+    .footer-product-name {
+        color: var(--text-dark);
+    }
+    .footer-copyright {
+        color: var(--metadata-dark);
+    }
+}

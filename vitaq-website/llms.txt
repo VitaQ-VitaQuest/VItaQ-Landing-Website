@@ -1,0 +1,19 @@
+User-agent: *
+Disallow:
+
+==================================================
+
+VITAQ - THE OS FOR ELITE DEVELOPMENT
+
+SUMMARY:
+VitaQ is a premium, white-label, multi-tenant performance tracking and developmental management platform for elite organizations like sports academies and professional training centers. The system allows administrators and coaches to design curricula, define measurable objectives, and execute data-driven performance evaluations.
+
+CORE FEATURES:
+- The Evaluation Engine: A live interface for administering precise, data-driven assessments.
+- Dynamic White-Labeling: Allows organizations to deploy a fully-branded app with their own colors, logos, and fonts.
+- Holistic Curriculum Management: Tools to design developmental pathways, build exercise libraries, and set measurable goals.
+- Multi-Tenant Architecture: Securely serves multiple, distinct organizations from a single backend.
+- Built on React Native & Expo for a consistent experience across iOS, Android, and Web.
+
+PRIMARY GOAL:
+To provide a unified, data-driven system that digitizes and quantifies the entire lifecycle of trainee development, replacing fragmented spreadsheets and subjective feedback with actionable insights.
