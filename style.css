@@ -700,6 +700,28 @@ section { padding: 9rem 0; position: relative; }
         box-shadow: var(--glow-shadow);
         transform: scale(1.02);
     }
+    .testimonial-card {
+        width: 300px; /* Significantly smaller card for mobile */
+        padding: 2rem; /* Reduce the padding */
+    }
+
+    .testimonial-card blockquote {
+        font-size: 1rem; /* Smaller text for better readability */
+        line-height: 1.5;
+    }
+
+    .testimonial-reel {
+        gap: 1.5rem; /* Reduce the gap between cards */
+        animation-duration: 80s; /* Slow down the animation slightly on mobile */
+    }
+    
+    /* Also adjust the client reel on mobile */
+    .client-reel {
+        gap: 3rem;
+    }
+    .client-reel img {
+        height: 60px;
+    }
 }
 @media (min-width: 992px) and (max-width: 1542px) {
     .hero {
