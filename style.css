@@ -9,6 +9,7 @@
     --border-color: rgba(255, 255, 255, 0.1);
     --font-family: 'Inter', sans-serif;
     --glow-shadow: 0 0 15px rgba(255, 80, 222, 0.6), 0 0 25px rgba(255, 80, 222, 0.4);
+    --success-green: #00ff89;
 }
 
 ::selection {
@@ -24,7 +25,7 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-light);
     overflow-x: hidden;
-    cursor: none;
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.7"/></svg>') 12 12, auto;
 }
 body.menu-open {
     overflow: hidden;
@@ -56,7 +57,6 @@ body.menu-open {
     filter: blur(150px);
     opacity: 0.15;
     z-index: -2;
-    animation: drift 20s infinite alternate ease-in-out;
 }
 .aurora-1 { width: 600px; height: 600px; background: var(--primary-pink); top: -10%; left: -15%; }
 .aurora-2 { width: 500px; height: 500px; background: var(--primary-purple); top: 40%; right: -20%; animation-duration: 25s; }
@@ -73,7 +73,6 @@ body.menu-open {
 .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
 section { padding: 9rem 0; position: relative; }
 .section-header { text-align: center; max-width: 750px; margin: 0 auto 4rem auto; }
-.section-title, .section-subtitle, .section-title-small { opacity: 0; visibility: hidden; } /* Hide for GSAP */
 .section-title { font-size: 3rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2; }
 .section-title-small { font-weight: 600; color: var(--text-medium); text-align: center; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.9rem; }
 .section-subtitle { font-size: 1.1rem; color: var(--text-medium); line-height: 1.7; max-width: 600px; margin: 0 auto; }
@@ -110,14 +109,12 @@ section { padding: 9rem 0; position: relative; }
 
 /* --- Section 1: Hero --- */
 .hero { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem; align-items: center; padding-top: 6rem; padding-bottom: 6rem; }
-.hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .hero-image-wrapper { opacity: 0; }
 .hero-preheadline { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple), var(--primary-pink)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradient-pan 6s linear infinite; }
 .hero-headline { font-size: 4.5rem; font-weight: 900; margin: 0 0 1.5rem 0; line-height: 1.1; }
 .hero-subheading { font-size: 1.2rem; color: var(--text-medium); margin: 0 auto 2.5rem auto; line-height: 1.7; max-width: 550px; }
 .hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
 .hero-image-wrapper { display: flex; justify-content: center; align-items: center; }
-.hero-image { max-width: none; width: 700px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); margin-right: -150px; will-change: transform; -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%); }
+.hero-image { max-width: none; width: 700px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); margin-right: -150px; will-change: transform; -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); mask-image: linear-gradient(to bottom, black 80%, transparent 100%); }
 
 /* --- Section 2: Social Proof --- */
 .social-proof { 
@@ -140,10 +137,9 @@ section { padding: 9rem 0; position: relative; }
     padding: 3rem 0; 
     -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent); 
     mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent); 
-    /* Add these lines for the animated gradient */
     background: linear-gradient(90deg, rgba(255, 80, 222, 0.8), rgba(127, 0, 255, 0.8), rgba(255, 80, 222, 0.8));
     background-size: 200% 200%;
-    animation: gradient-pan 8s ease infinite; /* A slightly slower pan feels more premium here */
+    animation: gradient-pan 8s ease infinite;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 50%, black 50%, transparent 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 50%, black 50%, transparent 100%);
 }
@@ -153,7 +149,7 @@ section { padding: 9rem 0; position: relative; }
 .client-reel img:hover { filter: grayscale(0); opacity: 1; transform: scale(1.2); }
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* NEW: Testimonials Wrapper for full-width glass background */
+/* Testimonials Wrapper */
 .testimonials-wrapper {
     background: rgba(10, 10, 16, 0.5);
     -webkit-backdrop-filter: blur(8px);
@@ -162,78 +158,398 @@ section { padding: 9rem 0; position: relative; }
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
 }
-
-/* NEW: Testimonials grid container */
 .testimonials {
-    display: grid;
-    grid-template-columns: 1fr; /* Default for mobile */
-    gap: 2rem;
+    display: block; /* Override the grid display */
+    grid-template-columns: none;
+    gap: 0;
 }
-
-/* Testimonial Cards */
+/* Adjust the testimonial card for the horizontal reel */
 .testimonial-card {
+    width: 400px; /* Give cards a consistent width */
+    flex-shrink: 0; /* Prevent cards from shrinking */
     background: var(--bg-dark); 
     padding: 2.5rem;
     border-radius: 16px; 
     border: 1px solid var(--border-color);
-    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* The "Glow Up" Hover Effect */
+.testimonial-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    border-color: rgba(255, 80, 222, 0.5);
+    box-shadow: var(--glow-shadow);
 }
 .testimonial-card blockquote { font-size: 1.3rem; font-weight: 500; line-height: 1.6; margin: 0 0 1.5rem 0; color: var(--text-light); }
 .testimonial-card cite { color: var(--text-medium); font-style: normal; font-weight: 600; }
 .testimonial-card cite span { display: block; color: var(--text-light); font-weight: 700; margin-bottom: 0.25rem; }
+.testimonial-reel-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 4rem 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.testimonial-reel {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    width: max-content;
+    animation: scroll-reverse 60s linear infinite;
+    align-items: flex-start;
+}
+
+/* This is the key: pause the animation when hovering the container */
+.testimonial-reel-container:hover .testimonial-reel {
+    animation-play-state: paused;
+}
+
+/* Define the reverse scroll animation */
+@keyframes scroll-reverse {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
 
 /* --- Section 3: Problem --- */
-.problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Default to a single column on mobile */
+    gap: 2rem;
+}
 .problem-card { background: var(--bg-light); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .problem-icon { width: 70px; height: 70px; transition: filter 0.3s ease; }
 .problem-card h3 { font-size: 1.3rem; margin: 1rem 0; }
 .problem-card p { color: var(--text-medium); line-height: 1.7; margin: 0; }
-.problem-card:hover { transform: translateY(-8px); border-color: rgba(255, 80, 222, 0.5); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+.problem-card:hover {
+    transform: translateY(-8px);
+    border-color: transparent; 
+    box-shadow: var(--glow-shadow); 
+}
 .problem-card:hover .problem-icon { filter: drop-shadow(var(--glow-shadow)); }
 
-/* --- Section 4 & 6 --- */
-.solution, .white-label { display: grid; grid-template-columns: 1fr; gap: 5rem; align-items: center; }
-.solution .section-subtitle, .white-label .section-subtitle { margin-bottom: 2rem; }
-.solution-image-wrapper img, .white-label-image-wrapper img { width: 140%; margin-left: -10%; border-radius: 16px;  }
+/* --- Section 4: Solution --- */
+.solution { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.solution .section-subtitle { margin-bottom: 2rem; }
+.solution-image-wrapper img { width: 100%; border-radius: 16px; }
 
 /* --- Section 5: Feature Grid (Glassmorphism) --- */
-.features {
-    /* Remove the container styles completely */
-    background: transparent;
-    border: none;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-}
-
-/* Give the title a subtle glow to make it pop */
-.features .section-header .section-title {
-    text-shadow: 0 0 25px rgba(255, 80, 222, 0.3);
-}
-
-/* Enhance the card hover effect to make them "lift" and glow */
-.feature-card:hover {
-    transform: translateY(-8px) scale(1.05); /* Add a vertical lift */
-    border-color: rgba(255, 80, 222, 0.6);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Add a shadow for depth */
+.features { background: transparent; border: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.features .section-header .section-title { text-shadow: 0 0 25px rgba(255, 80, 222, 0.3); }
+.feature-card:hover { 
+    transform: translateY(-8px) 
+    scale(1.05); 
+    border-color: transparent; 
+    box-shadow: var(--glow-shadow);
 }
 .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-.feature-card { background: var(--bg-dark); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+.feature-card {
+    background: var(--bg-dark);
+    padding: 3rem 2rem; /* Increased top/bottom padding */
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-align: center; /* Center everything */
+    position: relative; /* Crucial for the absolute icon */
+    overflow: hidden; /* Hides the icon when it's outside */
+ }
 .feature-card h4 { font-size: 1.2rem; margin: 0 0 0.5rem 0; }
 .feature-card p { color: var(--text-medium); margin: 0; line-height: 1.6; }
 
-/* --- Section 7: Contact Form --- */
-.contact-section {
-    text-align: center;
-    border-top: 1px solid var(--border-color);
-    background: linear-gradient(var(--bg-light) 0%, var(--bg-dark) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+.feature-card .feature-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1rem;
+    position: absolute; /* Key for positioning */
+    top: 2rem;
+    left: 50%;
+    transform: translate(-50%, -150%); /* Start hidden above */
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* A smooth, premium ease */
 }
+.feature-card h4, .feature-card p {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+/* On hover... */
+.feature-card:hover .feature-icon {
+    transform: translate(-50%, 0); /* Icon slides down into view */
+    opacity: 1;
+}
+
+.feature-card:hover h4 {
+    transform: translateY(35px); /* Title slides down */
+}
+
+.feature-card:hover p {
+    transform: translateY(40px); /* Paragraph slides down */
+    opacity: 0.7; /* Subtly fade the text to focus on the icon/title */
+}
+
+/* --- NEW: Floating Animation --- */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- Section 6: Deep Dive Scrollytelling --- */
+.deep-dive { padding-bottom: 0rem; }
+/* Hide mobile layout by default */
+.deep-dive-mobile { display: none; }
+.deep-dive-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: flex-start; }
+.sticky-col { position: sticky; top: 15vh; height: 70vh; }
+.sticky-content-wrapper { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+    gap: 2rem;
+    perspective: 1500px;
+}
+.step-title-container { position: relative; flex-shrink: 0; min-height: 5rem; }
+.step-title { font-size: 2rem; line-height: 1.3; font-weight: 900; position: absolute; top: 0; left: 0; width: 100%; opacity: 0; visibility: hidden; }
+.mockup-container { 
+    position: relative; 
+    top: 10vh; 
+    width: 100%; 
+    flex-grow: 1; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    will-change: transform; 
+    transform-style: preserve-3d;
+    filter: blur(0px);
+}
+.mockup-screen { position: absolute; max-width: 90%; max-height: 90%; opacity: 0; visibility: hidden; }
+.scroll-step { min-height: 75vh; display: flex; flex-direction: column; justify-content: center; }
+.step-content { background: var(--bg-light); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.4s ease; }
+.step-content.glowing { border-color: rgba(255, 80, 222, 0.6); box-shadow: var(--glow-shadow); transform: scale(1.02); }
+.step-content h4 { font-size: 1.2rem; font-weight: 700; margin: 0 0 1rem 0; color: var(--primary-pink); }
+.step-content p { color: var(--text-medium); margin: 0 0 1.5rem 0; line-height: 1.7; }
+.step-content ul { list-style: none; padding: 0; margin: 0 0 1.5rem 0; color: var(--text-medium); }
+.step-content ul li { padding-left: 25px; position: relative; margin-bottom: 0.75rem; line-height: 1.6; }
+.step-content ul li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--primary-pink); font-weight: 700; }
+.step-icon { width: 48px; height: 48px; display: block; margin-top: 1rem; }
+.scroll-step:first-child {
+    margin-top: 10vh;
+}
+
+/* --- Section 7: White-Label --- */
+.white-label { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: -30vh;}
+.white-label .white-label-content { order: -1; }
+.white-label .section-subtitle { margin-bottom: 2rem; }
+.white-label-image-wrapper img { width: 100%; border-radius: 16px; }
+.use-case-grid {
+    /* This ensures a 4-column layout on large screens, and responsive wrapping on smaller screens */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem; /* A bit more spacing */
+}
+
+.use-case-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem;
+    position: relative; /* Needed for the gradient border */
+    overflow: hidden; /* Keeps the gradient border neat */
+    border: 1px solid var(--border-color); /* The default border */
+}
+
+.use-case-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
+}
+
+.use-case-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.use-case-card p {
+    color: var(--text-medium);
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* The "Diamond Standard" Hover Effect */
+.use-case-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -1px; /* To sit behind the border */
+    border-radius: 17px; /* Matches the card's border-radius + border width */
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.use-case-card:hover {
+    transform: translateY(-10px); /* Lift the card */
+    border-color: transparent; /* Hide the default border to reveal the gradient */
+}
+
+.use-case-card:hover::before {
+    opacity: 1; /* Show the glowing gradient border on hover */
+}
+
+.use-case-grid-wrapper {
+    max-width: 1000px; /* Constrain the width for a more balanced look */
+    margin: 0 auto; /* Center the grid container */
+}
+
+.use-case-grid {
+    grid-template-columns: repeat(2, 1fr); /* A deliberate 2x2 grid */
+    gap: 2.5rem; /* Increase gap for a more premium feel */
+}
+
+.use-case-card {
+    background: var(--bg-light); /* Give cards a slightly different background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 20px; /* More rounded corners */
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth transitions */
+}
+
+.use-case-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
+}
+
+.use-case-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.use-case-card p {
+    color: var(--text-medium);
+    margin: 0;
+    line-height: 1.7;
+}
+
+.use-case-card p strong {
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+/* The "Diamond Standard" Hover Effect */
+.use-case-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 0;
+    margin: -1px;
+    border-radius: inherit; /* Inherit the card's border-radius */
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.use-case-card > * {
+    position: relative; /* Ensure card content sits above the gradient pseudo-element */
+    z-index: 1;
+}
+
+.use-case-card:hover {
+    transform: translateY(-12px); /* Lift the card more */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    border-color: transparent;
+}
+
+.use-case-card:hover::before {
+    opacity: 1; /* Show the glowing gradient border */
+}
+
+.use-case-image-wrapper {
+    max-width: 800px; /* Or whatever size feels right */
+    margin: 0 auto 5rem auto; /* Center it and add 5rem of space below it */
+}
+
+.use-case-image-wrapper img {
+    width: 100%;
+    border-radius: 16px; /* Match the site's aesthetic */
+}
+
+/* --- Section 8 & 9 --- */
+.contact-section .container { text-align: center; }
 .contact-section .hero-headline { font-size: 3.5rem; }
 .contact-section .hero-subheading { max-width: 700px; margin: 0 auto; }
-.form-container { max-width: 800px; margin: 3rem auto 0 auto; background: rgba(22, 22, 37, 0.5); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 20px; padding: 3rem; position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.3); }
-.form-container::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; border-radius: 20px; padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.form-container {
+    max-width: 800px;
+    margin: 3rem auto 0 auto;
+    position: relative; /* Crucial for positioning the glows */
+    border-radius: 20px;
+    padding: 0; /* Padding is now on the wrapper */
+    background: transparent; /* No background color here */
+    border: none; /* The glow will create the border */
+    box-shadow: 0 0 50px rgba(0,0,0,0.3);
+}
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 20px;
+    z-index: 1; /* Sits just behind the wrapper */
+    pointer-events: none;
+    animation: breathing-glow-pink 7s ease-in-out infinite;
+}
+
+.form-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 20px;
+    z-index: 1;
+    pointer-events: none;
+    animation: breathing-glow-purple 5s ease-in-out 1s infinite;
+}
+
+/* 5. The animation keyframes (no changes here, they are correct) */
+@keyframes breathing-glow-pink {
+    0% {
+        box-shadow: 0 0 10px 0px var(--primary-pink),
+                    0 0 20px 0px var(--primary-pink);
+    }
+    50% {
+        box-shadow: 0 0 25px 5px var(--primary-pink),
+                    0 0 50px 10px var(--primary-pink);
+    }
+    100% {
+        box-shadow: 0 0 10px 0px var(--primary-pink),
+                    0 0 20px 0px var(--primary-pink);
+    }
+}
+
+@keyframes breathing-glow-purple {
+    0% {
+        box-shadow: 0 0 12px 0px var(--primary-purple),
+                    0 0 25px 0px var(--primary-purple);
+    }
+    50% {
+        box-shadow: 0 0 30px 6px var(--primary-purple),
+                    0 0 60px 12px var(--primary-purple);
+    }
+    100% {
+        box-shadow: 0 0 12px 0px var(--primary-purple),
+                    0 0 25px 0px var(--primary-purple);
+    }
+}
 .form-row { display: flex; gap: 2rem; }
 .input-group { position: relative; margin-bottom: 2rem; text-align: left; width: 100%; }
 .input-group input, .input-group textarea { width: 100%; padding: 1rem 0 0.5rem 0; background: transparent; border: none; border-bottom: 2px solid var(--border-color); color: var(--text-light); font-size: 1rem; font-family: inherit; transition: border-color 0.3s; position: relative; background-image: linear-gradient(90deg, var(--primary-pink), var(--primary-purple)); background-repeat: no-repeat; background-size: 0% 2px; background-position: left bottom; }
@@ -242,15 +558,80 @@ section { padding: 9rem 0; position: relative; }
 .input-group input:focus, .input-group textarea:focus { outline: none; border-bottom-color: transparent; background-size: 100% 2px; }
 .input-group input:focus + label, .input-group textarea:focus + label, .input-group input:valid + label, .input-group textarea:valid + label { top: -0.5rem; font-size: 0.8rem; color: var(--primary-pink); }
 #contact-form button { margin-top: 1rem; width: 100%; }
-.form-wrapper { position: relative; }
+.form-wrapper {
+    position: relative;
+    z-index: 2; /* Sits on top of the pseudo-elements */
+    background: rgba(22, 22, 37, 0.8); /* The dark, semi-transparent background */
+    padding: 3rem; /* Padding is moved here */
+    border-radius: 20px; /* Match the container's radius */
+    overflow: hidden; /* Keeps everything neat */
+}
 .form-wrapper .spinner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; border: 5px solid rgba(255, 255, 255, 0.2); border-top-color: var(--primary-pink); border-radius: 50%; opacity: 0; visibility: hidden; transition: all 0.3s; animation: spin 1s linear infinite; }
 .form-wrapper.sending #contact-form { filter: blur(5px); opacity: 0.5; }
 .form-wrapper.sending .spinner { opacity: 1; visibility: visible; }
 @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-.form-success { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.form-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    background: rgba(22, 22, 37, 0.8);
+    padding: 3rem;
+    border-radius: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
 .success-icon { width: 80px; height: 80px; fill: #00C853; margin-bottom: 1rem; }
 .form-success h3 { font-size: 2rem; color: var(--text-light); margin: 0 0 0.5rem 0; }
 .form-success p { color: var(--text-medium); margin: 0; max-width: 300px; }
+.form-container::before,
+.form-container::after {
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+/* This is the class we will add with JavaScript */
+/* It overrides the default pink/purple animations */
+.form-container.form-success-glow::before {
+    animation: breathing-glow-green-1 4s ease-in-out infinite;
+}
+.form-container.form-success-glow::after {
+    animation: breathing-glow-green-2 6s ease-in-out 0.5s infinite;
+}
+
+/* Keyframes for the FIRST green glow layer */
+@keyframes breathing-glow-green-1 {
+    0% {
+        box-shadow: 0 0 10px 0px var(--success-green),
+                    0 0 20px 0px var(--success-green);
+    }
+    50% {
+        box-shadow: 0 0 25px 5px var(--success-green),
+                    0 0 50px 10px var(--success-green);
+    }
+    100% {
+        box-shadow: 0 0 10px 0px var(--success-green),
+                    0 0 20px 0px var(--success-green);
+    }
+}
+
+/* Keyframes for the SECOND green glow layer */
+@keyframes breathing-glow-green-2 {
+    0% {
+        box-shadow: 0 0 12px 0px var(--success-green),
+                    0 0 25px 0px var(--success-green);
+    }
+    50% {
+        box-shadow: 0 0 30px 6px var(--success-green),
+                    0 0 60px 12px var(--success-green);
+    }
+    100% {
+        box-shadow: 0 0 12px 0px var(--success-green),
+                    0 0 25px 0px var(--success-green);
+    }
+}
 
 /* --- Footer --- */
 .footer { padding: 2.5rem 0; text-align: center; color: var(--text-medium); }
@@ -267,7 +648,59 @@ section { padding: 9rem 0; position: relative; }
 }
 
 @media (max-width: 991px) { .hero { display: block; text-align: center; padding-top: 10rem; padding-bottom: 0; margin-bottom: 0; min-height: unset; } .hero-cta { align-items: center; } .hero-image-wrapper { margin-top: -3rem; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); mask-image: linear-gradient(to bottom, transparent 0%, black 40%); } .hero-image { width: 90%; max-width: 500px; margin: 0 auto; } .social-proof { margin-top: -150px; } .solution-image-wrapper img, .white-label-image-wrapper img { width: 100%; margin-left: 0; } }
-@media (max-width: 767px) { .hero-image-wrapper { margin-top: -3rem; } .hero-image { max-width: 450px; } .social-proof { margin-top: -100px; } section { padding: 6rem 0; } .hero-headline { font-size: 3rem; } .section-title { font-size: 2.5rem; } .contact-section .hero-headline { font-size: 2.8rem; } .solution, .white-label { gap: 3rem; } .white-label .white-label-image-wrapper { order: -1; } .nav-link { font-size: 2rem; } .client-reel { gap: 3rem; } .client-reel img { height: 60px; } .form-row { flex-direction: column; gap: 0; } .form-container { padding: 2rem; } }
+@media (max-width: 767px) { 
+    .hero-image-wrapper { margin-top: -3rem; } .hero-image { max-width: 450px; } .social-proof { margin-top: -100px; } section { padding: 6rem 0; } .hero-headline { font-size: 3rem; } .section-title { font-size: 2.5rem; } .contact-section .hero-headline { font-size: 2.8rem; } .solution, .white-label { gap: 3rem; } .white-label .white-label-image-wrapper { order: -1; } .nav-link { font-size: 2rem; } .client-reel { gap: 3rem; } .client-reel img { height: 60px; } .form-row { flex-direction: column; gap: 0; } .form-wrapper { padding: 2rem; } 
+    .problem-grid  {
+        display: grid;
+        grid-template-columns: 1fr; /* Default to a single column on mobile */
+        gap: 2rem;
+    }
+    .use-case-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* Default to a single column on mobile */
+        gap: 2rem;
+    }
+    .solution {
+        grid-template-columns: 1fr; /* Stack the columns */
+        text-align: center;
+    }
+    
+    .solution-image-wrapper {
+        order: 2; /* Move the image below the text */
+    }
+    
+    .solution-content {
+        order: 1;
+    }
+    /* --- NEW RULES FOR DEEP DIVE MOBILE --- */
+    .deep-dive-desktop {
+        display: none; /* Hide the entire desktop grid */
+    }
+    .deep-dive-mobile {
+        display: block; /* Show the mobile container */
+    }
+    .mobile-step {
+        margin-bottom: 4rem; /* Space between each feature step */
+    }
+    .step-title-mobile {
+        font-size: 1.8rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    .mobile-mockup-screen {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto 2rem auto;
+        border-radius: 12px;
+    }
+    .deep-dive-mobile .step-content {
+        border-color: rgba(255, 80, 222, 0.6);
+        box-shadow: var(--glow-shadow);
+        transform: scale(1.02);
+    }
+}
 @media (min-width: 992px) and (max-width: 1542px) {
     .hero {
         /* Change from a grid to a single-column block */
@@ -304,13 +737,6 @@ section { padding: 9rem 0; position: relative; }
     /* Explicitly keep the 'White-Label' section as two columns */
     .white-label {
         grid-template-columns: 1fr 1fr;
-    }
-
-    /* Tame the images in BOTH sections to prevent any overflow */
-    .solution-image-wrapper img, 
-    .white-label-image-wrapper img {
-        width: 100%;
-        margin-left: 0;
     }
 }
 /* Accessibility */

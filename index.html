@@ -13,10 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
+    <style>
+      /* Prevents Flash of Unstyled Content (FOUC) on animated elements */
+      .hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .hero-image-wrapper,
+      .section-title, .section-subtitle, .section-title-small,
+      .problem-card, .feature-card, .testimonial-card, .white-label, .step-content {
+        visibility: hidden;
+      }
+    </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Spotlight will be added by JS -->
 
     <!-- Particle.js Background Container -->
     <div id="particles-js"></div>
@@ -31,7 +38,8 @@
         <nav class="nav-fullscreen">
             <a href="#about" class="nav-link">About VitaQ</a>
             <a href="#clients" class="nav-link">Our Clients</a>
-            <a href="#feature-grid" class="nav-link">Platform Features</a>
+            <a href="#deep-dive" class="nav-link">Platform Features</a>
+            <a href="#use-cases" class="nav-link">Who It's For</a>
             <a href="#contact" class="nav-link cta">Request a Demo</a>
         </nav>
     </div>
@@ -84,7 +92,6 @@
                     <img src="proskate.by.png" alt="proskate.by Logo">
                     <img src="Rolloryx 2024.png" alt="Rolloryx 2024 Logo">
                     <img src="UAE Rollball.png" alt="UAE Rollball Logo">
-                    <!-- Cloned logos for seamless loop -->
                     <img src="rollfinity.png" alt="Rollfinity Logo">
                     <img src="rollersider.png" alt="Rollsiders Logo">
                     <img src="funkyrollers.png" alt="Funky Rollers Logo">
@@ -96,24 +103,72 @@
                 </div>
             </div>
 
-            <!-- NEW HTML STRUCTURE TO FIX LAYOUT -->
+            <!-- Section 2: Social Proof -> Testimonials Wrapper -->
             <div class="testimonials-wrapper">
-                <div class="testimonials container">
-                    <div class="testimonial-card">
-                        <blockquote>
-                            "VitaQ has fundamentally transformed how we operate. The objective data has created a new level of trust with our athletes and their parents."
-                        </blockquote>
-                        <cite><span>Ramadan</span>Rollsider, Saudi Arabia</cite>
-                    </div>
-                    <div class="testimonial-card">
-                        <blockquote>
-                            "Our evaluation process is 50% more efficient. The platform is intuitive for coaches and provides incredible value to our entire organization."
-                        </blockquote>
-                        <cite><span>Abdallah Mahmoud</span>Rollfinity, UAE, Dubai</cite>
+                <div class="testimonial-reel-container">
+                    <div class="testimonial-reel">
+                        <!-- ORIGINAL SET OF TESTIMONIALS -->
+                        <div class="testimonial-card">
+                            <blockquote>"VitaQ has fundamentally transformed how we operate..."</blockquote>
+                            <cite><span>Abdallah Mahmoud</span>Head Coach, Rollfinity (UAE)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"The ability to create and deploy a standardized national curriculum..."</blockquote>
+                            <cite><span>Omar Wasfi</span>Technical Director, National Skating Federation (UAE)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"As a parent with two children in the academy, the context switching is brilliant..."</blockquote>
+                            <cite><span>Josef Salah</span>Parent, Elite Youth Academy (Qatar)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"Moving from spreadsheets to VitaQ's Evaluation Conductor saved my coaching staff..."</blockquote>
+                            <cite><span>Javier Rossi</span>Academy Director, Pro Skater Development (Saudi Arabia)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"Quantifying patient recovery with objective data has revolutionized our practice..."</blockquote>
+                            <cite><span>Aisha Khan</span>Lead Physiotherapist, Apex Rehabilitation Center (UAE)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"The white-labeling process was seamless. We now have a professional, branded app..."</blockquote>
+                            <cite><span>Amanda Smith</span>Head Coach, National Sports Body (Oman)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"Our evaluation process is 50% more efficient..."</blockquote>
+                            <cite><span>Ramadan</span>Founder & Head Coach, Rollsiders (Saudi Arabia)</cite>
+                        </div>
+
+                        <!-- DUPLICATED SET FOR SEAMLESS LOOP -->
+                        <div class="testimonial-card">
+                            <blockquote>"VitaQ has fundamentally transformed how we operate..."</blockquote>
+                            <cite><span>Abdallah Mahmoud</span>Head Coach, Rollfinity (UAE)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"The ability to create and deploy a standardized national curriculum..."</blockquote>
+                            <cite><span>Omar Wasfi</span>Technical Director, National Skating Federation (UAE)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"As a parent with two children in the academy, the context switching is brilliant..."</blockquote>
+                            <cite><span>Josef Salah</span>Parent, Elite Youth Academy (Qatar)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"Moving from spreadsheets to VitaQ's Evaluation Conductor saved my coaching staff..."</blockquote>
+                            <cite><span>Javier Rossi</span>Academy Director, Pro Skater Development (Saudi Arabia)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"Quantifying patient recovery with objective data has revolutionized our practice..."</blockquote>
+                            <cite><span>Aisha Khan</span>Lead Physiotherapist, Apex Rehabilitation Center (UAE)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"The white-labeling process was seamless. We now have a professional, branded app..."</blockquote>
+                            <cite><span>Amanda Smith</span>Head Coach, National Sports Body (Oman)</cite>
+                        </div>
+                        <div class="testimonial-card">
+                            <blockquote>"Our evaluation process is 50% more efficient..."</blockquote>
+                            <cite><span>Ramadan</span>Founder & Head Coach, Rollsiders (Saudi Arabia)</cite>
+                        </div>
                     </div>
                 </div>
             </div>
-            
         </section>
 
         <!-- Section 3: The Problem -->
@@ -124,19 +179,24 @@
             </div>
             <div class="problem-grid">
                 <div class="problem-card">
-                    <lord-icon class="problem-icon" src="https://cdn.lordicon.com/rbbnmpcf.json" trigger="hover" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                    <lord-icon class="problem-icon" src="https://cdn.lordicon.com/oqhqyeud.json" trigger="loop" state="loop-all" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                     <h3>Scattered Data, Lost Insights</h3>
                     <p>Your data lives in spreadsheets, emails, and binders. It's impossible to track an athlete's multi-year journey or identify trends. Your data is generating zero ROI.</p>
                 </div>
                 <div class="problem-card">
-                    <lord-icon class="problem-icon" src="https://cdn.lordicon.com/bhfjfgqz.json" trigger="hover" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                    <lord-icon class="problem-icon" src="https://cdn.lordicon.com/snxksidl.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                     <h3>Subjective Guesswork, Unclear Feedback</h3>
                     <p>When feedback is based on gut feeling, it's inconsistent and hard to defend, leaving athletes without a clear path to improvement.</p>
                 </div>
                 <div class="problem-card">
-                    <lord-icon class="problem-icon" src="https://cdn.lordicon.com/wwmtsdzm.json" trigger="hover" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                    <lord-icon class="problem-icon" src="https://cdn.lordicon.com/wwmtsdzm.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                     <h3>Untapped Potential, Missed Opportunities</h3>
                     <p>How do you find the hidden gems in your program? Without objective data, true potential remains undiscovered and unfulfilled.</p>
+                </div>
+                <div class="problem-card">
+                    <lord-icon class="problem-icon" src="https://cdn.lordicon.com/warimioc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                    <h3>Wasted Time, Burned-Out Coaches</h3>
+                    <p>When coaches are bogged down with administrative tasks and manual data entry, they can't focus on what they do best: coaching. Eliminate the busywork and empower your staff.</p>
                 </div>
             </div>
         </section>
@@ -146,7 +206,7 @@
             <div class="solution-content">
                 <h2 class="section-title">The All-In-One Platform for Performance Intelligence</h2>
                 <p class="section-subtitle">VitaQ connects your methodology, coaches, and athletes. We provide a single source of truth to structure, measure, and accelerate development.</p>
-                 <a href="#feature-grid" class="btn btn-primary">Explore Platform Features</a>
+                 <a href="#deep-dive" class="btn btn-primary">Explore Platform Features</a>
             </div>
             <div class="solution-image-wrapper animate-with-scrub">
                 <img src="support 1.png" alt="VitaQ App Interface Showcase">
@@ -155,20 +215,201 @@
 
         <!-- Section 5: Feature Grid -->
         <section id="feature-grid" class="features container">
-             <div class="section-header">
-                <h2 class="section-title">Everything You Need. Nothing You Don't.</h2>
+            <div class="section-header">
+            <h2 class="section-title">Everything You Need. Nothing You Don't.</h2>
+        </div>
+        <div class="feature-grid">
+            <!-- Card 1 -->
+            <div class="feature-card">
+                <lord-icon class="feature-icon" src="https://cdn.lordicon.com/rgyftmhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                <h4>Curriculum Builder</h4>
+                <p>Your entire coaching philosophy, digitized into hierarchical pathways.</p>
             </div>
-            <div class="feature-grid">
-                <div class="feature-card"><h4>Curriculum Builder</h4><p>Your entire coaching philosophy, digitized into hierarchical pathways.</p></div>
-                <div class="feature-card"><h4>Content Library</h4><p>A rich, reusable library of exercises and goals with video and parameters.</p></div>
-                <div class="feature-card"><h4>Evaluation Engine</h4><p>Conduct live, on-field assessments with our dynamic Conductor UI.</p></div>
-                <div class="feature-card"><h4>Personalized Dashboards</h4><p>Engage athletes and parents with a clear view of their goals and progress.</p></div>
-                <div class="feature-card"><h4>Roster Management</h4><p>Manage trainees, groups, and complex parent/guardian relationships with ease.</p></div>
-                 <div class="feature-card"><h4>Global-Ready</h4><p>Full multi-language support, including right-to-left (RTL) for Arabic.</p></div>
+            <!-- Card 2 -->
+            <div class="feature-card">
+                <lord-icon class="feature-icon" src="https://cdn.lordicon.com/gsjfryhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                <h4>Content Library</h4>
+                <p>A rich, reusable library of exercises and goals with video and parameters.</p>
             </div>
+            <!-- Card 3 -->
+            <div class="feature-card">
+                <lord-icon class="feature-icon" src="https://cdn.lordicon.com/csxbxlji.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                <h4>Evaluation Engine</h4>
+                <p>Conduct live, on-field assessments with our dynamic Conductor UI.</p>
+            </div>
+            <!-- Card 4 -->
+            <div class="feature-card">
+                <lord-icon class="feature-icon" src="https://cdn.lordicon.com/vgwutnhw.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                <h4>Personalized Dashboards</h4>
+                <p>Engage athletes and parents with a clear view of their goals and progress.</p>
+            </div>
+            <!-- Card 5 -->
+            <div class="feature-card">
+                <lord-icon class="feature-icon" src="https://cdn.lordicon.com/lhwyshcs.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                <h4>Roster Management</h4>
+                <p>Manage trainees, groups, and complex parent/guardian relationships with ease.</p>
+            </div>
+            <!-- Card 6 -->
+                <div class="feature-card">
+                <lord-icon class="feature-icon" src="https://cdn.lordicon.com/rpviwvwn.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                <h4>Global-Ready</h4>
+                <p>Full multi-language support, including right-to-left (RTL) for Arabic.</p>
+            </div>
+        </div>
         </section>
 
-        <!-- Section 6: White-Label -->
+        <!-- Section 6: The Anatomy of a Champion (Feature Deep Dive) -->
+        <section id="deep-dive" class="deep-dive">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">An Unrivaled Toolkit for Elite Development</h2>
+                    <p class="section-subtitle">We’ve meticulously engineered every feature to address the real-world challenges of coaches, directors, and athletes. Explore the core components that make VitaQ the most comprehensive performance platform on the market.</p>
+                </div>
+                
+                <!-- CONTAINER FOR DESKTOP VIEW -->
+                <div class="deep-dive-desktop">
+                    <div class="deep-dive-grid">
+                        <!-- Left (Sticky) Column -->
+                        <div class="sticky-col">
+                            <div class="sticky-content-wrapper">
+                                <div class="step-title-container">
+                                    <h3 class="step-title" data-step="1">I. Build Your Developmental Blueprint</h3>
+                                    <h3 class="step-title" data-step="2">II. Create a Rich Library of Exercises</h3>
+                                    <h3 class="step-title" data-step="3">III. Execute Flawless Evaluations</h3>
+                                    <h3 class="step-title" data-step="4">IV. Uncover Actionable Insights</h3>
+                                </div>
+                                <div class="mockup-container">
+                                    <img src="screen-stages.png" class="mockup-screen" data-step="1" alt="VitaQ Stages Screen">
+                                    <img src="screen-library.png" class="mockup-screen" data-step="2" alt="VitaQ Library Screen">
+                                    <img src="screen-evaluation.png" class="mockup-screen" data-step="3" alt="VitaQ Evaluation Screen">
+                                    <img src="screen-analytics.png" class="mockup-screen" data-step="4" alt="VitaQ Analytics Screen">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right (Scrolling) Column -->
+                        <div class="scroll-col">
+                            <!-- Step 1 Content -->
+                            <div class="scroll-step" data-step="1">
+                                 <div class="step-content">
+                                    <h4>Your Philosophy, Digitized</h4>
+                                    <p>Stop managing your curriculum with scattered documents. Our <strong>Stages</strong> feature creates a clear, hierarchical pathway for progression.</p>
+                                    <ul>
+                                        <li><strong>Define Clear Progression:</strong> Create unlimited hierarchical levels, from foundational skills to professional-tier competencies.</li>
+                                        <li><strong>Centralize Resources:</strong> Assign specific training materials, videos, and benchmark goals to each unique stage.</li>
+                                        <li><strong>Track Cohort Progress:</strong> Get an instant, high-level view of how groups and individuals are performing within each stage.</li>
+                                    </ul>
+                                    <lord-icon class="step-icon" src="https://cdn.lordicon.com/rgyftmhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                                </div>
+                            </div>
+                            <!-- Step 2 Content -->
+                            <div class="scroll-step" data-step="2">
+                                 <div class="step-content">
+                                    <h4>Your IP, Centralized</h4>
+                                    <p>Your drills and objectives are your intellectual property. VitaQ provides a central, secure hub to house them, complete with detailed instructions, rich media, and quantifiable parameters.</p>
+                                    <ul>
+                                        <li><strong>Rich Media Integration:</strong> Add detailed descriptions, embed images, and link directly to YouTube or Vimeo videos.</li>
+                                        <li><strong>Quantifiable Parameters:</strong> Define what success looks like by setting parameters like `Time`, `Distance`, or `Reps`.</li>
+                                    </ul>
+                                    <lord-icon class="step-icon" src="https://cdn.lordicon.com/gsjfryhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                                </div>
+                            </div>
+                            <!-- Step 3 Content -->
+                            <div class="scroll-step" data-step="3">
+                                 <div class="step-content">
+                                    <h4>Precision on the Field</h4>
+                                    <p>Our Evaluation Engine transforms chaotic assessment days into models of efficiency. The live <strong>Evaluation Conductor</strong> provides a seamless on-field experience, capturing every data point with a simple tap.</p>
+                                    <ul>
+                                        <li><strong>The Live Conductor UI:</strong> See a real-time "story view" of all participants, tracking who has completed each exercise.</li>
+                                        <li><strong>Dynamic Data Entry:</strong> The app automatically generates the correct input form—be it a timer, a numeric stepper, or a slider.</li>
+                                        <li><strong>Robust State Management:</strong> Pause and resume a session hours or days later without losing a single piece of data.</li>
+                                    </ul>
+                                     <lord-icon class="step-icon" src="https://cdn.lordicon.com/csxbxlji.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                                </div>
+                            </div>
+                            <!-- Step 4 Content -->
+                            <div class="scroll-step" data-step="4">
+                                 <div class="step-content">
+                                    <h4>From Data to Decisions</h4>
+                                    <p>VitaQ turns raw performance data into your most powerful strategic asset. Make smarter coaching interventions and justify roster decisions with objective proof.</p>
+                                    <ul>
+                                        <li><strong>Trainee Analytics:</strong> Track an individual's long-term progress and compare their performance against stage benchmarks.</li>
+                                        <li><strong>Group Analytics:</strong> Analyze team cohesion and compare performance across different squads.</li>
+                                        <li><strong>Organizational Dashboards:</strong> Get a high-level overview of the entire academy's health.</li>
+                                    </ul>
+                                    <lord-icon class="step-icon" src="https://cdn.lordicon.com/vgwutnhw.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTAINER FOR MOBILE VIEW -->
+                <div class="deep-dive-mobile">
+                    <!-- Step 1 Mobile -->
+                    <div class="mobile-step">
+                        <h3 class="step-title-mobile">I. Build Your Developmental Blueprint</h3>
+                        <img src="screen-stages.png" class="mobile-mockup-screen" alt="VitaQ Stages Screen">
+                        <div class="step-content">
+                            <h4>Your Philosophy, Digitized</h4>
+                            <p>Stop managing your curriculum with scattered documents. Our <strong>Stages</strong> feature creates a clear, hierarchical pathway for progression.</p>
+                            <ul>
+                                <li><strong>Define Clear Progression:</strong> Create unlimited hierarchical levels, from foundational skills to professional-tier competencies.</li>
+                                <li><strong>Centralize Resources:</strong> Assign specific training materials, videos, and benchmark goals to each unique stage.</li>
+                                <li><strong>Track Cohort Progress:</strong> Get an instant, high-level view of how groups and individuals are performing within each stage.</li>
+                            </ul>
+                            <lord-icon class="step-icon" src="https://cdn.lordicon.com/rgyftmhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                        </div>
+                    </div>
+                    <!-- Step 2 Mobile -->
+                    <div class="mobile-step">
+                        <h3 class="step-title-mobile">II. Create a Rich Library of Exercises</h3>
+                        <img src="screen-library.png" class="mobile-mockup-screen" alt="VitaQ Library Screen">
+                        <div class="step-content">
+                            <h4>Your IP, Centralized</h4>
+                            <p>Your drills and objectives are your intellectual property. VitaQ provides a central, secure hub to house them, complete with detailed instructions, rich media, and quantifiable parameters.</p>
+                            <ul>
+                                <li><strong>Rich Media Integration:</strong> Add detailed descriptions, embed images, and link directly to YouTube or Vimeo videos.</li>
+                                <li><strong>Quantifiable Parameters:</strong> Define what success looks like by setting parameters like `Time`, `Distance`, or `Reps`.</li>
+                            </ul>
+                            <lord-icon class="step-icon" src="https://cdn.lordicon.com/gsjfryhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                        </div>
+                    </div>
+                    <!-- Step 3 Mobile -->
+                    <div class="mobile-step">
+                        <h3 class="step-title-mobile">III. Execute Flawless Evaluations</h3>
+                        <img src="screen-evaluation.png" class="mobile-mockup-screen" alt="VitaQ Evaluation Screen">
+                        <div class="step-content">
+                            <h4>Precision on the Field</h4>
+                            <p>Our Evaluation Engine transforms chaotic assessment days into models of efficiency. The live <strong>Evaluation Conductor</strong> provides a seamless on-field experience, capturing every data point with a simple tap.</p>
+                            <ul>
+                                <li><strong>The Live Conductor UI:</strong> See a real-time "story view" of all participants, tracking who has completed each exercise.</li>
+                                <li><strong>Dynamic Data Entry:</strong> The app automatically generates the correct input form—be it a timer, a numeric stepper, or a slider.</li>
+                                <li><strong>Robust State Management:</strong> Pause and resume a session hours or days later without losing a single piece of data.</li>
+                            </ul>
+                             <lord-icon class="step-icon" src="https://cdn.lordicon.com/csxbxlji.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                        </div>
+                    </div>
+                    <!-- Step 4 Mobile -->
+                    <div class="mobile-step">
+                        <h3 class="step-title-mobile">IV. Uncover Actionable Insights</h3>
+                        <img src="screen-analytics.png" class="mobile-mockup-screen" alt="VitaQ Analytics Screen">
+                        <div class="step-content">
+                            <h4>From Data to Decisions</h4>
+                            <p>VitaQ turns raw performance data into your most powerful strategic asset. Make smarter coaching interventions and justify roster decisions with objective proof.</p>
+                            <ul>
+                                <li><strong>Trainee Analytics:</strong> Track an individual's long-term progress and compare their performance against stage benchmarks.</li>
+                                <li><strong>Group Analytics:</strong> Analyze team cohesion and compare performance across different squads.</li>
+                                <li><strong>Organizational Dashboards:</strong> Get a high-level overview of the entire academy's health.</li>
+                            </ul>
+                            <lord-icon class="step-icon" src="https://cdn.lordicon.com/vgwutnhw.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- Section 7: White-Label Solution -->
         <section class="white-label container">
             <div class="white-label-image-wrapper animate-with-scrub">
                 <img src="support 2.png" alt="VitaQ platform customization">
@@ -180,15 +421,54 @@
             </div>
         </section>
 
-        <!-- Section 7: Contact Form -->
+        <!-- Section 8: Built for Every Level of Ambition -->
+        <section id="use-cases" class="use-cases container">
+            <div class="section-header">
+                <h2 class="section-title">The Definitive Platform for Any Performance-Based Organization</h2>
+                <p class="section-subtitle">VitaQ's flexible architecture is not limited to a single sport or structure. It's an ecosystem designed to bring data-driven clarity and operational excellence to any organization focused on the structured development of human potential.</p>
+            </div>
+            <div class="use-case-image-wrapper animate-with-scrub">
+                <img src="support 2.png" alt="VitaQ platform customization">
+            </div>
+            <div class="use-case-grid-wrapper">
+                <div class="feature-grid use-case-grid">
+                    <!-- Card 1 -->
+                    <div class="feature-card use-case-card">
+                        <lord-icon class="use-case-icon" src="https://cdn.lordicon.com/vttzorhw.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                        <h4>For Sports Academies & Clubs</h4>
+                        <p>Transform your academy into a modern talent factory. Codify your unique training philosophy, run hyper-efficient evaluations, and deliver a premium, branded app experience that parents are proud to invest in. <strong>Build your reputation, retain your athletes, and prove your value with undeniable data.</strong></p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="feature-card use-case-card">
+                        <lord-icon class="use-case-icon" src="https://cdn.lordicon.com/gitajdzc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                        <h4>For Federations & Governing Bodies</h4>
+                        <p>Establish a unified national development framework with unprecedented control and insight. Deploy a standardized curriculum to all member clubs, creating a single, objective talent pool. <strong>Identify future national champions with data, not politics.</strong></p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="feature-card use-case-card">
+                        <lord-icon class="use-case-icon" src="https://cdn.lordicon.com/weqkkuwt.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                        <h4>For Rehabilitation & High-Performance Centers</h4>
+                        <p>Quantify every step of the recovery and conditioning journey. Digitize custom physio protocols, track patient progress against objective benchmarks, and generate data-rich reports that prove outcomes. <strong>Turn your therapeutic expertise into measurable, repeatable results.</strong></p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="feature-card use-case-card">
+                        <lord-icon class="use-case-icon" src="https://cdn.lordicon.com/fiyxtklr.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                        <h4>For Member-Based Communities & Specialized Education</h4>
+                        <p>Structure and validate skill progression for any community, from martial arts dojos to professional certification programs. Create clear development pathways and provide members with a tangible record of their achievements. <strong>Increase engagement and create a clear, value-driven path to mastery.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Contact Form -->
         <section id="contact" class="contact-section">
             <div class="container">
-                 <h1 class="hero-headline section-title">Stop Guessing. Start Building Champions.</h1>
+                 <h2 class="hero-headline section-title">Stop Guessing. Start Building Champions.</h2>
                  <p class="hero-subheading section-subtitle">See for yourself how VitaQ can bring unparalleled clarity and data-driven power to your organization. Schedule a personalized demo today.</p>
-                 
+
                 <div class="form-container">
                     <div class="form-success">
-                        <svg class="success-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg>
+                        <svg class="success-icon" viewBox="0 0 24 24"><path d="M9 17.17L5.83 14l-1.42 1.41L9 20 21 8l-1.41-1.41z"></path></svg>
                         <h3>Thank You!</h3>
                         <p>Your demo request has been submitted successfully. We'll be in touch shortly.</p>
                     </div>
@@ -197,20 +477,20 @@
                          <form id="contact-form">
                             <div class="form-row">
                                 <div class="input-group">
-                                    <input type="text" id="name" required>
+                                    <input type="text" id="name" name="name" required>
                                     <label for="name">Full Name</label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="email" id="email" required>
+                                    <input type="email" id="email" name="email" required>
                                     <label for="email">Email Address</label>
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="text" id="organization" required>
+                                <input type="text" id="organization" name="organization" required>
                                 <label for="organization">Organization Name</label>
                             </div>
                             <div class="input-group">
-                                <textarea id="message" rows="4"></textarea>
+                                <textarea id="message" name="message" rows="4" placeholder="Hi there! We're a [Your Sport] organization and I'm particularly interested in how VitaQ handles [Your Specific Need, e.g., player evaluations, team analytics]..."></textarea>
                                 <label for="message">Message (Optional)</label>
                             </div>
                             <button type="submit" class="btn btn-primary btn-large">Book My Free Demo</button>
@@ -227,9 +507,6 @@
             <p>&copy; 2025 VitaQ Technologies. All Rights Reserved.</p>
         </div>
     </footer>
-
-    <!-- User-requested HTML snippet -->
-    <!-- <h1>VitaQ</h1> -->
     <ul>
         <ul>
             <!-- <a href="./rollersiders/index.html"> Rollsiders </a>-->
@@ -239,11 +516,19 @@
         </ul>
     </ul>
     
-    <!-- JavaScript Libraries -->
+    <!-- JAVASCRIPT LIBRARIES -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+    
+    <!-- GSAP Core Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    
+    <!-- GSAP ScrollTrigger Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Custom Script -->
     <script src="script.js"></script>
 
 </body>
