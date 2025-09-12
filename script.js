@@ -40,38 +40,39 @@ document.addEventListener('DOMContentLoaded', function () {
         { el: glows[2], factor: 25 }, // aurora-3 moves the most
     ];
 
-    // --- Interactive Spotlight Cursor (Unchanged) ---
-    const spotlight = document.createElement('div');
-    spotlight.classList.add('spotlight');
-    document.body.appendChild(spotlight);
-
     let mouseX = 0, mouseY = 0;
-    
+    const spotlight = document.querySelector('.spotlight'); // Get reference for cursor enhancement
 
-    function moveSpotlight() {
-        gsap.to(spotlight, {
-            duration: 0.4,
-            ease: 'power3.out',
-            x: mouseX - spotlight.offsetWidth / 2,
-            y: mouseY - spotlight.offsetHeight / 2,
-        });
-        requestAnimationFrame(moveSpotlight);
+    // --- PHASE 1 ENHANCEMENT: Surgical Mobile Optimization ---
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        // Create the spotlight div only on desktop
+        const spotlightEl = document.createElement('div');
+        spotlightEl.classList.add('spotlight');
+        document.body.appendChild(spotlightEl);
+
+        function moveSpotlight() {
+            gsap.to(spotlightEl, {
+                duration: 0.4,
+                ease: 'power3.out',
+                x: mouseX - spotlightEl.offsetWidth / 2,
+                y: mouseY - spotlightEl.offsetHeight / 2,
+            });
+            requestAnimationFrame(moveSpotlight);
+        }
+        moveSpotlight();
     }
-
+    
     window.addEventListener('mousemove', e => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     
-        // Calculate the mouse position from the center of the screen (-0.5 to 0.5)
         const xPos = (e.clientX / window.innerWidth) - 0.5;
         const yPos = (e.clientY / window.innerHeight) - 0.5;
     
-        // Loop through our glows and command their movement
         glowData.forEach(glow => {
             const targetX = -xPos * glow.factor;
             const targetY = -yPos * glow.factor;
     
-            // Use GSAP to smoothly animate to the target
             gsap.to(glow.el, {
                 x: targetX,
                 y: targetY,
@@ -80,9 +81,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
-
-    moveSpotlight();
-
 
     // --- Initialize Enhanced Particles.js  ---
     particlesJS("particles-js", {
@@ -121,25 +119,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // --- Animate on Scroll with GSAP ---
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, SplitText);
     
     // --- Hero Section Image Animation ---
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
     heroTimeline.fromTo('.hero-image-wrapper', { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, delay: 0.8 });
 
+    // ======================================================================
+    // --- REPLACEMENT: Refined Text Stagger Animations ---
+    // ======================================================================
+    // Animate titles with character stagger
+    const animatedTitles = document.querySelectorAll('.hero-headline, .section-title');
+    animatedTitles.forEach(title => {
+        const split = new SplitText(title, { type: "chars, words" });
+        gsap.from(split.chars, {
+            scrollTrigger: { trigger: title, start: "top 85%", toggleActions: "play reverse play reverse" },
+            duration: 0.6,
+            ease: "power2.out",
+            y: 40,
+            autoAlpha: 0,
+            stagger: {
+                from: "random",
+                amount: 0.2
+            }
+        });
+    });
 
-    // --- UNIFIED Scroll-Triggered Text Animations ---
+    // Animate other text elements with standard fade-in
     const animatedTextElements = document.querySelectorAll(
-        '.hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .section-title, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
+        '.hero-preheadline, .hero-subheading, .hero-cta, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
     );
-
     animatedTextElements.forEach(el => {
         gsap.fromTo(el, { autoAlpha: 0, y: 40 }, {
             scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: "play reverse play reverse" },
             duration: 0.8, autoAlpha: 1, y: 0, ease: 'power3.out'
         });
     });
-
 
     // --- Staggered Grid Animations ---
     function createStaggeredAnimation(containerSelector, elementSelector) {
@@ -167,11 +182,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let isTransitioning = false;
         let currentStep = 1;
     
-        // Setup for the new TextScramble library
         const textScrambles = Array.from(stepTitles).map(title => new TextScramble(title));
         const originalTexts = Array.from(stepTitles).map(title => title.textContent);
     
-        // Initial visibility setup
         gsap.set(stepTitles, { autoAlpha: 0 });
         gsap.set(mockupScreens, { autoAlpha: 0 });
         gsap.set(stepTitles[0], { autoAlpha: 1 });
@@ -204,11 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
     
-            tl.to(outgoingTitle, {
-                autoAlpha: 0,
-                duration: 0.3,
-                ease: 'power2.in'
-            });
+            tl.to(outgoingTitle, { autoAlpha: 0, duration: 0.3, ease: 'power2.in' });
     
             tl.to(mockupContainer, {
                 rotationY: "+=180",
@@ -241,7 +250,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (activeTitle) activeTitle.classList.add('active-mobile');
         }
     
-        // ScrollTrigger with the buffer zone
         scrollSteps.forEach(step => {
             ScrollTrigger.create({
                 trigger: step,
@@ -252,12 +260,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         setActiveStep(step.dataset.step);
                     }
                 },
-                // For debugging, you can add markers: true
-                // markers: true 
             });
         });
     } else {
-        // --- Animate mobile mockups on scroll ---
         gsap.utils.toArray('.mobile-mockup-screen').forEach(screen => {
             gsap.fromTo(screen, 
                 { autoAlpha: 0, y: 50, scale: 0.9 },
@@ -274,8 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
-    // --- Advanced Scroll-Tied Animations (Scrubbing) (Unchanged) ---
+    // --- Advanced Scroll-Tied Animations (Scrubbing) ---
     const scrubbingElements = document.querySelectorAll('.animate-with-scrub');
     scrubbingElements.forEach(el => {
         gsap.fromTo(el, { opacity: 0.3, scale: 0.9, rotation: -5 }, {
@@ -284,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // --- Full-Screen 3D Hero Image (Unchanged) ---
+    // --- Full-Screen 3D Hero Image ---
     const heroImage = document.querySelector('.hero-image');
     let targetRotateX = 0;
     let targetRotateY = 0;
@@ -304,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // --- Contact Form Logic (with Success Glow Trigger) ---
+    // --- Contact Form Logic ---
     const form = document.getElementById('contact-form');
     const formContainer = document.querySelector('.form-container');
     const formWrapper = document.querySelector('.form-wrapper');
@@ -314,24 +318,130 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         formWrapper.classList.add('sending');
     
-        // Your specific EmailJS credentials
         const serviceID = 'service_tf010rz'; 
         const templateID = 'template_vn7t583';
         const publicKey = 'Xc_6XWChYs1z1uehh'; 
     
-        // Send the form data using EmailJS
         emailjs.sendForm(serviceID, templateID, this, publicKey)
             .then(() => {
-                // SUCCESS LOGIC (this is what used to be in setTimeout)
                 formWrapper.classList.remove('sending');
                 form.style.display = 'none';
                 successMessage.style.display = 'flex';
                 gsap.fromTo(successMessage, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' });
                 formContainer.classList.add('form-success-glow');
             }, (err) => {
-                // ERROR LOGIC
                 formWrapper.classList.remove('sending');
                 alert('Message failed to send. Please try again. Error: ' + JSON.stringify(err));
             });
     });
+
+    // --- Preloader Logic ---
+    window.onload = () => {
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+        }, 3000);
+    };
+
+    // --- Dynamic "Peek-a-Boo" Header ---
+    const header = document.querySelector('.header');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY && currentScrollY > header.offsetHeight) {
+            header.classList.add('header--hidden');
+        } else {
+            header.classList.remove('header--hidden');
+        }
+        lastScrollY = currentScrollY;
+    });
+
+    // --- Testimonial Modal Logic ---
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const modalOverlay = document.getElementById('testimonial-modal');
+    const modalQuote = document.getElementById('modal-quote');
+    const modalCite = document.getElementById('modal-cite');
+    const modalCloseBtn = document.querySelector('.modal-close-btn');
+
+    function openModal(card) {
+        const fullQuote = card.dataset.fullQuote;
+        const citeHtml = card.querySelector('cite').innerHTML;
+        modalQuote.textContent = fullQuote;
+        modalCite.innerHTML = citeHtml;
+        document.body.classList.add('modal-open');
+        modalOverlay.classList.add('modal-visible');
+    }
+
+    function closeModal() {
+        document.body.classList.remove('modal-open');
+        modalOverlay.classList.remove('modal-visible');
+    }
+
+    testimonialCards.forEach(card => {
+        card.addEventListener('click', () => openModal(card));
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
+    });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('modal-visible')) closeModal();
+    });
+    
+    // ======================================================================
+    // --- NEW: Interactive Cursor Logic ---
+    // ======================================================================
+    function setupInteractiveCursor() {
+        const interactiveElements = document.querySelectorAll(
+            'a, button, .testimonial-card, .header-menu-button, .header-logo-wrapper, .problem-card, .feature-card, .use-case-card'
+        );
+        const spotlightEl = document.querySelector('.spotlight');
+
+        if (!spotlightEl) return; // Don't run on mobile
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                spotlightEl.classList.add('is-interactive');
+            });
+            el.addEventListener('mouseleave', () => {
+                spotlightEl.classList.remove('is-interactive');
+            });
+        });
+    }
+    setupInteractiveCursor();
+
+
+    // ======================================================================
+    // --- NEW: 'Living' Image Reveal Logic ---
+    // ======================================================================
+    function setupImageShimmers() {
+        const imagesToShimmer = document.querySelectorAll('.solution-image-wrapper, .white-label-image-wrapper, .use-case-image-wrapper');
+        
+        imagesToShimmer.forEach(wrapper => {
+            // Add the shimmer-wrap class for styling
+            wrapper.classList.add('shimmer-wrap');
+            const shimmerPseudo = window.getComputedStyle(wrapper, '::before');
+
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: wrapper,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            })
+            .from(wrapper.querySelector('img'), {
+                autoAlpha: 0,
+                scale: 1.1,
+                duration: 1,
+                ease: 'power3.out'
+            })
+            .to(wrapper, {
+                '--shimmer-translate': '100%', // Animate the custom property
+                duration: 1.2,
+                ease: 'power2.out'
+            }, '-=0.8');
+        });
+    }
+    setupImageShimmers();
 });

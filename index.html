@@ -25,6 +25,18 @@
 </head>
 <body>
 
+    <!-- =================================================================== -->
+    <!-- NEW: PHASE 2 - THE GRAND ENTRANCE PRELOADER -->
+    <!-- =================================================================== -->
+    <div id="preloader">
+        <svg id="preloader-logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+            <!-- Pink V-shape part -->
+            <path id="logo-v-pink" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+            <!-- Main body of the V/Q shape -->
+            <path id="logo-v-main" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+        </svg>
+    </div>
+
     <!-- Particle.js Background Container -->
     <div id="particles-js"></div>
 
@@ -108,61 +120,103 @@
                 <div class="testimonial-reel-container">
                     <div class="testimonial-reel">
                         <!-- ORIGINAL SET OF TESTIMONIALS -->
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="VitaQ has fundamentally transformed how we operate. We've moved from subjective coaching to data-driven development, allowing us to identify and nurture talent with incredible precision. Our athletes' progression has accelerated, and our coaches are more effective than ever.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"VitaQ has fundamentally transformed how we operate..."</blockquote>
                             <cite><span>Abdallah Mahmoud</span>Head Coach, Rollfinity (UAE)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="The ability to create and deploy a standardized national curriculum through VitaQ has been a game-changer. For the first time, we have a unified view of talent across all member clubs, ensuring every athlete is evaluated against the same objective criteria. It's the future of national team development.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"The ability to create and deploy a standardized national curriculum..."</blockquote>
                             <cite><span>Omar Wasfi</span>Technical Director, National Skating Federation (UAE)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="As a parent with two children in the academy, the context switching is brilliant. I can instantly toggle between my son's and daughter's profiles, see their upcoming goals, and review feedback from their last evaluation. It keeps me engaged and informed in a way that was never possible before.">
+                             <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"As a parent with two children in the academy, the context switching is brilliant..."</blockquote>
                             <cite><span>Josef Salah</span>Parent, Elite Youth Academy (Qatar)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="Moving from spreadsheets to VitaQ's Evaluation Conductor saved my coaching staff hundreds of hours per season. What used to be a chaotic weekend of clipboards and manual data entry is now a seamless, real-time process. The data is instantly available, and we can give feedback on the spot.">
+                             <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"Moving from spreadsheets to VitaQ's Evaluation Conductor saved my coaching staff..."</blockquote>
                             <cite><span>Javier Rossi</span>Academy Director, Pro Skater Development (Saudi Arabia)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="Quantifying patient recovery with objective data has revolutionized our practice. With VitaQ, we digitize our rehabilitation protocols, track progress against clear benchmarks, and provide patients with visual proof of their improvement. It has significantly improved patient adherence and outcomes.">
+                             <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"Quantifying patient recovery with objective data has revolutionized our practice..."</blockquote>
                             <cite><span>Aisha Khan</span>Lead Physiotherapist, Apex Rehabilitation Center (UAE)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="The white-labeling process was seamless. We now have a professional, branded app that feels like our own custom-built solution, but for a fraction of the cost and time. It has elevated our brand's perception and provided immense value to our members.">
+                             <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"The white-labeling process was seamless. We now have a professional, branded app..."</blockquote>
                             <cite><span>Amanda Smith</span>Head Coach, National Sports Body (Oman)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="Our evaluation process is 50% more efficient, and the quality of feedback we can provide to our skaters has improved tenfold. We can show them exactly where they stand and what they need to work on, backed by clear data. There are no more arguments, just a clear path to improvement.">
+                             <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"Our evaluation process is 50% more efficient..."</blockquote>
                             <cite><span>Ramadan</span>Founder & Head Coach, Rollsiders (Saudi Arabia)</cite>
                         </div>
 
                         <!-- DUPLICATED SET FOR SEAMLESS LOOP -->
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="VitaQ has fundamentally transformed how we operate. We've moved from subjective coaching to data-driven development, allowing us to identify and nurture talent with incredible precision. Our athletes' progression has accelerated, and our coaches are more effective than ever.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"VitaQ has fundamentally transformed how we operate..."</blockquote>
                             <cite><span>Abdallah Mahmoud</span>Head Coach, Rollfinity (UAE)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="The ability to create and deploy a standardized national curriculum through VitaQ has been a game-changer. For the first time, we have a unified view of talent across all member clubs, ensuring every athlete is evaluated against the same objective criteria. It's the future of national team development.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"The ability to create and deploy a standardized national curriculum..."</blockquote>
                             <cite><span>Omar Wasfi</span>Technical Director, National Skating Federation (UAE)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="As a parent with two children in the academy, the context switching is brilliant. I can instantly toggle between my son's and daughter's profiles, see their upcoming goals, and review feedback from their last evaluation. It keeps me engaged and informed in a way that was never possible before.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"As a parent with two children in the academy, the context switching is brilliant..."</blockquote>
                             <cite><span>Josef Salah</span>Parent, Elite Youth Academy (Qatar)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="Moving from spreadsheets to VitaQ's Evaluation Conductor saved my coaching staff hundreds of hours per season. What used to be a chaotic weekend of clipboards and manual data entry is now a seamless, real-time process. The data is instantly available, and we can give feedback on the spot.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"Moving from spreadsheets to VitaQ's Evaluation Conductor saved my coaching staff..."</blockquote>
                             <cite><span>Javier Rossi</span>Academy Director, Pro Skater Development (Saudi Arabia)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="Quantifying patient recovery with objective data has revolutionized our practice. With VitaQ, we digitize our rehabilitation protocols, track progress against clear benchmarks, and provide patients with visual proof of their improvement. It has significantly improved patient adherence and outcomes.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"Quantifying patient recovery with objective data has revolutionized our practice..."</blockquote>
                             <cite><span>Aisha Khan</span>Lead Physiotherapist, Apex Rehabilitation Center (UAE)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="The white-labeling process was seamless. We now have a professional, branded app that feels like our own custom-built solution, but for a fraction of the cost and time. It has elevated our brand's perception and provided immense value to our members.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"The white-labeling process was seamless. We now have a professional, branded app..."</blockquote>
                             <cite><span>Amanda Smith</span>Head Coach, National Sports Body (Oman)</cite>
                         </div>
-                        <div class="testimonial-card">
+                        <div class="testimonial-card" data-full-quote="Our evaluation process is 50% more efficient, and the quality of feedback we can provide to our skaters has improved tenfold. We can show them exactly where they stand and what they need to work on, backed by clear data. There are no more arguments, just a clear path to improvement.">
+                            <div class="testimonial-expand-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4h-6a1 1 0 1 0 0 2h4.586L13 11.586a1 1 0 0 0 1.414 1.414L20 7.414V12a1 1 0 1 0 2 0V5a1 1 0 0 0-1-1Zm-15 1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6a1 1 0 1 0-2 0v5H5V6h5a1 1 0 1 0 0-2Z"/></svg>
+                            </div>
                             <blockquote>"Our evaluation process is 50% more efficient..."</blockquote>
                             <cite><span>Ramadan</span>Founder & Head Coach, Rollsiders (Saudi Arabia)</cite>
                         </div>
@@ -515,6 +569,15 @@
             <!-- <a href="./legal/terms.html"> terms </a>-->
         </ul>
     </ul>
+
+    <!-- Testimonial Modal Structure -->
+    <div class="testimonial-modal-overlay" id="testimonial-modal">
+        <div class="testimonial-modal-content">
+            <button class="modal-close-btn" aria-label="Close testimonial">&times;</button>
+            <blockquote id="modal-quote"></blockquote>
+            <cite id="modal-cite"></cite>
+        </div>
+    </div>
     
     <!-- JAVASCRIPT LIBRARIES -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -525,7 +588,7 @@
     
     <!-- GSAP ScrollTrigger Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <!-- Custom Script -->
