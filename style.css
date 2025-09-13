@@ -19,6 +19,10 @@
 
 html { scroll-behavior: smooth; }
 
+*:focus {
+    outline: none;
+}
+
 body {
     margin: 0;
     font-family: var(--font-family);
@@ -380,6 +384,11 @@ section { padding: 9rem 0; position: relative; }
     color: var(--text-medium);
     margin: 0;
     line-height: 1.7;
+    transition: color 0.3s ease-in-out;
+}
+
+.use-case-card:hover p {
+    color: var(--text-light);
 }
 
 /* The "Diamond Standard" Hover Effect */
@@ -1026,4 +1035,212 @@ body.loaded #preloader {
 .header--hidden {
     /* Slide the header up and out of view */
     transform: translateY(-200%);
+}
+
+.faq {
+    padding-bottom: 6rem;
+}
+
+.faq-accordion {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.faq-group-title {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 3rem 0 1.5rem 0;
+    font-weight: 600;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    text-align: left;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.faq-question span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-right: 1.5rem;
+}
+
+.faq-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+    content: '';
+    position: absolute;
+    background-color: var(--primary-pink);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Horizontal line */
+.faq-icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+}
+
+/* Vertical line */
+.faq-icon::after {
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    transform: translateX(-50%);
+}
+
+.faq-answer {
+    /* Hide the answer by default */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+                padding-bottom 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-answer p {
+    color: var(--text-medium);
+    line-height: 1.7;
+    margin: 0;
+    padding-bottom: 0;
+}
+
+/* --- Active State --- */
+.faq-item.active .faq-question {
+    color: var(--primary-pink);
+}
+
+/* Rotate the vertical line of the icon to be horizontal */
+.faq-item.active .faq-icon::after {
+    transform: translateX(-50%) rotate(90deg);
+}
+
+.faq-item.active .faq-answer {
+    /* Reveal the answer */
+    max-height: 300px; /* Adjust if answers are very long */
+    padding-bottom: 2rem; /* Add space below the answer text */
+}
+
+/* --- Living Interface Enhancement: Step 1 (Image Reveals & Hovers) --- */
+
+/* 1. Shimmer Reveal on Scroll */
+.solution-image-wrapper,
+.white-label-image-wrapper,
+.use-case-image-wrapper {
+    position: relative;
+}
+
+.solution-image-wrapper:hover,
+.white-label-image-wrapper:hover,
+.use-case-image-wrapper:hover {
+    z-index: 10;
+}
+
+/* The shimmer pseudo-element itself */
+.solution-image-wrapper::after,
+.white-label-image-wrapper::after,
+.use-case-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 10%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 90%
+    );
+    transform: translateX(-101%);
+    opacity: 0;
+}
+
+/* The class added by JS to trigger the animation */
+.is-revealed::after {
+    opacity: 1;
+    animation: shimmer-wipe 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes shimmer-wipe {
+    /* The shimmer starts its journey, invisible */
+    0% {
+        transform: translateX(-101%);
+        opacity: 0;
+    }
+    /* As it reaches the middle, it is at its brightest */
+    50% {
+        transform: translateX(0%);
+        opacity: 0.5;
+    }
+    /* As it leaves, it has faded back to nothing */
+    100% {
+        transform: translateX(101%);
+        opacity: 0;
+    }
+}
+
+
+/* 2. 3D Tilt on Hover */
+.solution-image-wrapper,
+.white-label-image-wrapper,
+.use-case-image-wrapper,
+.mockup-container { /* Applying to the scrollytelling container too */
+    perspective: 1500px; /* This is the key to the 3D effect */
+}
+
+/* Target all the images within those wrappers */
+.solution-image-wrapper img,
+.white-label-image-wrapper img,
+.use-case-image-wrapper img,
+.mockup-container img {
+    will-change: transform; /* Performance hint for the browser */
+    transition: transform 0.2s ease; /* A subtle fallback transition */
+}
+
+/* Add a smooth transition to the cursor's inner circle */
+body {
+    /* Target the <circle> element within the SVG cursor */
+    --cursor-transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.7" style="transition: var(--cursor-transition);" /></svg>') 12 12, auto;
+}
+
+/* This class will be added via JS on hover */
+body.cursor-active {
+    /* Define the expanded state for the cursor's inner circle */
+    --cursor-transform: scale(2.5);
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.7" style="transition: var(--cursor-transition); transform-origin: center; transform: var(--cursor-transform);" /></svg>') 12 12, auto;
+}
+
+/* Prepare the headline containers for the reveal effect */
+.hero-headline, .section-title {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* The individual word spans we will create with JS */
+.hero-headline span, .section-title span {
+    display: inline-block;
+    will-change: transform, opacity; /* Performance hint */
 }

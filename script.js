@@ -133,13 +133,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- UNIFIED Scroll-Triggered Text Animations ---
     const animatedTextElements = document.querySelectorAll(
-        '.hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .section-title, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
+        '.hero-preheadline, .hero-subheading, .hero-cta, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
     );
 
     animatedTextElements.forEach(el => {
         gsap.fromTo(el, { autoAlpha: 0, y: 40 }, {
             scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: "play reverse play reverse" },
             duration: 0.8, autoAlpha: 1, y: 0, ease: 'power3.out'
+        });
+    });
+
+    const staggeredHeadlines = gsap.utils.toArray('.hero-headline, .section-title');
+
+    staggeredHeadlines.forEach(headline => {
+        const fragment = document.createDocumentFragment();
+        const childNodes = Array.from(headline.childNodes);
+
+        childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) { // If it's a text node
+                const words = node.textContent.split(/\s+/).filter(Boolean); // Split by any whitespace
+                words.forEach(word => {
+                    const span = document.createElement('span');
+                    span.textContent = word;
+                    fragment.appendChild(span);
+                    // Add a space back after each word
+                    fragment.appendChild(document.createTextNode(' ')); 
+                });
+            } else { // If it's an element like <br>
+                fragment.appendChild(node.cloneNode(true));
+            }
+        });
+
+        // Replace the headline's content with our new, structured version
+        headline.innerHTML = '';
+        headline.appendChild(fragment);
+
+        // THE FIX: Make the parent headline container visible before animating the children
+        gsap.set(headline, { autoAlpha: 1 });
+
+        // Animate the words in with a stagger
+        gsap.from(headline.querySelectorAll('span'), {
+            scrollTrigger: {
+                trigger: headline,
+                start: 'top 90%',
+                toggleActions: "play reverse play reverse"
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger: 0.05 // The magic property: delay between each word's animation
         });
     });
 
@@ -365,6 +408,30 @@ document.addEventListener('DOMContentLoaded', function () {
         lastScrollY = currentScrollY;
     });
 
+    // --- FAQ Accordion Logic ---
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // First, close all other items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+
+            // Then, toggle the clicked item
+            if (!isActive) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    });
+
     // --- Testimonial Modal Logic ---
     const testimonialCards = document.querySelectorAll('.testimonial-card');
     const modalOverlay = document.getElementById('testimonial-modal');
@@ -410,4 +477,79 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // --- Living Interface Enhancement: Step 1 (Image Reveals & Hovers) ---
+
+    // 1. Shimmer Reveal on Scroll
+    const revealWrappers = gsap.utils.toArray('.solution-image-wrapper, .white-label-image-wrapper, .use-case-image-wrapper');
+    revealWrappers.forEach(wrapper => {
+        ScrollTrigger.create({
+            trigger: wrapper,
+            start: 'top 85%',
+            once: true, // Animation runs only once
+            onEnter: () => {
+                // Add the class to start the animation
+                wrapper.classList.add('is-revealed');
+                
+                // Set a timer to remove the class after the animation is complete
+                // This is the "clean-up" that prevents the ghosting artifact.
+                setTimeout(() => {
+                    wrapper.classList.remove('is-revealed');
+                }, 1000); // The animation duration is 1s (1000ms)
+            }
+        });
+    });
+
+
+    // 2. 3D Tilt on Hover (Optimized)
+    const tiltWrappers = gsap.utils.toArray('.solution-image-wrapper, .white-label-image-wrapper, .use-case-image-wrapper, .mockup-container');
+    
+    tiltWrappers.forEach(wrapper => {
+        // Check if this is the multi-image scrollytelling container
+        const isMockupContainer = wrapper.classList.contains('mockup-container');
+        const imagesToTilt = isMockupContainer ? wrapper.querySelectorAll('img') : wrapper.querySelector('img');
+
+        wrapper.addEventListener('mousemove', (e) => {
+            const rect = wrapper.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Map mouse position to rotation values (-8 to 8 degrees)
+            const rotateY = gsap.utils.mapRange(0, rect.width, -8, 8, x);
+            const rotateX = gsap.utils.mapRange(0, rect.height, 8, -8, y);
+
+            gsap.to(imagesToTilt, {
+                rotationX: rotateX,
+                rotationY: rotateY,
+                transformPerspective: 1000,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+            gsap.to(imagesToTilt, {
+                rotationX: 0,
+                rotationY: 0,
+                transformPerspective: 1000,
+                duration: 1.5,
+                ease: 'elastic.out(1, 0.5)'
+            });
+        });
+    });
+
+    // --- Living Interface Enhancement: Step 2 (Interactive Cursor) ---
+    
+    // Select all elements that should trigger the cursor change
+    const interactiveElements = document.querySelectorAll(
+        'a, button, .testimonial-card, .problem-card, .feature-card, .use-case-card'
+    );
+
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            document.body.classList.add('cursor-active');
+        });
+        el.addEventListener('mouseleave', () => {
+            document.body.classList.remove('cursor-active');
+        });
+    });
 });
