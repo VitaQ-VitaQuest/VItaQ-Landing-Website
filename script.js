@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     createStaggeredAnimation('.problem-grid', '.problem-card');
     createStaggeredAnimation('#feature-grid .feature-grid', '#feature-grid .feature-card');
-    createStaggeredAnimation('.testimonials', '.testimonial-card');
+    createStaggeredAnimation('.testimonials-wrapper', '.testimonial-card');
     createStaggeredAnimation('#use-cases', '#use-cases .feature-card');
 
 
