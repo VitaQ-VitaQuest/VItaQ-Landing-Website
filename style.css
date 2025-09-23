@@ -1243,3 +1243,36 @@ body.cursor-active {
     display: inline-block;
     will-change: transform, opacity; /* Performance hint */
 }
+
+.footer .container {
+    display: flex;
+    flex-direction: column; /* Stack on mobile */
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: var(--text-medium);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--text-light);
+}
+
+/* On larger screens, align items side-by-side */
+@media (min-width: 768px) {
+    .footer .container {
+        flex-direction: row; /* Side-by-side on desktop */
+        justify-content: space-between;
+    }
+}

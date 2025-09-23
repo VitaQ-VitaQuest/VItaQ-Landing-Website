@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaQ Support Center</title>
+    <meta name="description" content="Get help with the VitaQ platform. Find answers in our FAQ or contact our support team directly for assistance.">
+    <meta name="robots" content="noindex, nofollow"> <!-- Prevents search engines from indexing this page -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Main Stylesheet (reused from original page) -->
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <!-- Particle.js Background Container (reused) -->
+    <div id="particles-js"></div>
+
+    <!-- Background Glows (reused) -->
+    <div class="aurora-glow aurora-1"></div>
+    <div class="aurora-glow aurora-2"></div>
+    <div class="aurora-glow aurora-3"></div>
+
+    <!-- Navigation Overlay (reused) -->
+    <div class="nav-overlay">
+        <nav class="nav-fullscreen">
+            <a href="/#about" class="nav-link">About VitaQ</a>
+            <a href="/#clients" class="nav-link">Our Clients</a>
+            <a href="/#deep-dive" class="nav-link">Platform Features</a>
+            <a href="/#use-cases" class="nav-link">Who It's For</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="/#contact" class="nav-link cta">Request a Demo</a>
+        </nav>
+    </div>
+
+    <!-- Header (reused) -->
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo-wrapper" aria-label="VitaQ Home">
+                <svg class="logo-svg" viewBox="0 0 1000 1000">
+                  <path class="cls-3" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                  <path class="cls-1" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                </svg>
+            </a>
+            <button class="header-menu-button" aria-label="Open Menu">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Support Hero -->
+        <section class="hero container" style="text-align: center; display: block; padding-top: 8rem; padding-bottom: 6rem; min-height: 0;">
+            <div>
+                <h1 class="hero-headline">Support Center</h1>
+                <p class="hero-subheading" style="max-width: 650px;">How can we help? Find answers to common questions below or submit a support ticket directly to our team.</p>
+            </div>
+            
+            <!-- NEW: Image Wrapper -->
+            <div class="solution-image-wrapper" style="margin-top: 4rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                <img src="support 1.webp" alt="A collage of user interface elements from the VitaQ platform." style="border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+            </div>
+        </section>
+
+        <!-- Section 2: FAQ (reused HTML structure) -->
+        <section id="faq" class="faq container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-accordion">
+                <!-- NOTE: This is the EXACT same HTML from your index.html FAQ section -->
+                <h3 class="faq-group-title">Platform & Philosophy</h3>
+                <div class="faq-item">
+                    <button class="faq-question"><span>What exactly is VitaQ?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>VitaQ is a premium, white-label performance intelligence platform. It provides elite organizations—such as sports academies, national federations, and high-performance centers—with a comprehensive digital ecosystem to structure their development methodologies, execute objective evaluations, and track the entire lifecycle of their talent. We turn your unique philosophy into measurable data.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Our training methodology is unique. Can VitaQ adapt to it?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Absolutely. VitaQ is not a rigid system; it's a framework designed to digitize <em>your</em> philosophy. The platform's core strength lies in its flexibility. You define your own hierarchical development pathways (<strong>Stages</strong>), build a library of your specific <strong>Exercises</strong> with custom parameters, and construct measurable <strong>Goals</strong>. The platform adapts to you, not the other way around.</p></div>
+                </div>
+            
+                <h3 class="faq-group-title">Implementation & Security</h3>
+                <div class="faq-item">
+                    <button class="faq-question"><span>What does "white-label" mean for my organization?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>It means the platform becomes a seamless extension of your brand. We integrate your logo, color palettes (for both light and dark modes), and typography directly into the application. For your users—be it coaches, athletes, or parents—the app is yours, reinforcing your brand's commitment to cutting-edge development.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>How is our data protected and who owns it?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Your organization owns 100% of your data. We act strictly as a Data Processor. We implement robust technical measures to protect your data, including complete data isolation in a secure, multi-tenant architecture, and encryption both in transit and at rest, utilizing industry-standard cloud infrastructure like AWS.</p></div>
+                </div>
+                 <div class="faq-item">
+                    <button class="faq-question"><span>How is VitaQ priced?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>VitaQ is a premium, tailored solution offered as a Software-as-a-Service (SaaS) subscription, typically based on the number of active trainees. Because every client is unique, we do not offer a fixed price list. Please contact us to schedule a demo, and we will prepare a custom quote that aligns with your scale and goals.</p></div>
+                </div>
+            
+                 <h3 class="faq-group-title">User Experience</h3>
+                <div class="faq-item">
+                    <button class="faq-question"><span>How does VitaQ make coaching more efficient?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>VitaQ is designed to eliminate administrative burdens. The <strong>Evaluation Conductor</strong> replaces clipboards and spreadsheets with a seamless, real-time interface for on-field assessments. Data is captured instantly, results are available immediately, and historical performance is just a tap away, allowing you to provide more timely and accurate feedback.</p></div>
+                </div>
+                 <div class="faq-item">
+                    <button class="faq-question"><span>As a parent, how can I track my child's development?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>The app provides a personalized and engaging dashboard where you can see your child’s active goals, review their progress on specific exercises over time, and view detailed results from past evaluations. It offers unprecedented clarity into their development journey.</p></div>
+                </div>
+                 <div class="faq-item">
+                    <button class="faq-question"><span>We have two children in the same academy. Do I need separate logins?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>No. The platform features an intuitive <strong>Context Switching</strong> function. With a single login, you can effortlessly toggle between the profiles of all the children you manage, making it simple to stay informed on everyone's progress.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Contact Support Form -->
+        <section id="contact-support" class="contact-section">
+            <div class="container">
+                 <h2 class="hero-headline section-title">Still Need Help?</h2>
+                 <p class="hero-subheading section-subtitle">If you couldn't find an answer in the FAQ, please fill out the form below and a member of our support team will get back to you as soon as possible.</p>
+
+                <div class="form-container">
+                    <div class="form-success">
+                        <svg class="success-icon" viewBox="0 0 24 24"><path d="M9 17.17L5.83 14l-1.42 1.41L9 20 21 8l-1.41-1.41z"></path></svg>
+                        <h3>Message Sent!</h3>
+                        <p>Thank you for reaching out. Our team has received your message and will be in touch shortly.</p>
+                    </div>
+                    <div class="form-wrapper">
+                         <div class="spinner"></div>
+                         <form id="support-form"> <!-- Changed ID -->
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <input type="text" id="name" name="name" required>
+                                    <label for="name">Full Name</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="email" id="email" name="email" required>
+                                    <label for="email">Your Email Address</label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="subject" name="subject" required>
+                                <label for="subject">Subject</label>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <label for="message">Please describe the issue in detail</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-large">Submit Support Ticket</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (reused) -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-copyright">&copy; 2025 VitaQ Technologies. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="support.html">Support</a>
+                <a href="./legal/privacy.html"> privacy </a>
+                <a href="./legal/terms.html"> terms </a>
+            </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LIBRARIES -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- New, simplified script for this page -->
+    <script src="support.js"></script>
+
+</body>
+</html>
