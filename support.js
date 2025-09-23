@@ -59,11 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         formWrapper.classList.add('sending');
     
-        // IMPORTANT: Create a *new* template in your EmailJS dashboard for support tickets.
-        // Use that new Template ID here to separate them from sales leads.
-        const serviceID = 'service_tf010rz'; // Your Service ID
-        const templateID = 'template_XXXXXXX'; // <-- YOUR NEW SUPPORT TEMPLATE ID
-        const publicKey = 'Xc_6XWChYs1z1uehh'; // Your Public Key
+        const serviceID = 'service_tf010rz'; 
+        const templateID = 'template_vap8q3h'; 
+        const publicKey = 'Xc_6XWChYs1z1uehh'; 
     
         emailjs.sendForm(serviceID, templateID, this, publicKey)
             .then(() => {
