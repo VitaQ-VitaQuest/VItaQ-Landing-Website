@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
     createStaggeredAnimation('#feature-grid .feature-grid', '#feature-grid .feature-card');
     createStaggeredAnimation('.testimonials-wrapper', '.testimonial-card');
     createStaggeredAnimation('#use-cases', '#use-cases .feature-card');
+    createStaggeredAnimation('.bento-grid', '.animate-bento');
 
 
     if (window.matchMedia("(min-width: 767px)").matches) {
@@ -355,9 +356,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const formContainer = document.querySelector('.form-container');
     const formWrapper = document.querySelector('.form-wrapper');
     const successMessage = document.querySelector('.form-success');
+    
+    // Select the anti-spam honeypot field
+    const honeyPotField = document.getElementById('website_url');
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // --- HONEYPOT CHECK ---
+        // If the hidden field has any value, it's a bot.
+        if (honeyPotField.value !== "") {
+            console.log("Bot detected. Submitting silently.");
+            // We return immediately, making the bot think it succeeded (or failed silently),
+            // but we do NOT send the email.
+            return;
+        }
+
         formWrapper.classList.add('sending');
     
         // Your specific EmailJS credentials
@@ -541,7 +555,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Select all elements that should trigger the cursor change
     const interactiveElements = document.querySelectorAll(
-        'a, button, .testimonial-card, .problem-card, .feature-card, .use-case-card'
+        'a, button, .testimonial-card, .problem-card, .feature-card, .use-case-card, .bento-card'
     );
 
     interactiveElements.forEach(el => {
