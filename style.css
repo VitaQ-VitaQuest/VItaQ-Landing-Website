@@ -17,6 +17,20 @@
     color: var(--bg-dark);
 }
 
+/* --- 1. Force Custom Cursor Globally --- */
+html, body, a, button, input, textarea, .btn {
+    /* Enforce the dot everywhere, overriding the default 'hand' */
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.8"/></svg>') 12 12, auto !important;
+}
+
+/* --- 2. The "Targeting" State (Hovering Clickables) --- */
+/* When JS adds .cursor-active, we switch the SVG to a larger, ring-like cursor */
+body.cursor-active,
+body.cursor-active a,
+body.cursor-active button {
+    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke="white" stroke-width="2" fill="white" fill-opacity="0.2"/></svg>') 12 12, auto !important;
+}
+
 html { scroll-behavior: smooth; }
 
 *:focus {
@@ -87,8 +101,30 @@ section { padding: 9rem 0; position: relative; }
 .btn-primary { z-index: 1; color: var(--text-light); background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple)); background-size: 200% 200%; animation: gradient-pan 4s ease infinite; box-shadow: 0 5px 20px rgba(255, 80, 222, 0.3); }
 .btn-primary:hover { transform: scale(1.08) translateY(-3px); box-shadow: 0 10px 35px rgba(255, 80, 222, 0.5); animation-duration: 2s; }
 @keyframes gradient-pan { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-.btn-secondary { color: var(--text-medium); font-weight: 600; }
-.btn-secondary:hover { color: var(--text-light); }
+.btn-secondary {
+    color: var(--text-medium);
+    font-weight: 600;
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.8rem 1.5rem; 
+    margin-top: 0.5rem;
+    -webkit-backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    color: var(--text-light);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
 .btn-large { font-size: 1.1rem; padding: 1.2rem 3rem; }
 
 /* --- Header & Navigation --- */
@@ -113,6 +149,17 @@ section { padding: 9rem 0; position: relative; }
 .nav-link.cta { color: var(--primary-pink); margin-top: 2rem; }
 
 /* --- Section 1: Hero --- */
+/* 1. Lift the Text & Buttons to the top layer */
+.hero-content {
+    position: relative;
+    z-index: 10; /* Ensures buttons are always clickable */
+}
+
+/* 2. Keep the image layer below the text */
+.hero-image-wrapper {
+    position: relative;
+    z-index: 1; 
+}
 .hero { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem; align-items: center; padding-top: 6rem; padding-bottom: 6rem; }
 .hero-preheadline { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple), var(--primary-pink)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradient-pan 6s linear infinite; }
 .hero-headline { font-size: 4.5rem; font-weight: 900; margin: 0 0 1.5rem 0; line-height: 1.1; }
@@ -351,79 +398,33 @@ section { padding: 9rem 0; position: relative; }
 .white-label .white-label-content { order: -1; }
 .white-label .section-subtitle { margin-bottom: 2rem; }
 .white-label-image-wrapper img { width: 100%; border-radius: 16px; }
-.use-case-grid {
-    /* This ensures a 4-column layout on large screens, and responsive wrapping on smaller screens */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem; /* A bit more spacing */
-}
 
-.use-case-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 2.5rem;
-    position: relative; /* Needed for the gradient border */
-    overflow: hidden; /* Keeps the gradient border neat */
-    border: 1px solid var(--border-color); /* The default border */
-}
-
-.use-case-icon {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 1.5rem;
-}
-
-.use-case-card h4 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-}
-
-.use-case-card p {
-    color: var(--text-medium);
-    margin: 0;
-    line-height: 1.7;
-    transition: color 0.3s ease-in-out;
-}
-
-.use-case-card:hover p {
-    color: var(--text-light);
-}
-
-/* The "Diamond Standard" Hover Effect */
-.use-case-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    z-index: -1;
-    margin: -1px; /* To sit behind the border */
-    border-radius: 17px; /* Matches the card's border-radius + border width */
-    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-}
-
-.use-case-card:hover {
-    transform: translateY(-10px); /* Lift the card */
-    border-color: transparent; /* Hide the default border to reveal the gradient */
-}
-
-.use-case-card:hover::before {
-    opacity: 1; /* Show the glowing gradient border on hover */
-}
+/* --- Section 8: "Use Case" Styles --- */
 
 .use-case-grid-wrapper {
-    max-width: 1000px; /* Constrain the width for a more balanced look */
-    margin: 0 auto; /* Center the grid container */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.use-case-image-wrapper {
+    max-width: 800px;
+    margin: 0 auto 5rem auto;
+}
+
+.use-case-image-wrapper img {
+    width: 100%;
+    border-radius: 16px;
 }
 
 .use-case-grid {
-    grid-template-columns: repeat(2, 1fr); /* A deliberate 2x2 grid */
-    gap: 2.5rem; /* Increase gap for a more premium feel */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
 }
 
+/* Base Card Styling */
 .use-case-card {
-    background: var(--bg-light); /* Give cards a slightly different background */
+    background: var(--bg-light);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -432,72 +433,115 @@ section { padding: 9rem 0; position: relative; }
     position: relative;
     overflow: hidden;
     border: 1px solid var(--border-color);
-    border-radius: 20px; /* More rounded corners */
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth transitions */
+    border-radius: 20px;
+    /* Smooth bouncy transition */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.4s ease, 
+                border-color 0.4s ease,
+                background 0.4s ease;
 }
 
+/* Z-Index Control: Content must be above the glow */
+.use-case-card > * {
+    position: relative; 
+    z-index: 2;
+}
+
+/* Typography Styling */
+.use-case-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-light); /* Default white */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.use-case-card p {
+    color: var(--text-medium); /* Default grey */
+    margin: 0;
+    line-height: 1.7;
+    transition: color 0.3s ease;
+}
+
+/* STOP THE TEXT SLIDE */
+.use-case-card h4, 
+.use-case-card p {
+    transform: none !important; 
+}
+
+/* Icon Animation */
 .use-case-icon {
     width: 60px;
     height: 60px;
     margin-bottom: 1.5rem;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
 }
 
-.use-case-card h4 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--text-light);
+/* --- HOVER STATES --- */
+
+.use-case-card:hover {
+    transform: translateY(-12px);
+    /* Darker background on hover to make text pop more */
+    background: #1a1a2e; 
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6); 
+    border-color: transparent;
 }
 
-.use-case-card p {
-    color: var(--text-medium);
-    margin: 0;
-    line-height: 1.7;
+/* 1. Brighter, but tighter shadow (Less blurry) */
+.use-case-card:hover .use-case-icon {
+    transform: scale(1.15) translateY(-8px);
+    /* Brightness up makes the white parts pop. Drop shadow is tighter (5px instead of 15px) */
+    filter: brightness(1.2) drop-shadow(0 0 8px var(--primary-pink));
 }
 
-.use-case-card p strong {
-    color: var(--text-light);
-    font-weight: 600;
+/* 2. Stay White, add Shadow for legibility */
+.use-case-card:hover h4 { 
+    color: #ffffff; 
+    /* Subtle shadow to separate text from any background glow */
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-/* The "Diamond Standard" Hover Effect */
+.use-case-card:hover p { 
+    color: #e0e0e0; /* Almost white */
+}
+
+/* PSEUDO ELEMENTS */
+
+/* The Gradient Border */
 .use-case-card::before {
     content: '';
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     z-index: 0;
     margin: -1px;
-    border-radius: inherit; /* Inherit the card's border-radius */
+    border-radius: inherit;
     background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
 }
 
-.use-case-card > * {
-    position: relative; /* Ensure card content sits above the gradient pseudo-element */
-    z-index: 1;
-}
-
-.use-case-card:hover {
-    transform: translateY(-12px); /* Lift the card more */
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-    border-color: transparent;
-}
-
 .use-case-card:hover::before {
-    opacity: 1; /* Show the glowing gradient border */
+    opacity: 1;
 }
 
-.use-case-image-wrapper {
-    max-width: 800px; /* Or whatever size feels right */
-    margin: 0 auto 5rem auto; /* Center it and add 5rem of space below it */
+/* The Inner Glow - Reduced Intensity */
+.use-case-card::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    /* Much more transparent gradient. Only 5% opacity. */
+    background: radial-gradient(circle at top center, rgba(255, 80, 222, 0.05), transparent 60%);
+    border-radius: 19px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    pointer-events: none;
 }
 
-.use-case-image-wrapper img {
-    width: 100%;
-    border-radius: 16px; /* Match the site's aesthetic */
+.use-case-card:hover::after {
+    opacity: 1;
 }
 
-/* --- Section 8 & 9 --- */
+/* --- Section 9 --- */
 .contact-section .container { text-align: center; }
 .contact-section .hero-headline { font-size: 3.5rem; }
 .contact-section .hero-subheading { max-width: 700px; margin: 0 auto; }
@@ -649,7 +693,7 @@ section { padding: 9rem 0; position: relative; }
 .footer p { margin: 0; font-size: 0.9rem; }
 
 /* --- Responsive Design --- */
-@media (min-width: 992px) { .section-title { font-size: 3.5rem; } .hero-headline { font-size: 5.5rem; } }
+@media (min-width: 992px) { .section-title { font-size: 3.5rem; } .hero-headline { font-size: 5.5rem; } .hero-content { transform: translateY(-4rem); } }
 
 @media (min-width: 768px) { 
     .testimonials { grid-template-columns: 1fr 1fr; } /* Apply two-column grid */
@@ -892,7 +936,7 @@ section { padding: 9rem 0; position: relative; }
     }
 }
 
-/* --- Bento Grid (Command Center) --- */
+/* --- Bento Grid (Command Center) - INTERACTIVE UPGRADE --- */
 .command-center { padding-top: 0; } 
 
 .bento-grid {
@@ -910,7 +954,7 @@ section { padding: 9rem 0; position: relative; }
 .card-events { grid-column: 3 / 4; grid-row: 1 / 2; } 
 .card-crm { grid-column: 3 / 4; grid-row: 2 / 3; } 
 
-/* Card Styling */
+/* Base Card Styling */
 .bento-card {
     background: var(--bg-light);
     border: 1px solid var(--border-color);
@@ -922,14 +966,15 @@ section { padding: 9rem 0; position: relative; }
     flex-direction: column;
     justify-content: space-between;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-    mask-image: radial-gradient(white, black);  
+    /* For 3D effects */
+    perspective: 1000px; 
 }
 
+/* Subtle Hover Lift for all cards */
 .bento-card:hover {
-    transform: translateY(-5px) scale(1.01);
+    transform: translateY(-5px) scale(1.005);
     border-color: rgba(255, 80, 222, 0.3);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 
 .bento-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
@@ -937,8 +982,11 @@ section { padding: 9rem 0; position: relative; }
 .bento-card h3 { font-size: 1.4rem; margin: 0; }
 .bento-card p { color: var(--text-medium); font-size: 0.95rem; line-height: 1.5; margin: 0; }
 
-/* --- 1. ENRICHED SCHEDULE UI --- */
-.ui-abstract-calendar {
+
+/* =========================================
+   INTERACTION 1: THE SCHEDULE (Accordion Expansion)
+   ========================================= */
+   .ui-abstract-calendar {
     margin-top: 1.5rem;
     background: rgba(10, 10, 16, 0.6);
     border-radius: 12px;
@@ -954,117 +1002,251 @@ section { padding: 9rem 0; position: relative; }
 .dot { width: 8px; height: 8px; border-radius: 50%; display: block; }
 .red { background: #ff5f56; } .yellow { background: #ffbd2e; }
 
-.cal-timeline { display: flex; flex-direction: column; gap: 1rem; height: 100%; }
+.cal-timeline { display: flex; flex-direction: column; gap: 0.8rem; height: 100%; }
 .time-row { display: flex; gap: 1rem; align-items: flex-start; }
-.time-label { font-size: 0.7rem; color: var(--text-medium); font-family: monospace; padding-top: 4px; width: 35px; }
+.time-label { font-size: 0.7rem; color: var(--text-medium); font-family: monospace; padding-top: 10px; width: 35px; }
 
+/* The Item Container */
 .cal-item { 
     flex-grow: 1; 
-    padding: 0.6rem 0.8rem; 
     border-radius: 8px; 
     position: relative; 
     overflow: hidden; 
     display: flex; 
-    justify-content: space-between; 
-    align-items: center;
+    flex-direction: column; /* Stack main content and details */
     border-left: 3px solid;
+    transition: background-color 0.3s ease;
 }
+
+/* Main Row Content (Always Visible) */
+.item-main {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.6rem 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .cal-item span { font-size: 0.8rem; font-weight: 600; z-index: 1; }
-/* Item Colors */
+
+/* Hidden Details (Reveals on Hover) */
+.item-details {
+    max-height: 0;
+    opacity: 0;
+    padding: 0 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* HOVER STATE: EXPAND */
+.interactive-row:hover .item-details {
+    max-height: 50px; /* Open up */
+    opacity: 1;
+    padding-bottom: 0.8rem;
+}
+
+/* Detail Tags */
+.detail-tag {
+    font-size: 0.65rem;
+    background: rgba(0,0,0,0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: rgba(255,255,255,0.8);
+}
+
+/* Colors */
 .pink-item { background: rgba(255, 80, 222, 0.1); border-left-color: var(--primary-pink); }
 .pink-item span { color: var(--text-light); }
 .purple-item { background: rgba(127, 0, 255, 0.1); border-left-color: var(--primary-purple); }
 .blue-item { background: rgba(0, 175, 255, 0.1); border-left-color: #00AFFF; }
 
-/* Mini Avatars */
+/* Active Hover Colors */
+.interactive-row:hover .pink-item { background: rgba(255, 80, 222, 0.25); box-shadow: 0 0 15px rgba(255, 80, 222, 0.2); }
+.interactive-row:hover .purple-item { background: rgba(127, 0, 255, 0.25); box-shadow: 0 0 15px rgba(127, 0, 255, 0.2); }
+.interactive-row:hover .blue-item { background: rgba(0, 175, 255, 0.25); box-shadow: 0 0 15px rgba(0, 175, 255, 0.2); }
+
+/* Live Badge with Pulse */
+.live-badge {
+    color: #ff5f56 !important;
+    font-size: 0.6rem !important;
+    display: flex; align-items: center; gap: 4px;
+    animation: pulse-red 1.5s infinite;
+}
+@keyframes pulse-red { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
+/* Avatars */
 .mini-avatars { display: flex; }
 .avatar { 
-    width: 20px; height: 20px; 
-    border-radius: 50%; 
-    background: #333; 
-    border: 2px solid #1e1e2d; 
-    margin-left: -8px; 
-    font-size: 8px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    color: #fff;
+    width: 20px; height: 20px; border-radius: 50%; 
+    background: #333; border: 2px solid #1e1e2d; 
+    margin-left: -8px; font-size: 8px; color: #fff;
+    display: flex; align-items: center; justify-content: center;
 }
 .avatar:first-child { margin-left: 0; background: #ccc; }
 .avatar:nth-child(2) { background: #888; }
 .avatar:nth-child(3) { background: var(--primary-pink); }
 
-/* --- 2. ENRICHED FINANCE UI --- */
-.ui-finance-wrapper { display: flex; flex-direction: column; justify-content: space-between; height: 100%; margin-top: 2rem; }
+
+/* =========================================
+   INTERACTION 2: FINANCE (Taller & Richer)
+   ========================================= */
+.ui-finance-wrapper { display: flex; flex-direction: column; justify-content: space-between; height: 100%; margin-top: 1.5rem; }
+
 .finance-stat { display: flex; flex-direction: column; gap: 0.2rem; }
+.stat-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 .stat-label { font-size: 0.8rem; color: var(--text-medium); }
-.stat-row { display: flex; align-items: center; gap: 1rem; }
-.stat-value { font-size: 1.8rem; font-weight: 700; color: var(--text-light); }
 .stat-badge { font-size: 0.8rem; color: #00ff89; background: rgba(0, 255, 137, 0.1); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+.stat-value { font-size: 2.2rem; font-weight: 700; color: var(--text-light); margin-top: 0.2rem; }
 
+/* The Graph Container */
 .ui-abstract-graph {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    height: 80px;
-    padding-bottom: 0px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    height: 120px; /* TALLER HEIGHT */
+    width: 100%;
     position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    /* Background Grid Lines */
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 19px,
+        rgba(255,255,255,0.05) 20px
+    );
 }
-.graph-bar { width: 18%; background: linear-gradient(to top, var(--primary-purple), var(--primary-pink)); border-radius: 4px 4px 0 0; opacity: 0.8; transition: height 1s ease; }
-.bar-1 { height: 40%; } .bar-2 { height: 70%; } .bar-3 { height: 50%; } .bar-4 { height: 90%; }
-.trend-line-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
 
-/* --- 3. ENRICHED EVENTS UI (Digital Ticket) --- */
-.ui-abstract-ticket {
-    margin-top: 1.5rem;
-    height: auto;
-    background: #0A0A10;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    padding: 1rem;
-    position: relative;
-    overflow: hidden;
+.graph-bar { 
+    width: 18%; 
+    background: linear-gradient(to top, var(--primary-purple), var(--primary-pink)); 
+    border-radius: 4px 4px 0 0; opacity: 0.8; 
+    transition: height 1s ease, opacity 0.3s ease, transform 0.3s ease;
+    position: relative; 
+    cursor: crosshair;
+    z-index: 1;
 }
+.bar-1 { height: 40%; } .bar-2 { height: 70%; } .bar-3 { height: 50%; } .bar-4 { height: 90%; }
+.trend-line-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+/* Hover Effects */
+.graph-bar:hover {
+    opacity: 1;
+    transform: scaleY(1.05);
+    box-shadow: 0 0 20px var(--primary-pink);
+    z-index: 10;
+}
+
+/* Persistent Tooltip on Hover */
+.graph-bar::after {
+    content: attr(data-val);
+    position: absolute;
+    top: -30px; left: 50%; transform: translateX(-50%) translateY(10px);
+    background: #000;
+    color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 20;
+}
+.graph-bar:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+
+/* =========================================
+   INTERACTION 3: EVENTS (Levitate & Tilt)
+   ========================================= */
+.ui-abstract-ticket {
+    margin-top: 1.5rem; height: auto; background: #0A0A10;
+    border-radius: 8px; border: 1px solid var(--border-color);
+    padding: 1rem; position: relative; overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+/* When Card is hovered, the Ticket floats */
+.card-events:hover .ui-abstract-ticket {
+    transform: translateY(-5px) rotateX(10deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    border-color: rgba(255,255,255,0.2);
+}
+
 .ticket-header { display: flex; justify-content: space-between; margin-bottom: 0.8rem; }
 .ticket-event { font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; }
 .ticket-tag { font-size: 0.6rem; background: var(--primary-pink); padding: 2px 6px; border-radius: 3px; font-weight: 700; }
 .ticket-barcode { position: relative; height: 30px; width: 100%; overflow: hidden; }
 .barcode-lines { 
     width: 100%; height: 100%; 
-    background: repeating-linear-gradient(90deg, 
-        #555, #555 2px, 
-        transparent 2px, transparent 4px,
-        #555 4px, #555 8px,
-        transparent 8px, transparent 9px
-    ); 
+    background: repeating-linear-gradient(90deg, #555, #555 2px, transparent 2px, transparent 4px, #555 4px, #555 8px, transparent 8px, transparent 9px); 
 }
 .scan-laser {
     position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: #00ff89;
     box-shadow: 0 0 10px #00ff89;
-    animation: scan 2s ease-in-out infinite;
+    animation: scan 3s ease-in-out infinite;
 }
+/* Faster laser on hover */
+.card-events:hover .scan-laser { animation-duration: 1s; box-shadow: 0 0 15px #00ff89; width: 3px; }
 @keyframes scan { 0% { left: 0; } 50% { left: 100%; } 100% { left: 0; } }
 
-/* --- 4. ENRICHED CRM UI (Profile Card) --- */
+
+/* =========================================
+   INTERACTION 4: CRM (Data Reveal)
+   ========================================= */
 .ui-abstract-profile { 
-    margin-top: 1.5rem; 
-    background: rgba(255,255,255,0.03); 
-    padding: 1rem; 
-    border-radius: 12px; 
-    display: flex; flex-direction: column; gap: 1rem; 
+    margin-top: 1.5rem; background: rgba(255,255,255,0.03); 
+    padding: 1rem; border-radius: 12px; 
+    display: flex; flex-direction: column; gap: 0.5rem;
+    transition: background 0.3s ease;
 }
+.card-crm:hover .ui-abstract-profile { background: rgba(255,255,255,0.06); }
+
+.profile-top { display: flex; justify-content: space-between; align-items: center; }
 .profile-header { display: flex; align-items: center; gap: 0.8rem; }
 .profile-avatar { 
     width: 36px; height: 36px; border-radius: 50%; 
     background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
     display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 0.9rem;
+    transition: transform 0.3s ease;
 }
+/* Avatar pops on hover */
+.card-crm:hover .profile-avatar { transform: scale(1.1); box-shadow: 0 0 10px var(--primary-pink); }
+
 .profile-info { display: flex; flex-direction: column; }
 .profile-name { font-weight: 600; font-size: 0.9rem; }
 .profile-status { font-size: 0.7rem; color: #00ff89; }
-.profile-tags { display: flex; gap: 0.5rem; }
 .tag { font-size: 0.6rem; border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 10px; color: var(--text-medium); }
+
+/* The Reveal Mechanism */
+.profile-hidden-stats {
+    display: flex; justify-content: space-between;
+    margin-top: 0;
+    max-height: 0; opacity: 0; /* Hidden by default */
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 0;
+}
+
+/* On Card Hover, Slide Down */
+.card-crm:hover .profile-hidden-stats {
+    max-height: 50px;
+    opacity: 1;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+}
+
+.p-stat { display: flex; flex-direction: column; align-items: center; }
+.p-stat .lbl { font-size: 0.55rem; color: var(--text-medium); letter-spacing: 1px; }
+.p-stat .val { font-size: 0.9rem; font-weight: 700; color: var(--text-light); }
+
 
 /* Mobile Response for Bento */
 @media (max-width: 991px) {

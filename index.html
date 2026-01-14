@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="logo.png">
 
     <title>VitaQ | The Complete Sports Operating System</title>
-    <meta name="description" content="VitaQ is the definitive operating system for elite sporting organizations. Manage performance, scheduling, events, and operations in one unified platform.">
+    <meta name="description" content="VitaQ is the all-in-one Sports Operating System (ERP) for academies and federations. Unified platform for Athlete Performance, Scheduling, Finance, and Event Management.">
 
     <!-- Social Media Sharing Meta Tags (OG & Twitter) -->
     <meta property="og:title" content="VitaQ | The Complete Sports Operating System">
@@ -44,6 +44,91 @@
 
         gtag('config', 'G-P06983P4SS');
     </script>
+
+    <!-- SCHEMATIC INTELLIGENCE (JSON-LD for AI & SEO) -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "SoftwareApplication",
+              "name": "VitaQ OS",
+              "operatingSystem": "Web, iOS, Android",
+              "applicationCategory": "SportsManagementApplication",
+              "description": "The definitive performance intelligence and operations platform for elite sporting organizations. Features include athlete evaluation, scheduling, financial management, and federation governance.",
+              "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/OnlineOnly",
+                "priceCurrency": "USD",
+                "price": "0.00",
+                "priceValidUntil": "2025-12-31",
+                "url": "https://vitaq.app/#contact"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "VitaQ Technologies",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://vitaq.app/logo.png"
+                }
+              }
+            },
+            {
+              "@type": "Organization",
+              "name": "VitaQ Technologies",
+              "url": "https://vitaq.app",
+              "logo": "https://vitaq.app/logo.png",
+              "sameAs": [
+                "https://twitter.com/vitaqapp",
+                "https://linkedin.com/company/vitaq"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "areaServed": "Worldwide",
+                "availableLanguage": ["English", "Arabic"]
+              }
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "What exactly is VitaQ?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "VitaQ is a premium, white-label performance intelligence platform and operating system for elite organizations, sports academies, and federations."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can VitaQ adapt to our unique training methodology?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. VitaQ is a framework designed to digitize your philosophy using custom Hierarchical Stages, Exercises, and Measurable Goals."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What does white-label mean for my organization?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It means the platform becomes an extension of your brand. We integrate your logo, colors, and typography directly into the application."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How is data protected in VitaQ?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Your organization owns 100% of your data. We act strictly as a Data Processor using secure, encrypted AWS infrastructure."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        </script>
 </head>
 <body>
 
@@ -69,7 +154,8 @@
     <div class="nav-overlay">
         <nav class="nav-fullscreen">
             <a href="#about" class="nav-link">About VitaQ</a>
-            <a href="#feature-grid" class="nav-link">Ecosystem</a>
+            <a href="#feature-grid" class="nav-link">The Ecosystem</a> 
+            <a href="#command-center" class="nav-link">Operations Center</a>
             <a href="#deep-dive" class="nav-link">Performance Tech</a>
             <a href="#use-cases" class="nav-link">Who It's For</a>
             <a href="#faq" class="nav-link">FAQ</a>
@@ -102,7 +188,7 @@
                 <p class="hero-subheading">VitaQ is the definitive operating system for elite sporting organizations. Manage performance, scheduling, events, and operations in one unified platform.</p>
                 <div class="hero-cta">
                     <a href="#contact" class="btn btn-primary">Request a Personalized Demo</a>
-                    <a href="#" class="btn btn-secondary">› Watch the 2-Minute Platform Tour</a>
+                    <a href="#command-center" class="btn btn-secondary">↓ &nbsp; Explore the Ecosystem</a>
                 </div>
             </div>
             <div class="hero-image-wrapper">
@@ -356,95 +442,122 @@
             </div>
 
             <div class="bento-grid">
-                <!-- Card 1: Master Schedule (Spans 2 columns) -->
+                <!-- Card 1: Master Schedule (Fully Interactive) -->
                 <div class="bento-card card-schedule animate-bento">
                     <div class="bento-content">
                         <div class="bento-header">
-                            <lord-icon class="bento-icon" src="https://cdn.lordicon.com/qjuahhae.json" trigger="loop" delay="2000" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                            <lord-icon class="bento-icon" src="https://cdn.lordicon.com/qjuahhae.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                             <h3>The Master Schedule</h3>
                         </div>
                         <p>Link facilities, coaches, and athletes in one view.</p>
                     </div>
-                    <!-- Enriched UI: Timeline View -->
-                    <div class="ui-abstract-calendar">
+                    <!-- UI: Timeline -->
+                    <div class="ui-abstract-calendar" aria-hidden="true">
                         <div class="cal-header">
                             <span class="cal-day">TODAY</span>
                             <div class="window-controls"><span class="dot red"></span><span class="dot yellow"></span></div>
                         </div>
                         <div class="cal-timeline">
-                            <!-- 9:00 AM Slot -->
-                            <div class="time-row">
+                            <!-- Interactive Row 1: Standard Training -->
+                            <div class="time-row interactive-row">
                                 <span class="time-label">09:00</span>
                                 <div class="cal-item pink-item">
-                                    <span>U16 Elite Training</span>
-                                    <div class="mini-avatars">
-                                        <div class="avatar"></div><div class="avatar"></div><div class="avatar">+4</div>
+                                    <div class="item-main">
+                                        <span>U16 Elite Training</span>
+                                        <div class="mini-avatars">
+                                            <div class="avatar"></div>
+                                            <div class="avatar"></div>
+                                            <div class="avatar">+4</div>
+                                        </div>
+                                    </div>
+                                    <div class="item-details">
+                                        <div class="detail-tag">📍 Main Rink (A)</div>
+                                        <div class="detail-tag">👨‍🏫 Coach Mike</div>
+                                        <div class="detail-tag">✅ 22/25 Attended</div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- 10:00 AM Slot -->
-                            <div class="time-row">
+                            
+                            <!-- Interactive Row 2: Live Eval + Training -->
+                            <div class="time-row interactive-row">
                                 <span class="time-label">10:30</span>
                                 <div class="cal-item purple-item">
-                                    <span>Performance Evals</span>
-                                    <div class="mini-avatars">
-                                        <div class="avatar"></div><div class="avatar"></div>
+                                    <div class="item-main">
+                                        <span>U18 Selection Camp</span>
+                                        <span class="live-badge">● LIVE</span>
+                                    </div>
+                                    <div class="item-details">
+                                        <div class="detail-tag">⚡ Performance Eval</div>
+                                        <div class="detail-tag">👀 Scouts Present</div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- 12:00 PM Slot -->
-                            <div class="time-row">
-                                <span class="time-label">12:00</span>
+                            
+                            <!-- Interactive Row 3: Online Strategy -->
+                            <div class="time-row interactive-row">
+                                <span class="time-label">13:00</span>
                                 <div class="cal-item blue-item">
-                                    <span>Staff Strategy</span>
+                                    <div class="item-main">
+                                        <span>Coaches Strategy Sync</span>
+                                        <div class="mini-avatars">
+                                            <div class="avatar"></div>
+                                            <div class="avatar"></div>
+                                        </div>
+                                    </div>
+                                    <div class="item-details">
+                                        <div class="detail-tag">💻 Online (Zoom)</div>
+                                        <div class="detail-tag">👑 Host: Head Coach</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Card 2: Financial Health (Tall Card) -->
+                <!-- Card 2: Financial Health (Taller & Richer) -->
                 <div class="bento-card card-finance animate-bento">
                     <div class="bento-content">
                         <div class="bento-header">
-                            <lord-icon class="bento-icon" src="https://cdn.lordicon.com/qhviklyi.json" trigger="loop" delay="3000" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                            <lord-icon class="bento-icon" src="https://cdn.lordicon.com/qhviklyi.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                             <h3>Financial Health</h3>
                         </div>
                         <p>Real-time revenue tracking.</p>
                     </div>
-                    <!-- Enriched UI: Metrics & Graph -->
-                    <div class="ui-finance-wrapper">
+                    <!-- UI: Graph -->
+                    <div class="ui-finance-wrapper" aria-hidden="true">
                         <div class="finance-stat">
-                            <span class="stat-label">Monthly Revenue</span>
-                            <div class="stat-row">
-                                <span class="stat-value">$42,850</span>
+                            <div class="stat-top">
+                                <span class="stat-label">Monthly Revenue</span>
                                 <span class="stat-badge">+18%</span>
                             </div>
+                            <span class="stat-value">$42,850</span>
                         </div>
+                        <!-- Graph Container with Background Grid -->
                         <div class="ui-abstract-graph">
-                            <div class="graph-bar bar-1"></div>
-                            <div class="graph-bar bar-2"></div>
-                            <div class="graph-bar bar-3"></div>
-                            <div class="graph-bar bar-4"></div>
-                            <!-- Added a trend line overlay -->
-                            <svg class="trend-line-svg" viewBox="0 0 100 50" preserveAspectRatio="none">
-                                <path d="M0,40 Q25,35 50,20 T100,5" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.5" />
+                            <div class="grid-lines"></div>
+                            <div class="graph-bar bar-1" data-val="$8k"></div>
+                            <div class="graph-bar bar-2" data-val="$14k"></div>
+                            <div class="graph-bar bar-3" data-val="$11k"></div>
+                            <div class="graph-bar bar-4" data-val="$18k"></div>
+                            <!-- Trend line matches the taller height -->
+                            <svg class="trend-line-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <path d="M0,80 Q25,70 50,40 T100,10" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.5" />
                             </svg>
                         </div>
                     </div>
                 </div>
-
-                <!-- Card 3: Event Pulse -->
+        
+                <!-- Card 3: Event Pulse (Levitate Interaction) -->
                 <div class="bento-card card-events animate-bento">
                     <div class="bento-content">
                         <div class="bento-header">
-                            <lord-icon class="bento-icon" src="https://cdn.lordicon.com/tftaqjwp.json" trigger="loop" delay="4000" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                            <lord-icon class="bento-icon" src="https://cdn.lordicon.com/ggnoyhfp.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                             <h3>Event Pulse</h3>
                         </div>
                         <p>Ticketing & logistics.</p>
                     </div>
-                    <!-- Enriched UI: Digital Ticket Scan -->
-                    <div class="ui-abstract-ticket">
+                    <!-- UI: Digital Ticket -->
+                     <div class="ui-abstract-ticket" aria-hidden="true">
                         <div class="ticket-header">
                             <span class="ticket-event">SUMMER CUP</span>
                             <span class="ticket-tag">VIP</span>
@@ -455,28 +568,44 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Card 4: Member CRM -->
+        
+                <!-- Card 4: Member CRM (Data Reveal Interaction) -->
                 <div class="bento-card card-crm animate-bento">
                     <div class="bento-content">
                         <div class="bento-header">
-                            <lord-icon class="bento-icon" src="https://cdn.lordicon.com/nobciafz.json" trigger="loop" delay="5000" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                            <lord-icon class="bento-icon" src="https://cdn.lordicon.com/nobciafz.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                             <h3>Total CRM</h3>
                         </div>
                         <p>360° Athlete Profiles.</p>
                     </div>
-                    <!-- Enriched UI: Profile Card -->
-                    <div class="ui-abstract-profile">
-                        <div class="profile-header">
-                            <div class="profile-avatar">JM</div>
-                            <div class="profile-info">
-                                <span class="profile-name">J. Miller</span>
-                                <span class="profile-status">Active Member</span>
+                    <!-- UI: Profile Card with Hidden Details -->
+                     <div class="ui-abstract-profile" aria-hidden="true">
+                        <div class="profile-top">
+                            <div class="profile-header">
+                                <div class="profile-avatar">JM</div>
+                                <div class="profile-info">
+                                    <span class="profile-name">J. Miller</span>
+                                    <span class="profile-status">Active Member</span>
+                                </div>
+                            </div>
+                            <div class="profile-tags">
+                                <span class="tag">Elite</span>
                             </div>
                         </div>
-                        <div class="profile-tags">
-                            <span class="tag">Elite Squad</span>
-                            <span class="tag">Paid</span>
+                        <!-- HIDDEN SECTION -->
+                        <div class="profile-hidden-stats">
+                            <div class="p-stat">
+                                <span class="lbl">ATT</span>
+                                <span class="val">98%</span>
+                            </div>
+                            <div class="p-stat">
+                                <span class="lbl">PERF</span>
+                                <span class="val">A+</span>
+                            </div>
+                            <div class="p-stat">
+                                <span class="lbl">DUE</span>
+                                <span class="val">$0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -523,7 +652,7 @@
                                         <li><strong>Centralize Resources:</strong> Assign specific training materials, videos, and benchmark goals to each unique stage.</li>
                                         <li><strong>Track Cohort Progress:</strong> Get an instant, high-level view of how groups and individuals are performing within each stage.</li>
                                     </ul>
-                                    <lord-icon class="step-icon" src="https://cdn.lordicon.com/rgyftmhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                                    <lord-icon class="step-icon" src="https://cdn.lordicon.com/glzqezmf.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                                 </div>
                             </div>
                             <!-- Step 2 Content -->
@@ -582,7 +711,7 @@
                                 <li><strong>Centralize Resources:</strong> Assign specific training materials, videos, and benchmark goals to each unique stage.</li>
                                 <li><strong>Track Cohort Progress:</strong> Get an instant, high-level view of how groups and individuals are performing within each stage.</li>
                             </ul>
-                            <lord-icon class="step-icon" src="https://cdn.lordicon.com/rgyftmhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
+                            <lord-icon class="step-icon" src="https://cdn.lordicon.com/glzqezmf.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                         </div>
                     </div>
                     <!-- Step 2 Mobile -->
