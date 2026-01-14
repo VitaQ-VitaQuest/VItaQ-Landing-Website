@@ -553,17 +553,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Living Interface Enhancement: Step 2 (Interactive Cursor) ---
     
-    // Select all elements that should trigger the cursor change
-    const interactiveElements = document.querySelectorAll(
-        'a, button, .testimonial-card, .problem-card, .feature-card, .use-case-card, .bento-card'
-    );
+    // Only run this on devices with a fine pointer (Mouse/Trackpad)
+    if (window.matchMedia("(pointer: fine)").matches) {
+        
+        const interactiveElements = document.querySelectorAll(
+            'a, button, .testimonial-card, .problem-card, .feature-card, .use-case-card, .bento-card'
+        );
 
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            document.body.classList.add('cursor-active');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.body.classList.add('cursor-active');
+            });
+            el.addEventListener('mouseleave', () => {
+                document.body.classList.remove('cursor-active');
+            });
         });
-        el.addEventListener('mouseleave', () => {
-            document.body.classList.remove('cursor-active');
-        });
-    });
+    }
+});
+
+// --- Growth Hack: Tab Title Changer ---
+let docTitle = document.title;
+window.addEventListener("blur", () => {
+    document.title = "👋 Come back to VitaQ!";
+});
+window.addEventListener("focus", () => {
+    document.title = docTitle;
 });
