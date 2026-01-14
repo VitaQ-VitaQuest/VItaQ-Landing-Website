@@ -255,7 +255,7 @@ section { padding: 9rem 0; position: relative; }
     border-color: transparent; 
     box-shadow: var(--glow-shadow);
 }
-.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
 .feature-card {
     background: var(--bg-dark);
     padding: 3rem 2rem; /* Increased top/bottom padding */
@@ -892,6 +892,191 @@ section { padding: 9rem 0; position: relative; }
     }
 }
 
+/* --- Bento Grid (Command Center) --- */
+.command-center { padding-top: 0; } 
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: 280px 280px;
+    gap: 1.5rem;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+/* Card Positioning */
+.card-schedule { grid-column: 1 / 2; grid-row: 1 / 3; } 
+.card-finance { grid-column: 2 / 3; grid-row: 1 / 3; } 
+.card-events { grid-column: 3 / 4; grid-row: 1 / 2; } 
+.card-crm { grid-column: 3 / 4; grid-row: 2 / 3; } 
+
+/* Card Styling */
+.bento-card {
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);  
+}
+
+.bento-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    border-color: rgba(255, 80, 222, 0.3);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.bento-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+.bento-icon { width: 40px; height: 40px; }
+.bento-card h3 { font-size: 1.4rem; margin: 0; }
+.bento-card p { color: var(--text-medium); font-size: 0.95rem; line-height: 1.5; margin: 0; }
+
+/* --- 1. ENRICHED SCHEDULE UI --- */
+.ui-abstract-calendar {
+    margin-top: 1.5rem;
+    background: rgba(10, 10, 16, 0.6);
+    border-radius: 12px;
+    padding: 1rem;
+    height: 100%;
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+}
+.cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.cal-day { font-size: 0.7rem; font-weight: 700; color: var(--text-medium); letter-spacing: 1px; }
+.window-controls { display: flex; gap: 6px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: block; }
+.red { background: #ff5f56; } .yellow { background: #ffbd2e; }
+
+.cal-timeline { display: flex; flex-direction: column; gap: 1rem; height: 100%; }
+.time-row { display: flex; gap: 1rem; align-items: flex-start; }
+.time-label { font-size: 0.7rem; color: var(--text-medium); font-family: monospace; padding-top: 4px; width: 35px; }
+
+.cal-item { 
+    flex-grow: 1; 
+    padding: 0.6rem 0.8rem; 
+    border-radius: 8px; 
+    position: relative; 
+    overflow: hidden; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-left: 3px solid;
+}
+.cal-item span { font-size: 0.8rem; font-weight: 600; z-index: 1; }
+/* Item Colors */
+.pink-item { background: rgba(255, 80, 222, 0.1); border-left-color: var(--primary-pink); }
+.pink-item span { color: var(--text-light); }
+.purple-item { background: rgba(127, 0, 255, 0.1); border-left-color: var(--primary-purple); }
+.blue-item { background: rgba(0, 175, 255, 0.1); border-left-color: #00AFFF; }
+
+/* Mini Avatars */
+.mini-avatars { display: flex; }
+.avatar { 
+    width: 20px; height: 20px; 
+    border-radius: 50%; 
+    background: #333; 
+    border: 2px solid #1e1e2d; 
+    margin-left: -8px; 
+    font-size: 8px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    color: #fff;
+}
+.avatar:first-child { margin-left: 0; background: #ccc; }
+.avatar:nth-child(2) { background: #888; }
+.avatar:nth-child(3) { background: var(--primary-pink); }
+
+/* --- 2. ENRICHED FINANCE UI --- */
+.ui-finance-wrapper { display: flex; flex-direction: column; justify-content: space-between; height: 100%; margin-top: 2rem; }
+.finance-stat { display: flex; flex-direction: column; gap: 0.2rem; }
+.stat-label { font-size: 0.8rem; color: var(--text-medium); }
+.stat-row { display: flex; align-items: center; gap: 1rem; }
+.stat-value { font-size: 1.8rem; font-weight: 700; color: var(--text-light); }
+.stat-badge { font-size: 0.8rem; color: #00ff89; background: rgba(0, 255, 137, 0.1); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+
+.ui-abstract-graph {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 80px;
+    padding-bottom: 0px;
+    position: relative;
+}
+.graph-bar { width: 18%; background: linear-gradient(to top, var(--primary-purple), var(--primary-pink)); border-radius: 4px 4px 0 0; opacity: 0.8; transition: height 1s ease; }
+.bar-1 { height: 40%; } .bar-2 { height: 70%; } .bar-3 { height: 50%; } .bar-4 { height: 90%; }
+.trend-line-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+
+/* --- 3. ENRICHED EVENTS UI (Digital Ticket) --- */
+.ui-abstract-ticket {
+    margin-top: 1.5rem;
+    height: auto;
+    background: #0A0A10;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+.ticket-header { display: flex; justify-content: space-between; margin-bottom: 0.8rem; }
+.ticket-event { font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; }
+.ticket-tag { font-size: 0.6rem; background: var(--primary-pink); padding: 2px 6px; border-radius: 3px; font-weight: 700; }
+.ticket-barcode { position: relative; height: 30px; width: 100%; overflow: hidden; }
+.barcode-lines { 
+    width: 100%; height: 100%; 
+    background: repeating-linear-gradient(90deg, 
+        #555, #555 2px, 
+        transparent 2px, transparent 4px,
+        #555 4px, #555 8px,
+        transparent 8px, transparent 9px
+    ); 
+}
+.scan-laser {
+    position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: #00ff89;
+    box-shadow: 0 0 10px #00ff89;
+    animation: scan 2s ease-in-out infinite;
+}
+@keyframes scan { 0% { left: 0; } 50% { left: 100%; } 100% { left: 0; } }
+
+/* --- 4. ENRICHED CRM UI (Profile Card) --- */
+.ui-abstract-profile { 
+    margin-top: 1.5rem; 
+    background: rgba(255,255,255,0.03); 
+    padding: 1rem; 
+    border-radius: 12px; 
+    display: flex; flex-direction: column; gap: 1rem; 
+}
+.profile-header { display: flex; align-items: center; gap: 0.8rem; }
+.profile-avatar { 
+    width: 36px; height: 36px; border-radius: 50%; 
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem;
+}
+.profile-info { display: flex; flex-direction: column; }
+.profile-name { font-weight: 600; font-size: 0.9rem; }
+.profile-status { font-size: 0.7rem; color: #00ff89; }
+.profile-tags { display: flex; gap: 0.5rem; }
+.tag { font-size: 0.6rem; border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 10px; color: var(--text-medium); }
+
+/* Mobile Response for Bento */
+@media (max-width: 991px) {
+    .bento-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .bento-card { min-height: 250px; }
+    .card-schedule, .card-finance, .card-events, .card-crm { grid-column: auto; grid-row: auto; }
+}
+
 /* --- PHASE 1 ENHANCEMENT: Accessibility & Performance --- */
 
 /* 1. Custom, branded focus state for keyboard navigation */
@@ -1275,4 +1460,16 @@ body.cursor-active {
         flex-direction: row; /* Side-by-side on desktop */
         justify-content: space-between;
     }
+}
+
+/* --- HONEYPOT STYLING (Anti-Spam) --- */
+.honey-pot {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    z-index: -1;
+    overflow: hidden;
 }
