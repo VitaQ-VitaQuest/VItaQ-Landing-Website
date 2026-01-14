@@ -693,7 +693,7 @@ section { padding: 9rem 0; position: relative; }
 .footer p { margin: 0; font-size: 0.9rem; }
 
 /* --- Responsive Design --- */
-@media (min-width: 992px) { .section-title { font-size: 3.5rem; } .hero-headline { font-size: 5.5rem; } }
+@media (min-width: 992px) { .section-title { font-size: 3.5rem; } .hero-headline { font-size: 5.5rem; } .hero-content { transform: translateY(-4rem); } }
 
 @media (min-width: 768px) { 
     .testimonials { grid-template-columns: 1fr 1fr; } /* Apply two-column grid */
