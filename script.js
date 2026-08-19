@@ -375,9 +375,9 @@ document.addEventListener('DOMContentLoaded', function () {
         formWrapper.classList.add('sending');
     
         // Your specific EmailJS credentials
-        const serviceID = 'service_tf010rz'; 
-        const templateID = 'template_vn7t583';
-        const publicKey = 'Xc_6XWChYs1z1uehh'; 
+        const serviceID = 'service_i2cehxk';
+        const templateID = 'template_t4src1r';
+        const publicKey = 'GnZyGn1ismb0LZW1f';
     
         // Send the form data using EmailJS
         emailjs.sendForm(serviceID, templateID, this, publicKey)
