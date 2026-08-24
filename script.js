@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // --- Dynamic "Peek-a-Boo" Header ---
-    const header = document.querySelector('.header');
+    const header = document.querySelector('.main-nav');
     let lastScrollY = window.scrollY;
 
     window.addEventListener('scroll', () => {

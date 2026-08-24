@@ -1460,7 +1460,7 @@ body.loaded #preloader {
     justify-content: center;
     gap: 0.75rem;
     max-width: 900px;
-    margin: 2.25rem auto 2.25rem;
+    margin: 3.25rem auto 2.25rem;
 }
 
 .faq-tabs-navigation {
@@ -1623,7 +1623,7 @@ body.loaded #preloader {
         grid-template-columns: 38px minmax(0, 1fr) 38px;
         align-items: center;
         gap: 0.45rem;
-        margin: 1.75rem auto 2rem;
+        margin: 2.5rem auto 2rem;
         width: 100%;
     }
 
