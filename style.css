@@ -735,7 +735,7 @@ section { padding: 9rem 0; position: relative; }
     .white-label .white-label-content { order: -1; } 
 }
 
-@media (max-width: 767px) { .hero { display: block; text-align: center; padding-top: 10rem; padding-bottom: 4rem; margin-bottom: 0; min-height: unset; } .hero-cta { align-items: center; } .hero-image-wrapper { margin-top: -3rem; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); mask-image: linear-gradient(to bottom, transparent 0%, black 40%); } .hero-image { width: 90%; max-width: 500px; margin: 0 auto; } .social-proof { margin-top: -24px; } .solution-image-wrapper img, .white-label-image-wrapper img { width: 100%; margin-left: 0; } }
+@media (max-width: 767px) { .hero { display: block; text-align: center; padding-top: 10rem; padding-bottom: 4rem; margin-bottom: 0; min-height: unset; } .hero-headline { font-size: 2.5rem; } .hero-cta { align-items: center; } .hero-image-wrapper { margin-top: -3rem; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); mask-image: linear-gradient(to bottom, transparent 0%, black 40%); } .hero-image { width: 90%; max-width: 500px; margin: 0 auto; } .social-proof { margin-top: -24px; } .solution-image-wrapper img, .white-label-image-wrapper img { width: 100%; margin-left: 0; } }
 @media (max-width: 767px) { 
         .hero-image-wrapper { display: none;}
     .problem-grid  {
