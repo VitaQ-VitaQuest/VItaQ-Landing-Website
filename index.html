@@ -1241,18 +1241,20 @@
         <!-- Section 9: Contact Form -->
         <section id="contact" class="contact-section">
             <div class="container">
-                 <h2 class="hero-headline section-title">See VitaQ in Your Organization</h2>
-                 <p class="hero-subheading section-subtitle">Tell us a little about your organization and we'll show you the VitaQ workflows most relevant to your team.</p>
+                <h2 class="hero-headline section-title">See VitaQ in Your Organization</h2>
+                <p class="hero-subheading section-subtitle">Tell us a little about your organization and we'll show you the VitaQ workflows most relevant to your team.</p>
 
                 <div class="form-container">
-                    <div class="form-success">
-                        <svg class="success-icon" viewBox="0 0 24 24"><path d="M9 17.17L5.83 14l-1.42 1.41L9 20 21 8l-1.41-1.41z"></path></svg>
+                    <div class="form-success" role="status" aria-live="polite">
+                        <svg class="success-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.17L5.83 14l-1.42 1.41L9 20 21 8l-1.41-1.41z"></path></svg>
                         <h3>Thank You!</h3>
                         <p>Your demo request has been submitted successfully. We'll be in touch shortly.</p>
                     </div>
+
                     <div class="form-wrapper">
-                         <div class="spinner"></div>
-                         <form id="contact-form">
+                        <div class="spinner" aria-hidden="true"></div>
+
+                        <form id="contact-form">
                             <!-- HONEYPOT FIELD (Spam Trap) -->
                             <div class="input-group honey-pot">
                                 <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
@@ -1261,22 +1263,26 @@
 
                             <div class="form-row">
                                 <div class="input-group">
-                                    <input type="text" id="name" name="name" required>
                                     <label for="name">Full Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Enter your full name" autocomplete="name" required>
                                 </div>
+
                                 <div class="input-group">
-                                    <input type="email" id="email" name="email" required>
                                     <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" placeholder="name@organization.com" autocomplete="email" required>
                                 </div>
                             </div>
+
                             <div class="input-group">
-                                <input type="text" id="organization" name="organization" required>
                                 <label for="organization">Organization Name</label>
+                                <input type="text" id="organization" name="organization" placeholder="Your company or team" autocomplete="organization" required>
                             </div>
+
                             <div class="input-group">
-                                <textarea id="message" name="message" rows="4" placeholder="Hi there! We're a [Your Sport] organization and I'm particularly interested in..."></textarea>
                                 <label for="message">Message (Optional)</label>
+                                <textarea id="message" name="message" rows="4" placeholder="Hi there! We're a [Your Sport] organization and I'm particularly interested in..."></textarea>
                             </div>
+
                             <button type="submit" class="btn btn-primary btn-large">Book My Free Demo</button>
                         </form>
                     </div>

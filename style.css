@@ -575,150 +575,292 @@ section { padding: 9rem 0; position: relative; }
     opacity: 1;
 }
 
-/* --- Section 9 --- */
-.contact-section .container { text-align: center; }
-.contact-section .hero-headline { font-size: 3.5rem; }
-.contact-section .hero-subheading { max-width: 700px; margin: 0 auto; }
+/* --- Section 9: Request a Demo --- */
+.contact-section {
+    overflow: hidden;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.contact-section .container {
+    text-align: center;
+}
+
+.contact-section .hero-headline {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    max-width: 700px;
+    margin: 0 auto 1.25rem;
+}
+
+.contact-section .hero-subheading {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.65;
+}
+
+/* Gradient frame + restrained VitaQ brand glow */
 .form-container {
     max-width: 800px;
-    margin: 3rem auto 0 auto;
-    position: relative; /* Crucial for positioning the glows */
+    margin: 3rem auto 0;
+    position: relative;
+    isolation: isolate;
+    box-sizing: border-box;
+    padding: 3px;
     border-radius: 20px;
-    padding: 0; /* Padding is now on the wrapper */
-    background: transparent; /* No background color here */
-    border: none; /* The glow will create the border */
-    box-shadow: 0 0 50px rgba(0,0,0,0.3);
+    background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
+    box-shadow:
+        0 0 40px rgba(255, 80, 222, 0.18),
+        0 24px 70px rgba(0, 0, 0, 0.28);
 }
+
 .form-container::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 20px;
-    z-index: 1; /* Sits just behind the wrapper */
+    inset: -72px;
+    z-index: -1;
     pointer-events: none;
-    animation: breathing-glow-pink 7s ease-in-out infinite;
+    background:
+        radial-gradient(circle at 20% 35%, rgba(255, 80, 222, 0.14), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(127, 0, 255, 0.14), transparent 42%);
+    filter: blur(34px);
 }
 
-.form-container::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 20px;
-    z-index: 1;
-    pointer-events: none;
-    animation: breathing-glow-purple 5s ease-in-out 1s infinite;
-}
-
-/* 5. The animation keyframes (no changes here, they are correct) */
-@keyframes breathing-glow-pink {
-    0% {
-        box-shadow: 0 0 10px 0px var(--primary-pink),
-                    0 0 20px 0px var(--primary-pink);
-    }
-    50% {
-        box-shadow: 0 0 25px 5px var(--primary-pink),
-                    0 0 50px 10px var(--primary-pink);
-    }
-    100% {
-        box-shadow: 0 0 10px 0px var(--primary-pink),
-                    0 0 20px 0px var(--primary-pink);
-    }
-}
-
-@keyframes breathing-glow-purple {
-    0% {
-        box-shadow: 0 0 12px 0px var(--primary-purple),
-                    0 0 25px 0px var(--primary-purple);
-    }
-    50% {
-        box-shadow: 0 0 30px 6px var(--primary-purple),
-                    0 0 60px 12px var(--primary-purple);
-    }
-    100% {
-        box-shadow: 0 0 12px 0px var(--primary-purple),
-                    0 0 25px 0px var(--primary-purple);
-    }
-}
-.form-row { display: flex; gap: 2rem; }
-.input-group { position: relative; margin-bottom: 2rem; text-align: left; width: 100%; }
-.input-group input, .input-group textarea { width: 100%; padding: 1rem 0 0.5rem 0; background: transparent; border: none; border-bottom: 2px solid var(--border-color); color: var(--text-light); font-size: 1rem; font-family: inherit; transition: border-color 0.3s; position: relative; background-image: linear-gradient(90deg, var(--primary-pink), var(--primary-purple)); background-repeat: no-repeat; background-size: 0% 2px; background-position: left bottom; }
-.input-group textarea { resize: vertical; }
-.input-group label { position: absolute; left: 0; top: 1rem; color: var(--text-medium); pointer-events: none; transition: all 0.3s ease; }
-.input-group input:focus, .input-group textarea:focus { outline: none; border-bottom-color: transparent; background-size: 100% 2px; }
-.input-group input:focus + label, .input-group textarea:focus + label, .input-group input:valid + label, .input-group textarea:valid + label { top: -0.5rem; font-size: 0.8rem; color: var(--primary-pink); }
-#contact-form button { margin-top: 1rem; width: 100%; }
-.form-wrapper {
+.form-wrapper,
+.form-success {
     position: relative;
-    z-index: 2; /* Sits on top of the pseudo-elements */
-    background: rgba(22, 22, 37, 0.8); /* The dark, semi-transparent background */
-    padding: 3rem; /* Padding is moved here */
-    border-radius: 20px; /* Match the container's radius */
-    overflow: hidden; /* Keeps everything neat */
+    z-index: 1;
+    box-sizing: border-box;
+    border-radius: 17px;
+    background: rgba(22, 22, 37, 0.88);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 }
-.form-wrapper .spinner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; border: 5px solid rgba(255, 255, 255, 0.2); border-top-color: var(--primary-pink); border-radius: 50%; opacity: 0; visibility: hidden; transition: all 0.3s; animation: spin 1s linear infinite; }
-.form-wrapper.sending #contact-form { filter: blur(5px); opacity: 0.5; }
-.form-wrapper.sending .spinner { opacity: 1; visibility: visible; }
-@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+.form-wrapper {
+    padding: 2.5rem;
+    overflow: hidden;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.input-group label {
+    position: static;
+    margin-left: 0.5rem;
+    color: var(--text-medium);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    pointer-events: auto;
+    transition: color 0.2s ease;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: rgba(10, 10, 16, 0.48);
+    background-image: none;
+    color: var(--text-light);
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.input-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: var(--text-medium);
+    opacity: 1;
+}
+
+.input-group:focus-within label {
+    color: var(--text-light);
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: rgba(255, 80, 222, 0.7);
+    background-color: rgba(10, 10, 16, 0.64);
+    box-shadow: 0 0 0 3px rgba(255, 80, 222, 0.12);
+}
+
+#contact-form button {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 0;
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
+}
+
+/* Preserve the existing submit/loading behavior. */
+.form-wrapper .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 52px;
+    height: 52px;
+    transform: translate(-50%, -50%);
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--primary-pink);
+    border-radius: 50%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    animation: spin 1s linear infinite;
+}
+
+.form-wrapper.sending #contact-form {
+    filter: blur(5px);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.form-wrapper.sending .spinner {
+    opacity: 1;
+    visibility: visible;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
 .form-success {
     display: none;
+    width: 100%;
+    min-height: 360px;
+    padding: 3rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    position: relative;
-    z-index: 2;
-    background: rgba(22, 22, 37, 0.8);
-    padding: 3rem;
-    border-radius: 20px;
-    width: 100%;
-    box-sizing: border-box;
-}
-.success-icon { width: 80px; height: 80px; fill: #00C853; margin-bottom: 1rem; }
-.form-success h3 { font-size: 2rem; color: var(--text-light); margin: 0 0 0.5rem 0; }
-.form-success p { color: var(--text-medium); margin: 0; max-width: 300px; }
-.form-container::before,
-.form-container::after {
-    transition: box-shadow 0.5s ease-in-out;
 }
 
-/* This is the class we will add with JavaScript */
-/* It overrides the default pink/purple animations */
+.success-icon {
+    width: 72px;
+    height: 72px;
+    fill: var(--success-green);
+    margin-bottom: 1rem;
+}
+
+.form-success h3 {
+    margin: 0 0 0.5rem;
+    color: var(--text-light);
+    font-size: 2rem;
+}
+
+.form-success p {
+    max-width: 360px;
+    margin: 0;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+.form-container.form-success-glow {
+    background: var(--success-green);
+    box-shadow:
+        0 0 36px rgba(0, 255, 137, 0.22),
+        0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
 .form-container.form-success-glow::before {
-    animation: breathing-glow-green-1 4s ease-in-out infinite;
-}
-.form-container.form-success-glow::after {
-    animation: breathing-glow-green-2 6s ease-in-out 0.5s infinite;
+    background: radial-gradient(circle, rgba(0, 255, 137, 0.12), transparent 55%);
 }
 
-/* Keyframes for the FIRST green glow layer */
-@keyframes breathing-glow-green-1 {
-    0% {
-        box-shadow: 0 0 10px 0px var(--success-green),
-                    0 0 20px 0px var(--success-green);
-    }
-    50% {
-        box-shadow: 0 0 25px 5px var(--success-green),
-                    0 0 50px 10px var(--success-green);
-    }
-    100% {
-        box-shadow: 0 0 10px 0px var(--success-green),
-                    0 0 20px 0px var(--success-green);
-    }
+.form-container.form-success-glow .form-wrapper {
+    display: none;
 }
 
-/* Keyframes for the SECOND green glow layer */
-@keyframes breathing-glow-green-2 {
-    0% {
-        box-shadow: 0 0 12px 0px var(--success-green),
-                    0 0 25px 0px var(--success-green);
+@media (max-width: 767px) {
+    .contact-section .hero-headline {
+        font-size: clamp(2.15rem, 9vw, 2.5rem);
+        line-height: 1.12;
     }
-    50% {
-        box-shadow: 0 0 30px 6px var(--success-green),
-                    0 0 60px 12px var(--success-green);
+
+    .contact-section .hero-subheading {
+        font-size: 1rem;
+        line-height: 1.6;
     }
-    100% {
-        box-shadow: 0 0 12px 0px var(--success-green),
-                    0 0 25px 0px var(--success-green);
+
+    .form-container {
+        margin-top: 2.5rem;
+        padding: 2px;
+        border-radius: 18px;
+    }
+
+    .form-wrapper,
+    .form-success {
+        border-radius: 16px;
+    }
+
+    .form-wrapper {
+        padding: 1.5rem;
+    }
+
+    #contact-form {
+        gap: 1.25rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .input-group input,
+    .input-group textarea {
+        font-size: 16px; /* Prevents iOS zoom on focus. */
+    }
+
+    .input-group textarea {
+        min-height: 120px;
+    }
+
+    #contact-form .btn-large {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .form-success {
+        min-height: 320px;
+        padding: 2rem 1.5rem;
     }
 }
 
