@@ -424,29 +424,269 @@ document.addEventListener('DOMContentLoaded', function () {
         lastScrollY = currentScrollY;
     });
 
-    // --- FAQ Accordion Logic ---
-    const faqItems = document.querySelectorAll('.faq-item');
+        // --- FAQ Tabs & Accordion Logic ---
+        const faqTabs = Array.from(document.querySelectorAll('.faq-tab'));
+        const faqPanels = Array.from(document.querySelectorAll('.faq-panel'));
+        const faqItems = Array.from(document.querySelectorAll('.faq-item'));
 
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            
-            // First, close all other items
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
+        const faqTabsContainer = document.querySelector('.faq-tabs');
+        const faqPrevButton = document.querySelector('.faq-tab-arrow-left');
+        const faqNextButton = document.querySelector('.faq-tab-arrow-right');
+
+
+        function closeFaqItem(item) {
+            item.classList.remove('active')
+
+            const question = item.querySelector('.faq-question');
+
+            if (question) {
+                question.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+
+        /*
+        * On mobile, automatically scroll the selected tab
+        * into the visible center of the tab container.
+        */
+        function scrollFaqTabIntoView(tab) {
+            if (
+                !faqTabsContainer ||
+                !window.matchMedia('(max-width: 767px)').matches
+            ) {
+                return;
+            }
+
+            const targetLeft =
+                tab.offsetLeft -
+                (faqTabsContainer.clientWidth - tab.offsetWidth) / 2;
+
+            faqTabsContainer.scrollTo({
+                left: Math.max(0, targetLeft),
+                behavior: 'smooth'
+            });
+        }
+
+
+        /*
+        * Disable the left arrow on the first category
+        * and the right arrow on the last category.
+        */
+        function updateFaqArrowState(tab) {
+            const activeIndex = faqTabs.indexOf(tab);
+
+            if (faqPrevButton) {
+                faqPrevButton.disabled = activeIndex <= 0;
+            }
+
+            if (faqNextButton) {
+                faqNextButton.disabled =
+                    activeIndex >= faqTabs.length - 1;
+            }
+        }
+
+
+        /*
+        * Activate a FAQ category.
+        */
+        function activateFaqTab(tab, shouldFocus = false) {
+            const category = tab.dataset.faqTab;
+
+            // Update tab buttons
+            faqTabs.forEach(otherTab => {
+                const isActive = otherTab === tab;
+
+                otherTab.classList.toggle('active', isActive);
+                otherTab.setAttribute(
+                    'aria-selected',
+                    String(isActive)
+                );
+
+                otherTab.tabIndex = isActive ? 0 : -1;
+            });
+
+
+            // Update FAQ panels
+            faqPanels.forEach(panel => {
+                const isActive =
+                    panel.dataset.faqPanel === category;
+
+                panel.classList.toggle('active', isActive);
+                panel.hidden = !isActive;
+
+                // Close questions when leaving a category
+                if (!isActive) {
+                    panel
+                        .querySelectorAll('.faq-item')
+                        .forEach(closeFaqItem);
                 }
             });
 
-            // Then, toggle the clicked item
-            if (!isActive) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
+
+            // Update mobile arrow states
+            updateFaqArrowState(tab);
+
+            // Make sure selected tab is visible on mobile
+            scrollFaqTabIntoView(tab);
+
+
+            // Keyboard accessibility
+            if (shouldFocus) {
+                tab.focus();
             }
+        }
+
+
+        /*
+        * FAQ category tab click + keyboard navigation
+        */
+        faqTabs.forEach((tab, index) => {
+
+            // Mouse / touch
+            tab.addEventListener('click', () => {
+                activateFaqTab(tab);
+            });
+
+
+            // Keyboard navigation
+            tab.addEventListener('keydown', event => {
+                let nextIndex = null;
+
+                if (event.key === 'ArrowRight') {
+                    nextIndex =
+                        (index + 1) % faqTabs.length;
+                }
+
+                else if (event.key === 'ArrowLeft') {
+                    nextIndex =
+                        (index - 1 + faqTabs.length) %
+                        faqTabs.length;
+                }
+
+                else if (event.key === 'Home') {
+                    nextIndex = 0;
+                }
+
+                else if (event.key === 'End') {
+                    nextIndex = faqTabs.length - 1;
+                }
+
+
+                if (nextIndex !== null) {
+                    event.preventDefault();
+
+                    activateFaqTab(
+                        faqTabs[nextIndex],
+                        true
+                    );
+                }
+            });
         });
-    });
+
+
+        /*
+        * Mobile Previous Category Arrow
+        */
+        if (faqPrevButton) {
+            faqPrevButton.addEventListener('click', () => {
+
+                const activeIndex =
+                    faqTabs.findIndex(tab =>
+                        tab.classList.contains('active')
+                    );
+
+                if (activeIndex > 0) {
+                    activateFaqTab(
+                        faqTabs[activeIndex - 1]
+                    );
+                }
+            });
+        }
+
+
+        /*
+        * Mobile Next Category Arrow
+        */
+        if (faqNextButton) {
+            faqNextButton.addEventListener('click', () => {
+
+                const activeIndex =
+                    faqTabs.findIndex(tab =>
+                        tab.classList.contains('active')
+                    );
+
+                if (
+                    activeIndex >= 0 &&
+                    activeIndex < faqTabs.length - 1
+                ) {
+                    activateFaqTab(
+                        faqTabs[activeIndex + 1]
+                    );
+                }
+            });
+        }
+
+
+        /*
+        * FAQ Accordion
+        */
+        faqItems.forEach(item => {
+            const question =
+                item.querySelector('.faq-question');
+
+            if (!question) {
+                return;
+            }
+
+            question.addEventListener('click', () => {
+
+                const panel =
+                    item.closest('.faq-panel');
+
+                const isActive =
+                    item.classList.contains('active');
+
+
+                /*
+                * Close every question inside
+                * the current category first.
+                */
+                panel
+                    .querySelectorAll('.faq-item')
+                    .forEach(closeFaqItem);
+
+
+                /*
+                * If the clicked question was closed,
+                * open it.
+                *
+                * If it was already open,
+                * it simply remains closed.
+                */
+                if (!isActive) {
+                    item.classList.add('active');
+
+                    question.setAttribute(
+                        'aria-expanded',
+                        'true'
+                    );
+                }
+            });
+        });
+
+
+        /*
+        * Initial FAQ state
+        */
+        if (faqTabs.length) {
+
+            const initialActiveTab =
+                faqTabs.find(tab =>
+                    tab.classList.contains('active')
+                ) || faqTabs[0];
+
+            updateFaqArrowState(initialActiveTab);
+        }
 
     // --- Testimonial Modal Logic ---
     const testimonialCards = document.querySelectorAll('.testimonial-card');

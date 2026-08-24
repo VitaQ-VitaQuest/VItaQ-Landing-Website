@@ -94,26 +94,42 @@
               "mainEntity": [
                 {
                   "@type": "Question",
-                  "name": "What exactly is VitaQ?",
+                  "name": "What is VitaQ?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "VitaQ is a premium, white-label performance intelligence platform and operating system for elite organizations, sports academies, and federations."
+                    "text": "VitaQ is an all-in-one sports management platform for managing athletes, coaching, schedules, memberships, payments, events, and performance."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "Can VitaQ adapt to our unique training methodology?",
+                  "name": "Who is VitaQ built for?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes. VitaQ is a framework designed to digitize your philosophy using custom Hierarchical Stages, Exercises, and Measurable Goals."
+                    "text": "VitaQ is designed for sports academies, clubs, federations, governing bodies, high-performance centers, and other organizations managing structured sports programs."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "What does white-label mean for my organization?",
+                  "name": "Is VitaQ limited to one sport?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "It means the platform becomes an extension of your brand. We integrate your logo, colors, and typography directly into the application."
+                    "text": "No. VitaQ is designed to adapt to different sports, organizational structures, and development methodologies."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can VitaQ adapt to our training methodology?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. You can structure your own stages, exercises, goals, benchmarks, and evaluation processes inside VitaQ."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What does \"white-label\" mean for my organization?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It means the platform becomes an extension of your brand, integrating your logo, colors, and typography."
                   }
                 },
                 {
@@ -121,7 +137,31 @@
                   "name": "How is data protected in VitaQ?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Your organization owns 100% of your data. We act strictly as a Data Processor using secure, encrypted AWS infrastructure."
+                    "text": "Your organization owns 100% of your data; we act as a Data Processor using secure AWS infrastructure."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How is VitaQ priced?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It is a tailored SaaS subscription based on your scale. Contact us for a custom quote."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How does VitaQ make coaching more efficient?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The Evaluation Conductor replaces manual data entry with a real-time digital interface."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can I track multiple children's progress?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, our Context Switching feature allows you to toggle between multiple trainee profiles with one login."
                   }
                 }
               ]
@@ -822,91 +862,157 @@
         <!-- =================================================================== -->
         <!-- FAQ Section -->
         <!-- =================================================================== -->
-        <section id="faq" class="faq container">
-            <div class="section-header">
-                <h2 class="section-title">Your Questions, Answered.</h2>
-                <p class="section-subtitle">A brief overview of how VitaQ empowers organizations and safeguards your most valuable assets: your methodology and your members.</p>
+        <section id="faq" class="faq container" aria-labelledby="faq-title">
+            <div class="faq-header">
+                <h2 id="faq-title" class="section-title faq-title">Questions? We've Got Answers.</h2>
             </div>
 
-            <div class="faq-accordion">
-                <!-- Group 1: Platform & Philosophy -->
-                <h3 class="faq-group-title">Platform & Philosophy</h3>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What exactly is VitaQ?</span>
-                        <div class="faq-icon"></div>
-                    </button>
-                    <div class="faq-answer">
-                        <p>VitaQ is a premium, white-label performance intelligence platform. It provides elite organizations—such as sports academies, national federations, and high-performance centers—with a comprehensive digital ecosystem to structure their development methodologies, execute objective evaluations, and track the entire lifecycle of their talent. We turn your unique philosophy into measurable data.</p>
+            <div class="faq-tabs" role="tablist" aria-label="FAQ categories">
+                <button
+                    type="button"
+                    class="faq-tab active"
+                    id="faq-tab-platform"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="faq-panel-platform"
+                    data-faq-tab="platform"
+                >
+                    Platform &amp; Philosophy
+                </button>
+                <button
+                    type="button"
+                    class="faq-tab"
+                    id="faq-tab-implementation"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="faq-panel-implementation"
+                    data-faq-tab="implementation"
+                    tabindex="-1"
+                >
+                    Implementation &amp; Security
+                </button>
+                <button
+                    type="button"
+                    class="faq-tab"
+                    id="faq-tab-experience"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="faq-panel-experience"
+                    data-faq-tab="experience"
+                    tabindex="-1"
+                >
+                    User Experience
+                </button>
+            </div>
+
+            <div class="faq-panels">
+                <div
+                    class="faq-panel active"
+                    id="faq-panel-platform"
+                    role="tabpanel"
+                    aria-labelledby="faq-tab-platform"
+                    data-faq-panel="platform"
+                >
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-platform-1" type="button" aria-expanded="false" aria-controls="faq-answer-platform-1">
+                            <span>What is VitaQ?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-platform-1" role="region" aria-labelledby="faq-question-platform-1">
+                            <p>VitaQ is an all-in-one sports management platform for managing athletes, coaching, schedules, memberships, payments, events, and performance.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-platform-2" type="button" aria-expanded="false" aria-controls="faq-answer-platform-2">
+                            <span>Who is VitaQ built for?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-platform-2" role="region" aria-labelledby="faq-question-platform-2">
+                            <p>VitaQ is designed for sports academies, clubs, federations, governing bodies, high-performance centers, and other organizations managing structured sports programs.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-platform-3" type="button" aria-expanded="false" aria-controls="faq-answer-platform-3">
+                            <span>Is VitaQ limited to one sport?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-platform-3" role="region" aria-labelledby="faq-question-platform-3">
+                            <p>No. VitaQ is designed to adapt to different sports, organizational structures, and development methodologies.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-platform-4" type="button" aria-expanded="false" aria-controls="faq-answer-platform-4">
+                            <span>Can VitaQ adapt to our training methodology?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-platform-4" role="region" aria-labelledby="faq-question-platform-4">
+                            <p>Yes. You can structure your own stages, exercises, goals, benchmarks, and evaluation processes inside VitaQ.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Our training methodology is unique. Can VitaQ adapt to it?</span>
-                        <div class="faq-icon"></div>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Absolutely. VitaQ is not a rigid system; it's a framework designed to digitize <em>your</em> philosophy. The platform's core strength lies in its flexibility. You define your own hierarchical development pathways (<strong>Stages</strong>), build a library of your specific <strong>Exercises</strong> with custom parameters, and construct measurable <strong>Goals</strong>. The platform adapts to you, not the other way around.</p>
+
+                <div
+                    class="faq-panel"
+                    id="faq-panel-implementation"
+                    role="tabpanel"
+                    aria-labelledby="faq-tab-implementation"
+                    data-faq-panel="implementation"
+                    hidden
+                >
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-implementation-1" type="button" aria-expanded="false" aria-controls="faq-answer-implementation-1">
+                            <span>What does "white-label" mean for my organization?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-implementation-1" role="region" aria-labelledby="faq-question-implementation-1">
+                            <p>It means the platform becomes an extension of your brand, integrating your logo, colors, and typography.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-implementation-2" type="button" aria-expanded="false" aria-controls="faq-answer-implementation-2">
+                            <span>How is data protected in VitaQ?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-implementation-2" role="region" aria-labelledby="faq-question-implementation-2">
+                            <p>Your organization owns 100% of your data; we act as a Data Processor using secure AWS infrastructure.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-implementation-3" type="button" aria-expanded="false" aria-controls="faq-answer-implementation-3">
+                            <span>How is VitaQ priced?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-implementation-3" role="region" aria-labelledby="faq-question-implementation-3">
+                            <p>It is a tailored SaaS subscription based on your scale. Contact us for a custom quote.</p>
+                        </div>
                     </div>
                 </div>
-            
-                <!-- Group 2: Implementation & Security -->
-                <h3 class="faq-group-title">Implementation & Security</h3>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What does "white-label" mean for my organization?</span>
-                        <div class="faq-icon"></div>
-                    </button>
-                    <div class="faq-answer">
-                        <p>It means the platform becomes a seamless extension of your brand. We integrate your logo, color palettes (for both light and dark modes), and typography directly into the application. For your users—be it coaches, athletes, or parents—the app is yours, reinforcing your brand's commitment to cutting-edge development.</p>
+
+                <div
+                    class="faq-panel"
+                    id="faq-panel-experience"
+                    role="tabpanel"
+                    aria-labelledby="faq-tab-experience"
+                    data-faq-panel="experience"
+                    hidden
+                >
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-experience-1" type="button" aria-expanded="false" aria-controls="faq-answer-experience-1">
+                            <span>How does VitaQ make coaching more efficient?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-experience-1" role="region" aria-labelledby="faq-question-experience-1">
+                            <p>The Evaluation Conductor replaces manual data entry with a real-time digital interface.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How is our data protected and who owns it?</span>
-                        <div class="faq-icon"></div>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Your organization owns 100% of your data. We act strictly as a Data Processor. We implement robust technical measures to protect your data, including complete data isolation in a secure, multi-tenant architecture, and encryption both in transit and at rest, utilizing industry-standard cloud infrastructure like AWS.</p>
-                    </div>
-                </div>
-                 <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How is VitaQ priced?</span>
-                        <div class="faq-icon"></div>
-                    </button>
-                    <div class="faq-answer">
-                        <p>VitaQ is a premium, tailored solution offered as a Software-as-a-Service (SaaS) subscription, typically based on the number of active trainees. Because every client is unique, we do not offer a fixed price list. Please contact us to schedule a demo, and we will prepare a custom quote that aligns with your scale and goals.</p>
-                    </div>
-                </div>
-            
-                <!-- Group 3: User Experience -->
-                 <h3 class="faq-group-title">User Experience</h3>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How does VitaQ make coaching more efficient?</span>
-                        <div class="faq-icon"></div>
-                    </button>
-                    <div class="faq-answer">
-                        <p>VitaQ is designed to eliminate administrative burdens. The <strong>Evaluation Conductor</strong> replaces clipboards and spreadsheets with a seamless, real-time interface for on-field assessments. Data is captured instantly, results are available immediately, and historical performance is just a tap away, allowing you to provide more timely and accurate feedback.</p>
-                    </div>
-                </div>
-                 <div class="faq-item">
-                    <button class="faq-question">
-                        <span>As a parent, how can I track my child's development?</span>
-                        <div class="faq-icon"></div>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The app provides a personalized and engaging dashboard where you can see your child’s active goals, review their progress on specific exercises over time, and view detailed results from past evaluations. It offers unprecedented clarity into their development journey.</p>
-                    </div>
-                </div>
-                 <div class="faq-item">
-                    <button class="faq-question">
-                        <span>We have two children in the same academy. Do I need separate logins?</span>
-                        <div class="faq-icon"></div>
-                    </button>
-                    <div class="faq-answer">
-                        <p>No. The platform features an intuitive <strong>Context Switching</strong> function. With a single login, you can effortlessly toggle between the profiles of all the children you manage, making it simple to stay informed on everyone's progress.</p>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-question-experience-2" type="button" aria-expanded="false" aria-controls="faq-answer-experience-2">
+                            <span>Can I track multiple children's progress?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-experience-2" role="region" aria-labelledby="faq-question-experience-2">
+                            <p>Yes, our Context Switching feature allows you to toggle between multiple trainee profiles with one login.</p>
+                        </div>
                     </div>
                 </div>
             </div>
