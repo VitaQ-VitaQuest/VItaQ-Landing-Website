@@ -129,11 +129,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Hero Section Image Animation ---
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
     heroTimeline.fromTo('.hero-image-wrapper', { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, delay: 0.8 });
+    // .hero-cta lives in the initial viewport, so it should reveal on load, not on scroll
+    heroTimeline.fromTo('.hero-cta', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.4);
 
 
     // --- UNIFIED Scroll-Triggered Text Animations ---
     const animatedTextElements = document.querySelectorAll(
-        '.hero-preheadline, .hero-subheading, .hero-cta, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
+        '.hero-preheadline, .hero-subheading, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
     );
 
     animatedTextElements.forEach(el => {
