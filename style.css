@@ -267,7 +267,7 @@ section { padding: 9rem 0; position: relative; }
     flex-wrap: nowrap;
     align-items: center;
     gap: var(--client-logo-gap);
-    animation: scroll 40s linear infinite;
+    animation: scroll 20s linear infinite;
 }
 
 .client-reel img {
