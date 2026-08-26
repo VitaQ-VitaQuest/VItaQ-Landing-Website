@@ -203,37 +203,96 @@ section { padding: 9rem 0; position: relative; }
 .hero-image { max-width: none; width: 560px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); margin-right: -60px; will-change: transform; -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); mask-image: linear-gradient(to bottom, black 80%, transparent 100%); transform-style: preserve-3d; cursor: pointer; }
 
 /* --- Section 2: Social Proof --- */
-.social-proof { 
-    background: var(--bg-light); 
-    border-top-left-radius: 20px; 
-    border-top-right-radius: 20px; 
-    padding-top: 6rem; 
-    padding-bottom: 0; 
-    position: relative; 
-    z-index: 2; 
-    margin-top: -150px; 
-    overflow: hidden; 
+
+.section-title-small {
+    font-weight: 600;
+    color: var(--text-medium);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1rem;
+}
+.social-proof {
+    /* ---------------------------------------------------------------
+       SOCIAL PROOF TUNING CONTROLS
+       Change only these variables when you want to tune the reel.
+       The defaults below reproduce the current design exactly.
+       --------------------------------------------------------------- */
+    --client-logo-height: 105px;
+    --client-logo-max-width: 230px;
+    --client-logo-gap: 5rem;
+    --client-logo-opacity: 0.95;
+    --client-logo-hover-scale: 1.2;
+    --client-logo-mobile-height: 60px;
+    --client-logo-mobile-gap: 3rem;
+    --client-reel-padding: 6rem;
+    --client-reel-glow-left: rgba(10, 10, 16, 1);
+    --client-reel-glow-center:  rgba(255, 80, 222, 0.8);
+    --client-reel-glow-right: rgba(10, 10, 16, 1);
+
+    background: transparent;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding-top: -6rem;
+    padding-bottom: 0;
+    position: relative;
+    z-index: 2;
+    margin-top: -180px;
+    overflow: hidden;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 
 /* Client Reel */
-.client-reel-container { 
-    width: 100%; 
-    padding: 3rem 0; 
-    -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent); 
-    mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent); 
-    background: linear-gradient(90deg, rgba(255, 80, 222, 0.8), rgba(127, 0, 255, 0.8), rgba(255, 80, 222, 0.8));
+.client-reel-container {
+    width: 100%;
+    padding: var(--client-reel-padding) 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+    background: linear-gradient(
+        90deg,
+        var(--client-reel-glow-left),
+        var(--client-reel-glow-center),
+        var(--client-reel-glow-right)
+    );
     background-size: 200% 200%;
     animation: gradient-pan 8s ease infinite;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 50%, black 50%, transparent 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 50%, black 50%, transparent 100%);
 }
-.client-reel { display: flex; flex-wrap: nowrap; align-items: center; gap: 5rem; animation: scroll 40s linear infinite; }
-.client-reel img { height: 80px; max-width: 180px; flex-shrink: 0; filter: grayscale(1); opacity: 0.7; transition: all 0.3s ease-in-out; }
-.client-reel-container:hover .client-reel { animation-play-state: paused; }
-.client-reel img:hover { filter: grayscale(0); opacity: 1; transform: scale(1.2); }
-@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.client-reel {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: var(--client-logo-gap);
+    animation: scroll 40s linear infinite;
+}
+
+.client-reel img {
+    height: var(--client-logo-height);
+    max-width: var(--client-logo-max-width);
+    flex-shrink: 0;
+    filter: grayscale(1);
+    opacity: var(--client-logo-opacity);
+    transition: all 0.3s ease-in-out;
+}
+
+.client-reel-container:hover .client-reel {
+    animation-play-state: paused;
+}
+
+.client-reel img:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(var(--client-logo-hover-scale));
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 
 /* Testimonials Wrapper */
 .testimonials-wrapper {
@@ -433,146 +492,660 @@ section { padding: 9rem 0; position: relative; }
 .white-label .section-subtitle { margin-bottom: 2rem; }
 .white-label-image-wrapper img { width: 100%; border-radius: 16px; }
 
-/* --- Section 8: "Use Case" Styles --- */
-
-.use-case-grid-wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
+/* --- Section 8: Who VitaQ Is Built For --- */
+.use-cases {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
 }
 
-.use-case-image-wrapper {
-    max-width: 800px;
-    margin: 0 auto 5rem auto;
+/* Anchor the section title just below the floating navbar when navigated to. */
+#use-cases-title {
+    scroll-margin-top: 5.5rem;
 }
 
-.use-case-image-wrapper img {
-    width: 100%;
-    border-radius: 16px;
+.use-cases-header {
+    margin-bottom: 3rem;
 }
 
-.use-case-grid {
+.use-cases-header .section-title {
+    margin-bottom: 1rem;
+}
+
+.use-cases-header .section-subtitle {
+    max-width: 720px;
+}
+
+.use-case-tabs-nav {
+    width: min(100%, 940px);
+    margin: 0 auto 3rem;
+    padding: 0.45rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
+    grid-template-columns: 42px minmax(0, 1fr) 42px;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    background: rgba(22, 22, 37, 0.72);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    box-sizing: border-box;
 }
 
-/* Base Card Styling */
-.use-case-card {
-    background: var(--bg-light);
+.use-case-tab-arrow {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--text-light);
+    font: inherit;
+    font-size: 1.55rem;
+    line-height: 1;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.use-case-tab-arrow:hover {
+    color: var(--primary-pink);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.use-case-tab-arrow:active {
+    transform: scale(0.92);
+}
+
+.use-case-tabs-scroll {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+}
+
+.use-case-tabs-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.use-case-tab-list {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: max-content;
+    min-width: 100%;
+}
+
+/* Keep secondary client types hidden until the right arrow is used as an expand control. */
+.use-case-tab-secondary {
+    display: none;
+}
+
+.use-case-tabs-nav.is-expanded .use-case-tab-secondary {
+    display: block;
+}
+
+.use-case-tabs-nav.is-expanded .use-case-tab-list {
+    justify-content: flex-start;
+}
+
+.use-case-tab {
+    appearance: none;
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+    padding: 0.8rem 1rem;
+    border: 0;
+    background: transparent;
+    color: var(--text-medium);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+}
+
+.use-case-tab:hover,
+.use-case-tab.active {
+    color: var(--text-light);
+}
+
+.use-case-tab-indicator {
+    position: absolute;
+    left: 0;
+    bottom: 0.2rem;
+    height: 2px;
+    width: 0;
+    border-radius: 100px;
+    background: var(--primary-pink);
+    box-shadow: 0 0 14px rgba(255, 80, 222, 0.45);
+    transition: left 0.3s ease, width 0.3s ease;
+}
+
+.use-case-panel {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 4.5rem;
+    align-items: center;
+    padding: 4.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    background: rgba(22, 22, 37, 0.72);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.use-case-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 45%);
+}
+
+.use-case-panel.is-switching {
+    opacity: 0.2;
+    transform: translateY(4px);
+}
+
+.use-case-visual {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Keep the existing frameless, Hero-like treatment. */
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+    perspective: 1200px;
+}
+
+.use-case-visual::after {
+    display: none;
+}
+
+/*
+ * One visual stage, two rendering modes:
+ * - reusable layered composition (dashboard + scene + phone)
+ * - single-image fallback for client types without layered assets
+ */
+.use-case-composition {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: visible;
+    transform-style: preserve-3d;
+    will-change: transform;
+    pointer-events: none;
+    isolation: isolate;
+}
+
+/*
+ * A subtle purple floor bridge sits behind the transparent skater/track layer.
+ * This prevents a visual seam between the full-background dashboard and rink.
+ */
+.use-case-composition.is-layered::before {
+    display: none;
+}
+
+.use-case-image {
+    display: block;
+    transition:
+        opacity 0.22s ease,
+        transform 0.35s ease,
+        filter 0.35s ease;
+}
+
+.use-case-image--single {
+    position: absolute;
+    inset: 0;
+    width: 108%;
+    height: 100%;
+    max-width: none;
+    margin-left: -4%;
+    object-fit: contain;
+    object-position: center;
+    transform-style: preserve-3d;
+    will-change: transform;
+    filter:
+        drop-shadow(0 25px 45px rgba(0, 0, 0, 0.45))
+        drop-shadow(0 0 30px rgba(127, 0, 255, 0.10));
+}
+
+/* Hide the normal image while a layered composition is active. */
+.use-case-composition.is-layered .use-case-image--single {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Hide all layers for client states that use a normal single image. */
+.use-case-composition:not(.is-layered) .use-case-layer {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Individual transparent PNG layers. */
+.use-case-layer {
+    position: absolute;
+    display: block;
+    max-width: none;
+    height: auto;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+    transition:
+        opacity 0.22s ease,
+        transform 0.35s ease,
+        filter 0.35s ease;
+}
+
+/*
+ * Main desktop dashboard — treated as the scene background rather than a
+ * floating card. Oversizing/cropping lets it occupy the full upper stage.
+ */
+.use-case-layer-dashboard {
+    z-index: 1;
+    width: 123%;
+    left: -10%;
+    top: 5%;
+    filter:
+        drop-shadow(0 18px 30px rgba(0, 0, 0, 0.20))
+        drop-shadow(0 0 24px rgba(127, 0, 255, 0.06));
+}
+
+/*
+ * Foreground scene layer. For Academies this is the skater/rink scene;
+ * Event & Competition Organizers can use the same slot for their event scene.
+ */
+.use-case-layer-scene {
+    z-index: 3;
+    width: 125%;
+    right: -20%;
+    bottom: -4%;
+    filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.34));
+}
+
+
+/*
+ * Large foreground phone.
+ * Its negative left/bottom offsets intentionally let it overlap the
+ * dashboard/skater composition instead of sitting inside the dashboard.
+ */
+.use-case-layer-phone {
+    z-index: 5;
+    width: 49%;
+    left: -10%;
+    bottom: 8%;
+    filter:
+        drop-shadow(0 26px 34px rgba(0, 0, 0, 0.48))
+        drop-shadow(0 0 20px rgba(127, 0, 255, 0.08));
+}
+
+
+/* Event & Competition Organizers: two-image composition.
+   Main race image fills most of the visual stage; the judges image overlaps
+   the lower-right corner with minimal dead space. */
+.use-case-composition[data-composition-variant="events"] .use-case-layer-dashboard {
+    z-index: 1;
+    width: 116%;
+    height: 82%;
+    left: -6%;
+    top: 2%;
+    object-fit: cover;
+    object-position: center 50%;
+    border-radius: 18px;
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.24));
+}
+
+.use-case-composition[data-composition-variant="events"] .use-case-layer-scene {
+    z-index: 4;
+
+    width: 52%;
+    aspect-ratio: 1 / 1;
+    height: auto;
+
+    right: -8%;
+    top: 58%;
+    bottom: 0;
+
+    object-fit: cover;
+    object-position: center 60%;
+
+    border-radius: 16px;
+
+    filter:
+        drop-shadow(0 22px 30px rgba(0, 0, 0, 0.46))
+        drop-shadow(0 0 18px rgba(127, 0, 255, 0.08));
+}
+
+.use-case-composition[data-composition-variant="events"] .use-case-layer-phone {
+    display: none;
+}
+
+.use-case-content {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    min-height: 520px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    /* Smooth bouncy transition */
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                box-shadow 0.4s ease, 
-                border-color 0.4s ease,
-                background 0.4s ease;
+    transform: translateX(35px);
 }
 
-/* Z-Index Control: Content must be above the glow */
-.use-case-card > * {
-    position: relative; 
-    z-index: 2;
+.use-case-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
 }
 
-/* Typography Styling */
-.use-case-card h4 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--text-light); /* Default white */
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+.use-case-eyebrow {
+    color: var(--primary-pink);
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
-.use-case-card p {
-    color: var(--text-medium); /* Default grey */
+.use-case-heading {
     margin: 0;
-    line-height: 1.7;
-    transition: color 0.3s ease;
+    color: var(--text-light);
+    font-size: clamp(1.65rem, 2.3vw, 2.15rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
 }
 
-/* STOP THE TEXT SLIDE */
-.use-case-card h4, 
-.use-case-card p {
-    transform: none !important; 
+.use-case-description {
+    max-width: 620px;
+    margin: 0;
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    line-height: 1.55;
 }
 
-/* Icon Animation */
-.use-case-icon {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 1.5rem;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+.use-case-how {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* --- HOVER STATES --- */
-
-.use-case-card:hover {
-    transform: translateY(-12px);
-    /* Darker background on hover to make text pop more */
-    background: #1a1a2e; 
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6); 
-    border-color: transparent;
+.use-case-how-title {
+    margin: 0 0 1rem;
+    color: var(--text-medium);
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
-/* 1. Brighter, but tighter shadow (Less blurry) */
-.use-case-card:hover .use-case-icon {
-    transform: scale(1.15) translateY(-8px);
-    /* Brightness up makes the white parts pop. Drop shadow is tighter (5px instead of 15px) */
-    filter: brightness(1.2) drop-shadow(0 0 8px var(--primary-pink));
+.use-case-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-/* 2. Stay White, add Shadow for legibility */
-.use-case-card:hover h4 { 
-    color: #ffffff; 
-    /* Subtle shadow to separate text from any background glow */
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+.use-case-point {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
 }
 
-.use-case-card:hover p { 
-    color: #e0e0e0; /* Almost white */
+.use-case-point-icon {
+    width: 18px;
+    height: 18px;
+    margin-top: 0.1rem;
+    border: 1px solid rgba(255, 80, 222, 0.35);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-pink);
+    background: rgba(255, 80, 222, 0.06);
+    font-size: 0.68rem;
+    font-weight: 900;
+    line-height: 1;
 }
 
-/* PSEUDO ELEMENTS */
-
-/* The Gradient Border */
-.use-case-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    z-index: 0;
-    margin: -1px;
-    border-radius: inherit;
-    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+.use-case-point strong,
+.use-case-point span:not(.use-case-point-icon) {
+    display: block;
 }
 
-.use-case-card:hover::before {
-    opacity: 1;
+.use-case-point strong {
+    margin-bottom: 0.15rem;
+    color: var(--text-light);
+    font-size: 0.84rem;
+    line-height: 1.35;
 }
 
-/* The Inner Glow - Reduced Intensity */
-.use-case-card::after {
-    content: '';
-    position: absolute;
-    inset: 1px;
-    /* Much more transparent gradient. Only 5% opacity. */
-    background: radial-gradient(circle at top center, rgba(255, 80, 222, 0.05), transparent 60%);
-    border-radius: 19px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 0;
-    pointer-events: none;
+.use-case-point div > span {
+    color: var(--text-medium);
+    font-size: 0.72rem;
+    line-height: 1.45;
 }
 
-.use-case-card:hover::after {
-    opacity: 1;
+.use-case-cta-row {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+.use-case-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.72rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.use-case-cta:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 80, 222, 0.5);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 8px 24px rgba(255, 80, 222, 0.12);
+}
+
+@media (max-width: 991px) {
+    .use-case-panel {
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .use-case-visual,
+    .use-case-content {
+        min-height: 470px;
+    }
+
+    .use-case-heading {
+        font-size: 2rem;
+    }
+
+    .use-case-description {
+        font-size: 1rem;
+    }
+
+    .use-case-composition {
+        height: 470px;
+    }
+
+    .use-case-layer-dashboard {
+        width: 130%;
+        left: -15%;
+        top: -3%;
+    }
+
+    .use-case-layer-scene {
+        width: 132%;
+        right: -21%;
+        bottom: -2%;
+    }
+
+    .use-case-layer-phone {
+        width: 50%;
+        left: -16%;
+        bottom: -10%;
+    }
+
+
+    .use-case-composition[data-composition-variant="events"] .use-case-layer-dashboard {
+        width: 114%;
+        height: 78%;
+        left: -7%;
+        top: 6%;
+    }
+
+    .use-case-composition[data-composition-variant="events"] .use-case-layer-scene {
+        width: 48%;
+        height: 62%;
+        right: -3%;
+        bottom: 1%;
+    }
+}
+
+@media (max-width: 767px) {
+    .use-cases {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+    
+    .use-case-composition {
+        height: 410px;
+        min-height: 410px;
+    }
+
+    .use-case-image--single {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .use-case-layer-dashboard {
+        width: 132%;
+        left: -16%;
+        top: 0;
+    }
+
+    .use-case-layer-scene {
+        width: 135%;
+        right: -23%;
+        bottom: 3%;
+    }
+
+    .use-case-layer-phone {
+        width: 52%;
+        left: -16%;
+        bottom: 10%;
+    }
+
+
+    .use-case-composition[data-composition-variant="events"] .use-case-layer-dashboard {
+        width: 106%;
+        height: 68%;
+        left: -3%;
+        top: 4%;
+    }
+
+    .use-case-composition[data-composition-variant="events"] .use-case-layer-scene {
+        width: 54%;
+        height: 56%;
+        right: -2%;
+        bottom: 0;
+    }
+
+    #use-cases-title {
+        scroll-margin-top: 5rem;
+    }
+
+    .use-cases-header {
+        margin-bottom: 2.25rem;
+    }
+
+    .use-case-tabs-nav {
+        grid-template-columns: 36px minmax(0, 1fr) 36px;
+        gap: 0.2rem;
+        margin-bottom: 2rem;
+        padding: 0.35rem;
+    }
+
+    .use-case-tab-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 1.4rem;
+    }
+
+    .use-case-tab {
+        padding: 0.7rem 0.85rem;
+        font-size: 0.72rem;
+    }
+
+    .use-case-panel {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        padding: 1.25rem;
+    }
+
+    .use-case-visual {
+        min-height: 0;
+        max-height: 480px;
+        aspect-ratio: 0.88;
+    }
+
+    .use-case-content {
+        min-height: 0;
+        transform: none;
+        margin-top: 3.5rem;
+    }
+
+    .use-case-heading {
+        font-size: 1.85rem;
+    }
+
+    .use-case-description {
+        font-size: 0.98rem;
+    }
+
+    .use-case-point {
+        grid-template-columns: 20px minmax(0, 1fr);
+        gap: 0.65rem;
+    }
+
+    .use-case-point strong {
+        font-size: 0.88rem;
+    }
+
+    .use-case-point div > span {
+        font-size: 0.8rem;
+    }
+
+    .use-case-cta {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+    }
 }
 
 /* --- Section 9: Request a Demo --- */
@@ -948,10 +1521,10 @@ section { padding: 9rem 0; position: relative; }
     
     /* Also adjust the client reel on mobile */
     .client-reel {
-        gap: 3rem;
+        gap: var(--client-logo-mobile-gap);
     }
     .client-reel img {
-        height: 60px;
+        height: var(--client-logo-mobile-height);
     }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
