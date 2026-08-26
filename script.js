@@ -204,9 +204,330 @@ document.addEventListener('DOMContentLoaded', function () {
     createStaggeredAnimation('.problem-grid', '.problem-card');
     createStaggeredAnimation('#feature-grid .feature-grid', '#feature-grid .feature-card');
     createStaggeredAnimation('.testimonials-wrapper', '.testimonial-card');
-    createStaggeredAnimation('#use-cases', '#use-cases .feature-card');
     createStaggeredAnimation('.bento-grid', '.animate-bento');
 
+
+
+    // --- Who It's For: Interactive Organization Tabs ---
+    const useCaseSection = document.getElementById('use-cases');
+
+    if (useCaseSection) {
+        const useCaseStates = [
+            {
+                title: 'Sports Academies & Clubs',
+                heading: 'Run Your Academy in One Connected System.',
+                description: 'Manage staff, trainees, schedules, attendance, payments, and athlete development without jumping between different tools.',
+                howTitle: 'How Academies Use VitaQ',
+                cta: 'Explore Academy & Club Solutions',
+                image: 'who-academies.png',
+                imageAlt: 'VitaQ platform for sports academies and clubs',
+                composition: {
+                    type: 'layered',
+                    variant: 'academies',
+                    dashboard: 'who-academies-dashboard.png',
+                    scene: 'who-academies-skaters-scene.png',
+                    phone: 'who-academies-phone.png'
+                },
+                points: [
+                    ['Manage Coaches & Trainees', 'Keep your teams, groups, athletes, and member information organized.'],
+                    ['Simplify Scheduling & Attendance', 'Coordinate sessions, coaches, facilities, groups, and attendance in one place.'],
+                    ['Manage Memberships & Payments', 'Handle registrations, subscriptions, invoices, and payments with less admin.'],
+                    ['Track Athlete Development', 'Set goals, run evaluations, and follow progress over time.'],
+                    ['Keep Everyone Connected', 'Give coaches, athletes, and parents access to the information that matters to them.']
+                ]
+            },
+            {
+                title: 'Event & Competition Organizers',
+                heading: 'Run Every Stage of Your Event in One Place.',
+                description: 'Connect registrations, participants, schedules, competitions, ticketing, payments, and event operations from setup to event day.',
+                howTitle: 'How Organizers Use VitaQ',
+                cta: 'Explore Event & Competition Solutions',
+                image: 'who-events-race.JPG',
+                imageAlt: 'Event participants and event operations managed with VitaQ',
+                composition: {
+                    type: 'layered',
+                    variant: 'events',
+                    // Main landscape event image.
+                    dashboard: 'who-events-race.JPG',
+                    // Smaller overlapping judges / event-operations image.
+                    scene: 'who-events-judges.jpg'
+                },
+                points: [
+                    ['Manage Registrations', 'Manage registrations, accreditations, and attendee access IDs in one place.'],
+                    ['Build Event Schedules', 'Coordinate competitions, sessions, activities, venues, and timing.'],
+                    ['Manage Competitions', 'Organize participants, categories, brackets, and competition workflows.'],
+                    ['Handle Tickets & Payments', 'Keep registrations, purchases, tickets, and transactions connected.'],
+                    ['Keep Your Team in Control', 'Give organizers one source of truth throughout the entire event.']
+                ]
+            },
+            {
+                title: 'Sports Complexes',
+                heading: 'Your Complex & Your Brand in One App.',
+                description: 'Bring every sport, facility, program, member, payment, and event into one branded digital experience.',
+                howTitle: 'How Sports Complexes Use VitaQ',
+                cta: 'Explore Sports Complex Solutions',
+                // IMPORTANT: Sports Complexes is intentionally single-image only.
+                // No layered composition is attached to this state, so Academy assets
+                // can never replace this image when the tab is selected or re-clicked.
+                image: 'who-complexes-phone.png',
+                imageAlt: 'VitaQ white-label experience for sports complexes',
+                points: [
+                    ['Launch Your Own Branded Experience', 'Deliver VitaQ with your organization’s identity for a premium member experience.'],
+                    ['Bring Every Sport Together', 'Manage multiple sports, academies, programs, and activities from one platform.'],
+                    ['Coordinate Facilities & Schedules', 'Connect courts, rinks, halls, fields, sessions, coaches, and availability.'],
+                    ['Manage Members & Revenue', 'Handle registrations, memberships, subscriptions, invoices, and payments.'],
+                    ['Run Events & Competitions', 'Use the same ecosystem for registrations, schedules, participants, ticketing, and events.']
+                ]
+            },
+            {
+                title: 'High-Performance Centers',
+                heading: 'Turn Your Methodology Into Measurable Progress.',
+                description: 'Structure programs, evaluations, goals, and performance data around the way your organization develops athletes.',
+                howTitle: 'How High-Performance Centers Use VitaQ',
+                cta: 'Explore High-Performance Solutions',
+                image: 'screen-analytics.webp',
+                imageAlt: 'VitaQ performance analytics for high-performance centers',
+                points: [
+                    ['Digitize Your Methodology', 'Turn programs, stages, exercises, and protocols into a structured system.'],
+                    ['Set Clear Benchmarks', 'Define measurable goals for development and performance.'],
+                    ['Capture Evaluations', 'Record results directly during assessments and training.'],
+                    ['Track Progress Over Time', 'Understand individual and group development through connected data.'],
+                    ['Turn Data Into Decisions', 'Give coaches and performance teams a clearer picture of what happens next.']
+                ]
+            }
+        ];
+
+        const useCaseTabs = Array.from(useCaseSection.querySelectorAll('.use-case-tab'));
+        const useCaseTabsNav = useCaseSection.querySelector('.use-case-tabs-nav');
+        const useCaseTabsScroll = useCaseSection.querySelector('.use-case-tabs-scroll');
+        const useCaseIndicator = useCaseSection.querySelector('.use-case-tab-indicator');
+        const useCasePrev = useCaseSection.querySelector('.use-case-tab-arrow-left');
+        const useCaseNext = useCaseSection.querySelector('.use-case-tab-arrow-right');
+        const useCasePanel = useCaseSection.querySelector('.use-case-panel');
+        const useCaseImage = document.getElementById('use-case-image');
+        const useCaseComposition = document.getElementById('use-case-composition');
+        const useCaseDashboard = document.getElementById('use-case-dashboard');
+        const useCaseScene = document.getElementById('use-case-scene');
+        const useCasePhone = document.getElementById('use-case-phone');
+        const useCaseTitle = document.getElementById('use-case-title');
+        const useCaseHeading = document.getElementById('use-case-heading');
+        const useCaseDescription = document.getElementById('use-case-description');
+        const useCaseHowTitle = document.getElementById('use-case-how-title');
+        const useCasePoints = document.getElementById('use-case-points');
+        const useCaseCta = document.getElementById('use-case-cta');
+
+        const primaryUseCaseCount = Math.min(3, useCaseStates.length);
+        let activeUseCaseIndex = 0;
+        let useCaseOptionsExpanded = false;
+        let useCaseSwitchTimer = null;
+
+        function expandUseCaseOptions() {
+            if (useCaseOptionsExpanded || useCaseStates.length <= primaryUseCaseCount) {
+                return false;
+            }
+
+            useCaseOptionsExpanded = true;
+            useCaseTabsNav?.classList.add('is-expanded');
+            useCaseNext?.setAttribute('aria-expanded', 'true');
+            useCaseNext?.setAttribute('aria-label', 'Next organization type');
+
+            requestAnimationFrame(() => {
+                positionUseCaseIndicator();
+                centerUseCaseTab(useCaseTabs[activeUseCaseIndex]);
+            });
+
+            return true;
+        }
+
+        function getVisibleUseCaseCount() {
+            return useCaseOptionsExpanded
+                ? useCaseTabs.length
+                : primaryUseCaseCount;
+        }
+
+        function positionUseCaseIndicator() {
+            const activeTab = useCaseTabs[activeUseCaseIndex];
+            if (!activeTab || !useCaseIndicator) return;
+
+            useCaseIndicator.style.width = `${activeTab.offsetWidth}px`;
+            useCaseIndicator.style.left = `${activeTab.offsetLeft}px`;
+        }
+
+        function centerUseCaseTab(tab) {
+            if (!tab || !useCaseTabsScroll) return;
+
+            const targetLeft = tab.offsetLeft - (useCaseTabsScroll.clientWidth - tab.offsetWidth) / 2;
+            useCaseTabsScroll.scrollTo({
+                left: Math.max(0, targetLeft),
+                behavior: 'smooth'
+            });
+        }
+
+        function applyUseCaseVisual(state) {
+            if (!state || !useCaseComposition || !useCaseImage) return;
+
+            const composition = state.composition;
+            const isLayered = composition?.type === 'layered';
+            const variant = isLayered ? (composition.variant || 'default') : 'single';
+
+            // Visual mode is resolved synchronously on every state change. There are
+            // no delayed image callbacks that can overwrite a newly selected client.
+            useCaseComposition.classList.toggle('is-layered', isLayered);
+            useCaseComposition.dataset.compositionVariant = variant;
+            useCaseComposition.setAttribute('aria-label', state.imageAlt || state.title);
+
+            // The single-image element always receives the selected state's exact
+            // fallback/source. For Sports Complexes this is ONLY who-complexes-phone.png.
+            useCaseImage.src = state.image;
+            useCaseImage.alt = '';
+
+            if (!isLayered) {
+                return;
+            }
+
+            if (useCaseDashboard && composition.dashboard) {
+                useCaseDashboard.src = composition.dashboard;
+            }
+
+            if (useCaseScene && composition.scene) {
+                useCaseScene.src = composition.scene;
+            }
+
+            // Academies uses a phone layer. Events intentionally does not.
+            if (useCasePhone) {
+                if (composition.phone) {
+                    useCasePhone.src = composition.phone;
+                } else {
+                    useCasePhone.removeAttribute('src');
+                }
+            }
+        }
+
+        function renderUseCase(index) {
+            const state = useCaseStates[index];
+            if (!state) return;
+
+            applyUseCaseVisual(state);
+
+            useCaseTitle.textContent = state.title;
+            useCaseHeading.textContent = state.heading;
+            useCaseDescription.textContent = state.description;
+            useCaseHowTitle.textContent = state.howTitle;
+            useCaseCta.innerHTML = `${state.cta} <span aria-hidden="true">→</span>`;
+            useCaseCta.href = '#feature-grid';
+
+            useCasePoints.innerHTML = state.points.map(([title, description]) => `
+                <div class="use-case-point">
+                    <span class="use-case-point-icon" aria-hidden="true">✓</span>
+                    <div>
+                        <strong>${title}</strong>
+                        <span>${description}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            useCasePanel.setAttribute('aria-labelledby', useCaseTabs[index].id);
+        }
+
+        function setActiveUseCase(index, shouldFocus = false) {
+            const visibleCount = getVisibleUseCaseCount();
+            const normalizedIndex = (index + visibleCount) % visibleCount;
+            const activeTab = useCaseTabs[normalizedIndex];
+
+            if (!activeTab) return;
+
+            // Re-clicking an already active tab deliberately does nothing. This keeps
+            // the currently selected visual stable and prevents needless image resets.
+            if (
+                normalizedIndex === activeUseCaseIndex &&
+                activeTab.classList.contains('active')
+            ) {
+                if (shouldFocus) {
+                    activeTab.focus();
+                }
+                return;
+            }
+
+            activeUseCaseIndex = normalizedIndex;
+
+            useCaseTabs.forEach((tab, tabIndex) => {
+                const isActive = tabIndex === normalizedIndex;
+                tab.classList.toggle('active', isActive);
+                tab.setAttribute('aria-selected', String(isActive));
+                tab.tabIndex = isActive ? 0 : -1;
+            });
+
+            positionUseCaseIndicator();
+            centerUseCaseTab(activeTab);
+
+            if (useCaseSwitchTimer) {
+                clearTimeout(useCaseSwitchTimer);
+            }
+
+            useCasePanel.classList.add('is-switching');
+
+            useCaseSwitchTimer = setTimeout(() => {
+                renderUseCase(normalizedIndex);
+                useCasePanel.classList.remove('is-switching');
+            }, 180);
+
+            if (shouldFocus) {
+                activeTab.focus();
+            }
+        }
+
+        useCaseTabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                const tabIndex = Number(tab.dataset.useCaseIndex);
+                setActiveUseCase(Number.isInteger(tabIndex) ? tabIndex : index);
+            });
+
+            tab.addEventListener('keydown', event => {
+                let nextIndex = null;
+                const visibleCount = getVisibleUseCaseCount();
+
+                if (event.key === 'ArrowRight') {
+                    nextIndex = (index + 1) % visibleCount;
+                }
+                if (event.key === 'ArrowLeft') {
+                    nextIndex = (index - 1 + visibleCount) % visibleCount;
+                }
+                if (event.key === 'Home') {
+                    nextIndex = 0;
+                }
+                if (event.key === 'End') {
+                    nextIndex = visibleCount - 1;
+                }
+
+                if (nextIndex !== null) {
+                    event.preventDefault();
+                    setActiveUseCase(nextIndex, true);
+                }
+            });
+        });
+
+        useCasePrev?.addEventListener('click', () => {
+            setActiveUseCase(activeUseCaseIndex - 1);
+        });
+
+        useCaseNext?.addEventListener('click', () => {
+            // First click reveals the secondary client type.
+            if (expandUseCaseOptions()) return;
+
+            // After expansion it behaves as the normal next arrow.
+            setActiveUseCase(activeUseCaseIndex + 1);
+        });
+
+        window.addEventListener('resize', () => {
+            positionUseCaseIndicator();
+            centerUseCaseTab(useCaseTabs[activeUseCaseIndex]);
+        });
+
+        requestAnimationFrame(() => {
+            renderUseCase(0);
+            positionUseCaseIndicator();
+        });
+    }
 
     if (window.matchMedia("(min-width: 767px)").matches) {
         const scrollSteps = document.querySelectorAll('.scroll-step');
@@ -757,12 +1078,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // 2. 3D Tilt on Hover (Optimized)
-    const tiltWrappers = gsap.utils.toArray('.solution-image-wrapper, .white-label-image-wrapper, .use-case-image-wrapper, .mockup-container');
-    
+    const tiltWrappers = gsap.utils.toArray('.solution-image-wrapper, .white-label-image-wrapper, .use-case-visual, .mockup-container');
     tiltWrappers.forEach(wrapper => {
-        // Check if this is the multi-image scrollytelling container
+        // Keep multi-part visuals moving as one 3D composition.
         const isMockupContainer = wrapper.classList.contains('mockup-container');
-        const imagesToTilt = isMockupContainer ? wrapper.querySelectorAll('img') : wrapper.querySelector('img');
+        const isUseCaseVisual = wrapper.classList.contains('use-case-visual');
+
+        const imagesToTilt = isMockupContainer
+            ? wrapper.querySelectorAll('img')
+            : isUseCaseVisual
+                ? wrapper.querySelector('.use-case-composition')
+                : wrapper.querySelector('img');
 
         wrapper.addEventListener('mousemove', (e) => {
             const rect = wrapper.getBoundingClientRect();
