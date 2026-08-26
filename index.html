@@ -193,8 +193,8 @@
     <!-- Navigation Overlay (Mobile) -->
     <div class="nav-overlay">
         <nav class="nav-fullscreen">
-            <a href="#feature-grid" class="nav-link">Features</a>
             <a href="#use-cases-title" class="nav-link">Who It's For</a>
+            <a href="#feature-grid" class="nav-link">Features</a>
             <a href="#faq" class="nav-link">FAQ</a>
             <a href="#contact" class="nav-link cta">Request a Demo</a>
         </nav>
@@ -209,8 +209,8 @@
                 </svg>
             </a>
             <div class="main-nav-links">
-                <a href="#feature-grid" class="main-nav-link">Features</a>
                 <a href="#use-cases-title" class="main-nav-link">Who It's For</a>
+                <a href="#feature-grid" class="main-nav-link">Features</a>
                 <a href="#faq" class="main-nav-link">FAQ</a>
             </div>
             <div class="main-nav-actions">
@@ -268,7 +268,114 @@
             </div>
         </section>
 
-        <!-- Section 3: The Problem -->
+        <!-- Section 3: Who VitaQ Is Built For -->
+        <section id="use-cases" class="use-cases container" aria-labelledby="use-cases-title">
+            <div class="section-header use-cases-header">
+                <h2 id="use-cases-title" class="section-title">Who VitaQ Is Built For</h2>
+                <p class="section-subtitle">See how VitaQ helps sports complexes, academies, and event organizers connect people, operations, payments, and performance in one system.</p>
+            </div>
+
+            <div class="use-case-tabs-nav" aria-label="VitaQ solutions by organization type">
+                <button type="button" class="use-case-tab-arrow use-case-tab-arrow-left" aria-label="Previous organization type">
+                    <span aria-hidden="true">&#8249;</span>
+                </button>
+
+                <div class="use-case-tabs-scroll">
+                    <div class="use-case-tab-list" id="use-case-tab-list" role="tablist" aria-label="Organization types">
+                        <button type="button" class="use-case-tab active" id="use-case-tab-0" role="tab" aria-selected="true" aria-controls="use-case-panel" data-use-case-index="0">Sports Academies &amp; Clubs</button>
+                        <button type="button" class="use-case-tab" id="use-case-tab-1" role="tab" aria-selected="false" aria-controls="use-case-panel" data-use-case-index="1" tabindex="-1">Events &amp; Competitions</button>
+                        <button type="button" class="use-case-tab" id="use-case-tab-2" role="tab" aria-selected="false" aria-controls="use-case-panel" data-use-case-index="2" tabindex="-1">Sports Complexes</button>
+                        <button type="button" class="use-case-tab use-case-tab-secondary" id="use-case-tab-3" role="tab" aria-selected="false" aria-controls="use-case-panel" data-use-case-index="3" tabindex="-1">High-Performance Centers</button>
+                        <span class="use-case-tab-indicator" aria-hidden="true"></span>
+                    </div>
+                </div>
+
+                <button type="button" class="use-case-tab-arrow use-case-tab-arrow-right" aria-label="Show more organization types" aria-expanded="false" aria-controls="use-case-tab-list">
+                    <span aria-hidden="true">&#8250;</span>
+                </button>
+            </div>
+
+            <div class="use-case-panel" id="use-case-panel" role="tabpanel" aria-labelledby="use-case-tab-0">
+                <div class="use-case-visual">
+                    <div
+                        class="use-case-composition is-layered"
+                        id="use-case-composition"
+                        role="img"
+                        aria-label="VitaQ platform for sports academies and clubs"
+                    >
+                        <!-- Single-image fallback used by the other client types -->
+                        <img
+                            id="use-case-image"
+                            class="use-case-image use-case-image--single"
+                            src="who-academies.png"
+                            alt=""
+                        >
+
+                        <!-- Reusable layered composition. Academies use dashboard + scene + phone; Events use race + judges only. -->
+                        <img
+                            id="use-case-dashboard"
+                            class="use-case-layer use-case-layer-dashboard"
+                            src="who-academies-dashboard.png"
+                            alt=""
+                            aria-hidden="true"
+                        >
+                        <img
+                            id="use-case-scene"
+                            class="use-case-layer use-case-layer-scene"
+                            src="who-academies-skaters-scene.png"
+                            alt=""
+                            aria-hidden="true"
+                        >
+                        <img
+                            id="use-case-phone"
+                            class="use-case-layer use-case-layer-phone"
+                            src="who-academies-phone.png"
+                            alt=""
+                            aria-hidden="true"
+                        >
+                    </div>
+                </div>
+
+                <div class="use-case-content">
+                    <div class="use-case-copy">
+                        <span class="use-case-eyebrow" id="use-case-title">Sports Academies &amp; Clubs</span>
+                        <h3 class="use-case-heading" id="use-case-heading">Run Your Academy in One Connected System</h3>
+                        <p class="use-case-description" id="use-case-description">Manage staff, trainees, schedules, attendance, payments, and athlete development—all in one place.</p>
+                    </div>
+
+                    <div class="use-case-how">
+                        <p class="use-case-how-title" id="use-case-how-title">How Academies Use VitaQ</p>
+                        <div class="use-case-points" id="use-case-points">
+                            <div class="use-case-point">
+                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
+                                <div><strong>Manage Coaches &amp; Trainees</strong><span>Keep your teams, groups, athletes, and member information organized.</span></div>
+                            </div>
+                            <div class="use-case-point">
+                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
+                                <div><strong>Simplify Scheduling &amp; Attendance</strong><span>Coordinate sessions, coaches, facilities, groups, and attendance in one place.</span></div>
+                            </div>
+                            <div class="use-case-point">
+                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
+                                <div><strong>Manage Memberships &amp; Payments</strong><span>Handle registrations, subscriptions, invoices, and payments with less admin.</span></div>
+                            </div>
+                            <div class="use-case-point">
+                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
+                                <div><strong>Track Athlete Development</strong><span>Set goals, run evaluations, and follow progress over time.</span></div>
+                            </div>
+                            <div class="use-case-point">
+                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
+                                <div><strong>Keep Everyone Connected</strong><span>Give coaches, athletes, and parents access to the information that matters to them.</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="use-case-cta-row">
+                        <a class="use-case-cta" id="use-case-cta" href="#feature-grid">Explore Academy &amp; Club Solutions <span aria-hidden="true">→</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>        
+        <!-- Section 4: The Problem -->
         <section id="about" class="problem container">
             <div class="section-header">
                 <h2 class="section-title">Are You Building Champions on a Foundation of Guesswork?</h2>
@@ -298,7 +405,7 @@
             </div>
         </section>
 
-        <!-- Section 4: The Solution -->
+        <!-- Section 5: The Solution -->
         <section class="solution container">
             <div class="solution-content">
                 <h2 class="section-title">The All-In-One Platform for Performance Intelligence</h2>
@@ -310,7 +417,7 @@
             </div>
         </section>
 
-        <!-- Section 5: Feature Grid -->
+        <!-- Section 6: Feature Grid -->
         <section id="feature-grid" class="features container">
             <div class="section-header">
             <h2 class="section-title">An Ecosystem of Excellence</h2>
@@ -548,7 +655,7 @@
             </div>
         </section>
 
-        <!-- Section 6: The Anatomy of a Champion (Feature Deep Dive) -->
+        <!-- Section 7: The Anatomy of a Champion (Feature Deep Dive) -->
         <section id="deep-dive" class="deep-dive">
             <div class="container">
                 <div class="section-header">
@@ -699,7 +806,7 @@
             </div>
         </section>
         
-        <!-- Section 7: White-Label Solution -->
+        <!-- Section 8: White-Label Solution -->
         <section class="white-label container">
             <div class="white-label-image-wrapper animate-with-scrub">
                 <img src="support 2.webp" alt="Demonstration of VitaQ's white-label capabilities, showing an admin area UI card floating next to a phone displaying a list of athletes.">
@@ -711,113 +818,6 @@
             </div>
         </section>
 
-        <!-- Section 8: Who VitaQ Is Built For -->
-        <section id="use-cases" class="use-cases container" aria-labelledby="use-cases-title">
-            <div class="section-header use-cases-header">
-                <h2 id="use-cases-title" class="section-title">Who VitaQ Is Built For</h2>
-                <p class="section-subtitle">See how VitaQ helps sports complexes, academies, and event organizers connect people, operations, payments, and performance in one system.</p>
-            </div>
-
-            <div class="use-case-tabs-nav" aria-label="VitaQ solutions by organization type">
-                <button type="button" class="use-case-tab-arrow use-case-tab-arrow-left" aria-label="Previous organization type">
-                    <span aria-hidden="true">&#8249;</span>
-                </button>
-
-                <div class="use-case-tabs-scroll">
-                    <div class="use-case-tab-list" id="use-case-tab-list" role="tablist" aria-label="Organization types">
-                        <button type="button" class="use-case-tab active" id="use-case-tab-0" role="tab" aria-selected="true" aria-controls="use-case-panel" data-use-case-index="0">Sports Academies &amp; Clubs</button>
-                        <button type="button" class="use-case-tab" id="use-case-tab-1" role="tab" aria-selected="false" aria-controls="use-case-panel" data-use-case-index="1" tabindex="-1">Events &amp; Competitions</button>
-                        <button type="button" class="use-case-tab" id="use-case-tab-2" role="tab" aria-selected="false" aria-controls="use-case-panel" data-use-case-index="2" tabindex="-1">Sports Complexes</button>
-                        <button type="button" class="use-case-tab use-case-tab-secondary" id="use-case-tab-3" role="tab" aria-selected="false" aria-controls="use-case-panel" data-use-case-index="3" tabindex="-1">High-Performance Centers</button>
-                        <span class="use-case-tab-indicator" aria-hidden="true"></span>
-                    </div>
-                </div>
-
-                <button type="button" class="use-case-tab-arrow use-case-tab-arrow-right" aria-label="Show more organization types" aria-expanded="false" aria-controls="use-case-tab-list">
-                    <span aria-hidden="true">&#8250;</span>
-                </button>
-            </div>
-
-            <div class="use-case-panel" id="use-case-panel" role="tabpanel" aria-labelledby="use-case-tab-0">
-                <div class="use-case-visual">
-                    <div
-                        class="use-case-composition is-layered"
-                        id="use-case-composition"
-                        role="img"
-                        aria-label="VitaQ platform for sports academies and clubs"
-                    >
-                        <!-- Single-image fallback used by the other client types -->
-                        <img
-                            id="use-case-image"
-                            class="use-case-image use-case-image--single"
-                            src="who-academies.png"
-                            alt=""
-                        >
-
-                        <!-- Reusable layered composition. Academies use dashboard + scene + phone; Events use race + judges only. -->
-                        <img
-                            id="use-case-dashboard"
-                            class="use-case-layer use-case-layer-dashboard"
-                            src="who-academies-dashboard.png"
-                            alt=""
-                            aria-hidden="true"
-                        >
-                        <img
-                            id="use-case-scene"
-                            class="use-case-layer use-case-layer-scene"
-                            src="who-academies-skaters-scene.png"
-                            alt=""
-                            aria-hidden="true"
-                        >
-                        <img
-                            id="use-case-phone"
-                            class="use-case-layer use-case-layer-phone"
-                            src="who-academies-phone.png"
-                            alt=""
-                            aria-hidden="true"
-                        >
-                    </div>
-                </div>
-
-                <div class="use-case-content">
-                    <div class="use-case-copy">
-                        <span class="use-case-eyebrow" id="use-case-title">Sports Academies &amp; Clubs</span>
-                        <h3 class="use-case-heading" id="use-case-heading">Run Your Academy in One Connected System</h3>
-                        <p class="use-case-description" id="use-case-description">Manage staff, trainees, schedules, attendance, payments, and athlete development—all in one place.</p>
-                    </div>
-
-                    <div class="use-case-how">
-                        <p class="use-case-how-title" id="use-case-how-title">How Academies Use VitaQ</p>
-                        <div class="use-case-points" id="use-case-points">
-                            <div class="use-case-point">
-                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
-                                <div><strong>Manage Coaches &amp; Trainees</strong><span>Keep your teams, groups, athletes, and member information organized.</span></div>
-                            </div>
-                            <div class="use-case-point">
-                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
-                                <div><strong>Simplify Scheduling &amp; Attendance</strong><span>Coordinate sessions, coaches, facilities, groups, and attendance in one place.</span></div>
-                            </div>
-                            <div class="use-case-point">
-                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
-                                <div><strong>Manage Memberships &amp; Payments</strong><span>Handle registrations, subscriptions, invoices, and payments with less admin.</span></div>
-                            </div>
-                            <div class="use-case-point">
-                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
-                                <div><strong>Track Athlete Development</strong><span>Set goals, run evaluations, and follow progress over time.</span></div>
-                            </div>
-                            <div class="use-case-point">
-                                <span class="use-case-point-icon" aria-hidden="true">✓</span>
-                                <div><strong>Keep Everyone Connected</strong><span>Give coaches, athletes, and parents access to the information that matters to them.</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="use-case-cta-row">
-                        <a class="use-case-cta" id="use-case-cta" href="#feature-grid">Explore Academy &amp; Club Solutions <span aria-hidden="true">→</span></a>
-                    </div>
-                </div>
-            </div>
-        </section>        
 <!-- =================================================================== -->
 <!-- FAQ Section -->
 <!-- =================================================================== -->
