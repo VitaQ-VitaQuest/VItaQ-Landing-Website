@@ -267,7 +267,7 @@ section { padding: 9rem 0; position: relative; }
     flex-wrap: nowrap;
     align-items: center;
     gap: var(--client-logo-gap);
-    animation: scroll 40s linear infinite;
+    animation: scroll 20s linear infinite;
 }
 
 .client-reel img {
@@ -1036,6 +1036,7 @@ section { padding: 9rem 0; position: relative; }
     .use-case-composition {
         height: 410px;
         min-height: 410px;
+        margin-top: 5rem;
     }
 
     .use-case-image--single {
@@ -1071,9 +1072,15 @@ section { padding: 9rem 0; position: relative; }
 
     .use-case-composition[data-composition-variant="events"] .use-case-layer-scene {
         width: 54%;
-        height: 56%;
+        aspect-ratio: 1 / 1;
+        height: auto;
+
         right: -2%;
+        top: auto;       /* IMPORTANT: cancels desktop top: 60% */
         bottom: 0;
+
+        object-fit: cover;
+        object-position: center 60%;
     }
 
     #use-cases-title {
@@ -1117,7 +1124,7 @@ section { padding: 9rem 0; position: relative; }
     .use-case-content {
         min-height: 0;
         transform: none;
-        margin-top: 3.5rem;
+        margin-top: 6rem;
     }
 
     .use-case-heading {
