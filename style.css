@@ -227,8 +227,8 @@ section { padding: 9rem 0; position: relative; }
     --client-logo-mobile-height: 60px;
     --client-logo-mobile-gap: 3rem;
     --client-reel-padding: 6rem;
-    --client-reel-glow-left: rgba(10, 10, 16, 1);
-    --client-reel-glow-center:  rgba(255, 80, 222, 0.8);
+    --client-reel-glow-left: rgba(255, 80, 222, 0.25);
+    --client-reel-glow-center: rgba(255, 80, 222, 0.25);
     --client-reel-glow-right: rgba(10, 10, 16, 1);
 
     background: transparent;
@@ -248,6 +248,9 @@ section { padding: 9rem 0; position: relative; }
 .client-reel-container {
     width: 100%;
     padding: var(--client-reel-padding) 0;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
     -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
     mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
     background: linear-gradient(
@@ -262,12 +265,18 @@ section { padding: 9rem 0; position: relative; }
     mask-image: linear-gradient(to bottom, transparent 0%, black 50%, black 50%, transparent 100%);
 }
 
+/* Active while the user is click-dragging the reel (set by JS) */
+.client-reel-container.is-dragging {
+    cursor: grabbing;
+}
+
 .client-reel {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     gap: var(--client-logo-gap);
-    animation: scroll 20s linear infinite;
+    width: max-content;
+    will-change: transform;
 }
 
 .client-reel img {
@@ -276,22 +285,15 @@ section { padding: 9rem 0; position: relative; }
     flex-shrink: 0;
     filter: grayscale(1);
     opacity: var(--client-logo-opacity);
-    transition: all 0.3s ease-in-out;
-}
-
-.client-reel-container:hover .client-reel {
-    animation-play-state: paused;
+    transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .client-reel img:hover {
     filter: grayscale(0);
     opacity: 1;
     transform: scale(var(--client-logo-hover-scale));
-}
-
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
 }
 
 /* Testimonials Wrapper */

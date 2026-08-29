@@ -214,29 +214,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (useCaseSection) {
         const useCaseStates = [
             {
-                title: 'Sports Academies & Clubs',
-                heading: 'Run Your Academy in One Connected System.',
-                description: 'Manage staff, trainees, schedules, attendance, payments, and athlete development without jumping between different tools.',
-                howTitle: 'How Academies Use VitaQ',
-                cta: 'Explore Academy & Club Solutions',
-                image: 'who-academies.png',
-                imageAlt: 'VitaQ platform for sports academies and clubs',
-                composition: {
-                    type: 'layered',
-                    variant: 'academies',
-                    dashboard: 'who-academies-dashboard.png',
-                    scene: 'who-academies-skaters-scene.png',
-                    phone: 'who-academies-phone.png'
-                },
-                points: [
-                    ['Manage Coaches & Trainees', 'Keep your teams, groups, athletes, and member information organized.'],
-                    ['Simplify Scheduling & Attendance', 'Coordinate sessions, coaches, facilities, groups, and attendance in one place.'],
-                    ['Manage Memberships & Payments', 'Handle registrations, subscriptions, invoices, and payments with less admin.'],
-                    ['Track Athlete Development', 'Set goals, run evaluations, and follow progress over time.'],
-                    ['Keep Everyone Connected', 'Give coaches, athletes, and parents access to the information that matters to them.']
-                ]
-            },
-            {
                 title: 'Event & Competition Organizers',
                 heading: 'Run Every Stage of Your Event in One Place.',
                 description: 'Connect registrations, participants, schedules, competitions, ticketing, payments, and event operations from setup to event day.',
@@ -258,6 +235,29 @@ document.addEventListener('DOMContentLoaded', function () {
                     ['Manage Competitions', 'Organize participants, categories, brackets, and competition workflows.'],
                     ['Handle Tickets & Payments', 'Keep registrations, purchases, tickets, and transactions connected.'],
                     ['Keep Your Team in Control', 'Give organizers one source of truth throughout the entire event.']
+                ]
+            },
+            {
+                title: 'Sports Academies & Clubs',
+                heading: 'Run Your Academy in One Connected System.',
+                description: 'Manage staff, trainees, schedules, attendance, payments, and athlete development without jumping between different tools.',
+                howTitle: 'How Academies Use VitaQ',
+                cta: 'Explore Academy & Club Solutions',
+                image: 'who-academies.png',
+                imageAlt: 'VitaQ platform for sports academies and clubs',
+                composition: {
+                    type: 'layered',
+                    variant: 'academies',
+                    dashboard: 'who-academies-dashboard.png',
+                    scene: 'who-academies-skaters-scene.png',
+                    phone: 'who-academies-phone.png'
+                },
+                points: [
+                    ['Manage Coaches & Trainees', 'Keep your teams, groups, athletes, and member information organized.'],
+                    ['Simplify Scheduling & Attendance', 'Coordinate sessions, coaches, facilities, groups, and attendance in one place.'],
+                    ['Manage Memberships & Payments', 'Handle registrations, subscriptions, invoices, and payments with less admin.'],
+                    ['Track Athlete Development', 'Set goals, run evaluations, and follow progress over time.'],
+                    ['Keep Everyone Connected', 'Give coaches, athletes, and parents access to the information that matters to them.']
                 ]
             },
             {
@@ -296,6 +296,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 ]
             }
         ];
+
+        // Preload every Who-It's-For visual up front. Without this, switching
+        // tabs sets a new <img> src that still has to be downloaded/decoded,
+        // so the text content (set in the same tick) visibly updates before
+        // the image does. Warming the browser cache here removes that lag.
+        const useCaseImagePaths = new Set();
+        useCaseStates.forEach(state => {
+            if (state.image) useCaseImagePaths.add(state.image);
+            if (state.composition) {
+                ['dashboard', 'scene', 'phone'].forEach(layerKey => {
+                    if (state.composition[layerKey]) useCaseImagePaths.add(state.composition[layerKey]);
+                });
+            }
+        });
+        useCaseImagePaths.forEach(src => {
+            const preloadImg = new Image();
+            preloadImg.src = src;
+        });
 
         const useCaseTabs = Array.from(useCaseSection.querySelectorAll('.use-case-tab'));
         const useCaseTabsNav = useCaseSection.querySelector('.use-case-tabs-nav');
@@ -466,10 +484,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             useCasePanel.classList.add('is-switching');
 
+            // Matches the .use-case-panel.is-switching CSS transition duration
+            // (0.22s) so the fade-out finishes completely before the content
+            // swaps and the fade-in starts. Previously this fired at 180ms,
+            // cutting the fade-out short and restarting the transition mid-way,
+            // which read as a stutter/lag on every tab switch.
             useCaseSwitchTimer = setTimeout(() => {
                 renderUseCase(normalizedIndex);
                 useCasePanel.classList.remove('is-switching');
-            }, 180);
+            }, 220);
 
             if (shouldFocus) {
                 activeTab.focus();
@@ -1146,4 +1169,93 @@ window.addEventListener("blur", () => {
 });
 window.addEventListener("focus", () => {
     document.title = docTitle;
+});
+
+// --- Client Logo Reel: Seamless Auto-Scroll + Click-and-Drag ---
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.client-reel-container');
+    const track = document.querySelector('.client-reel');
+    if (!container || !track) return;
+
+    const AUTO_SCROLL_SPEED = 0.6; // pixels per frame while idle
+    const CLICK_MOVE_THRESHOLD = 5; // px of movement below which a drag counts as a "click" instead
+
+    let currentX = 0;        // unwrapped running position (can grow without limit)
+    let halfWidth = 0;       // width of ONE copy of the logo set
+    let isDragging = false;
+    let isPaused = false;    // true after a plain click/tap; stays stopped until clicked again
+    let dragStartClientX = 0;
+    let dragStartX = 0;
+    let hasMoved = false;    // did this press move past the click threshold?
+
+    // The track contains two identical copies of the logo list back-to-back.
+    // halfWidth is the width of a single copy, measured from the real DOM
+    // so it always stays accurate even if logos are added/removed later.
+    function measure() {
+        halfWidth = track.scrollWidth / 2;
+    }
+    measure();
+    window.addEventListener('resize', measure);
+
+    // Wraps currentX into a single copy's width so the transform always
+    // lands within the visually-identical repeating region. Using a real
+    // modulo (not CSS's -50% trick) means there is no seam or snap at the
+    // loop boundary in either scroll direction, including while dragging.
+    function render() {
+        const wrapped = ((currentX % halfWidth) + halfWidth) % halfWidth;
+        track.style.transform = `translateX(${wrapped - halfWidth}px)`;
+    }
+
+    function tick() {
+        if (!isDragging && !isPaused) {
+            currentX -= AUTO_SCROLL_SPEED;
+        }
+        render();
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    function startDrag(clientX) {
+        isDragging = true;
+        hasMoved = false;
+        dragStartClientX = clientX;
+        dragStartX = currentX;
+        container.classList.add('is-dragging');
+    }
+
+    function moveDrag(clientX) {
+        if (!isDragging) return;
+        if (Math.abs(clientX - dragStartClientX) > CLICK_MOVE_THRESHOLD) {
+            hasMoved = true;
+        }
+        currentX = dragStartX + (clientX - dragStartClientX);
+        render();
+    }
+
+    function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        container.classList.remove('is-dragging');
+
+        // A press that never moved past the threshold counts as a plain
+        // click/tap on a logo: toggle stopped-in-place instead of treating
+        // it as a drag release.
+        if (!hasMoved) {
+            isPaused = !isPaused;
+        }
+    }
+
+    // Mouse
+    container.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        startDrag(e.clientX);
+    });
+    window.addEventListener('mousemove', (e) => moveDrag(e.clientX));
+    window.addEventListener('mouseup', endDrag);
+
+    // Touch
+    container.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX), { passive: true });
+    container.addEventListener('touchmove', (e) => moveDrag(e.touches[0].clientX), { passive: true });
+    container.addEventListener('touchend', endDrag);
+    container.addEventListener('touchcancel', endDrag);
 });
