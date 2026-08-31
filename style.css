@@ -2076,6 +2076,15 @@ button:focus-visible,
     transition: opacity 0.5s ease-in-out 0.2s, visibility 0.5s ease-in-out 0.2s;
 }
 
+/* While the preloader is on screen, lock scrolling. #preloader is only a
+   visual overlay (position: fixed) and never blocked touch/scroll input by
+   itself, so the page underneath was still scrollable during the logo
+   animation, before layout (fonts/images) and the GSAP ScrollTrigger
+   animations had fully settled. This removes that gap. */
+body:not(.loaded) {
+    overflow: hidden;
+}
+
 /* This class, added by JS, is the ONLY trigger now */
 body.loaded #preloader {
     opacity: 0;
