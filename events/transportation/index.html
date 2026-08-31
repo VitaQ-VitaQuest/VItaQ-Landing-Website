@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A10">
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    <title>Event Transportation & Team Travel Software | VitaQ</title>
+    <meta name="description" content="Plan event transport end to end: route drafts generated from transport requests, driver manifests with onboard attendance, vehicle management and live trip status for families.">
+    <link rel="canonical" href="https://vitaq.app/events/transportation/">
+
+    <meta property="og:title" content="VitaQ Transportation — 300 Athletes. 12 Buses. One Live Dashboard.">
+    <meta property="og:description" content="Route drafts from transport requests, driver manifests with onboard attendance and live trip status for families — event transport on one screen.">
+    <meta property="og:image" content="https://vitaq.app/screen-stages.webp">
+    <meta property="og:url" content="https://vitaq.app/events/transportation/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VitaQ Transportation — 300 Athletes. 12 Buses. One Live Dashboard.">
+    <meta name="twitter:description" content="Route drafts from transport requests, driver manifests with onboard attendance and live trip status for families — event transport on one screen.">
+    <meta name="twitter:image" content="https://vitaq.app/screen-stages.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/css/pages.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P06983P4SS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P06983P4SS');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vitaq.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Championship Ops", "item": "https://vitaq.app/events/" },
+            { "@type": "ListItem", "position": 3, "name": "Transportation", "item": "https://vitaq.app/events/transportation/" }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "name": "VitaQ Event Transportation",
+          "url": "https://vitaq.app/events/transportation/",
+          "description": "Event transportation on VitaQ: transport requests from families and teams, route-planner drafts, driver and vehicle management, onboard attendance manifests and live trip status.",
+          "isPartOf": { "@type": "WebSite", "name": "VitaQ", "url": "https://vitaq.app/" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do route drafts work?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Families and teams file transport requests in the app. The route planner turns those requests into draft routes, which you review, adjust and approve — each approved draft becomes a trip with a driver, a vehicle and a manifest." }
+            },
+            {
+              "@type": "Question",
+              "name": "Do drivers need training to use it?",
+              "acceptedAnswer": { "@type": "Answer", "text": "No. Drivers get a focused driver view: today's trips, a start button, the stop-by-stop manifest and onboard attendance with notes per athlete. If they can use a messaging app, they can run a trip." }
+            },
+            {
+              "@type": "Question",
+              "name": "Does onboard attendance sync with event records?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. When a driver checks an athlete in at the bus door, it writes to the same participation records the club, coaches and reports use — one shared record across the whole platform." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can parents see live trip status?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Trips show scheduled, en-route and completed states in the family app as the driver progresses, so parents can follow the journey in real time." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we import existing transport lists?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Bulk import brings your athletes, teams and existing lists into VitaQ, so you can build trips from real rosters on day one." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="subpage">
+
+    <div class="aurora-glow aurora-1"></div>
+    <div class="aurora-glow aurora-2"></div>
+    <div class="aurora-glow aurora-3"></div>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay">
+        <nav class="nav-fullscreen">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/for/" class="nav-link">For Your Role</a>
+            <a href="/sports/" class="nav-link">Sports</a>
+            <a href="/events/" class="nav-link">Championship Ops</a>
+            <a href="/support.html" class="nav-link">Support</a>
+            <a href="/#contact" class="nav-link cta">Request a Demo</a>
+        </nav>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo-wrapper" aria-label="VitaQ Home">
+                <svg class="logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                  <path class="cls-3" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                  <path class="cls-1" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                </svg>
+            </a>
+            <button class="header-menu-button" aria-label="Open Menu" aria-expanded="false">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="page-hero container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span class="crumb-sep">/</span>
+                <a href="/events/">Championship Ops</a><span class="crumb-sep">/</span>
+                <span aria-current="page">Transportation</span>
+            </nav>
+            <div class="page-hero-grid">
+                <div class="io-reveal">
+                    <p class="page-hero-eyebrow">Championship Ops · Transportation <span class="badge-live">Live</span></p>
+                    <h1>300 athletes. 12 buses.<br><span class="accent">One live dashboard.</span></h1>
+                    <p class="page-hero-sub">Families and teams file transport requests; the planner turns them into route drafts you approve. Drivers get a live manifest and mark attendance at the door — and parents follow live trip status right in the family app.</p>
+                    <div class="page-hero-cta">
+                        <a href="/#contact" class="btn btn-primary">Book a Free Demo</a>
+                        <a href="#routes" class="btn btn-secondary">↓ &nbsp;See how routing works</a>
+                    </div>
+                    <div class="page-hero-proof">
+                        <span class="proof-chip"><strong>Route drafts</strong> from requests</span>
+                        <span class="proof-chip"><strong>Onboard</strong> attendance manifests</span>
+                        <span class="proof-chip"><strong>Live</strong> status for parents</span>
+                    </div>
+                </div>
+                <div class="io-reveal">
+                    <div class="app-frame demo-trip" data-demo="trip">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Shuttle 04 · Finals Day</span>
+                            <span class="app-frame-hint">Press Start trip</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature → Outcome -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Finals day, powered by VitaQ</h2>
+            </div>
+            <div class="pain-outcome-grid">
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Route Planner</p>
+                    <p class="po-outcome">The planner generates route drafts — <span class="accent">you just approve</span></p>
+                    <p class="po-proof">Transport requests from families and teams feed the route planner; approved drafts become real trips with drivers and vehicles assigned.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Onboard Attendance</p>
+                    <p class="po-outcome">Drivers mark attendance <span class="accent">at the door</span></p>
+                    <p class="po-proof">Onboard attendance is checked as athletes board — synced to the same participation records the club sees.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Trip Manifests</p>
+                    <p class="po-outcome">A live manifest with <span class="accent">notes per athlete</span></p>
+                    <p class="po-proof">The driver app lists every rider for every stop, with notes that travel with the manifest, stop by stop.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Trip Tracking</p>
+                    <p class="po-outcome">Live trip status <span class="accent">in the family app</span></p>
+                    <p class="po-proof">Trips move through scheduled, en-route and completed states the moment the driver taps them.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Splits -->
+        <section id="routes" class="container">
+            <div class="split-section">
+                <div class="split-copy io-reveal">
+                    <h2>From requests to routes</h2>
+                    <p>Teams and families request their seats once, inside the app — and the planner does the heavy lifting from there.</p>
+                    <ul>
+                        <li><strong>Transport requests</strong> — families and teams file them in the app, in a couple of taps.</li>
+                        <li><strong>Route-planner drafts</strong> — requests become draft routes you review, adjust and approve.</li>
+                        <li><strong>Drivers &amp; vehicles</strong> — assign both to every trip from one screen.</li>
+                        <li><strong>Transportation dashboard</strong> — every trip, driver and vehicle across the event in a single view.</li>
+                    </ul>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-schedule" data-demo="schedule" data-days="Fri|Sat|Sun|Mon" data-sessions="Shuttle A · Hotel Loop|Shuttle B · Athlete Village|Van 1 · Officials|Bus 2 · Junior Teams|Shuttle A · Venue Express|Bus 4 · Airport Run">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Fleet Programme</span>
+                            <span class="app-frame-hint">Drag to reassign a day</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="split-section reverse">
+                <div class="split-copy io-reveal">
+                    <h2>The driver's day, scripted</h2>
+                    <p>Drivers don't need the whole platform — they need today's trips, the manifest and a start button. That's exactly what they get.</p>
+                    <ul>
+                        <li><strong>Start / end trips</strong> — one tap opens the manifest, one tap closes the trip.</li>
+                        <li><strong>Onboard attendance</strong> — marked at the bus door, synced to the same participation records the club and coaches see.</li>
+                        <li><strong>Notes per athlete</strong> — instructions ride with the manifest, visible at every stop.</li>
+                        <li><strong>Mileage &amp; trip notes</strong> — logged when the trip closes, ready for reporting.</li>
+                    </ul>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame" data-demo="capacity">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Fleet Load</span>
+                            <span class="app-frame-hint">Live app component</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="container">
+            <div class="stat-strip io-reveal">
+                <div><div class="stat-value"><span class="count-up" data-count="1">0</span></div><div class="stat-label">manifest per trip, shared by planner, driver and club</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="100" data-suffix="%">0</span></div><div class="stat-label">of onboard attendance synced to event records</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="0">0</span></div><div class="stat-label">paper manifests on finals day</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="3">0</span></div><div class="stat-label">views in sync — planner, driver and family</div></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Transport questions, answered</h2>
+            </div>
+            <div class="faq-accordion io-reveal">
+                <div class="faq-item">
+                    <button class="faq-question"><span>How do route drafts work?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Families and teams file transport requests in the app. The route planner turns those requests into draft routes, which you review, adjust and approve — each approved draft becomes a trip with a driver, a vehicle and a manifest.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Do drivers need training to use it?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>No. Drivers get a focused driver view: today's trips, a start button, the stop-by-stop manifest and onboard attendance with notes per athlete. If they can use a messaging app, they can run a trip.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Does onboard attendance sync with event records?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. When a driver checks an athlete in at the bus door, it writes to the same participation records the club, coaches and reports use — one shared record across the whole platform.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can parents see live trip status?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Trips show scheduled, en-route and completed states in the family app as the driver progresses, so parents can follow the journey in real time.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we import existing transport lists?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Bulk import brings your athletes, teams and existing lists into VitaQ, so you can build trips from real rosters on day one.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Connected to everything else</h2>
+            </div>
+            <div class="related-grid io-reveal">
+                <a class="related-card" href="/events/scheduling/">
+                    <span class="rc-icon">🗓️</span><span class="rc-arrow">→</span>
+                    <h3>Schedules</h3>
+                    <p>Sessions, venues and recurring series — the programme your fleet serves.</p>
+                </a>
+                <a class="related-card" href="/events/training-camps/">
+                    <span class="rc-icon">🏕️</span><span class="rc-arrow">→</span>
+                    <h3>Training Camps</h3>
+                    <p>Camps with enrollment, payments and camp transfers run as trips.</p>
+                </a>
+                <a class="related-card" href="/for/transport-managers/">
+                    <span class="rc-icon">🚌</span><span class="rc-arrow">→</span>
+                    <h3>For Transport Managers</h3>
+                    <p>The dashboard, the drivers and the fleet — your whole job in one view.</p>
+                </a>
+                <a class="related-card" href="/for/parents/">
+                    <span class="rc-icon">👨‍👧</span><span class="rc-arrow">→</span>
+                    <h3>For Parents</h3>
+                    <p>One login for every child — schedules, progress, payments and trip status.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container">
+            <div class="cta-band io-reveal">
+                <h2>Put the whole fleet on one screen.</h2>
+                <p>See route drafts, the driver app and live parent-facing trip status in a personalized 30-minute demo.</p>
+                <a href="/#contact" class="btn btn-primary btn-large">Book My Free Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols">
+                <div class="footer-brand">
+                    <svg class="footer-logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                      <path fill="#FF50DE" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                      <path fill="#FFFFFF" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                    </svg>
+                    <p>The sports operating system — performance, scheduling, finance and championship operations in one white-label platform.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Who It's For</h4>
+                    <ul>
+                        <li><a href="/for/club-owners/">Club Owners & Academies</a></li>
+                        <li><a href="/for/coaches/">Coaches & Trainers</a></li>
+                        <li><a href="/for/athletes/">Athletes</a></li>
+                        <li><a href="/for/parents/">Parents & Guardians</a></li>
+                        <li><a href="/for/federations/">Federations</a></li>
+                        <li><a href="/for/event-organizers/">Event Organizers</a></li>
+                        <li><a href="/for/finance-teams/">Finance Teams</a></li>
+                        <li><a href="/for/transport-managers/">Transport Managers</a></li>
+                        <li><a href="/for/front-desk/">Front Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Sports</h4>
+                    <ul>
+                        <li><a href="/sports/figure-skating/">Figure Skating</a></li>
+                        <li><a href="/sports/roller-skating/">Roller Skating</a></li>
+                        <li><a href="/sports/speed-skating/">Speed Skating</a></li>
+                        <li><a href="/sports/ice-hockey/">Ice Hockey</a></li>
+                        <li><a href="/sports/skiing/">Skiing</a></li>
+                        <li><a href="/sports/rollball/">Rollball</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Championship Ops</h4>
+                    <ul>
+                        <li><a href="/events/">Overview</a></li>
+                        <li><a href="/events/registration/">Registration & Fees</a></li>
+                        <li><a href="/events/scheduling/">Schedules</a></li>
+                        <li><a href="/events/transportation/">Transportation</a></li>
+                        <li><a href="/events/training-camps/">Training Camps</a></li>
+                        <li><a href="/events/live-results/">Live Results</a></li>
+                        <li><a href="/events/ticketing/">Ticketing</a></li>
+                        <li><a href="/events/accreditation/">Accreditation</a></li>
+                        <li><a href="/events/accommodation/">Accommodation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-base">
+                <p>&copy; 2026 VitaQ Technologies. All Rights Reserved.</p>
+                <div>
+                    <a href="/support.html">Support</a>
+                    <a href="/legal/privacy.html">Privacy</a>
+                    <a href="/legal/terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/pages.js" defer></script>
+</body>
+</html>

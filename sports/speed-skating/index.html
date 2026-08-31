@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A10">
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    <title>Speed Skating Club & Training Software | VitaQ</title>
+    <meta name="description" content="Lap times, training blocks and squad rankings in one app — VitaQ logs every split as an exercise parameter, charts progression across seasons and handles entries, fees and away-race travel.">
+    <link rel="canonical" href="https://vitaq.app/sports/speed-skating/">
+
+    <meta property="og:title" content="VitaQ for Speed Skating — Where Hundredths Become Habits">
+    <meta property="og:description" content="Lap times, training blocks and squad rankings in one app — every split logged, every season charted, every entry paid online.">
+    <meta property="og:image" content="https://vitaq.app/screen-stages.webp">
+    <meta property="og:url" content="https://vitaq.app/sports/speed-skating/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VitaQ for Speed Skating — Where Hundredths Become Habits">
+    <meta name="twitter:description" content="Lap times, training blocks and squad rankings in one app — every split logged, every season charted, every entry paid online.">
+    <meta name="twitter:image" content="https://vitaq.app/screen-stages.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/css/pages.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P06983P4SS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P06983P4SS');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vitaq.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Sports", "item": "https://vitaq.app/sports/" },
+            { "@type": "ListItem", "position": 3, "name": "Speed Skating", "item": "https://vitaq.app/sports/speed-skating/" }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "name": "VitaQ for Speed Skating",
+          "url": "https://vitaq.app/sports/speed-skating/",
+          "description": "Speed skating club and training software: lap times logged as exercise parameters, season progression charts, squad rankings from custom equations, training blocks, race entries and away-race transport.",
+          "isPartOf": { "@type": "WebSite", "name": "VitaQ", "url": "https://vitaq.app/" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Can we log lap times and splits in VitaQ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every exercise in your library carries the parameters you define — 100m splits, 500m time, lap count, heart rate — with built-in unit conversion. Coaches record values during the session and each entry lands in the athlete's history, ready to chart." }
+            },
+            {
+              "@type": "Question",
+              "name": "Do athletes see their own progression?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Athletes open their own app and see goals, evaluation results and progress charts the moment a coach records them — season bests, attendance and goal completion in one view, any day of the season." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we rank a whole squad on time-trial results?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Custom scoring equations convert raw times into points — faster time, higher score — and group evaluations rank the squad on a live leaderboard as results are recorded. Rankings publish to every athlete instantly." }
+            },
+            {
+              "@type": "Question",
+              "name": "How do we organize transport to away races?",
+              "acceptedAnswer": { "@type": "Answer", "text": "VitaQ's transportation module is live: assign drivers and vehicles, draft routes, and run trips with onboard attendance. Every skater is checked on and off the bus, and the manifest closes itself when the trip ends." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we run race-day entries through VitaQ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Registration and fees are live today — skaters enroll online, pay by card, wallet or pay link, and your entry list fills itself. Heat draws and tournament brackets are on the roadmap — see Live Results for what's coming." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="subpage">
+
+    <div class="aurora-glow aurora-1"></div>
+    <div class="aurora-glow aurora-2"></div>
+    <div class="aurora-glow aurora-3"></div>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay">
+        <nav class="nav-fullscreen">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/for/" class="nav-link">For Your Role</a>
+            <a href="/sports/" class="nav-link">Sports</a>
+            <a href="/events/" class="nav-link">Championship Ops</a>
+            <a href="/support.html" class="nav-link">Support</a>
+            <a href="/#contact" class="nav-link cta">Request a Demo</a>
+        </nav>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo-wrapper" aria-label="VitaQ Home">
+                <svg class="logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                  <path class="cls-3" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                  <path class="cls-1" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                </svg>
+            </a>
+            <button class="header-menu-button" aria-label="Open Menu" aria-expanded="false">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="page-hero container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span class="crumb-sep">/</span>
+                <a href="/sports/">Sports</a><span class="crumb-sep">/</span>
+                <span aria-current="page">Speed Skating</span>
+            </nav>
+            <div class="page-hero-grid">
+                <div class="io-reveal">
+                    <p class="page-hero-eyebrow">VitaQ for Speed Skating</p>
+                    <h1>Where hundredths<br><span class="accent">become habits.</span></h1>
+                    <p class="page-hero-sub">Speed skating is a sport of splits — and VitaQ treats every one as data. It logs every lap, charts every skater's season, ranks the squad on real results and runs your training blocks, entries and away-race buses — in one app.</p>
+                    <div class="page-hero-cta">
+                        <a href="/#contact" class="btn btn-primary">Book a Free Demo</a>
+                        <a href="#times" class="btn btn-secondary">↓ &nbsp;Try the live demo</a>
+                    </div>
+                    <div class="page-hero-proof">
+                        <span class="proof-chip"><strong>Every split</strong> logged & charted</span>
+                        <span class="proof-chip"><strong>Live</strong> squad rankings</span>
+                        <span class="proof-chip"><strong>Online</strong> entries & pay links</span>
+                    </div>
+                </div>
+                <div class="io-reveal">
+                    <div class="app-frame demo-leaderboard" data-demo="leaderboard" data-unit="pts" data-athletes="Ivan P.|Lena K.|Omar S.|Mia T.|Yuto N.|Ella V.">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Time Trial · Points</span>
+                            <span class="app-frame-hint">Press to simulate a session</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value highlights -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Your season, powered by VitaQ</h2>
+            </div>
+            <div class="pain-outcome-grid">
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Lap Time Logging</p>
+                    <p class="po-outcome">Every split logged as an <span class="accent">exercise parameter</span>, charted over seasons</p>
+                    <p class="po-proof">Define 100m, 500m and full-lap parameters once; unit conversion and athlete history come built in.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Athlete App</p>
+                    <p class="po-outcome">Progress charts athletes <span class="accent">check themselves</span></p>
+                    <p class="po-proof">Goals, evaluation results and season trends appear in each skater's own app the moment they're recorded.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Squad Scheduling</p>
+                    <p class="po-outcome">Recurring training blocks with <span class="accent">exceptions handled cleanly</span></p>
+                    <p class="po-proof">Build the block once; move or cancel a single ice slot without touching the rest of the series.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Checkout</p>
+                    <p class="po-outcome">Online entries with <span class="accent">pay links and receipts</span></p>
+                    <p class="po-proof">Card, wallet, cash or bank — every entry paid, invoiced and posted to the ledger automatically.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Times -->
+        <section id="times" class="container">
+            <div class="split-section">
+                <div class="split-copy io-reveal">
+                    <h2>Times that tell a story</h2>
+                    <p>A 500m time means nothing in isolation — it matters against last month, last season and the rest of the squad. VitaQ turns every recorded split into structured data your whole program can build on.</p>
+                    <ul>
+                        <li><strong>Exercise parameters</strong> for splits, lap counts and distances — with unit conversion built in.</li>
+                        <li><strong>Snapshots over time</strong> — every evaluation preserves the numbers, so season charts draw themselves.</li>
+                        <li><strong>Custom scoring equations</strong> convert raw times into points, so a 12-year-old and a senior can be ranked fairly on the same board.</li>
+                        <li><strong>Live leaderboards</strong> during time trials — instant competitive energy on the ice.</li>
+                    </ul>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-progress" data-demo="progress" data-metrics="Season best progress|68|Attendance|93|Goal completion|81">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Skater Progress</span>
+                            <span class="app-frame-hint">Live app component</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training blocks -->
+            <div class="split-section reverse">
+                <div class="split-copy io-reveal">
+                    <h2>Train long track, short track and dryland in one plan</h2>
+                    <p>A speed program lives in three places at once: the oval, the short track and the gym. VitaQ holds the whole block in one schedule — recurring series, assigned coaches, enrolled skaters — and when ice time moves, everyone knows instantly.</p>
+                    <ul>
+                        <li><strong>Recurring blocks</strong> with clean exceptions — detach one occurrence, keep the series intact.</li>
+                        <li><strong>Staff assignment</strong> so the sprint coach, distance coach and S&amp;C coach each see their own day.</li>
+                        <li><strong>Self-enrollment and access rules</strong> — open sessions fill themselves; elite ice stays elite.</li>
+                        <li><strong>Attendance check-in/out</strong> with verdicts that flow straight into each skater's record.</li>
+                    </ul>
+                    <p><a href="/events/scheduling/" style="color: var(--primary-pink); text-decoration: none; font-weight: 700;">Explore scheduling in depth →</a></p>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-schedule" data-demo="schedule" data-days="Mon|Tue|Thu|Sat" data-sessions="Long Track Tempo|Short Track Starts|Dryland Power|Relay Exchanges|Technique Video|Race Simulation">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Training Block · Week 6</span>
+                            <span class="app-frame-hint">Drag a session to move it</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="container">
+            <div class="stat-strip io-reveal">
+                <div><div class="stat-value"><span class="count-up" data-count="8" data-suffix="+">0</span></div><div class="stat-label">organizations run training on VitaQ</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="100" data-suffix="%">0</span></div><div class="stat-label">of recorded splits visible to skaters instantly</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="0">0</span></div><div class="stat-label">extra steps from a recorded split to the season chart</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="1">0</span></div><div class="stat-label">app for times, training blocks &amp; entries</div></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Speed skating questions, answered</h2>
+            </div>
+            <div class="faq-accordion io-reveal">
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we log lap times and splits in VitaQ?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Every exercise in your library carries the parameters you define — 100m splits, 500m time, lap count, heart rate — with built-in unit conversion. Coaches record values during the session and each entry lands in the athlete's history, ready to chart.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Do athletes see their own progression?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Athletes open their own app and see goals, evaluation results and progress charts the moment a coach records them — season bests, attendance and goal completion in one view, any day of the season.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we rank a whole squad on time-trial results?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Custom scoring equations convert raw times into points — faster time, higher score — and group evaluations rank the squad on a live leaderboard as results are recorded. Rankings publish to every athlete instantly.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>How do we organize transport to away races?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>VitaQ's transportation module is live: assign drivers and vehicles, draft routes, and run trips with onboard attendance. Every skater is checked on and off the bus, and the manifest closes itself when the trip ends.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we run race-day entries through VitaQ?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Registration and fees are live today — skaters enroll online, pay by card, wallet or pay link, and your entry list fills itself. Heat draws and tournament brackets are <span class="badge-soon">on the roadmap</span> — see <a href="/events/live-results/" style="color: var(--primary-pink); text-decoration: none; font-weight: 700;">Live Results</a> for what's coming.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Built for your whole program</h2>
+            </div>
+            <div class="related-grid io-reveal">
+                <a class="related-card" href="/for/coaches/">
+                    <span class="rc-icon">⏱️</span><span class="rc-arrow">→</span>
+                    <h3>For Coaches</h3>
+                    <p>Real-time evaluations, your schedule and one-tap attendance.</p>
+                </a>
+                <a class="related-card" href="/for/athletes/">
+                    <span class="rc-icon">🏅</span><span class="rc-arrow">→</span>
+                    <h3>For Athletes</h3>
+                    <p>Goals, rankings and progress that skaters actually check.</p>
+                </a>
+                <a class="related-card" href="/sports/figure-skating/">
+                    <span class="rc-icon">⛸️</span><span class="rc-arrow">→</span>
+                    <h3>Figure Skating</h3>
+                    <p>Levels, evaluations and club operations on the artistic side of the ice.</p>
+                </a>
+                <a class="related-card" href="/events/transportation/">
+                    <span class="rc-icon">🚌</span><span class="rc-arrow">→</span>
+                    <h3>Transportation</h3>
+                    <p>Drivers, vehicles, routes and onboard attendance for away races.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container">
+            <div class="cta-band io-reveal">
+                <h2>Put your splits to work.</h2>
+                <p>See lap-time logging, squad leaderboards and training blocks built for speed skating in a personalized 30-minute demo.</p>
+                <a href="/#contact" class="btn btn-primary btn-large">Book My Free Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols">
+                <div class="footer-brand">
+                    <svg class="footer-logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                      <path fill="#FF50DE" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                      <path fill="#FFFFFF" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                    </svg>
+                    <p>The sports operating system — performance, scheduling, finance and championship operations in one white-label platform.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Who It's For</h4>
+                    <ul>
+                        <li><a href="/for/club-owners/">Club Owners & Academies</a></li>
+                        <li><a href="/for/coaches/">Coaches & Trainers</a></li>
+                        <li><a href="/for/athletes/">Athletes</a></li>
+                        <li><a href="/for/parents/">Parents & Guardians</a></li>
+                        <li><a href="/for/federations/">Federations</a></li>
+                        <li><a href="/for/event-organizers/">Event Organizers</a></li>
+                        <li><a href="/for/finance-teams/">Finance Teams</a></li>
+                        <li><a href="/for/transport-managers/">Transport Managers</a></li>
+                        <li><a href="/for/front-desk/">Front Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Sports</h4>
+                    <ul>
+                        <li><a href="/sports/figure-skating/">Figure Skating</a></li>
+                        <li><a href="/sports/roller-skating/">Roller Skating</a></li>
+                        <li><a href="/sports/speed-skating/">Speed Skating</a></li>
+                        <li><a href="/sports/ice-hockey/">Ice Hockey</a></li>
+                        <li><a href="/sports/skiing/">Skiing</a></li>
+                        <li><a href="/sports/rollball/">Rollball</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Championship Ops</h4>
+                    <ul>
+                        <li><a href="/events/">Overview</a></li>
+                        <li><a href="/events/registration/">Registration & Fees</a></li>
+                        <li><a href="/events/scheduling/">Schedules</a></li>
+                        <li><a href="/events/transportation/">Transportation</a></li>
+                        <li><a href="/events/training-camps/">Training Camps</a></li>
+                        <li><a href="/events/live-results/">Live Results</a></li>
+                        <li><a href="/events/ticketing/">Ticketing</a></li>
+                        <li><a href="/events/accreditation/">Accreditation</a></li>
+                        <li><a href="/events/accommodation/">Accommodation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-base">
+                <p>&copy; 2026 VitaQ Technologies. All Rights Reserved.</p>
+                <div>
+                    <a href="/support.html">Support</a>
+                    <a href="/legal/privacy.html">Privacy</a>
+                    <a href="/legal/terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/pages.js" defer></script>
+</body>
+</html>

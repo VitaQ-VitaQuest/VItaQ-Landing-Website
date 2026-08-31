@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A10">
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    <title>Sports Parent App — Schedules, Progress & Payments | VitaQ</title>
+    <meta name="description" content="One login for every child: family schedules, live progress, online payments and even the team bus — VitaQ is the sports parent app that keeps your whole family in one place.">
+    <link rel="canonical" href="https://vitaq.app/for/parents/">
+
+    <meta property="og:title" content="VitaQ for Parents — Every Practice. Every Payment. One Login.">
+    <meta property="og:description" content="One login for every child: family schedules, live progress, online payments and the team bus — all in one app.">
+    <meta property="og:image" content="https://vitaq.app/screen-analytics.webp">
+    <meta property="og:url" content="https://vitaq.app/for/parents/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VitaQ for Parents — Every Practice. Every Payment. One Login.">
+    <meta name="twitter:description" content="One login for every child: family schedules, live progress, online payments and the team bus — all in one app.">
+    <meta name="twitter:image" content="https://vitaq.app/screen-analytics.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/css/pages.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P06983P4SS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P06983P4SS');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vitaq.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Who It's For", "item": "https://vitaq.app/for/" },
+            { "@type": "ListItem", "position": 3, "name": "Parents", "item": "https://vitaq.app/for/parents/" }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "name": "VitaQ for Parents & Guardians",
+          "url": "https://vitaq.app/for/parents/",
+          "description": "The family side of VitaQ: one login for every child — schedules, progress, online payments and live transport status.",
+          "isPartOf": { "@type": "WebSite", "name": "VitaQ", "url": "https://vitaq.app/" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Can I manage multiple children with one login?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. VitaQ is built around family accounts — one parent login with every child linked underneath. Switch between children in a tap to see each one's schedule, progress, payments and attendance." }
+            },
+            {
+              "@type": "Question",
+              "name": "How do payments work?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Your club can send a secure payment link to your email, or you pay directly in the app — by card (powered by Stripe), prepaid family wallet or cash recorded at the desk. Every payment generates an instant receipt, and refunds can be returned to your wallet as credit." }
+            },
+            {
+              "@type": "Question",
+              "name": "Will I be notified when something changes?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. When the club moves a session, posts an evaluation result or issues an invoice, you're notified by push, email, SMS or in-app — depending on how your club configures notifications." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I request transport for my child?",
+              "acceptedAnswer": { "@type": "Answer", "text": "If your club runs transportation, yes. Submit a transport request from the app, see which trip and vehicle your child is assigned to, and follow live stop-by-stop status on the day." }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my family's data private?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your family's data lives in your club's own isolated tenant — owned by the organization, encrypted, and never mixed with other clubs' data." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="subpage">
+
+    <div class="aurora-glow aurora-1"></div>
+    <div class="aurora-glow aurora-2"></div>
+    <div class="aurora-glow aurora-3"></div>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay">
+        <nav class="nav-fullscreen">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/for/" class="nav-link">For Your Role</a>
+            <a href="/sports/" class="nav-link">Sports</a>
+            <a href="/events/" class="nav-link">Championship Ops</a>
+            <a href="/support.html" class="nav-link">Support</a>
+            <a href="/#contact" class="nav-link cta">Request a Demo</a>
+        </nav>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo-wrapper" aria-label="VitaQ Home">
+                <svg class="logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                  <path class="cls-3" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                  <path class="cls-1" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                </svg>
+            </a>
+            <button class="header-menu-button" aria-label="Open Menu" aria-expanded="false">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="page-hero container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span class="crumb-sep">/</span>
+                <a href="/for/">Who It's For</a><span class="crumb-sep">/</span>
+                <span aria-current="page">Parents</span>
+            </nav>
+            <div class="page-hero-grid">
+                <div class="io-reveal">
+                    <p class="page-hero-eyebrow">VitaQ for Parents &amp; Guardians</p>
+                    <h1>Every practice. Every payment.<br><span class="accent">One login.</span></h1>
+                    <p class="page-hero-sub">VitaQ gives your family one app: every child's schedule, progress, payments and even the team bus — behind a single login, with updates the moment anything changes.</p>
+                    <div class="page-hero-cta">
+                        <a href="/#contact" class="btn btn-primary">Ask Your Club for VitaQ</a>
+                        <a href="#family" class="btn btn-secondary">↓ &nbsp;Try the live demo</a>
+                    </div>
+                    <div class="page-hero-proof">
+                        <span class="proof-chip"><strong>One</strong> login, every child</span>
+                        <span class="proof-chip"><strong>Live</strong> schedules &amp; progress</span>
+                        <span class="proof-chip"><strong>Instant</strong> receipts</span>
+                    </div>
+                </div>
+                <div class="io-reveal">
+                    <div class="app-frame demo-schedule" data-demo="schedule" data-days="Mon|Wed|Fri|Sat" data-sessions="Maya · Foundations|Adam · Elite Squad|Free Practice|Maya · Ballet|Adam · Strength|Family Open Skate">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Family Schedule · This Week</span>
+                            <span class="app-frame-hint">Drag a session — this is the real UX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature → Outcome -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Your family's week, all in one app</h2>
+            </div>
+            <div class="pain-outcome-grid">
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Family Schedule</p>
+                    <p class="po-outcome">One family schedule with <span class="accent">push alerts</span></p>
+                    <p class="po-proof">Every child's sessions in one view — changes land on your phone the moment the club makes them.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Live Progress</p>
+                    <p class="po-outcome">Goals, scores and coach feedback <span class="accent">live in your pocket</span></p>
+                    <p class="po-proof">Evaluation results, goal progress and session feedback appear in your app as coaches record them.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Online Payments</p>
+                    <p class="po-outcome">Pay online with <span class="accent">instant receipts</span></p>
+                    <p class="po-proof">Card, prepaid wallet or pay links by email — every payment receipted and on your family's record.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Live Transport</p>
+                    <p class="po-outcome">Live trip status <span class="accent">when the club runs transport</span></p>
+                    <p class="po-proof">Request a seat on the bus, see the route and follow stop-by-stop status on trip day.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Family account -->
+        <section id="family" class="container">
+            <div class="split-section">
+                <div class="split-copy io-reveal">
+                    <h2>Both kids. One tap apart.</h2>
+                    <p>VitaQ family accounts link every child to one parent login. Switch context in a tap and the whole app — schedule, progress, payments, attendance — becomes that child's world.</p>
+                    <ul>
+                        <li><strong>One login, many children</strong> — no second account, no shared passwords, no logging in and out.</li>
+                        <li><strong>Per-child everything</strong> — enrollments, attendance, goals and evaluation results, kept separate and clear.</li>
+                        <li><strong>Self-enrollment</strong> — book the right session for the right child straight from the club's public schedule.</li>
+                        <li><strong>Goals you can watch move</strong> — progress and rankings update as coaches record them.</li>
+                    </ul>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-progress" data-demo="progress">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Maya · Progress</span>
+                            <span class="app-frame-hint">Live app component</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payments -->
+            <div class="split-section reverse">
+                <div class="split-copy io-reveal">
+                    <h2>Pay the way you live</h2>
+                    <p>Pay from anywhere: the club sends a secure payment link to your email, or you pay in the app — and the receipt, the roster and the family record all update by themselves.</p>
+                    <ul>
+                        <li><strong>Pay links by email</strong> — settle an invoice in two taps from any device.</li>
+                        <li><strong>Card, wallet or cash</strong> — Stripe-powered card payments, a prepaid family wallet, or cash recorded at the desk.</li>
+                        <li><strong>Refunds that make sense</strong> — refunds can go straight back to your wallet as credit for the next term.</li>
+                        <li><strong>Discounts &amp; promo codes</strong> applied automatically at checkout.</li>
+                    </ul>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-checkout" data-demo="checkout" data-product="Maya's Championship Entry">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Family Checkout</span>
+                            <span class="app-frame-hint">Try the payment flow</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transport -->
+            <div class="split-section">
+                <div class="split-copy io-reveal">
+                    <h2>Know the bus arrived</h2>
+                    <p>When your club runs transportation, you see it all live. Request a seat, see the assigned trip and vehicle, and watch each stop complete as the driver moves through the route.</p>
+                    <ul>
+                        <li><strong>Transport requests</strong> — ask for pickup from the app when the club offers it.</li>
+                        <li><strong>Live trip status</strong> — every stop updates as the driver progresses the route.</li>
+                        <li><strong>Onboard attendance</strong> — drivers check athletes in as they board, so you know your child is on the bus.</li>
+                    </ul>
+                    <p><a href="/events/transportation/" style="color: var(--primary-pink); text-decoration: none; font-weight: 700;">Explore transportation in depth →</a></p>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-trip" data-demo="trip">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Bus A · Live Trip</span>
+                            <span class="app-frame-hint">Press start trip</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="container">
+            <div class="stat-strip io-reveal">
+                <div><div class="stat-value"><span class="count-up" data-count="8" data-suffix="+">0</span></div><div class="stat-label">organizations run on VitaQ</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="1">0</span></div><div class="stat-label">login for your whole family</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="100" data-suffix="%">0</span></div><div class="stat-label">of payments receipted automatically</div></div>
+                <div><div class="stat-value">Live</div><div class="stat-label">updates the moment your club changes anything</div></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Parent questions, answered</h2>
+            </div>
+            <div class="faq-accordion io-reveal">
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can I manage multiple children with one login?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. VitaQ is built around family accounts — one parent login with every child linked underneath. Switch between children in a tap to see each one's schedule, progress, payments and attendance.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>How do payments work?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Your club can send a secure payment link to your email, or you pay directly in the app — by card (powered by Stripe), prepaid family wallet or cash recorded at the desk. Every payment generates an instant receipt, and refunds can be returned to your wallet as credit.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Will I be notified when something changes?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. When the club moves a session, posts an evaluation result or issues an invoice, you're notified by push, email, SMS or in-app — depending on how your club configures notifications.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can I request transport for my child?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>If your club runs transportation, yes. Submit a transport request from the app, see which trip and vehicle your child is assigned to, and follow live stop-by-stop status on the day.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Is my family's data private?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Your family's data lives in your club's own isolated tenant — owned by the organization, encrypted, and never mixed with other clubs' data.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Built for your whole club</h2>
+            </div>
+            <div class="related-grid io-reveal">
+                <a class="related-card" href="/for/athletes/">
+                    <span class="rc-icon">⛸️</span><span class="rc-arrow">→</span>
+                    <h3>For Athletes</h3>
+                    <p>Goals, rankings and progress that athletes actually check.</p>
+                </a>
+                <a class="related-card" href="/for/coaches/">
+                    <span class="rc-icon">📋</span><span class="rc-arrow">→</span>
+                    <h3>For Coaches</h3>
+                    <p>Real-time evaluations, schedules and one-tap attendance.</p>
+                </a>
+                <a class="related-card" href="/for/club-owners/">
+                    <span class="rc-icon">🏛️</span><span class="rc-arrow">→</span>
+                    <h3>For Club Owners</h3>
+                    <p>Revenue, retention and operations in one command center.</p>
+                </a>
+                <a class="related-card" href="/events/transportation/">
+                    <span class="rc-icon">🚌</span><span class="rc-arrow">→</span>
+                    <h3>Transportation</h3>
+                    <p>Drivers, routed trips and live status families can follow.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container">
+            <div class="cta-band io-reveal">
+                <h2>One app for the whole family.</h2>
+                <p>VitaQ is rolled out by clubs — tell yours you want one login for schedules, progress, payments and the bus.</p>
+                <a href="/#contact" class="btn btn-primary btn-large">Ask Your Club for VitaQ</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols">
+                <div class="footer-brand">
+                    <svg class="footer-logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                      <path fill="#FF50DE" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                      <path fill="#FFFFFF" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                    </svg>
+                    <p>The sports operating system — performance, scheduling, finance and championship operations in one white-label platform.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Who It's For</h4>
+                    <ul>
+                        <li><a href="/for/club-owners/">Club Owners & Academies</a></li>
+                        <li><a href="/for/coaches/">Coaches & Trainers</a></li>
+                        <li><a href="/for/athletes/">Athletes</a></li>
+                        <li><a href="/for/parents/">Parents & Guardians</a></li>
+                        <li><a href="/for/federations/">Federations</a></li>
+                        <li><a href="/for/event-organizers/">Event Organizers</a></li>
+                        <li><a href="/for/finance-teams/">Finance Teams</a></li>
+                        <li><a href="/for/transport-managers/">Transport Managers</a></li>
+                        <li><a href="/for/front-desk/">Front Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Sports</h4>
+                    <ul>
+                        <li><a href="/sports/figure-skating/">Figure Skating</a></li>
+                        <li><a href="/sports/roller-skating/">Roller Skating</a></li>
+                        <li><a href="/sports/speed-skating/">Speed Skating</a></li>
+                        <li><a href="/sports/ice-hockey/">Ice Hockey</a></li>
+                        <li><a href="/sports/skiing/">Skiing</a></li>
+                        <li><a href="/sports/rollball/">Rollball</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Championship Ops</h4>
+                    <ul>
+                        <li><a href="/events/">Overview</a></li>
+                        <li><a href="/events/registration/">Registration & Fees</a></li>
+                        <li><a href="/events/scheduling/">Schedules</a></li>
+                        <li><a href="/events/transportation/">Transportation</a></li>
+                        <li><a href="/events/training-camps/">Training Camps</a></li>
+                        <li><a href="/events/live-results/">Live Results</a></li>
+                        <li><a href="/events/ticketing/">Ticketing</a></li>
+                        <li><a href="/events/accreditation/">Accreditation</a></li>
+                        <li><a href="/events/accommodation/">Accommodation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-base">
+                <p>&copy; 2026 VitaQ Technologies. All Rights Reserved.</p>
+                <div>
+                    <a href="/support.html">Support</a>
+                    <a href="/legal/privacy.html">Privacy</a>
+                    <a href="/legal/terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/pages.js" defer></script>
+</body>
+</html>

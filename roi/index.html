@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A10">
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    <title>Save More, Earn More — The ROI of Running Your Club on VitaQ</title>
+    <meta name="description" content="VitaQ grows club revenue with 24/7 self-serve booking, capacity you can actually fill and clean payment collection — while cutting admin hours and replacing the stack of tools you pay for today. Estimate your numbers with the interactive calculator.">
+    <link rel="canonical" href="https://vitaq.app/roi/">
+
+    <meta property="og:title" content="Save More, Earn More — The ROI of VitaQ">
+    <meta property="og:description" content="More revenue from the schedule you already run, fewer hours lost to admin, one bill instead of five tools. Estimate your club's numbers with the interactive calculator.">
+    <meta property="og:image" content="https://vitaq.app/screen-analytics.webp">
+    <meta property="og:url" content="https://vitaq.app/roi/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Save More, Earn More — The ROI of VitaQ">
+    <meta name="twitter:description" content="More revenue from the schedule you already run, fewer hours lost to admin, one bill instead of five tools. Estimate your club's numbers with the interactive calculator.">
+    <meta name="twitter:image" content="https://vitaq.app/screen-analytics.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/css/pages.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P06983P4SS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P06983P4SS');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vitaq.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Save & Earn More", "item": "https://vitaq.app/roi/" }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "name": "Save More, Earn More — The ROI of VitaQ",
+          "url": "https://vitaq.app/roi/",
+          "description": "How VitaQ grows club revenue — 24/7 self-serve booking, capacity filling, clean payment collection — while cutting admin hours and consolidating your tool stack. Includes an interactive savings calculator.",
+          "isPartOf": { "@type": "WebSite", "name": "VitaQ", "url": "https://vitaq.app/" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How does VitaQ help my club earn more?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Every open spot on your schedule becomes bookable and payable by families 24/7 in your app, capacity meters show you exactly which programs have room to sell, and camps and event entries run through the same checkout — so revenue stops depending on someone answering messages at the desk." }
+            },
+            {
+              "@type": "Question",
+              "name": "Where do the savings come from?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Scheduling, attendance, evaluations, payments and family communication run on one platform, so the hours your team spends retyping data between tools go back into coaching — and the subscriptions for separate booking, messaging and payment-tracking tools come off your bill." }
+            },
+            {
+              "@type": "Question",
+              "name": "Does VitaQ reduce missed and unpaid fees?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Every order, payment and refund lands in one live ledger, with outstanding balances visible per family — card via Stripe, cash, bank transfer and wallet all in the same record — so nothing depends on memory or a side spreadsheet." }
+            },
+            {
+              "@type": "Question",
+              "name": "Which tools can VitaQ replace?",
+              "acceptedAnswer": { "@type": "Answer", "text": "A typical club consolidates its scheduling calendar, booking system, payment tracker, evaluation sheets, family messaging and separate event-registration tools into one platform with one subscription." }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the calculator a guarantee?",
+              "acceptedAnswer": { "@type": "Answer", "text": "No — it is an illustrative estimate driven entirely by the numbers you enter. Use it to size the opportunity, then bring your real figures to a demo and we will model your club together." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* ---------- ROI page specific ---------- */
+        .roi-calc { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 22px; padding: 2.2rem; display: grid; grid-template-columns: 1.15fr 1fr; gap: 2.5rem; }
+        @media (max-width: 900px) { .roi-calc { grid-template-columns: 1fr; } }
+        .roi-inputs h3, .roi-results h3 { color: var(--text-light); font-size: 1.1rem; margin: 0 0 1.4rem 0; }
+        .roi-field { margin-bottom: 1.5rem; }
+        .roi-field-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .45rem; }
+        .roi-field-head label { color: var(--text-medium); font-size: .88rem; }
+        .roi-field-head output { color: var(--primary-pink); font-weight: 700; font-size: .95rem; font-family: 'Poppins', sans-serif; }
+        .roi-field input[type="range"] { width: 100%; accent-color: var(--primary-pink); cursor: pointer; }
+        .roi-results { display: flex; flex-direction: column; }
+        .roi-line { display: flex; justify-content: space-between; align-items: baseline; padding: .8rem 0; border-bottom: 1px solid var(--border-color); }
+        .roi-line span { color: var(--text-medium); font-size: .85rem; }
+        .roi-line strong { color: var(--text-light); font-size: 1.05rem; font-family: 'Poppins', sans-serif; }
+        .roi-total { margin-top: auto; padding-top: 1.4rem; }
+        .roi-total span { display: block; color: var(--text-medium); font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .3rem; }
+        .roi-total strong { color: var(--primary-pink); font-size: clamp(2rem, 4vw, 2.8rem); font-family: 'Poppins', sans-serif; line-height: 1.1; }
+        .roi-disclaimer { color: var(--text-medium); font-size: .72rem; margin-top: 1rem; line-height: 1.5; }
+        .roi-bars { display: flex; align-items: flex-end; gap: .8rem; height: 90px; margin-top: 1.2rem; }
+        .roi-bar-wrap { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+        .roi-bar { border-radius: 6px 6px 0 0; min-height: 4px; transition: height .35s ease; }
+        .roi-bar.b1 { background: var(--primary-pink); }
+        .roi-bar.b2 { background: var(--primary-purple); }
+        .roi-bar.b3 { background: #17A2B8; }
+        .roi-bar-label { color: var(--text-medium); font-size: .62rem; text-align: center; margin-top: .4rem; }
+    </style>
+</head>
+<body class="subpage">
+
+    <div class="aurora-glow aurora-1"></div>
+    <div class="aurora-glow aurora-2"></div>
+    <div class="aurora-glow aurora-3"></div>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay">
+        <nav class="nav-fullscreen">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/for/" class="nav-link">For Your Role</a>
+            <a href="/sports/" class="nav-link">Sports</a>
+            <a href="/events/" class="nav-link">Championship Ops</a>
+            <a href="/support.html" class="nav-link">Support</a>
+            <a href="/#contact" class="nav-link cta">Request a Demo</a>
+        </nav>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo-wrapper" aria-label="VitaQ Home">
+                <svg class="logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                  <path class="cls-3" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                  <path class="cls-1" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                </svg>
+            </a>
+            <button class="header-menu-button" aria-label="Open Menu" aria-expanded="false">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="page-hero container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span class="crumb-sep">/</span>
+                <span aria-current="page">Save & Earn More</span>
+            </nav>
+            <div class="page-hero-grid">
+                <div class="io-reveal">
+                    <p class="page-hero-eyebrow">Why VitaQ Pays For Itself</p>
+                    <h1>Run leaner.<br><span class="accent">Earn more.</span></h1>
+                    <p class="page-hero-sub">The schedule you already run holds revenue you can't currently reach — open spots nobody can book, fees nobody tracked, hours spent retyping data between tools. VitaQ turns all three into money: self-serve booking that sells 24/7, one live ledger that catches every payment, and automation that gives your team its week back.</p>
+                    <div class="page-hero-cta">
+                        <a href="/#contact" class="btn btn-primary">Book a Free Demo</a>
+                        <a href="#calculator" class="btn btn-secondary">↓ &nbsp;Estimate your numbers</a>
+                    </div>
+                    <div class="page-hero-proof">
+                        <span class="proof-chip"><strong>24/7</strong> self-serve booking</span>
+                        <span class="proof-chip"><strong>One</strong> live ledger</span>
+                        <span class="proof-chip"><strong>One</strong> subscription, not five</span>
+                    </div>
+                </div>
+                <div class="io-reveal">
+                    <div class="app-frame demo-finance" data-demo="finance" data-currency="$">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Financial Health</span>
+                            <span class="app-frame-hint">Live app component</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value grid -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Four ways the platform pays you back</h2>
+            </div>
+            <div class="pain-outcome-grid">
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Self-Serve Booking</p>
+                    <p class="po-outcome">Your schedule sells spots <span class="accent">while you sleep</span></p>
+                    <p class="po-proof">Families book and pay for sessions, programs, camps and event entries directly in your app — 24/7, capacity-aware.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Live Ledger</p>
+                    <p class="po-outcome">Every fee collected, <span class="accent">nothing slips through</span></p>
+                    <p class="po-proof">Card via Stripe, cash, bank transfer and wallet land in one record, with outstanding balances visible per family.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Automation</p>
+                    <p class="po-outcome">Admin hours go <span class="accent">back into coaching</span></p>
+                    <p class="po-proof">Attendance, evaluations, schedules and family updates flow automatically — entered once, visible everywhere.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Consolidation</p>
+                    <p class="po-outcome">One platform replaces <span class="accent">a stack of subscriptions</span></p>
+                    <p class="po-proof">Scheduling, booking, payments, evaluations, messaging and event tools — one bill, one login, one source of truth.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Earn more -->
+        <section class="container">
+            <div class="split-section">
+                <div class="split-copy io-reveal">
+                    <h2>Earn more from the schedule you already run</h2>
+                    <p>Capacity meters show exactly which groups, sessions and camps have room — and every open spot is bookable and payable by families the moment they see it. Demand stops waiting for office hours.</p>
+                    <ul>
+                        <li><strong>Fill open spots</strong> — live occupancy across every program shows where there's room to sell.</li>
+                        <li><strong>Sell around the clock</strong> — booking and checkout live in your branded app, not your inbox.</li>
+                        <li><strong>New revenue lines</strong> — camps, championships and drop-in sessions run through the same engine.</li>
+                        <li><strong>Promo codes & wallets</strong> — discounts and top-ups that keep families spending inside your club.</li>
+                    </ul>
+                    <p><a href="/events/registration/" style="color: var(--primary-pink); text-decoration: none; font-weight: 700;">See booking & registration in depth →</a></p>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-capacity" data-demo="capacity">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Program Occupancy</span>
+                            <span class="app-frame-hint">Live app component</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save more -->
+            <div class="split-section reverse">
+                <div class="split-copy io-reveal">
+                    <h2>Save the hours and the subscriptions</h2>
+                    <p>Most clubs run on a patchwork: a calendar here, a booking tool there, payments in a spreadsheet, messages everywhere. VitaQ runs all of it on one platform — so the time and the tool budget both come back.</p>
+                    <ul>
+                        <li><strong>Enter once, done</strong> — attendance, scores and schedule changes propagate to families instantly.</li>
+                        <li><strong>One subscription</strong> — replaces separate scheduling, booking, payment-tracking and messaging tools.</li>
+                        <li><strong>Clean refunds & records</strong> — order history and refund workflows that don't need detective work.</li>
+                        <li><strong>Front desk on one screen</strong> — check-ins, payments and capacity without app-switching.</li>
+                    </ul>
+                    <p><a href="/for/finance-teams/" style="color: var(--primary-pink); text-decoration: none; font-weight: 700;">See the finance side in depth →</a></p>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-checkout" data-demo="checkout" data-product="Spring Camp — Full Week" data-price="240" data-currency="$">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Booking & Checkout</span>
+                            <span class="app-frame-hint">Tap through the flow</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator -->
+        <section id="calculator" class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Estimate what VitaQ is worth to your club</h2>
+                <p class="section-subtitle">Move the sliders to your club's numbers. The estimate updates live.</p>
+            </div>
+            <div class="roi-calc io-reveal">
+                <div class="roi-inputs">
+                    <h3>Your club today</h3>
+                    <div class="roi-field">
+                        <div class="roi-field-head"><label for="r-members">Active members</label><output id="o-members">200</output></div>
+                        <input type="range" id="r-members" min="30" max="1000" step="10" value="200">
+                    </div>
+                    <div class="roi-field">
+                        <div class="roi-field-head"><label for="r-fee">Average monthly fee per member</label><output id="o-fee">$80</output></div>
+                        <input type="range" id="r-fee" min="20" max="300" step="5" value="80">
+                    </div>
+                    <div class="roi-field">
+                        <div class="roi-field-head"><label for="r-fill">Extra capacity you could fill with 24/7 booking</label><output id="o-fill">5%</output></div>
+                        <input type="range" id="r-fill" min="0" max="15" step="1" value="5">
+                    </div>
+                    <div class="roi-field">
+                        <div class="roi-field-head"><label for="r-hours">Team admin hours saved per week</label><output id="o-hours">10 h</output></div>
+                        <input type="range" id="r-hours" min="0" max="40" step="1" value="10">
+                    </div>
+                    <div class="roi-field">
+                        <div class="roi-field-head"><label for="r-rate">What an admin hour costs you</label><output id="o-rate">$20</output></div>
+                        <input type="range" id="r-rate" min="10" max="60" step="5" value="20">
+                    </div>
+                    <div class="roi-field">
+                        <div class="roi-field-head"><label for="r-tools">Tools VitaQ would replace (at ~$50/mo each)</label><output id="o-tools">3</output></div>
+                        <input type="range" id="r-tools" min="0" max="6" step="1" value="3">
+                    </div>
+                </div>
+                <div class="roi-results">
+                    <h3>Your estimated year with VitaQ</h3>
+                    <div class="roi-line"><span>Extra booking revenue</span><strong id="res-revenue">$0</strong></div>
+                    <div class="roi-line"><span>Admin time recovered</span><strong id="res-admin">$0</strong></div>
+                    <div class="roi-line"><span>Tool subscriptions consolidated</span><strong id="res-tools">$0</strong></div>
+                    <div class="roi-bars" aria-hidden="true">
+                        <div class="roi-bar-wrap"><div class="roi-bar b1" id="bar-revenue"></div><div class="roi-bar-label">Booking</div></div>
+                        <div class="roi-bar-wrap"><div class="roi-bar b2" id="bar-admin"></div><div class="roi-bar-label">Time</div></div>
+                        <div class="roi-bar-wrap"><div class="roi-bar b3" id="bar-tools"></div><div class="roi-bar-label">Tools</div></div>
+                    </div>
+                    <div class="roi-total">
+                        <span>Estimated annual value</span>
+                        <strong id="res-total">$0</strong>
+                        <p class="roi-disclaimer">Illustrative estimate driven entirely by your inputs — not a guarantee. Bring your real numbers to a demo and we'll model your club together.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="container">
+            <div class="stat-strip io-reveal">
+                <div><div class="stat-value"><span class="count-up" data-count="8" data-suffix="+">0</span></div><div class="stat-label">organizations run on VitaQ</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="100" data-suffix="%">0</span></div><div class="stat-label">of orders, payments and refunds in one ledger</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="24" data-suffix="/7">0</span></div><div class="stat-label">booking & checkout open in your app</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="1">0</span></div><div class="stat-label">subscription replaces the stack</div></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">The money questions, answered</h2>
+            </div>
+            <div class="faq-accordion io-reveal">
+                <div class="faq-item">
+                    <button class="faq-question"><span>How does VitaQ help my club earn more?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Every open spot on your schedule becomes bookable and payable by families 24/7 in your app, capacity meters show you exactly which programs have room to sell, and camps and event entries run through the same checkout — so revenue stops depending on someone answering messages at the desk.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Where do the savings come from?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Scheduling, attendance, evaluations, payments and family communication run on one platform, so the hours your team spends retyping data between tools go back into coaching — and the subscriptions for separate booking, messaging and payment-tracking tools come off your bill.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Does VitaQ reduce missed and unpaid fees?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Every order, payment and refund lands in one live ledger, with outstanding balances visible per family — card via Stripe, cash, bank transfer and wallet all in the same record — so nothing depends on memory or a side spreadsheet.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Which tools can VitaQ replace?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>A typical club consolidates its scheduling calendar, booking system, payment tracker, evaluation sheets, family messaging and separate event-registration tools into one platform with one subscription.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Is the calculator a guarantee?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>No — it is an illustrative estimate driven entirely by the numbers you enter. Use it to size the opportunity, then bring your real figures to a demo and we will model your club together.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Follow the money through the platform</h2>
+            </div>
+            <div class="related-grid io-reveal">
+                <a class="related-card" href="/for/club-owners/">
+                    <span class="rc-icon">📊</span><span class="rc-arrow">→</span>
+                    <h3>For Club Owners</h3>
+                    <p>Revenue, occupancy and staff oversight in one command center.</p>
+                </a>
+                <a class="related-card" href="/for/finance-teams/">
+                    <span class="rc-icon">💳</span><span class="rc-arrow">→</span>
+                    <h3>For Finance Teams</h3>
+                    <p>Orders to refunds — one reconciled ledger, live all month.</p>
+                </a>
+                <a class="related-card" href="/events/registration/">
+                    <span class="rc-icon">🎫</span><span class="rc-arrow">→</span>
+                    <h3>Event Registration</h3>
+                    <p>Championship entries collected online, paid on the spot.</p>
+                </a>
+                <a class="related-card" href="/events/training-camps/">
+                    <span class="rc-icon">🏕️</span><span class="rc-arrow">→</span>
+                    <h3>Training Camps</h3>
+                    <p>Multi-day programs with enrollment, capacity and per-camp payments.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container">
+            <div class="cta-band io-reveal">
+                <h2>See your club's numbers on VitaQ.</h2>
+                <p>Bring your member count and program list to a personalized 30-minute demo — we'll model the revenue and the savings together.</p>
+                <a href="/#contact" class="btn btn-primary btn-large">Book My Free Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols">
+                <div class="footer-brand">
+                    <svg class="footer-logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                      <path fill="#FF50DE" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                      <path fill="#FFFFFF" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                    </svg>
+                    <p>The sports operating system — performance, scheduling, finance and championship operations in one white-label platform.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Who It's For</h4>
+                    <ul>
+                        <li><a href="/for/club-owners/">Club Owners & Academies</a></li>
+                        <li><a href="/for/coaches/">Coaches & Trainers</a></li>
+                        <li><a href="/for/athletes/">Athletes</a></li>
+                        <li><a href="/for/parents/">Parents & Guardians</a></li>
+                        <li><a href="/for/federations/">Federations</a></li>
+                        <li><a href="/for/event-organizers/">Event Organizers</a></li>
+                        <li><a href="/for/finance-teams/">Finance Teams</a></li>
+                        <li><a href="/for/transport-managers/">Transport Managers</a></li>
+                        <li><a href="/for/front-desk/">Front Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Sports</h4>
+                    <ul>
+                        <li><a href="/sports/figure-skating/">Figure Skating</a></li>
+                        <li><a href="/sports/roller-skating/">Roller Skating</a></li>
+                        <li><a href="/sports/speed-skating/">Speed Skating</a></li>
+                        <li><a href="/sports/ice-hockey/">Ice Hockey</a></li>
+                        <li><a href="/sports/skiing/">Skiing</a></li>
+                        <li><a href="/sports/rollball/">Rollball</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Championship Ops</h4>
+                    <ul>
+                        <li><a href="/events/">Overview</a></li>
+                        <li><a href="/events/registration/">Registration & Fees</a></li>
+                        <li><a href="/events/scheduling/">Schedules</a></li>
+                        <li><a href="/events/transportation/">Transportation</a></li>
+                        <li><a href="/events/training-camps/">Training Camps</a></li>
+                        <li><a href="/events/live-results/">Live Results</a></li>
+                        <li><a href="/events/ticketing/">Ticketing</a></li>
+                        <li><a href="/events/accreditation/">Accreditation</a></li>
+                        <li><a href="/events/accommodation/">Accommodation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-base">
+                <p>&copy; 2026 VitaQ Technologies. All Rights Reserved.</p>
+                <div>
+                    <a href="/support.html">Support</a>
+                    <a href="/legal/privacy.html">Privacy</a>
+                    <a href="/legal/terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/pages.js" defer></script>
+    <script>
+        (function () {
+            'use strict';
+            var fields = {
+                members: { input: 'r-members', out: 'o-members', fmt: function (v) { return v; } },
+                fee:     { input: 'r-fee',     out: 'o-fee',     fmt: function (v) { return '$' + v; } },
+                fill:    { input: 'r-fill',    out: 'o-fill',    fmt: function (v) { return v + '%'; } },
+                hours:   { input: 'r-hours',   out: 'o-hours',   fmt: function (v) { return v + ' h'; } },
+                rate:    { input: 'r-rate',    out: 'o-rate',    fmt: function (v) { return '$' + v; } },
+                tools:   { input: 'r-tools',   out: 'o-tools',   fmt: function (v) { return v; } }
+            };
+            function val(key) { return parseFloat(document.getElementById(fields[key].input).value); }
+            function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+            function update() {
+                Object.keys(fields).forEach(function (k) {
+                    var f = fields[k];
+                    document.getElementById(f.out).textContent = f.fmt(val(k));
+                });
+                var revenue = val('members') * val('fee') * 12 * (val('fill') / 100);
+                var admin = val('hours') * 52 * val('rate');
+                var tools = val('tools') * 50 * 12;
+                var total = revenue + admin + tools;
+                document.getElementById('res-revenue').textContent = money(revenue);
+                document.getElementById('res-admin').textContent = money(admin);
+                document.getElementById('res-tools').textContent = money(tools);
+                document.getElementById('res-total').textContent = money(total);
+                var max = Math.max(revenue, admin, tools, 1);
+                document.getElementById('bar-revenue').style.height = Math.max(4, revenue / max * 100) + '%';
+                document.getElementById('bar-admin').style.height = Math.max(4, admin / max * 100) + '%';
+                document.getElementById('bar-tools').style.height = Math.max(4, tools / max * 100) + '%';
+            }
+            Object.keys(fields).forEach(function (k) {
+                document.getElementById(fields[k].input).addEventListener('input', update);
+            });
+            update();
+        })();
+    </script>
+</body>
+</html>

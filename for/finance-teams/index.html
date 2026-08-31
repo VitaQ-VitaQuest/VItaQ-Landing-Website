@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A10">
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    <title>Sports Club Finance Software — Payments, Invoices & Refunds | VitaQ</title>
+    <meta name="description" content="From orders to refunds, Stripe to cash — VitaQ gives sports club finance teams one reconciled ledger: payments, invoices, prepaid wallets, taxes, discounts and financial reports in a single system.">
+    <link rel="canonical" href="https://vitaq.app/for/finance-teams/">
+
+    <meta property="og:title" content="VitaQ for Finance Teams — One Reconciled Ledger.">
+    <meta property="og:description" content="Orders, payments, invoices and refunds in one reconciled ledger — Stripe, cash, bank and prepaid wallets covered.">
+    <meta property="og:image" content="https://vitaq.app/screen-analytics.webp">
+    <meta property="og:url" content="https://vitaq.app/for/finance-teams/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VitaQ for Finance Teams — One Reconciled Ledger.">
+    <meta name="twitter:description" content="Orders, payments, invoices and refunds in one reconciled ledger — Stripe, cash, bank and prepaid wallets covered.">
+    <meta name="twitter:image" content="https://vitaq.app/screen-analytics.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/css/pages.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P06983P4SS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P06983P4SS');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vitaq.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Who It's For", "item": "https://vitaq.app/for/" },
+            { "@type": "ListItem", "position": 3, "name": "Finance Teams", "item": "https://vitaq.app/for/finance-teams/" }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "name": "VitaQ for Finance Teams",
+          "url": "https://vitaq.app/for/finance-teams/",
+          "description": "The finance side of VitaQ: orders, Stripe and manual payments, invoices, prepaid wallets, a controlled refund workflow and financial summaries in one reconciled ledger.",
+          "isPartOf": { "@type": "WebSite", "name": "VitaQ", "url": "https://vitaq.app/" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Which payment providers does VitaQ support?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Card payments run on Stripe today. Alongside cards, VitaQ records bank transfers, cash taken at the desk and prepaid wallet payments — every method posts to the same order and ledger, with retries, dispute tracking and manual receipts built in." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can families pay in installments or subscriptions?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Subscription plans support weekly, monthly, quarterly and yearly cap periods, so recurring training fees bill themselves automatically each period." }
+            },
+            {
+              "@type": "Question",
+              "name": "How do refunds work?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Refunds follow a controlled workflow: a request is filed, finance approves it, the amount is captured and the refund completes. You choose the destination — prepaid wallet, account credit or the original payment method — and every step is logged against the order." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we apply taxes and discounts?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Set fixed or percentage taxes, and create discounts and promo codes for enrollments and orders. Both are calculated automatically on invoices and order totals." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we send a payment link by email?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. VitaQ generates public order and payment links you can send by email, so a family pays from their phone without logging in — the payment posts straight to the order the moment it completes." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="subpage">
+
+    <div class="aurora-glow aurora-1"></div>
+    <div class="aurora-glow aurora-2"></div>
+    <div class="aurora-glow aurora-3"></div>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay">
+        <nav class="nav-fullscreen">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/for/" class="nav-link">For Your Role</a>
+            <a href="/sports/" class="nav-link">Sports</a>
+            <a href="/events/" class="nav-link">Championship Ops</a>
+            <a href="/support.html" class="nav-link">Support</a>
+            <a href="/#contact" class="nav-link cta">Request a Demo</a>
+        </nav>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo-wrapper" aria-label="VitaQ Home">
+                <svg class="logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                  <path class="cls-3" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                  <path class="cls-1" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                </svg>
+            </a>
+            <button class="header-menu-button" aria-label="Open Menu" aria-expanded="false">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="page-hero container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span class="crumb-sep">/</span>
+                <a href="/for/">Who It's For</a><span class="crumb-sep">/</span>
+                <span aria-current="page">Finance Teams</span>
+            </nav>
+            <div class="page-hero-grid">
+                <div class="io-reveal">
+                    <p class="page-hero-eyebrow">VitaQ for Finance Teams &amp; Accountants</p>
+                    <h1>Orders to refunds,<br><span class="accent">one reconciled ledger.</span></h1>
+                    <p class="page-hero-sub">Orders, payments, invoices, wallets and refunds post to one reconciled ledger — from Stripe to cash, from request to refund. The numbers are right because they were never re-typed.</p>
+                    <div class="page-hero-cta">
+                        <a href="/#contact" class="btn btn-primary">Book a Free Demo</a>
+                        <a href="#payments" class="btn btn-secondary">↓ &nbsp;Try the live demo</a>
+                    </div>
+                    <div class="page-hero-proof">
+                        <span class="proof-chip"><strong>4</strong> payment methods</span>
+                        <span class="proof-chip"><strong>1</strong> reconciled ledger</span>
+                        <span class="proof-chip"><strong>Controlled</strong> refund workflow</span>
+                    </div>
+                </div>
+                <div class="io-reveal">
+                    <div class="app-frame demo-finance" data-demo="finance" data-currency="$">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Finance Dashboard</span>
+                            <span class="app-frame-hint">Live dashboard demo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature → Outcome -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Your month-end, reconciled with VitaQ</h2>
+            </div>
+            <div class="pain-outcome-grid">
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Pay Links &amp; Checkout</p>
+                    <p class="po-outcome">Public pay links and self-serve checkout <span class="accent">collect for you</span></p>
+                    <p class="po-proof">Order and payment links go out by email; families pay by card, wallet or bank and the order settles itself.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Unified Ledger</p>
+                    <p class="po-outcome">Orders, invoices and payments post to <span class="accent">one ledger</span></p>
+                    <p class="po-proof">Every transaction — Stripe, cash, bank or wallet — lands on the order it belongs to, with invoice lines to match.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Refund Workflow</p>
+                    <p class="po-outcome">Request → approve → capture, with <span class="accent">a full audit trail</span></p>
+                    <p class="po-proof">Refund to prepaid wallet, account credit or the original payment method — every step logged on the order.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Financial Reports</p>
+                    <p class="po-outcome">Financial summaries and charts <span class="accent">per product</span></p>
+                    <p class="po-proof">Dashboards break revenue down by product and period, with billing profiles keeping every entity clean.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payments -->
+        <section id="payments" class="container">
+            <div class="split-section">
+                <div class="split-copy io-reveal">
+                    <h2>Every payment path covered</h2>
+                    <p>Families pay the way they actually pay: Stripe cards online, bank transfers, cash at the desk, prepaid wallets topped up in advance. VitaQ treats them all as first-class payments on the same order.</p>
+                    <ul>
+                        <li><strong>Stripe card payments</strong> with retries and dispute tracking built in.</li>
+                        <li><strong>Manual receipts</strong> for cash and bank transfers — recorded, not remembered.</li>
+                        <li><strong>Prepaid wallets &amp; top-ups</strong> so families pay once and spend down.</li>
+                        <li><strong>Public pay links by email</strong> for self-serve settlement, no login required.</li>
+                    </ul>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-checkout" data-demo="checkout" data-product="Term Fees — Q3">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Checkout · Term Fees</span>
+                            <span class="app-frame-hint">Interactive — try the flow</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Refunds -->
+            <div class="split-section reverse">
+                <div class="split-copy io-reveal">
+                    <h2>Refunds with a full audit trail</h2>
+                    <p>Refunds run as a controlled workflow: requests come in, finance approves, the amount is captured and the refund completes — to the destination you choose, with a credit ledger per athlete.</p>
+                    <ul>
+                        <li><strong>Request → approve → capture → complete</strong>, every step logged.</li>
+                        <li><strong>Three destinations</strong>: prepaid wallet, account credit or the original payment method.</li>
+                        <li><strong>Credit ledger per athlete</strong> — balances visible to families in the app.</li>
+                        <li><strong>Coverage-recovery quotes</strong> turn unpaid sessions into collectable orders.</li>
+                    </ul>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Refund #R-2031 · Mia T.</span>
+                            <span class="app-frame-hint">Workflow preview</span>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-row">
+                                <span class="grow">
+                                    <p class="app-title">Refund requested</p>
+                                    <p class="app-sub">2 unattended sessions · $46.00 · filed by parent</p>
+                                </span>
+                                <span class="app-badge success">Done</span>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-row">
+                                <span class="grow">
+                                    <p class="app-title">Approved by finance</p>
+                                    <p class="app-sub">Policy check passed · destination: prepaid wallet</p>
+                                </span>
+                                <span class="app-badge success">Done</span>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-row">
+                                <span class="grow">
+                                    <p class="app-title">Captured</p>
+                                    <p class="app-sub">Amount reserved against the original order</p>
+                                </span>
+                                <span class="app-badge primary">In progress</span>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-row">
+                                <span class="grow">
+                                    <p class="app-title">Completed</p>
+                                    <p class="app-sub">Wallet credited · family notified automatically</p>
+                                </span>
+                                <span class="app-badge neutral">Up next</span>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-row">
+                                <span class="app-sub grow">Refund destinations</span>
+                                <span class="app-badge primary">Wallet</span>
+                                <span class="app-badge info">Account credit</span>
+                                <span class="app-badge neutral">Original method</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="container">
+            <div class="stat-strip io-reveal">
+                <div><div class="stat-value"><span class="count-up" data-count="4">0</span></div><div class="stat-label">payment methods on one order — card, bank, cash, wallet</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="3">0</span></div><div class="stat-label">refund destinations — wallet, account or original method</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="100" data-suffix="%">0</span></div><div class="stat-label">of orders posted to one reconciled ledger</div></div>
+                <div><div class="stat-value">Live</div><div class="stat-label">financial summaries by product and period</div></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Finance questions, answered</h2>
+            </div>
+            <div class="faq-accordion io-reveal">
+                <div class="faq-item">
+                    <button class="faq-question"><span>Which payment providers does VitaQ support?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Card payments run on Stripe today. Alongside cards, VitaQ records bank transfers, cash taken at the desk and prepaid wallet payments — every method posts to the same order and ledger, with retries, dispute tracking and manual receipts built in.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can families pay in installments or subscriptions?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Subscription plans support weekly, monthly, quarterly and yearly cap periods, so recurring training fees bill themselves automatically each period.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>How do refunds work?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Refunds follow a controlled workflow: a request is filed, finance approves it, the amount is captured and the refund completes. You choose the destination — prepaid wallet, account credit or the original payment method — and every step is logged against the order.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we apply taxes and discounts?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Set fixed or percentage taxes, and create discounts and promo codes for enrollments and orders. Both are calculated automatically on invoices and order totals.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we send a payment link by email?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. VitaQ generates public order and payment links you can send by email, so a family pays from their phone without logging in — the payment posts straight to the order the moment it completes.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Built for your whole organization</h2>
+            </div>
+            <div class="related-grid io-reveal">
+                <a class="related-card" href="/for/club-owners/">
+                    <span class="rc-icon">🏛️</span><span class="rc-arrow">→</span>
+                    <h3>For Club Owners</h3>
+                    <p>Revenue, retention and operations in one command center.</p>
+                </a>
+                <a class="related-card" href="/for/front-desk/">
+                    <span class="rc-icon">🛎️</span><span class="rc-arrow">→</span>
+                    <h3>For Front Desk</h3>
+                    <p>Enroll walk-ins, take payments and answer anything in one screen.</p>
+                </a>
+                <a class="related-card" href="/events/registration/">
+                    <span class="rc-icon">🧾</span><span class="rc-arrow">→</span>
+                    <h3>Registration &amp; Fees</h3>
+                    <p>Self-enrollment, entry fees and payment links at championship scale.</p>
+                </a>
+                <a class="related-card" href="/for/parents/">
+                    <span class="rc-icon">👨‍👧</span><span class="rc-arrow">→</span>
+                    <h3>For Parents</h3>
+                    <p>One login for every child — schedules, progress and payments.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container">
+            <div class="cta-band io-reveal">
+                <h2>Close the books from one ledger.</h2>
+                <p>See orders, payments, invoices and the full refund workflow — on numbers like yours — in a personalized 30-minute demo.</p>
+                <a href="/#contact" class="btn btn-primary btn-large">Book My Free Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols">
+                <div class="footer-brand">
+                    <svg class="footer-logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                      <path fill="#FF50DE" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                      <path fill="#FFFFFF" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                    </svg>
+                    <p>The sports operating system — performance, scheduling, finance and championship operations in one white-label platform.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Who It's For</h4>
+                    <ul>
+                        <li><a href="/for/club-owners/">Club Owners & Academies</a></li>
+                        <li><a href="/for/coaches/">Coaches & Trainers</a></li>
+                        <li><a href="/for/athletes/">Athletes</a></li>
+                        <li><a href="/for/parents/">Parents & Guardians</a></li>
+                        <li><a href="/for/federations/">Federations</a></li>
+                        <li><a href="/for/event-organizers/">Event Organizers</a></li>
+                        <li><a href="/for/finance-teams/">Finance Teams</a></li>
+                        <li><a href="/for/transport-managers/">Transport Managers</a></li>
+                        <li><a href="/for/front-desk/">Front Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Sports</h4>
+                    <ul>
+                        <li><a href="/sports/figure-skating/">Figure Skating</a></li>
+                        <li><a href="/sports/roller-skating/">Roller Skating</a></li>
+                        <li><a href="/sports/speed-skating/">Speed Skating</a></li>
+                        <li><a href="/sports/ice-hockey/">Ice Hockey</a></li>
+                        <li><a href="/sports/skiing/">Skiing</a></li>
+                        <li><a href="/sports/rollball/">Rollball</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Championship Ops</h4>
+                    <ul>
+                        <li><a href="/events/">Overview</a></li>
+                        <li><a href="/events/registration/">Registration & Fees</a></li>
+                        <li><a href="/events/scheduling/">Schedules</a></li>
+                        <li><a href="/events/transportation/">Transportation</a></li>
+                        <li><a href="/events/training-camps/">Training Camps</a></li>
+                        <li><a href="/events/live-results/">Live Results</a></li>
+                        <li><a href="/events/ticketing/">Ticketing</a></li>
+                        <li><a href="/events/accreditation/">Accreditation</a></li>
+                        <li><a href="/events/accommodation/">Accommodation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-base">
+                <p>&copy; 2026 VitaQ Technologies. All Rights Reserved.</p>
+                <div>
+                    <a href="/support.html">Support</a>
+                    <a href="/legal/privacy.html">Privacy</a>
+                    <a href="/legal/terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/pages.js" defer></script>
+</body>
+</html>

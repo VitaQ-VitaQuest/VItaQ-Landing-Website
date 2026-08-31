@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /osc/
+Disallow: /rollersiders/
+Disallow: /deletemyaccount.html
+
+Sitemap: https://vitaq.app/sitemap.xml

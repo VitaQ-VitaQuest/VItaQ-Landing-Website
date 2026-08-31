@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A10">
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    <title>Ski Club & Race Training Software | VitaQ</title>
+    <meta name="description" content="Gate training, race prep, mountain transfers and club fees in one app — VitaQ logs every run, flexes the schedule when weather hits and moves your team up the mountain on time.">
+    <link rel="canonical" href="https://vitaq.app/sports/skiing/">
+
+    <meta property="og:title" content="VitaQ for Ski Clubs & Race Teams — Every Gate, Every Run, On the Record">
+    <meta property="og:description" content="Gate training, race prep, mountain transfers and club fees in one app — built for ski clubs and race teams.">
+    <meta property="og:image" content="https://vitaq.app/screen-stages.webp">
+    <meta property="og:url" content="https://vitaq.app/sports/skiing/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VitaQ for Ski Clubs & Race Teams — Every Gate, Every Run, On the Record">
+    <meta name="twitter:description" content="Gate training, race prep, mountain transfers and club fees in one app — built for ski clubs and race teams.">
+    <meta name="twitter:image" content="https://vitaq.app/screen-stages.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/css/pages.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P06983P4SS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P06983P4SS');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vitaq.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Sports", "item": "https://vitaq.app/sports/" },
+            { "@type": "ListItem", "position": 3, "name": "Skiing", "item": "https://vitaq.app/sports/skiing/" }
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "name": "VitaQ for Ski Clubs & Race Teams",
+          "url": "https://vitaq.app/sports/skiing/",
+          "description": "Ski club and race training software: run times logged as exercise parameters, squad rankings from evaluations, weather-proof schedules, mountain transfers with live status and online club fees.",
+          "isPartOf": { "@type": "WebSite", "name": "VitaQ", "url": "https://vitaq.app/" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What happens when weather forces a reschedule?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Drag the session to a new slot and everyone enrolled — athletes, parents and assigned coaches — is notified instantly. Recurring blocks support clean exceptions, so moving Saturday's gate session never disturbs the rest of the series." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we manage transfers between the hotel, the lift and the venue?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. VitaQ's transportation module is live: assign drivers and vehicles, draft multi-stop routes — hotel pickup, lift base, race venue, return — and run trips with live status and onboard attendance at every stop." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we log run times and gate counts?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Exercises carry the parameters you define — run time, gates skied, splits, video flags — with built-in unit conversion. Every recorded value lands in the athlete's history, ready to chart across the season and across disciplines." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we run training camps in the Alps through VitaQ?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Build the camp as recurring training blocks, open public self-enrollment with capacity limits and collect payments online — deposits, pay links and invoices included. See the Training Camps page for the full workflow." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can VitaQ book race-week accommodation?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Not yet — hotels and accommodation management are on the VitaQ roadmap. Today you can run everything around the stay: transfers, schedules, fees and attendance. Follow the Accommodation page for updates." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="subpage">
+
+    <div class="aurora-glow aurora-1"></div>
+    <div class="aurora-glow aurora-2"></div>
+    <div class="aurora-glow aurora-3"></div>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay">
+        <nav class="nav-fullscreen">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/for/" class="nav-link">For Your Role</a>
+            <a href="/sports/" class="nav-link">Sports</a>
+            <a href="/events/" class="nav-link">Championship Ops</a>
+            <a href="/support.html" class="nav-link">Support</a>
+            <a href="/#contact" class="nav-link cta">Request a Demo</a>
+        </nav>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo-wrapper" aria-label="VitaQ Home">
+                <svg class="logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                  <path class="cls-3" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                  <path class="cls-1" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                </svg>
+            </a>
+            <button class="header-menu-button" aria-label="Open Menu" aria-expanded="false">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="page-hero container">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/">Home</a><span class="crumb-sep">/</span>
+                <a href="/sports/">Sports</a><span class="crumb-sep">/</span>
+                <span aria-current="page">Skiing</span>
+            </nav>
+            <div class="page-hero-grid">
+                <div class="io-reveal">
+                    <p class="page-hero-eyebrow">VitaQ for Ski Clubs &amp; Race Teams</p>
+                    <h1>Every gate, every run,<br><span class="accent">on the record.</span></h1>
+                    <p class="page-hero-sub">Ski racing happens far from the office — on a mountain, in the weather, across hotels, lifts and venues. VitaQ keeps the whole operation in one app: run data, squad rankings, schedules that flex with the forecast and transfers that run themselves.</p>
+                    <div class="page-hero-cta">
+                        <a href="/#contact" class="btn btn-primary">Book a Free Demo</a>
+                        <a href="#race-prep" class="btn btn-secondary">↓ &nbsp;Try the live demo</a>
+                    </div>
+                    <div class="page-hero-proof">
+                        <span class="proof-chip"><strong>Every run</strong> logged &amp; charted</span>
+                        <span class="proof-chip"><strong>Weather-proof</strong> schedules</span>
+                        <span class="proof-chip"><strong>Live</strong> mountain transfers</span>
+                    </div>
+                </div>
+                <div class="io-reveal">
+                    <div class="app-frame demo-trip" data-demo="trip">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Race Day Transfers</span>
+                            <span class="app-frame-hint">Press Start trip</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value highlights -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Your mountain week, run on VitaQ</h2>
+            </div>
+            <div class="pain-outcome-grid">
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Mountain Transfers</p>
+                    <p class="po-outcome">Planned transfers with <span class="accent">live status</span></p>
+                    <p class="po-proof">Hotel, lift base, venue, return — every stop drafted in advance, every athlete checked on and off.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Run Logging</p>
+                    <p class="po-outcome">Every run logged and <span class="accent">charted across the season</span></p>
+                    <p class="po-proof">Run time, gates and splits stored as exercise parameters in each athlete's permanent history.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Group Management</p>
+                    <p class="po-outcome">Squads and schedules in <span class="accent">one app</span></p>
+                    <p class="po-proof">Groups, assigned coaches and session rosters visible to everyone before the first lift.</p>
+                </div>
+                <div class="po-card io-reveal">
+                    <p class="po-feature">Checkout</p>
+                    <p class="po-outcome">Online payments with <span class="accent">receipts and a clean ledger</span></p>
+                    <p class="po-proof">Card, wallet, bank or cash on desk — invoices, pay links and refunds handled in one finance module.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Race prep -->
+        <section id="race-prep" class="container">
+            <div class="split-section">
+                <div class="split-copy io-reveal">
+                    <h2>Race prep you can replay</h2>
+                    <p>A good training day produces twenty runs of data. VitaQ keeps every gate session as structured numbers your coaches can compare, rank and build on — all season long.</p>
+                    <ul>
+                        <li><strong>Exercise parameters</strong> for run times, gates skied, splits and video flags — with unit conversion built in.</li>
+                        <li><strong>Evaluations rank the squad</strong> — time trials become live leaderboards, scored by your own custom equations.</li>
+                        <li><strong>Goals per athlete per discipline</strong> — separate targets for slalom and GS, tracked side by side.</li>
+                        <li><strong>Season history</strong> — compare today's GS runs with October's camp, athlete by athlete.</li>
+                    </ul>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-leaderboard" data-demo="leaderboard" data-unit="pts" data-athletes="Lena K.|Ivan P.|Mia T.|Omar S.|Ella V.|Yuto N.">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>GS Time Trial</span>
+                            <span class="app-frame-hint">Interactive — press the button</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mountain schedule -->
+            <div class="split-section reverse">
+                <div class="split-copy io-reveal">
+                    <h2>The mountain schedule that flexes</h2>
+                    <p>Fog rolls in, the piste closes, the lift queue doubles — weather happens. In VitaQ you move the block, and every athlete, parent and coach knows before they reach the gondola.</p>
+                    <ul>
+                        <li><strong>Drag-and-drop reschedules</strong> — move a session and notifications go out instantly.</li>
+                        <li><strong>Recurring blocks with exceptions</strong> — shift one storm-day session without touching the series.</li>
+                        <li><strong>Staff assignment</strong> — the slalom coach, the GS coach and the dryland coach each see their own day.</li>
+                        <li><strong>Attendance with verdicts</strong> — know who made the early lift, logged straight to each athlete's record.</li>
+                    </ul>
+                    <p><a href="/events/scheduling/" style="color: var(--primary-pink); text-decoration: none; font-weight: 700;">Explore scheduling in depth →</a></p>
+                </div>
+                <div class="split-demo io-reveal">
+                    <div class="app-frame demo-schedule" data-demo="schedule" data-days="Thu|Fri|Sat|Sun" data-sessions="Slalom Gates|GS Runs|Dryland Circuit|Video Analysis|Race Simulation|Free Ski">
+                        <div class="app-frame-titlebar">
+                            <span class="app-frame-title"><span class="app-logo-dot"></span>Race Week Plan</span>
+                            <span class="app-frame-hint">Drag a session to move it</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="container">
+            <div class="stat-strip io-reveal">
+                <div><div class="stat-value"><span class="count-up" data-count="8" data-suffix="+">0</span></div><div class="stat-label">organizations run training on VitaQ</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="100" data-suffix="%">0</span></div><div class="stat-label">of transfer status visible to staff live</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="0">0</span></div><div class="stat-label">extra steps to notify everyone when a session moves</div></div>
+                <div><div class="stat-value"><span class="count-up" data-count="1">0</span></div><div class="stat-label">app for runs, transfers &amp; club fees</div></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Ski club questions, answered</h2>
+            </div>
+            <div class="faq-accordion io-reveal">
+                <div class="faq-item">
+                    <button class="faq-question"><span>What happens when weather forces a reschedule?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Drag the session to a new slot and everyone enrolled — athletes, parents and assigned coaches — is notified instantly. Recurring blocks support clean exceptions, so moving Saturday's gate session never disturbs the rest of the series.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we manage transfers between the hotel, the lift and the venue?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. VitaQ's transportation module is live: assign drivers and vehicles, draft multi-stop routes — hotel pickup, lift base, race venue, return — and run trips with live status and onboard attendance at every stop.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we log run times and gate counts?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Exercises carry the parameters you define — run time, gates skied, splits, video flags — with built-in unit conversion. Every recorded value lands in the athlete's history, ready to chart across the season and across disciplines.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can we run training camps in the Alps through VitaQ?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Yes. Build the camp as recurring training blocks, open public self-enrollment with capacity limits and collect payments online — deposits, pay links and invoices included. See the <a href="/events/training-camps/" style="color: var(--primary-pink); text-decoration: none; font-weight: 700;">Training Camps</a> page for the full workflow.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can VitaQ book race-week accommodation?</span><div class="faq-icon"></div></button>
+                    <div class="faq-answer"><p>Not yet — hotels and accommodation management are <span class="badge-soon">on the VitaQ roadmap</span>. Today you can run everything around the stay: transfers, schedules, fees and attendance. Follow the <a href="/events/accommodation/" style="color: var(--primary-pink); text-decoration: none; font-weight: 700;">Accommodation</a> page for updates.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related -->
+        <section class="container">
+            <div class="section-header io-reveal">
+                <h2 class="section-title">Built for your whole operation</h2>
+            </div>
+            <div class="related-grid io-reveal">
+                <a class="related-card" href="/for/event-organizers/">
+                    <span class="rc-icon">🏁</span><span class="rc-arrow">→</span>
+                    <h3>For Event Organizers</h3>
+                    <p>Registration, schedules and logistics for race weekends.</p>
+                </a>
+                <a class="related-card" href="/events/training-camps/">
+                    <span class="rc-icon">🏕️</span><span class="rc-arrow">→</span>
+                    <h3>Training Camps</h3>
+                    <p>Glacier camps with enrollment, capacity and online payments.</p>
+                </a>
+                <a class="related-card" href="/events/transportation/">
+                    <span class="rc-icon">🚌</span><span class="rc-arrow">→</span>
+                    <h3>Transportation</h3>
+                    <p>Drivers, vehicles, routes and onboard attendance for the mountain.</p>
+                </a>
+                <a class="related-card" href="/sports/ice-hockey/">
+                    <span class="rc-icon">🏒</span><span class="rc-arrow">→</span>
+                    <h3>Ice Hockey</h3>
+                    <p>Practice plans, skills tracking and team logistics on VitaQ.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container">
+            <div class="cta-band io-reveal">
+                <h2>Run the mountain like a program.</h2>
+                <p>See run logging, weather-proof schedules and race-day transfers built for ski clubs in a personalized 30-minute demo.</p>
+                <a href="/#contact" class="btn btn-primary btn-large">Book My Free Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cols">
+                <div class="footer-brand">
+                    <svg class="footer-logo-svg" viewBox="0 0 1000 1000" role="img" aria-label="VitaQ logo">
+                      <path fill="#FF50DE" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
+                      <path fill="#FFFFFF" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
+                    </svg>
+                    <p>The sports operating system — performance, scheduling, finance and championship operations in one white-label platform.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Who It's For</h4>
+                    <ul>
+                        <li><a href="/for/club-owners/">Club Owners & Academies</a></li>
+                        <li><a href="/for/coaches/">Coaches & Trainers</a></li>
+                        <li><a href="/for/athletes/">Athletes</a></li>
+                        <li><a href="/for/parents/">Parents & Guardians</a></li>
+                        <li><a href="/for/federations/">Federations</a></li>
+                        <li><a href="/for/event-organizers/">Event Organizers</a></li>
+                        <li><a href="/for/finance-teams/">Finance Teams</a></li>
+                        <li><a href="/for/transport-managers/">Transport Managers</a></li>
+                        <li><a href="/for/front-desk/">Front Desk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Sports</h4>
+                    <ul>
+                        <li><a href="/sports/figure-skating/">Figure Skating</a></li>
+                        <li><a href="/sports/roller-skating/">Roller Skating</a></li>
+                        <li><a href="/sports/speed-skating/">Speed Skating</a></li>
+                        <li><a href="/sports/ice-hockey/">Ice Hockey</a></li>
+                        <li><a href="/sports/skiing/">Skiing</a></li>
+                        <li><a href="/sports/rollball/">Rollball</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Championship Ops</h4>
+                    <ul>
+                        <li><a href="/events/">Overview</a></li>
+                        <li><a href="/events/registration/">Registration & Fees</a></li>
+                        <li><a href="/events/scheduling/">Schedules</a></li>
+                        <li><a href="/events/transportation/">Transportation</a></li>
+                        <li><a href="/events/training-camps/">Training Camps</a></li>
+                        <li><a href="/events/live-results/">Live Results</a></li>
+                        <li><a href="/events/ticketing/">Ticketing</a></li>
+                        <li><a href="/events/accreditation/">Accreditation</a></li>
+                        <li><a href="/events/accommodation/">Accommodation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-base">
+                <p>&copy; 2026 VitaQ Technologies. All Rights Reserved.</p>
+                <div>
+                    <a href="/support.html">Support</a>
+                    <a href="/legal/privacy.html">Privacy</a>
+                    <a href="/legal/terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/pages.js" defer></script>
+</body>
+</html>
