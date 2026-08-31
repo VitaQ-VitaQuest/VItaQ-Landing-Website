@@ -224,7 +224,7 @@ section { padding: 9rem 0; position: relative; }
     --client-logo-gap: 5rem;
     --client-logo-opacity: 0.95;
     --client-logo-hover-scale: 1.2;
-    --client-logo-mobile-height: 60px;
+    --client-logo-mobile-height: 95px;
     --client-logo-mobile-gap: 3rem;
     --client-reel-padding: 6rem;
     --client-reel-glow-left: rgba(255, 80, 222, 0.25);
