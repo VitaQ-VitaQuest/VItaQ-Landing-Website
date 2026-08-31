@@ -125,6 +125,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Animate on Scroll with GSAP ---
     gsap.registerPlugin(ScrollTrigger);
+
+    // iOS Safari resizes the visual viewport whenever the address bar / tab
+    // bar shows or hides while scrolling. Without this, every one of those
+    // UI-driven resizes makes ScrollTrigger think the window was resized and
+    // re-measures every trigger, which can flip already-revealed sections
+    // back to their hidden starting state mid-scroll ("appearing/disappearing"
+    // sections, or a blank page). This tells ScrollTrigger to ignore resizes
+    // that are only caused by mobile browser UI, not real layout changes.
+    ScrollTrigger.config({ ignoreMobileResize: true });
     
     // --- Hero Section Image Animation ---
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
@@ -747,6 +756,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // the user sees the beautiful logo animation, then fade out.
         setTimeout(() => {
             document.body.classList.add('loaded');
+            // The preloader was covering the full viewport and scrolling was
+            // locked until now (see body:not(.loaded) in style.css), so the
+            // page layout could have shifted underneath it (web font swap,
+            // hero image decode, etc.). Re-measure every ScrollTrigger now
+            // that the real, final layout is in place, so trigger positions
+            // are accurate instead of based on stale/partial measurements.
+            ScrollTrigger.refresh();
         }, 3000); // A fixed delay to appreciate the full animation.
     };
 
