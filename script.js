@@ -1,3 +1,35 @@
+(function () {
+    var revealed = false;
+
+    function revealPage() {
+        if (revealed) return; // classList.add is idempotent anyway, but
+        revealed = true;      // this also stops the fallback timer from
+                               // needlessly re-running ScrollTrigger.refresh().
+        document.body.classList.add('loaded');
+        // ScrollTrigger may not exist if GSAP itself failed to load -
+        // guard the call so that can never re-break the reveal.
+        try {
+            if (window.ScrollTrigger) {
+                window.ScrollTrigger.refresh();
+            }
+        } catch (err) {
+            /* Non-fatal: the page is already revealed at this point. */
+        }
+    }
+
+    // Normal path: reveal shortly after the page (incl. images) finishes
+    // loading, same 3s delay as before so the logo animation still plays.
+    window.addEventListener('load', function () {
+        setTimeout(revealPage, 3000);
+    });
+
+    // Failsafe path: if "load" never fires at all (e.g. a hung third-party
+    // request), force the reveal after 8s so visitors are never stuck
+    // behind the preloader.
+    setTimeout(revealPage, 8000);
+})();
+
+
 // --- EMBEDDED TEXT SCRAMBLE LIBRARY (Guaranteed Alternative) ---
 class TextScramble {
     constructor(el) { this.el = el; this.chars = '!<>-_\\/[]{}—=+*^?#________'; this.update = this.update.bind(this); }
@@ -749,22 +781,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('Message failed to send. Please try again. Error: ' + JSON.stringify(err));
             });
     });
-
-    // --- Preloader Logic ---
-    window.onload = () => {
-        // After everything (inc. images) is loaded, wait a moment to ensure
-        // the user sees the beautiful logo animation, then fade out.
-        setTimeout(() => {
-            document.body.classList.add('loaded');
-            // The preloader was covering the full viewport and scrolling was
-            // locked until now (see body:not(.loaded) in style.css), so the
-            // page layout could have shifted underneath it (web font swap,
-            // hero image decode, etc.). Re-measure every ScrollTrigger now
-            // that the real, final layout is in place, so trigger positions
-            // are accurate instead of based on stale/partial measurements.
-            ScrollTrigger.refresh();
-        }, 3000); // A fixed delay to appreciate the full animation.
-    };
 
     // --- Dynamic "Peek-a-Boo" Header ---
     const header = document.querySelector('.main-nav');
