@@ -182,6 +182,47 @@
         </svg>
     </div>
 
+    <!-- PRELOADER CONTROLLER
+         Intentionally inline and dependency-free. It starts before any external
+         JavaScript at the bottom of the page can block, fail, or be rejected by
+         an older Safari parser. The original 3s timing and 8s failsafe are kept. -->
+    <script>
+    (function () {
+        var revealed = false;
+        window.__vitaqAnimationsReady = false;
+
+        function revealPage() {
+            if (revealed) return;
+            revealed = true;
+
+            // If the main animation bundle never initialized (for example because
+            // a dependency failed or Safari rejected the bundle), reveal the page
+            // statically instead of leaving the FOUC-hidden content invisible.
+            if (!window.__vitaqAnimationsReady) {
+                document.body.classList.add('loading-fallback');
+            }
+
+            document.body.classList.add('loaded');
+
+            try {
+                if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+                    window.ScrollTrigger.refresh();
+                }
+            } catch (err) {
+                // Non-fatal: the page has already been revealed.
+            }
+        }
+
+        // Normal path: preserve the existing 3-second post-load preloader timing.
+        window.addEventListener('load', function () {
+            setTimeout(revealPage, 3000);
+        });
+
+        // Independent failsafe: this timer starts before any third-party scripts.
+        setTimeout(revealPage, 8000);
+    })();
+    </script>
+
     <!-- Particle.js Background Container -->
     <div id="particles-js"></div>
 

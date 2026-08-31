@@ -1,35 +1,3 @@
-(function () {
-    var revealed = false;
-
-    function revealPage() {
-        if (revealed) return; // classList.add is idempotent anyway, but
-        revealed = true;      // this also stops the fallback timer from
-                               // needlessly re-running ScrollTrigger.refresh().
-        document.body.classList.add('loaded');
-        // ScrollTrigger may not exist if GSAP itself failed to load -
-        // guard the call so that can never re-break the reveal.
-        try {
-            if (window.ScrollTrigger) {
-                window.ScrollTrigger.refresh();
-            }
-        } catch (err) {
-            /* Non-fatal: the page is already revealed at this point. */
-        }
-    }
-
-    // Normal path: reveal shortly after the page (incl. images) finishes
-    // loading, same 3s delay as before so the logo animation still plays.
-    window.addEventListener('load', function () {
-        setTimeout(revealPage, 3000);
-    });
-
-    // Failsafe path: if "load" never fires at all (e.g. a hung third-party
-    // request), force the reveal after 8s so visitors are never stuck
-    // behind the preloader.
-    setTimeout(revealPage, 8000);
-})();
-
-
 // --- EMBEDDED TEXT SCRAMBLE LIBRARY (Guaranteed Alternative) ---
 class TextScramble {
     constructor(el) { this.el = el; this.chars = '!<>-_\\/[]{}—=+*^?#________'; this.update = this.update.bind(this); }
@@ -120,23 +88,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // --- Initialize Enhanced Particles.js  ---
-    particlesJS("particles-js", {
-        particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: "#FFFFFF" },
-            shape: { type: "circle" },
-            opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-            size: { value: 2, random: true, anim: { enable: false } },
-            line_linked: { enable: false },
-            move: { enable: true, speed: 1, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
-        },
-        interactivity: {
-            detect_on: "canvas",
-            events: { onhover: { enable: true, mode: "push" }, onclick: { enable: true, mode: "push" }, resize: true },
-            modes: { grab: { distance: 140, line_opacity: 0.5 }, push: { particles_nb: 4 } }
-        },
-        retina_detect: true
-    });
+    // Particles are decorative, so a CDN failure must never abort the rest of
+    // the landing-page initialization.
+    if (typeof window.particlesJS === 'function') {
+        try {
+            window.particlesJS("particles-js", {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#FFFFFF" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                    size: { value: 2, random: true, anim: { enable: false } },
+                    line_linked: { enable: false },
+                    move: { enable: true, speed: 1, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: { onhover: { enable: true, mode: "push" }, onclick: { enable: true, mode: "push" }, resize: true },
+                    modes: { grab: { distance: 140, line_opacity: 0.5 }, push: { particles_nb: 4 } }
+                },
+                retina_detect: true
+            });
+        } catch (err) {
+            console.warn('particles.js failed to initialize; continuing without particles.', err);
+        }
+    }
 
     // --- Hamburger Menu Logic ---
     const menuButton = document.querySelector('.header-menu-button');
@@ -246,6 +222,11 @@ document.addEventListener('DOMContentLoaded', function () {
     createStaggeredAnimation('#feature-grid .feature-grid', '#feature-grid .feature-card');
     createStaggeredAnimation('.testimonials-wrapper', '.testimonial-card');
     createStaggeredAnimation('.bento-grid', '.animate-bento');
+
+    // The dependency-free preloader controller uses this flag to distinguish a
+    // healthy GSAP initialization from a failed/unsupported bundle.
+    window.__vitaqAnimationsReady = true;
+    document.body.classList.remove('loading-fallback');
 
 
 
@@ -386,9 +367,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             useCaseOptionsExpanded = true;
-            useCaseTabsNav?.classList.add('is-expanded');
-            useCaseNext?.setAttribute('aria-expanded', 'true');
-            useCaseNext?.setAttribute('aria-label', 'Next organization type');
+            if (useCaseTabsNav) useCaseTabsNav.classList.add('is-expanded');
+            if (useCaseNext) useCaseNext.setAttribute('aria-expanded', 'true');
+            if (useCaseNext) useCaseNext.setAttribute('aria-label', 'Next organization type');
 
             requestAnimationFrame(() => {
                 positionUseCaseIndicator();
@@ -426,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!state || !useCaseComposition || !useCaseImage) return;
 
             const composition = state.composition;
-            const isLayered = composition?.type === 'layered';
+            const isLayered = !!(composition && composition.type === 'layered');
             const variant = isLayered ? (composition.variant || 'default') : 'single';
 
             // Visual mode is resolved synchronously on every state change. There are
@@ -570,17 +551,21 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        useCasePrev?.addEventListener('click', () => {
-            setActiveUseCase(activeUseCaseIndex - 1);
-        });
+        if (useCasePrev) {
+            useCasePrev.addEventListener('click', () => {
+                setActiveUseCase(activeUseCaseIndex - 1);
+            });
+        }
 
-        useCaseNext?.addEventListener('click', () => {
-            // First click reveals the secondary client type.
-            if (expandUseCaseOptions()) return;
+        if (useCaseNext) {
+            useCaseNext.addEventListener('click', () => {
+                // First click reveals the secondary client type.
+                if (expandUseCaseOptions()) return;
 
-            // After expansion it behaves as the normal next arrow.
-            setActiveUseCase(activeUseCaseIndex + 1);
-        });
+                // After expansion it behaves as the normal next arrow.
+                setActiveUseCase(activeUseCaseIndex + 1);
+            });
+        }
 
         window.addEventListener('resize', () => {
             positionUseCaseIndicator();
