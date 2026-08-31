@@ -1,23 +1,3 @@
-// --- PRELOADER SAFETY NET ---
-// Root cause of the Safari "stuck on black loading screen" bug:
-// the preloader is only ever removed by adding the "loaded" class to
-// <body> (see "body.loaded #preloader" in style.css). That used to happen
-// inside window.onload, but window.onload was assigned near the bottom of
-// the main DOMContentLoaded handler below, AFTER calls into third-party
-// libraries such as particlesJS(...) and gsap.registerPlugin(...).
-// If any of those libraries failed to load in time (a slow/blocked
-// third-party CDN request, a content blocker, Safari's Intelligent
-// Tracking Prevention, etc. - all more common on Safari/iOS than other
-// browsers), calling the missing global throws an error that stops the
-// rest of that function from running, so window.onload never got
-// registered - and the real "load" event later fires into thin air.
-// Result: the reveal code never runs and the black preloader is stuck
-// on screen forever, even though the page itself is fine.
-//
-// Fix: register the reveal independently, first, before anything that
-// could throw, wrap it defensively, and add a hard-cap fallback timer in
-// case the "load" event itself never fires (e.g. one sub-resource hangs
-// on a bad connection). This guarantees the page is always revealed.
 (function () {
     var revealed = false;
 
@@ -801,16 +781,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('Message failed to send. Please try again. Error: ' + JSON.stringify(err));
             });
     });
-
-    // --- Preloader Logic ---
-    // NOTE: the actual reveal logic now lives at the very top of this file
-    // (see "PRELOADER SAFETY NET"). It used to be registered here, but this
-    // point in the code only runs if every earlier line in this function
-    // (particlesJS(), gsap.registerPlugin(), etc.) succeeds first - if a
-    // third-party script failed to load, an error here would stop
-    // window.onload from ever being registered and permanently freeze the
-    // black preloader on screen. Registering it first, standalone, removes
-    // that dependency.
 
     // --- Dynamic "Peek-a-Boo" Header ---
     const header = document.querySelector('.main-nav');
