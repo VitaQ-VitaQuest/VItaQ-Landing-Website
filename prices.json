@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "defaultCurrency": "USD",
+  "currencyNotice": "USD and AED prices are published independently and are not live exchange-rate conversions.",
+  "currencies": {
+    "USD": {
+      "label": "US dollar",
+      "locale": "en-US"
+    },
+    "AED": {
+      "label": "UAE dirham",
+      "locale": "en-AE"
+    }
+  },
+  "customers": {
+    "academies": {
+      "name": "Academies",
+      "shortDescription": "Ongoing programs across branches and sports.",
+      "description": "Academy pricing follows the number of active branch–sport relationships in your organization.",
+      "relationshipLabel": "branch–sport relationship",
+      "minimumMonthlyCommitmentMonths": 3,
+      "rates": {
+        "annual": {
+          "label": "Annual academy access",
+          "unit": "per branch–sport / year",
+          "prices": {
+            "USD": 2660,
+            "AED": 9600
+          }
+        },
+        "monthly": {
+          "label": "Monthly academy access",
+          "unit": "per branch–sport / month",
+          "prices": {
+            "USD": 270,
+            "AED": 1000
+          }
+        }
+      }
+    },
+    "trainingCamps": {
+      "name": "Training Camps",
+      "shortDescription": "A focused registration window for one camp.",
+      "description": "Choose a fixed platform fee or a collection-based model for each training camp.",
+      "rates": {
+        "fixed": {
+          "label": "Fixed camp fee",
+          "unit": "per camp",
+          "registrationWindowDaysIncluded": 90,
+          "prices": {
+            "USD": 1360,
+            "AED": 5000
+          }
+        },
+        "revenueShare": {
+          "label": "Collection-based fee",
+          "unit": "of the total collected in the application",
+          "percentage": 7.5
+        }
+      }
+    },
+    "events": {
+      "name": "Events & Competitions",
+      "shortDescription": "Setup, registration, accreditation, and event-day support.",
+      "description": "Start with event setup, then add participant, accreditation, and on-ground operating needs.",
+      "rates": {
+        "setup": {
+          "label": "Event setup fee",
+          "unit": "per event",
+          "prices": {
+            "USD": 2000,
+            "AED": 7500
+          }
+        },
+        "participant": {
+          "label": "Participant registration",
+          "unit": "per participant",
+          "prices": {
+            "USD": 3,
+            "AED": 10
+          }
+        },
+        "accreditation": {
+          "label": "Accreditation",
+          "unit": "per accreditation",
+          "prices": {
+            "USD": 6.5,
+            "AED": 25
+          }
+        },
+        "onGroundSpecialist": {
+          "label": "On-ground specialist",
+          "unit": "per specialist / day",
+          "prices": {
+            "USD": 816,
+            "AED": 3000
+          }
+        }
+      }
+    }
+  },
+  "addOns": {
+    "brandedApplication": {
+      "name": "Branded application",
+      "description": "Your own branded experience for iOS, Android, and web.",
+      "unit": "one-time payment",
+      "prices": {
+        "USD": 13600,
+        "AED": 50000
+      }
+    }
+  }
+}
