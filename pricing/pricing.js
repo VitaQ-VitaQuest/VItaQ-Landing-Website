@@ -122,7 +122,10 @@ function renderNumberField({ field, label, value, min, max, suffix, help = '', w
     const step = wholeNumber ? 1 : 0.01;
     return `
         <div class="pricing-number-field">
-            <label class="pricing-label" id="${labelId}" for="${inputId}">${escapeHtml(label)}</label>
+            <div class="pricing-field-copy">
+                <label class="pricing-label" id="${labelId}" for="${inputId}">${escapeHtml(label)}</label>
+                ${help ? `<small class="pricing-field-help">${escapeHtml(help)}</small>` : ''}
+            </div>
             <span class="pricing-input-shell">
                 <button
                     type="button"
@@ -152,7 +155,6 @@ function renderNumberField({ field, label, value, min, max, suffix, help = '', w
                     aria-label="Increase ${escapeHtml(label)}"
                 >+</button>
             </span>
-            ${help ? `<small class="pricing-field-help">${escapeHtml(help)}</small>` : ''}
         </div>
     `;
 }
@@ -165,16 +167,13 @@ function renderCustomerSelector() {
         return `
             <button
                 type="button"
-                class="pricing-customer-tab"
+                class="pricing-plan-tab pricing-calculator-tab"
                 role="tab"
                 data-customer="${customerId}"
                 aria-selected="${isSelected}"
                 aria-controls="pricing-configuration-panel"
                 tabindex="${isSelected ? 0 : -1}"
-            >
-                <strong>${escapeHtml(customer.name)}</strong>
-                <small>${escapeHtml(customer.shortDescription)}</small>
-            </button>
+            >${escapeHtml(customer.name)}</button>
         `;
     }).join('');
 }
@@ -215,22 +214,41 @@ function renderAcademyConfiguration() {
             suffix: 'months',
             help: `Minimum ${academy.minimumMonthlyCommitmentMonths} months, paid upfront.`,
         }) : ''}
-        <div class="pricing-relationship-readout" data-relationship-readout>
-            ${renderRelationshipReadout()}
-        </div>
     `;
 }
 
-function renderRelationshipReadout() {
-    const possibleRelationships = calculatorState.branches * calculatorState.sports;
-    const branchLabel = pluralize(calculatorState.branches, 'branch', 'branches');
-    const sportLabel = pluralize(calculatorState.sports, 'sport');
-    const relationshipLabel = pluralize(possibleRelationships, 'relationship');
+function renderPricingRelationshipReadout() {
+    if (calculatorState.customerId === 'academies') {
+        const possibleRelationships = calculatorState.branches * calculatorState.sports;
+        const branchLabel = pluralize(calculatorState.branches, 'branch', 'branches');
+        const sportLabel = pluralize(calculatorState.sports, 'sport');
+        return `
+            <span>Pricing relationship</span>
+            <strong>${calculatorState.activeRelationships} active / ${possibleRelationships} possible</strong>
+            <small>${calculatorState.branches} ${branchLabel} × ${calculatorState.sports} ${sportLabel}</small>
+        `;
+    }
+
+    if (calculatorState.customerId === 'trainingCamps') {
+        const camps = pricingData.customers.trainingCamps;
+        const isFixed = calculatorState.campPricingModel === 'fixed';
+        return `
+            <span>Pricing relationship</span>
+            <strong>${isFixed ? 'Fixed fee' : `${camps.rates.revenueShare.percentage}% collected`}</strong>
+            <small>${calculatorState.registrationWindowDays}-day registration window</small>
+        `;
+    }
+
     return `
-        <span>Pricing unit</span>
-        <strong>${calculatorState.activeRelationships} active / ${possibleRelationships} possible</strong>
-        <small>${calculatorState.branches} ${branchLabel} × ${calculatorState.sports} ${sportLabel} creates up to ${possibleRelationships} ${relationshipLabel}.</small>
+        <span>Pricing relationship</span>
+        <strong>Setup + volume + crew</strong>
+        <small>${calculatorState.participants} ${pluralize(calculatorState.participants, 'participant')} · ${calculatorState.accreditations} ${pluralize(calculatorState.accreditations, 'accreditation')} · ${calculatorState.specialistCount} ${pluralize(calculatorState.specialistCount, 'specialist')} × ${calculatorState.specialistDays} ${pluralize(calculatorState.specialistDays, 'day')}</small>
     `;
+}
+
+function updatePricingRelationshipReadout() {
+    const readout = document.querySelector('[data-pricing-relationship]');
+    if (readout) readout.innerHTML = renderPricingRelationshipReadout();
 }
 
 function renderCampConfiguration() {
@@ -280,20 +298,13 @@ function renderEventConfiguration() {
             ${renderNumberField({ field: 'specialistCount', label: 'On-ground specialists', value: calculatorState.specialistCount, min: 0, max: 100, suffix: 'people' })}
             ${renderNumberField({ field: 'specialistDays', label: 'Specialist operating days', value: calculatorState.specialistDays, min: 0, max: 365, suffix: 'days' })}
         </div>
-        <div class="pricing-included-note">
-            <span>Included in estimate</span>
-            <strong>${escapeHtml(events.rates.setup.label)}</strong>
-            <small>${escapeHtml(setupRate)} per event</small>
-        </div>
+
     `;
 }
 
 function renderConfiguration() {
-    const customer = pricingData.customers[calculatorState.customerId];
-    const description = document.querySelector('[data-configuration-description]');
     const panel = document.querySelector('[data-configuration-panel]');
     panel.id = 'pricing-configuration-panel';
-    description.textContent = customer.description;
 
     if (calculatorState.customerId === 'academies') {
         panel.innerHTML = renderAcademyConfiguration();
@@ -302,6 +313,8 @@ function renderConfiguration() {
     } else {
         panel.innerHTML = renderEventConfiguration();
     }
+
+    updatePricingRelationshipReadout();
 }
 
 function buildAcademyEstimate() {
@@ -412,39 +425,25 @@ function buildEstimate() {
 function renderEstimate() {
     const estimate = buildEstimate();
     const panel = document.querySelector('[data-estimate-panel]');
-    const lines = estimate.lines.map((line) => `
-        <div class="pricing-breakdown-line">
-            <div>
-                <strong>${escapeHtml(line.label)}</strong>
-                <span>${escapeHtml(line.formula)}</span>
-            </div>
-            <b>${escapeHtml(formatMoney(calculatorState.currency, line.amount))}</b>
-        </div>
-    `).join('');
 
     panel.innerHTML = `
-        <header class="pricing-estimate-header">
-            <div>
+        <div class="pricing-estimate-content">
+            <header class="pricing-estimate-header">
                 <span>Expected breakdown</span>
                 <h3 id="pricing-estimate-title">${escapeHtml(estimate.title)}</h3>
-            </div>
-            <small class="pricing-estimate-context">${escapeHtml(estimate.context)}</small>
-        </header>
-        <div class="pricing-breakdown">${lines}</div>
-        <output class="pricing-estimate-total" aria-live="polite">
-            <span>Estimated total</span>
-            <strong>${escapeHtml(formatMoney(calculatorState.currency, estimate.total))}</strong>
-        </output>
-        ${estimate.minimumDue !== null ? `
-            <div class="pricing-minimum-due">
-                <span>Minimum due to start</span>
-                <strong>${escapeHtml(formatMoney(calculatorState.currency, estimate.minimumDue))}</strong>
-            </div>
-        ` : ''}
-        <p class="pricing-estimate-note">${escapeHtml(estimate.note)}</p>
-        <a class="btn btn-primary pricing-estimate-action" href="/#contact">Discuss This Estimate</a>
-        <p class="pricing-estimate-disclaimer">This calculator provides an estimate. Final scope and commercial terms are confirmed in your proposal.</p>
+                <small class="pricing-estimate-context">${escapeHtml(estimate.context)}</small>
+            </header>
+            <output class="pricing-estimate-total" aria-live="polite">
+                <span>Estimated total</span>
+                <strong>${escapeHtml(formatMoney(calculatorState.currency, estimate.total))}</strong>
+            </output>
+        </div>
     `;
+
+    const actionSlot = document.querySelector('[data-estimate-action]');
+    if (actionSlot) {
+        actionSlot.innerHTML = '<a class="btn btn-primary pricing-estimate-action" href="/#contact">Discuss the<br>Estimate</a>';
+    }
 }
 
 function renderCurrencyControls() {
@@ -608,8 +607,12 @@ function renderPublishedPricing() {
 function renderPricingError(error) {
     const message = 'Published pricing could not be loaded. Refresh the page or contact demo@vitaq.app for help.';
     const errorMarkup = `<p class="pricing-data-error" role="alert"><strong>Pricing is temporarily unavailable.</strong>${escapeHtml(message)}</p>`;
+    const relationshipReadout = document.querySelector('[data-pricing-relationship]');
+    if (relationshipReadout) relationshipReadout.innerHTML = '<span>Pricing relationship</span><strong>Unavailable</strong>';
     document.querySelector('[data-configuration-panel]').innerHTML = errorMarkup;
     document.querySelector('[data-estimate-panel]').innerHTML = errorMarkup;
+    const estimateAction = document.querySelector('[data-estimate-action]');
+    if (estimateAction) estimateAction.innerHTML = '';
     document.querySelector('[data-plan-tabs]').innerHTML = '';
     document.querySelector('[data-rate-cards]').innerHTML = errorMarkup;
     console.error('Failed to load VitaQ pricing.', error);
@@ -625,8 +628,6 @@ function updateRelationshipInputs() {
         activeRelationshipsInput.value = calculatorState.activeRelationships;
     }
 
-    const readout = document.querySelector('[data-relationship-readout]');
-    if (readout) readout.innerHTML = renderRelationshipReadout();
 }
 
 function selectCustomer(customerId) {
@@ -680,7 +681,15 @@ function handlePricingClick(event) {
     }
 
     const choiceButton = event.target.closest('[data-choice]');
+    if (choiceButton) {
+        const stateKey = choiceButton.dataset.choice;
+        const value = choiceButton.dataset.choiceValue;
+        if (!(stateKey in calculatorState)) return;
 
+        calculatorState[stateKey] = value;
+        renderConfiguration();
+        renderEstimate();
+    }
 }
 
 function handlePricingInput(event) {
@@ -700,6 +709,7 @@ function handlePricingInput(event) {
         updateRelationshipInputs();
     }
 
+    updatePricingRelationshipReadout();
     renderEstimate();
 }
 

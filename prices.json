@@ -16,7 +16,7 @@
     "academies": {
       "name": "Academies",
       "shortDescription": "Ongoing programs across branches and sports.",
-      "description": "Academy pricing follows the number of active branch–sport relationships in your organization.",
+      "description": "Academy pricing is based on active branch–sport relationships.",
       "relationshipLabel": "branch–sport relationship",
       "minimumMonthlyCommitmentMonths": 3,
       "rates": {
@@ -62,7 +62,7 @@
     "events": {
       "name": "Events & Competitions",
       "shortDescription": "Setup, registration, accreditation, and event-day support.",
-      "description": "Start with event setup, then add participant, accreditation, and on-ground operating needs.",
+      "description": "Event pricing covers setup, participants, accreditation, and on-ground support.",
       "rates": {
         "setup": {
           "label": "Event setup fee",

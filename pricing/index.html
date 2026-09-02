@@ -122,7 +122,7 @@
             <a href="/#feature-grid" class="nav-link">Features</a>
             <a href="/pricing/" class="nav-link" aria-current="page">Pricing</a>
             <a href="/#faq" class="nav-link">FAQ</a>
-            <a href="/#contact" class="nav-link cta">Request a Demo</a>
+            <a href="/#contact" class="nav-link cta">Book a Demo</a>
         </nav>
     </div>
 
@@ -141,7 +141,7 @@
                 <a href="/#faq" class="main-nav-link">FAQ</a>
             </div>
             <div class="main-nav-actions">
-                <a href="/#contact" class="btn btn-primary btn-sm">Request a Demo</a>
+                <a href="/#contact" class="btn btn-primary btn-sm">Book a Demo</a>
                 <button class="header-menu-button" type="button" aria-label="Open Menu" aria-expanded="false">
                     <span class="line line1"></span>
                     <span class="line line2"></span>
@@ -203,24 +203,36 @@
             <div class="container">
                 <div class="pricing-section-header">
                     <p class="hero-preheadline">Live estimator</p>
-                    <h2 class="section-title">What do you need VitaQ for?</h2>
-                    <p class="section-subtitle">Choose your operation, enter its working scale, and see each part of the estimate.</p>
+                    <h2 class="section-title">Calculate your <br> estimated cost</h2>
+                    <p class="section-subtitle">Select your organization, enter your numbers, and see what VitaQ could cost for your operation.</p>
                 </div>
 
-                <div class="pricing-customer-selector" role="tablist" aria-label="Choose what you need VitaQ for" data-customer-selector></div>
+                <div class="pricing-plan-tabs pricing-calculator-tabs" role="tablist" aria-label="Choose what you need VitaQ for" data-customer-selector></div>
 
                 <div class="pricing-workspace">
                     <section class="pricing-configuration" aria-labelledby="pricing-configuration-title">
                         <header class="pricing-panel-heading">
-                            <span id="pricing-configuration-title">Configure</span>
-                            <p data-configuration-description>Loading published pricing…</p>
+                            <div class="pricing-relationship-readout pricing-relationship-readout--header" data-pricing-relationship>
+                                <span id="pricing-configuration-title">Pricing relationship</span>
+                                <strong>Loading…</strong>
+                            </div>
+                            <div class="pricing-panel-currency">
+                                <span>Display currency</span>
+                                <div class="pricing-currency-buttons" role="group" aria-label="Choose estimate currency">
+                                    <button type="button" data-currency="USD" aria-pressed="true">USD</button>
+                                    <button type="button" data-currency="AED" aria-pressed="false">AED</button>
+                                </div>
+                            </div>
                         </header>
                         <div class="pricing-form" role="tabpanel" data-configuration-panel></div>
                     </section>
 
-                    <aside class="pricing-estimate" aria-labelledby="pricing-estimate-title" data-estimate-panel>
-                        <div class="pricing-data-loading" role="status">Reading prices.json…</div>
-                    </aside>
+                    <div class="pricing-estimate-row">
+                        <aside class="pricing-estimate" aria-labelledby="pricing-estimate-title" data-estimate-panel>
+                            <div class="pricing-data-loading" role="status">Reading prices.json…</div>
+                        </aside>
+                        <div class="pricing-estimate-action-slot" data-estimate-action></div>
+                    </div>
                 </div>
             </div>
         </section>
