@@ -8,7 +8,7 @@
     <title>VitaQ | The Complete Sports management software</title>
     <meta name="description" content="VitaQ is the all-in-one Sports management software for academies and federations. Unified platform for Athlete Performance, Scheduling, Finance, and Event Management.">
 
-
+    <!-- Social Media Sharing Meta Tags (OG & Twitter) -->
     <meta property="og:title" content="VitaQ | The Complete Sports Operating System">
     <meta property="og:description" content="Performance intelligence meets operational excellence. Manage athletes, events, and business operations in one place.">
     <meta property="og:image" content="https://vitaq.app/hero%20image.webp">
@@ -19,22 +19,67 @@
     <meta name="twitter:description" content="Performance intelligence meets operational excellence. Manage athletes, events, and business operations in one place.">
     <meta name="twitter:image" content="https://vitaq.app/hero%20image.webp">
 
-
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-
+    <!-- Stylesheet -->
     <style>
+      /* Prevents Flash of Unstyled Content (FOUC) on animated elements */
       .hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .hero-image-wrapper,
       .section-title, .section-subtitle, .section-title-small,
       .problem-card, .feature-card, .testimonial-card, .white-label, .step-content {
         visibility: hidden;
       }
     </style>
+    <!-- Paste this block immediately BEFORE:
+<link rel="stylesheet" href="style.css">
+-->
+
+<!-- iOS Safari Aurora rendering fix -->
+    <style>
+      @supports (-webkit-touch-callout: none) {
+        .aurora-glow {
+          -webkit-filter: none !important;
+          filter: none !important;
+        }
+
+        .aurora-1 {
+          background: radial-gradient(
+            circle at center,
+            rgba(255, 80, 222, 1) 0%,
+            rgba(255, 80, 222, 0.72) 28%,
+            rgba(255, 80, 222, 0.28) 55%,
+            rgba(255, 80, 222, 0) 78%
+          ) !important;
+        }
+
+        .aurora-2 {
+          background: radial-gradient(
+            circle at center,
+            rgba(127, 0, 255, 1) 0%,
+            rgba(127, 0, 255, 0.72) 28%,
+            rgba(127, 0, 255, 0.28) 55%,
+            rgba(127, 0, 255, 0) 78%
+          ) !important;
+        }
+
+        .aurora-3 {
+          background: radial-gradient(
+            circle at center,
+            rgba(0, 175, 255, 1) 0%,
+            rgba(0, 175, 255, 0.72) 28%,
+            rgba(0, 175, 255, 0.28) 55%,
+            rgba(0, 175, 255, 0) 78%
+          ) !important;
+        }
+      }
+    </style>
+
     <link rel="stylesheet" href="style.css">
 
-
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P06983P4SS"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -44,7 +89,7 @@
         gtag('config', 'G-P06983P4SS');
     </script>
 
-
+    <!-- SCHEMATIC INTELLIGENCE (JSON-LD for AI & SEO) -->
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -144,7 +189,7 @@
                   "name": "How is VitaQ priced?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "VitaQ publishes separate pricing for academies, training camps, events and competitions, plus an optional branded application, in USD and AED."
+                    "text": "It is a tailored SaaS subscription based on your scale. Contact us for a custom quote."
                   }
                 },
                 {
@@ -171,17 +216,20 @@
 </head>
 <body>
 
-
+    <!-- PRELOADER -->
     <div id="preloader">
         <svg id="preloader-logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-
+            <!-- Pink V-shape part -->
             <path id="logo-v-pink" d="M604.55,340.36l133-230.36,122.37,59.06-88.67,127.75c-7.46,10.75-2.81,25.66,9.45,30.25l147.37,55.21-82.81,143.43-226.02-130.49c-19.2-11.09-25.78-35.64-14.7-54.85Z"/>
-
+            <!-- Main body of the V/Q shape -->
             <path id="logo-v-main" d="M817.66,573.52l-82.81,143.42-121.13-99.73c-10.09-8.31-25.3-4.91-30.9,6.9l-115.19,242.93c-14.57,30.72-58.33,30.56-72.68-.26l-17.45-37.49-.15.07L71.92,174.37l136.46-63.64,219.96,471.69c6.86,14.72,27.46,15.62,35.58,1.55l72.88-126.24c11.09-19.2,35.64-25.78,54.85-14.7l226.01,130.49Z"/>
         </svg>
     </div>
 
-
+    <!-- PRELOADER CONTROLLER
+         Intentionally inline and dependency-free. It starts before any external
+         JavaScript at the bottom of the page can block, fail, or be rejected by
+         an older Safari parser. The original 3s timing and 8s failsafe are kept. -->
     <script>
     (function () {
         var revealed = false;
@@ -191,6 +239,9 @@
             if (revealed) return;
             revealed = true;
 
+            // If the main animation bundle never initialized (for example because
+            // a dependency failed or Safari rejected the bundle), reveal the page
+            // statically instead of leaving the FOUC-hidden content invisible.
             if (!window.__vitaqAnimationsReady) {
                 document.body.classList.add('loading-fallback');
             }
@@ -202,26 +253,29 @@
                     window.ScrollTrigger.refresh();
                 }
             } catch (err) {
+                // Non-fatal: the page has already been revealed.
             }
         }
 
+        // Normal path: preserve the existing 3-second post-load preloader timing.
         window.addEventListener('load', function () {
             setTimeout(revealPage, 3000);
         });
 
+        // Independent failsafe: this timer starts before any third-party scripts.
         setTimeout(revealPage, 8000);
     })();
     </script>
 
-
+    <!-- Particle.js Background Container -->
     <div id="particles-js"></div>
 
-
+    <!-- Background Glows -->
     <div class="aurora-glow aurora-1"></div>
     <div class="aurora-glow aurora-2"></div>
     <div class="aurora-glow aurora-3"></div>
 
-
+    <!-- Navigation Overlay (Mobile) -->
     <div class="nav-overlay">
         <nav class="nav-fullscreen">
             <a href="#use-cases-title" class="nav-link">Who It's For</a>
@@ -258,7 +312,7 @@
 
     <main>
 
-
+        <!-- Section 1: Hero -->
         <section class="hero container">
             <div class="hero-content">
                 <p class="hero-preheadline">VitaQ</p>
@@ -274,7 +328,7 @@
             </div>
         </section>
 
-
+        <!-- Section 2: Social Proof -->
         <section id="clients" class="social-proof">
             <div class="container">
                 <h2 class="section-title-small">Trusted by the Organizations Shaping the Future of Sport</h2>
@@ -295,12 +349,12 @@
                     <img src="azerbaijan.png" alt="Azerbaijan Logo">
                     <img src="ISMF.png" alt="International Ski Mountaineering Federation">
                     <img src="GFSF.png" alt="Georgian Figure Skating Federation Logo">
-
+                    
                 </div>
             </div>
         </section>
 
-
+        <!-- Section 3: Who VitaQ Is Built For -->
         <section id="use-cases" class="use-cases container" aria-labelledby="use-cases-title">
             <div class="section-header use-cases-header">
                 <h2 id="use-cases-title" class="section-title">Who VitaQ Is Built For</h2>
@@ -336,7 +390,7 @@
                         aria-label="Event participants and event operations managed with VitaQ"
                         data-composition-variant="events"
                     >
-
+                        <!-- Single-image fallback used by the other client types -->
                         <img
                             id="use-case-image"
                             class="use-case-image use-case-image--single"
@@ -344,7 +398,7 @@
                             alt=""
                         >
 
-
+                        <!-- Reusable layered composition. Academies use dashboard + scene + phone; Events use race + judges only. -->
                         <img
                             id="use-case-dashboard"
                             class="use-case-layer use-case-layer-dashboard"
@@ -407,7 +461,7 @@
                 </div>
             </div>
         </section>        
-
+        <!-- Section 4: The Problem -->
         <section id="about" class="problem container">
             <div class="section-header">
                 <h2 class="section-title">Are You Building Champions on a Foundation of Guesswork?</h2>
@@ -437,7 +491,7 @@
             </div>
         </section>
 
-
+        <!-- Section 5: The Solution -->
         <section class="solution container">
             <div class="solution-content">
                 <h2 class="section-title">The All-In-One Platform for Performance Intelligence</h2>
@@ -449,56 +503,56 @@
             </div>
         </section>
 
-
+        <!-- Section 6: Feature Grid -->
         <section id="feature-grid" class="features container">
             <div class="section-header">
             <h2 class="section-title">Everything Your Sports Organization Needs</h2>
             <p class="section-subtitle"> Manage daily operations, payments, events, and athlete development in one connected platform.</p>
         </div>
         <div class="feature-grid">
-
+            <!-- Card 1 -->
             <div class="feature-card">
                 <lord-icon class="feature-icon" src="https://cdn.lordicon.com/nocovwne.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                 <h4>Athlete Evaluations</h4>
                 <p>Run structured evaluations and capture results as they happen.</p>
             </div>
-
+            <!-- Card 2 -->
             <div class="feature-card">
                 <lord-icon class="feature-icon" src="https://cdn.lordicon.com/qjuahhae.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                 <h4>Smart Scheduling</h4>
                 <p>Coordinate sessions, coaches, facilities, and groups in one shared calendar.</p>
             </div>
-
+             <!-- Card 3 -->
              <div class="feature-card">
                 <lord-icon class="feature-icon" src="https://cdn.lordicon.com/egiwmiit.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                 <h4>Attendance & Check-In</h4>
                 <p>Make check-ins simple and keep attendance connected to every athlete.</p>
             </div>
-
+            <!-- Card 4 -->
             <div class="feature-card">
                 <lord-icon class="feature-icon" src="https://cdn.lordicon.com/ezityrjj.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                 <h4>Programs & Development</h4>
                 <p>Turn your methodology into clear stages, exercises, goals, and benchmarks.</p>
             </div>
-
+             <!-- Card 5 -->
              <div class="feature-card">
                 <lord-icon class="feature-icon" src="https://cdn.lordicon.com/euaablbm.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                 <h4>Events & Competitions</h4>
                 <p>Manage registrations, participants, schedules, ticketing, accreditation, and event operations.</p>
             </div>
-
+             <!-- Card 6 -->
              <div class="feature-card">
                 <lord-icon class="feature-icon" src="https://cdn.lordicon.com/qhviklyi.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                 <h4>Memberships & Payments</h4>
                 <p>Manage memberships, subscriptions, invoices, and payments with less admin.</p>
             </div>
-
+            <!-- Card 7 -->
                 <div class="feature-card">
                 <lord-icon class="feature-icon" src="https://cdn.lordicon.com/rpviwvwn.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                 <h4>Federation Management</h4>
                 <p>Manage club licensing, national databases, and regulatory compliance.</p>
             </div>
-
+             <!-- Card 8 -->
              <div class="feature-card">
                 <lord-icon class="feature-icon" src="https://cdn.lordicon.com/oqhqyeud.json" trigger="loop" state="loop-all" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                 <h4>Athlete Progress</h4>
@@ -507,9 +561,9 @@
         </div>
         </section>
 
-
-        
-
+        <!-- =================================================================== -->
+        <!-- section 5: The Command Center (Bento Grid) -->
+        <!-- =================================================================== -->
         <section id="command-center" class="command-center container">
             <div class="section-header">
                 <h2 class="section-title">Run Everything From One Place</h2>
@@ -517,7 +571,7 @@
             </div>
 
             <div class="bento-grid">
-
+                <!-- Card 1: Master Schedule (Fully Interactive) -->
                 <div class="bento-card card-schedule animate-bento">
                     <div class="bento-content">
                         <div class="bento-header">
@@ -526,14 +580,14 @@
                         </div>
                         <p>Link facilities, coaches, and athletes in one view.</p>
                     </div>
-
+                    <!-- UI: Timeline -->
                     <div class="ui-abstract-calendar" aria-hidden="true">
                         <div class="cal-header">
                             <span class="cal-day">TODAY</span>
                             <div class="window-controls"><span class="dot red"></span><span class="dot yellow"></span></div>
                         </div>
                         <div class="cal-timeline">
-
+                            <!-- Interactive Row 1: Standard Training -->
                             <div class="time-row interactive-row">
                                 <span class="time-label">09:00</span>
                                 <div class="cal-item pink-item">
@@ -552,8 +606,8 @@
                                     </div>
                                 </div>
                             </div>
-
                             
+                            <!-- Interactive Row 2: Live Eval + Training -->
                             <div class="time-row interactive-row">
                                 <span class="time-label">10:30</span>
                                 <div class="cal-item purple-item">
@@ -567,8 +621,8 @@
                                     </div>
                                 </div>
                             </div>
-
                             
+                            <!-- Interactive Row 3: Online Strategy -->
                             <div class="time-row interactive-row">
                                 <span class="time-label">13:00</span>
                                 <div class="cal-item blue-item">
@@ -589,7 +643,7 @@
                     </div>
                 </div>
 
-
+                <!-- Card 2: Financial Health (Taller & Richer) -->
                 <div class="bento-card card-finance animate-bento">
                     <div class="bento-content">
                         <div class="bento-header">
@@ -598,7 +652,7 @@
                         </div>
                         <p>Real-time revenue tracking.</p>
                     </div>
-
+                    <!-- UI: Graph -->
                     <div class="ui-finance-wrapper" aria-hidden="true">
                         <div class="finance-stat">
                             <div class="stat-top">
@@ -607,22 +661,22 @@
                             </div>
                             <span class="stat-value">$42,850</span>
                         </div>
-
+                        <!-- Graph Container with Background Grid -->
                         <div class="ui-abstract-graph">
                             <div class="grid-lines"></div>
                             <div class="graph-bar bar-1" data-val="$8k"></div>
                             <div class="graph-bar bar-2" data-val="$14k"></div>
                             <div class="graph-bar bar-3" data-val="$11k"></div>
                             <div class="graph-bar bar-4" data-val="$18k"></div>
-
+                            <!-- Trend line matches the taller height -->
                             <svg class="trend-line-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
                                 <path d="M0,80 Q25,70 50,40 T100,10" fill="none" stroke="#fff" stroke-width="2" stroke-opacity="0.5" />
                             </svg>
                         </div>
                     </div>
                 </div>
-
-                
+        
+                <!-- Card 3: Event Pulse (Levitate Interaction) -->
                 <div class="bento-card card-events animate-bento">
                     <div class="bento-content">
                         <div class="bento-header">
@@ -631,7 +685,7 @@
                         </div>
                         <p>Keep tickets, access, schedules, and event activity connected</p>
                     </div>
-
+                    <!-- UI: Digital Ticket -->
                      <div class="ui-abstract-ticket" aria-hidden="true">
                         <div class="ticket-header">
                             <span class="ticket-event">SUMMER CUP</span>
@@ -643,8 +697,8 @@
                         </div>
                     </div>
                 </div>
-
-                
+        
+                <!-- Card 4: Member CRM (Data Reveal Interaction) -->
                 <div class="bento-card card-crm animate-bento">
                     <div class="bento-content">
                         <div class="bento-header">
@@ -653,7 +707,7 @@
                         </div>
                         <p>360° Athlete Profiles.</p>
                     </div>
-
+                    <!-- UI: Profile Card with Hidden Details -->
                      <div class="ui-abstract-profile" aria-hidden="true">
                         <div class="profile-top">
                             <div class="profile-header">
@@ -667,7 +721,7 @@
                                 <span class="tag">Elite</span>
                             </div>
                         </div>
-
+                        <!-- HIDDEN SECTION -->
                         <div class="profile-hidden-stats">
                             <div class="p-stat">
                                 <span class="lbl">ATT</span>
@@ -687,18 +741,18 @@
             </div>
         </section>
 
-
+        <!-- Section 7: The Anatomy of a Champion (Feature Deep Dive) -->
         <section id="deep-dive" class="deep-dive">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">From Methodology to Measurable Progress</h2>
                     <p class="section-subtitle">Build your development pathway, run evaluations, and see progress clearly—all inside VitaQ.</p>
                 </div>
-
                 
+                <!-- CONTAINER FOR DESKTOP VIEW -->
                 <div class="deep-dive-desktop">
                     <div class="deep-dive-grid">
-
+                        <!-- Left (Sticky) Column -->
                         <div class="sticky-col">
                             <div class="sticky-content-wrapper">
                                 <div class="step-title-container">
@@ -715,9 +769,9 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!-- Right (Scrolling) Column -->
                         <div class="scroll-col">
-
+                            <!-- Step 1 Content -->
                             <div class="scroll-step" data-step="1">
                                  <div class="step-content">
                                     <h4>Your Philosophy, Digitized</h4>
@@ -730,7 +784,7 @@
                                     <lord-icon class="step-icon" src="https://cdn.lordicon.com/glzqezmf.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                                 </div>
                             </div>
-
+                            <!-- Step 2 Content -->
                             <div class="scroll-step" data-step="2">
                                  <div class="step-content">
                                     <h4>Your IP, Centralized</h4>
@@ -742,7 +796,7 @@
                                     <lord-icon class="step-icon" src="https://cdn.lordicon.com/gsjfryhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                                 </div>
                             </div>
-
+                            <!-- Step 3 Content -->
                             <div class="scroll-step" data-step="3">
                                  <div class="step-content">
                                     <h4>Precision on the Field</h4>
@@ -755,7 +809,7 @@
                                      <lord-icon class="step-icon" src="https://cdn.lordicon.com/csxbxlji.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                                 </div>
                             </div>
-
+                            <!-- Step 4 Content -->
                             <div class="scroll-step" data-step="4">
                                  <div class="step-content">
                                     <h4>From Data to Decisions</h4>
@@ -772,9 +826,9 @@
                     </div>
                 </div>
 
-
+                <!-- CONTAINER FOR MOBILE VIEW -->
                 <div class="deep-dive-mobile">
-
+                    <!-- Step 1 Mobile -->
                     <div class="mobile-step">
                         <h3 class="step-title-mobile">I. Build Your Developmental Blueprint</h3>
                         <img src="screen-stages.webp" class="mobile-mockup-screen" alt="VitaQ's Curriculum Builder screen on mobile.">
@@ -789,7 +843,7 @@
                             <lord-icon class="step-icon" src="https://cdn.lordicon.com/glzqezmf.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                         </div>
                     </div>
-
+                    <!-- Step 2 Mobile -->
                     <div class="mobile-step">
                         <h3 class="step-title-mobile">II. Create a Rich Library of Exercises</h3>
                         <img src="screen-library.webp" class="mobile-mockup-screen" alt="VitaQ's Content Library screen on mobile.">
@@ -803,7 +857,7 @@
                             <lord-icon class="step-icon" src="https://cdn.lordicon.com/gsjfryhc.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                         </div>
                     </div>
-
+                    <!-- Step 3 Mobile -->
                     <div class="mobile-step">
                         <h3 class="step-title-mobile">III. Execute Flawless Evaluations</h3>
                         <img src="screen-evaluation.webp" class="mobile-mockup-screen" alt="VitaQ's Evaluation Conductor screen on mobile.">
@@ -818,7 +872,7 @@
                              <lord-icon class="step-icon" src="https://cdn.lordicon.com/csxbxlji.json" trigger="loop" colors="primary:#ff50de,secondary:#ffffff"></lord-icon>
                         </div>
                     </div>
-
+                    <!-- Step 4 Mobile -->
                     <div class="mobile-step">
                         <h3 class="step-title-mobile">IV. Uncover Actionable Insights</h3>
                         <img src="screen-analytics.webp" class="mobile-mockup-screen" alt="VitaQ's Trainee Analytics dashboard on mobile.">
@@ -837,8 +891,8 @@
 
             </div>
         </section>
-
         
+        <!-- Section 8: White-Label Solution -->
         <section class="white-label container">
             <div class="white-label-image-wrapper animate-with-scrub">
                 <img src="support 2.webp" alt="Demonstration of VitaQ's white-label capabilities, showing an admin area UI card floating next to a phone displaying a list of athletes.">
@@ -850,7 +904,9 @@
             </div>
         </section>
 
-
+<!-- =================================================================== -->
+<!-- FAQ Section -->
+<!-- =================================================================== -->
         <section id="faq" class="faq container" aria-labelledby="faq-title">
 
             <div class="faq-header">
@@ -859,7 +915,7 @@
                 </h2>
             </div>
 
-
+            <!-- FAQ Category Tabs -->
             <div class="faq-tabs-navigation">
 
                 <button
@@ -923,12 +979,12 @@
 
             </div>
 
-
+            <!-- FAQ Panels -->
             <div class="faq-panels">
 
-
-                
-
+                <!-- =========================================================== -->
+                <!-- 1. Platform & Fit -->
+                <!-- =========================================================== -->
                 <div
                     class="faq-panel active"
                     id="faq-panel-platform"
@@ -1017,8 +1073,9 @@
                 </div>
 
 
-                
-
+                <!-- =========================================================== -->
+                <!-- 2. Customization & Experience -->
+                <!-- =========================================================== -->
                 <div
                     class="faq-panel"
                     id="faq-panel-implementation"
@@ -1134,8 +1191,9 @@
                 </div>
 
 
-                
-
+                <!-- =========================================================== -->
+                <!-- 3. Security & Pricing -->
+                <!-- =========================================================== -->
                 <div
                     class="faq-panel"
                     id="faq-panel-experience"
@@ -1214,9 +1272,9 @@
                             aria-labelledby="faq-question-experience-3"
                         >
                             <p>
-                                Pricing is published for academies, training camps, and events &amp;
-                                competitions in USD and AED. Visit the pricing page to calculate
-                                the setup that matches your organization.
+                                Pricing is tailored to your organization’s size, structure, and
+                                requirements. Request a demo and we’ll recommend the right VitaQ
+                                setup for your organization.
                             </p>
                         </div>
                     </div>
@@ -1225,7 +1283,7 @@
 
             </div>
         </section>
-
+        <!-- Section 9: Contact Form -->
         <section id="contact" class="contact-section">
             <div class="container">
                 <h2 class="hero-headline section-title">See VitaQ in Your Organization</h2>
@@ -1242,7 +1300,7 @@
                         <div class="spinner" aria-hidden="true"></div>
 
                         <form id="contact-form">
-
+                            <!-- HONEYPOT FIELD (Spam Trap) -->
                             <div class="input-group honey-pot">
                                 <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
                                 <label for="website_url">Website URL</label>
@@ -1283,16 +1341,14 @@
         <div class="container">
             <p class="footer-copyright">&copy; 2026 VitaQ Technologies. All Rights Reserved.</p>
             <div class="footer-links">
-                <a href="/pricing/">Pricing</a>
-                <a href="/#contact">Contact Us</a>
                 <a href="/support">Support</a>
-                <a href="/legal/privacy"> privacy </a>
-                <a href="/legal/terms"> terms </a>
+                <a href="./legal/privacy"> privacy </a>
+                <a href="./legal/terms"> terms </a>
             </div>
         </div>
     </footer>
-
     
+    <!-- Testimonial Modal Structure -->
     <div class="testimonial-modal-overlay" id="testimonial-modal">
         <div class="testimonial-modal-content">
             <button class="modal-close-btn" aria-label="Close testimonial">&times;</button>
@@ -1300,20 +1356,20 @@
             <cite id="modal-cite"></cite>
         </div>
     </div>
-
     
+    <!-- JAVASCRIPT LIBRARIES -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
-
     
+    <!-- GSAP Core Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-
     
+    <!-- GSAP ScrollTrigger Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
     
+    <!-- Custom Script -->
     <script src="script.js"></script>
 
 </body>

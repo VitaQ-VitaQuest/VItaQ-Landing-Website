@@ -24,7 +24,9 @@
 }
 
 .pricing-headline {
-font-size: 4.5rem; font-weight: 900; margin: 0 0 1.5rem 0; line-height: 1.1; 
+    font-size: 4.5rem; font-weight: 900; margin: 0 0 1.5rem 0; line-height: 1.1; 
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 
@@ -52,6 +54,7 @@ font-size: 4.5rem; font-weight: 900; margin: 0 0 1.5rem 0; line-height: 1.1;
 .pricing-logic {
     position: relative;
     overflow: hidden;
+    clip-path: inset(0 round 18px); 
     border: 1px solid var(--border-color);
     border-top: 2px solid var(--text-light);
     border-radius: 18px;
@@ -63,16 +66,6 @@ font-size: 4.5rem; font-weight: 900; margin: 0 0 1.5rem 0; line-height: 1.1;
     transform-style: preserve-3d;
     cursor: pointer;
     margin-top: 6rem;
-}
-
-.pricing-logic::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 72px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
-    content: '';
 }
 
 .pricing-logic-header,
@@ -764,7 +757,11 @@ font-size: 4.5rem; font-weight: 900; margin: 0 0 1.5rem 0; line-height: 1.1;
     }
 
     .pricing-headline {
-        font-size: clamp(3.2rem, 16vw, 4.8rem);
+        font-size: clamp(2.75rem, 11vw, 4.4rem); 
+    }
+
+    .pricing-headline br {
+        display: none;
     }
 
     .pricing-hero-actions {

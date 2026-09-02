@@ -22,6 +22,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+      @supports (-webkit-touch-callout: none) {
+        .aurora-glow {
+          -webkit-filter: none !important;
+          filter: none !important;
+        }
+
+        .aurora-1 {
+          background: radial-gradient(
+            circle at center,
+            rgba(255, 80, 222, 1) 0%,
+            rgba(255, 80, 222, 0.72) 28%,
+            rgba(255, 80, 222, 0.28) 55%,
+            rgba(255, 80, 222, 0) 78%
+          ) !important;
+        }
+
+        .aurora-2 {
+          background: radial-gradient(
+            circle at center,
+            rgba(127, 0, 255, 1) 0%,
+            rgba(127, 0, 255, 0.72) 28%,
+            rgba(127, 0, 255, 0.28) 55%,
+            rgba(127, 0, 255, 0) 78%
+          ) !important;
+        }
+
+        .aurora-3 {
+          background: radial-gradient(
+            circle at center,
+            rgba(0, 175, 255, 1) 0%,
+            rgba(0, 175, 255, 0.72) 28%,
+            rgba(0, 175, 255, 0.28) 55%,
+            rgba(0, 175, 255, 0) 78%
+          ) !important;
+        }
+      }
+    </style>
+
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="./pricing.css">
 
