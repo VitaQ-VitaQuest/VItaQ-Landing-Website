@@ -9,12 +9,13 @@
 .pricing-hero {
     display: grid;
     min-height: 100vh;
-    grid-template-columns: minmax(0, 1.12fr) minmax(350px, 0.88fr);
+    grid-template-columns: minmax(0, 1fr) minmax(380px, 1fr); 
     gap: clamp(3rem, 8vw, 7rem);
-    align-items: center;
+    align-items: start;
     box-sizing: border-box;
-    padding-top: 9rem;
-    padding-bottom: 7rem;
+    padding-top: 6.5rem;
+    padding-bottom: 6rem;
+    perspective: 1000px;
 }
 
 .pricing-hero-copy {
@@ -23,24 +24,10 @@
 }
 
 .pricing-headline {
-    max-width: 760px;
-    margin: 0;
-    font-size: clamp(4rem, 7.2vw, 6.7rem);
-    font-weight: 900;
-    letter-spacing: -0.065em;
-    line-height: 0.94;
+font-size: 4.5rem; font-weight: 900; margin: 0 0 1.5rem 0; line-height: 1.1; 
 }
 
-.pricing-headline::after {
-    display: inline-block;
-    width: 0.2em;
-    height: 0.2em;
-    margin-left: 0.08em;
-    border-radius: 50%;
-    background: var(--primary-pink);
-    box-shadow: var(--glow-shadow);
-    content: '';
-}
+
 
 .pricing-hero-subheading {
     max-width: 640px;
@@ -55,7 +42,7 @@
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-    margin-top: 2.5rem;
+    margin-top: 1rem;
 }
 
 .pricing-hero-actions .btn-secondary {
@@ -72,6 +59,10 @@
     box-shadow: 24px 24px 60px rgba(0, 0, 0, 0.24);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
+    will-change: transform;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    margin-top: 6rem;
 }
 
 .pricing-logic::before {
@@ -94,25 +85,27 @@
 }
 
 .pricing-logic-header {
-    padding: 1rem 1.25rem;
-    color: var(--text-medium);
+    padding: 1.25rem 1.75rem;
+    color: var(--primary-pink);
     font-size: 0.67rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .pricing-logic-row {
-    padding: 1.35rem 1.25rem;
+    padding: 1.9rem 1.5rem;
 }
 
 .pricing-logic-row > span {
     color: var(--text-medium);
-    font-size: 0.82rem;
+    font-size: 1.05;
 }
 
 .pricing-logic-row strong {
-    font-size: 0.82rem;
+    font-size: 1.05;
     font-weight: 700;
     text-align: right;
 }

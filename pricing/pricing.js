@@ -22,6 +22,29 @@ const calculatorState = {
 
 let pricingData = null;
 
+function initializePricingCardTilt() {
+    const pricingCard = document.querySelector('.pricing-logic');
+    if (!pricingCard) return;
+
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        targetRotateX = gsap.utils.mapRange(0, window.innerHeight, -8, 8, e.clientY);
+        targetRotateY = gsap.utils.mapRange(0, window.innerWidth, 8, -8, e.clientX);
+    });
+
+    gsap.ticker.add(() => {
+        gsap.to(pricingCard, {
+            duration: 1.5,
+            rotationX: targetRotateX,
+            rotationY: targetRotateY,
+            transformPerspective: 1000,
+            ease: 'power3.out',
+        });
+    });
+}
+
 function escapeHtml(value) {
     return String(value)
         .replaceAll('&', '&amp;')
@@ -787,6 +810,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeHeaderBehavior();
     initializeCursorBehavior();
     initializePageAnimations();
+    initializePricingCardTilt();
     loadPublishedPricing().catch(renderPricingError);
 
     window.__vitaqAnimationsReady = true;
