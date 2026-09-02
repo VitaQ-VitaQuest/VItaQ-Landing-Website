@@ -1,4 +1,4 @@
-
+/* --- Basic Setup & Variables --- */
 :root {
     --bg-dark: #0A0A10;
     --bg-light: #161625;
@@ -17,13 +17,14 @@
     color: var(--bg-dark);
 }
 
-
+/* --- 1. Force Custom Cursor Globally --- */
 html, body, a, button, input, textarea, .btn {
-
+    /* Enforce the dot everywhere, overriding the default 'hand' */
     cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.8"/></svg>') 12 12, auto !important;
 }
 
-
+/* --- 2. The "Targeting" State (Hovering Clickables) --- */
+/* When JS adds .cursor-active, we switch the SVG to a larger, ring-like cursor */
 body.cursor-active,
 body.cursor-active a,
 body.cursor-active button {
@@ -49,7 +50,7 @@ body.modal-open {
     overflow: hidden;
 }
 
-
+/* --- Interactive Spotlight Cursor --- */
 .spotlight {
     position: fixed;
     top: 0;
@@ -68,7 +69,7 @@ body.modal-open {
     body { cursor: auto; }
 }
 
-
+/* --- Animated Aurora Background Glows --- */
 .aurora-glow {
     position: fixed;
     border-radius: 50%;
@@ -84,10 +85,10 @@ body.modal-open {
     100% { transform: translate(100px, 50px) scale(1.2); }
 }
 
-
+/* --- Particle Background --- */
 #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; top: 0; left: 0; }
 
-
+/* --- Reusable Components --- */
 .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
 section { padding: 9rem 0; position: relative; }
 .section-header { text-align: center; max-width: 750px; margin: 0 auto 4rem auto; }
@@ -95,7 +96,7 @@ section { padding: 9rem 0; position: relative; }
 .section-title-small { font-weight: 600; color: var(--text-medium); text-align: center; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.9rem; }
 .section-subtitle { font-size: 1.1rem; color: var(--text-medium); line-height: 1.7; max-width: 600px; margin: 0 auto; }
 
-
+/* --- Gradient Button --- */
 .btn { display: inline-block; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; border: 2px solid transparent; -webkit-user-select: none; user-select: none; position: relative; overflow: hidden; }
 .btn-primary { z-index: 1; color: var(--text-light); background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple)); background-size: 200% 200%; animation: gradient-pan 4s ease infinite; box-shadow: 0 5px 20px rgba(255, 80, 222, 0.3); }
 .btn-primary:hover { transform: scale(1.08) translateY(-3px); box-shadow: 0 10px 35px rgba(255, 80, 222, 0.5); animation-duration: 2s; }
@@ -103,16 +104,16 @@ section { padding: 9rem 0; position: relative; }
 .btn-secondary {
     color: var(--text-medium);
     font-weight: 600;
-
+    /* Glass Effect */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem 1.5rem; 
     margin-top: 0.5rem;
-    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); 
     backdrop-filter: blur(10px);
 }
 
@@ -127,7 +128,7 @@ section { padding: 9rem 0; position: relative; }
 .btn-large { font-size: 1.1rem; padding: 1.2rem 3rem; }
 .btn-sm { padding: 0.7rem 1.4rem; font-size: 0.9rem; }
 
-
+/* --- Main Floating Navbar --- */
 .main-nav { position: fixed; top: 1rem; left: 0; width: 100%; z-index: 1001; padding: 0 2rem; }
 .main-nav-container {
     display: flex;
@@ -160,7 +161,7 @@ section { padding: 9rem 0; position: relative; }
     .main-nav-container { padding: 0.6rem; }
 }
 
-
+/* --- Header & Navigation --- */
 .header-logo-wrapper, .header-menu-button { background: rgba(30, 30, 30, 0.5); border: 1px solid var(--border-color); border-radius: 50px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: all 0.3s ease; }
 .header-logo-wrapper { padding: 0.5rem 0.8rem; }
 .header-logo-wrapper:hover { border-color: var(--text-light); }
@@ -179,13 +180,14 @@ section { padding: 9rem 0; position: relative; }
 .nav-link:hover { color: var(--text-light); transform: scale(1.1); }
 .nav-link.cta { color: var(--primary-pink); margin-top: 2rem; }
 
-
+/* --- Section 1: Hero --- */
+/* 1. Lift the Text & Buttons to the top layer */
 .hero-content {
     position: relative;
-    z-index: 10;
+    z-index: 10; /* Ensures buttons are always clickable */
 }
 
-
+/* 2. Keep the image layer below the text */
 .hero-image-wrapper {
     position: relative;
     z-index: 1;
@@ -200,6 +202,7 @@ section { padding: 9rem 0; position: relative; }
 .hero-image-wrapper { display: flex; justify-content: center; align-items: center; }
 .hero-image { max-width: none; width: 560px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); margin-right: -60px; will-change: transform; -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); mask-image: linear-gradient(to bottom, black 80%, transparent 100%); transform-style: preserve-3d; cursor: pointer; }
 
+/* --- Section 2: Social Proof --- */
 
 .section-title-small {
     font-weight: 600;
@@ -211,7 +214,11 @@ section { padding: 9rem 0; position: relative; }
     font-size: 1rem;
 }
 .social-proof {
-
+    /* ---------------------------------------------------------------
+       SOCIAL PROOF TUNING CONTROLS
+       Change only these variables when you want to tune the reel.
+       The defaults below reproduce the current design exactly.
+       --------------------------------------------------------------- */
     --client-logo-height: 105px;
     --client-logo-max-width: 230px;
     --client-logo-gap: 5rem;
@@ -237,7 +244,7 @@ section { padding: 9rem 0; position: relative; }
     mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 
-
+/* Client Reel */
 .client-reel-container {
     width: 100%;
     padding: var(--client-reel-padding) 0;
@@ -258,7 +265,7 @@ section { padding: 9rem 0; position: relative; }
     mask-image: linear-gradient(to bottom, transparent 0%, black 50%, black 50%, transparent 100%);
 }
 
-
+/* Active while the user is click-dragging the reel (set by JS) */
 .client-reel-container.is-dragging {
     cursor: grabbing;
 }
@@ -289,7 +296,7 @@ section { padding: 9rem 0; position: relative; }
     transform: scale(var(--client-logo-hover-scale));
 }
 
-
+/* Testimonials Wrapper */
 .testimonials-wrapper {
     background: rgba(10, 10, 16, 0.5);
     -webkit-backdrop-filter: blur(8px);
@@ -298,27 +305,27 @@ section { padding: 9rem 0; position: relative; }
     mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
 }
 .testimonials {
-    display: block;
+    display: block; /* Override the grid display */
     grid-template-columns: none;
     gap: 0;
 }
-
+/* Adjust the testimonial card for the horizontal reel */
 .testimonial-card {
-    width: 400px;
-    flex-shrink: 0;
-    background: var(--bg-dark);
+    width: 400px; /* Give cards a consistent width */
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    background: var(--bg-dark); 
     padding: 2.5rem;
-    border-radius: 16px;
+    border-radius: 16px; 
     border: 1px solid var(--border-color);
     transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    cursor: pointer;
-    position: relative;
+    cursor: pointer; /* Indicate card is clickable */
+    position: relative; /* Needed for icon positioning */
 }
 
-
+/* The "Glow Up" Hover Effect */
 .testimonial-card:hover {
     transform: translateY(-8px) scale(1.03);
     border-color: rgba(255, 80, 222, 0.5);
@@ -344,12 +351,12 @@ section { padding: 9rem 0; position: relative; }
     align-items: flex-start;
 }
 
-
+/* This is the key: pause the animation when hovering the container */
 .testimonial-reel-container:hover .testimonial-reel {
     animation-play-state: paused;
 }
 
-
+/* Define the reverse scroll animation */
 @keyframes scroll-reverse {
     0% {
         transform: translateX(-50%);
@@ -359,10 +366,10 @@ section { padding: 9rem 0; position: relative; }
     }
 }
 
-
+/* --- Section 3: Problem --- */
 .problem-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Default to a single column on mobile */
     gap: 2rem;
 }
 .problem-card { background: var(--bg-light); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -371,35 +378,35 @@ section { padding: 9rem 0; position: relative; }
 .problem-card p { color: var(--text-medium); line-height: 1.7; margin: 0; }
 .problem-card:hover {
     transform: translateY(-8px);
-    border-color: transparent;
-    box-shadow: var(--glow-shadow);
+    border-color: transparent; 
+    box-shadow: var(--glow-shadow); 
 }
 .problem-card:hover .problem-icon { filter: drop-shadow(var(--glow-shadow)); }
 
-
+/* --- Section 4: Solution --- */
 .solution { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .solution .section-subtitle { margin-bottom: 2rem; }
 .solution-image-wrapper img { width: 100%; border-radius: 16px; }
 
-
+/* --- Section 5: Feature Grid (Glassmorphism) --- */
 .features { background: transparent; border: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .features .section-header .section-title { text-shadow: 0 0 25px rgba(255, 80, 222, 0.3); }
-.feature-card:hover {
-    transform: translateY(-8px)
-    scale(1.05);
-    border-color: transparent;
+.feature-card:hover { 
+    transform: translateY(-8px) 
+    scale(1.05); 
+    border-color: transparent; 
     box-shadow: var(--glow-shadow);
 }
 .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
 .feature-card {
     background: var(--bg-dark);
-    padding: 3rem 2rem;
+    padding: 3rem 2rem; /* Increased top/bottom padding */
     border-radius: 16px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    text-align: center; /* Center everything */
+    position: relative; /* Crucial for the absolute icon */
+    overflow: hidden; /* Hides the icon when it's outside */
  }
 .feature-card h4 { font-size: 1.2rem; margin: 0 0 0.5rem 0; }
 .feature-card p { color: var(--text-medium); margin: 0; line-height: 1.6; }
@@ -408,62 +415,62 @@ section { padding: 9rem 0; position: relative; }
     width: 50px;
     height: 50px;
     margin-bottom: 1rem;
-    position: absolute;
+    position: absolute; /* Key for positioning */
     top: 2rem;
     left: 50%;
-    transform: translate(-50%, -150%);
+    transform: translate(-50%, -150%); /* Start hidden above */
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* A smooth, premium ease */
 }
 .feature-card h4, .feature-card p {
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-
+/* On hover... */
 .feature-card:hover .feature-icon {
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0); /* Icon slides down into view */
     opacity: 1;
 }
 
 .feature-card:hover h4 {
-    transform: translateY(35px);
+    transform: translateY(35px); /* Title slides down */
 }
 
 .feature-card:hover p {
-    transform: translateY(40px);
-    opacity: 0.7;
+    transform: translateY(40px); /* Paragraph slides down */
+    opacity: 0.7; /* Subtly fade the text to focus on the icon/title */
 }
 
-
+/* --- NEW: Floating Animation --- */
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-12px); }
     100% { transform: translateY(0px); }
 }
 
-
+/* --- Section 6: Deep Dive Scrollytelling --- */
 .deep-dive { padding-bottom: 0rem; }
-
+/* Hide mobile layout by default */
 .deep-dive-mobile { display: none; }
 .deep-dive-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: flex-start; }
 .sticky-col { position: sticky; top: 15vh; height: 70vh; }
-.sticky-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.sticky-content-wrapper { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
     gap: 2rem;
     perspective: 1500px;
 }
 .step-title-container { position: relative; flex-shrink: 0; min-height: 5rem; }
 .step-title { font-size: 2rem; line-height: 1.3; font-weight: 900; position: absolute; top: 0; left: 0; width: 100%; opacity: 0; visibility: hidden; }
-.mockup-container {
-    position: relative;
-    top: 10vh;
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    will-change: transform;
+.mockup-container { 
+    position: relative; 
+    top: 10vh; 
+    width: 100%; 
+    flex-grow: 1; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    will-change: transform; 
     transform-style: preserve-3d;
     filter: blur(0px);
 }
@@ -481,19 +488,19 @@ section { padding: 9rem 0; position: relative; }
     margin-top: 10vh;
 }
 
-
+/* --- Section 7: White-Label --- */
 .white-label { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: -30vh;}
 .white-label .white-label-content { order: -1; }
 .white-label .section-subtitle { margin-bottom: 2rem; }
 .white-label-image-wrapper img { width: 100%; border-radius: 16px; }
 
-
+/* --- Section 8: Who VitaQ Is Built For --- */
 .use-cases {
     padding-top: 8rem;
     padding-bottom: 8rem;
 }
 
-
+/* Anchor the section title just below the floating navbar when navigated to. */
 #use-cases-title {
     scroll-margin-top: 5.5rem;
 }
@@ -573,7 +580,7 @@ section { padding: 9rem 0; position: relative; }
     min-width: 100%;
 }
 
-
+/* Keep secondary client types hidden until the right arrow is used as an expand control. */
 .use-case-tab-secondary {
     display: none;
 }
@@ -662,7 +669,7 @@ section { padding: 9rem 0; position: relative; }
     align-items: center;
     justify-content: center;
 
-
+    /* Keep the existing frameless, Hero-like treatment. */
     border: none;
     border-radius: 0;
     background: transparent;
@@ -675,7 +682,11 @@ section { padding: 9rem 0; position: relative; }
     display: none;
 }
 
-
+/*
+ * One visual stage, two rendering modes:
+ * - reusable layered composition (dashboard + scene + phone)
+ * - single-image fallback for client types without layered assets
+ */
 .use-case-composition {
     position: relative;
     width: 100%;
@@ -687,7 +698,10 @@ section { padding: 9rem 0; position: relative; }
     isolation: isolate;
 }
 
-
+/*
+ * A subtle purple floor bridge sits behind the transparent skater/track layer.
+ * This prevents a visual seam between the full-background dashboard and rink.
+ */
 .use-case-composition.is-layered::before {
     display: none;
 }
@@ -716,19 +730,19 @@ section { padding: 9rem 0; position: relative; }
         drop-shadow(0 0 30px rgba(127, 0, 255, 0.10));
 }
 
-
+/* Hide the normal image while a layered composition is active. */
 .use-case-composition.is-layered .use-case-image--single {
     opacity: 0;
     visibility: hidden;
 }
 
-
+/* Hide all layers for client states that use a normal single image. */
 .use-case-composition:not(.is-layered) .use-case-layer {
     opacity: 0;
     visibility: hidden;
 }
 
-
+/* Individual transparent PNG layers. */
 .use-case-layer {
     position: absolute;
     display: block;
@@ -742,7 +756,10 @@ section { padding: 9rem 0; position: relative; }
         filter 0.35s ease;
 }
 
-
+/*
+ * Main desktop dashboard — treated as the scene background rather than a
+ * floating card. Oversizing/cropping lets it occupy the full upper stage.
+ */
 .use-case-layer-dashboard {
     z-index: 1;
     width: 123%;
@@ -753,7 +770,10 @@ section { padding: 9rem 0; position: relative; }
         drop-shadow(0 0 24px rgba(127, 0, 255, 0.06));
 }
 
-
+/*
+ * Foreground scene layer. For Academies this is the skater/rink scene;
+ * Event & Competition Organizers can use the same slot for their event scene.
+ */
 .use-case-layer-scene {
     z-index: 3;
     width: 125%;
@@ -763,6 +783,11 @@ section { padding: 9rem 0; position: relative; }
 }
 
 
+/*
+ * Large foreground phone.
+ * Its negative left/bottom offsets intentionally let it overlap the
+ * dashboard/skater composition instead of sitting inside the dashboard.
+ */
 .use-case-layer-phone {
     z-index: 5;
     width: 49%;
@@ -774,6 +799,9 @@ section { padding: 9rem 0; position: relative; }
 }
 
 
+/* Event & Competition Organizers: two-image composition.
+   Main race image fills most of the visual stage; the judges image overlaps
+   the lower-right corner with minimal dead space. */
 .use-case-composition[data-composition-variant="events"] .use-case-layer-dashboard {
     z-index: 1;
     width: 116%;
@@ -1006,7 +1034,7 @@ section { padding: 9rem 0; position: relative; }
         padding-top: 6rem;
         padding-bottom: 6rem;
     }
-
+    
     .use-case-composition {
         height: 410px;
         min-height: 410px;
@@ -1050,7 +1078,7 @@ section { padding: 9rem 0; position: relative; }
         height: auto;
 
         right: -2%;
-        top: auto;
+        top: auto;       /* IMPORTANT: cancels desktop top: 60% */
         bottom: 0;
 
         object-fit: cover;
@@ -1129,7 +1157,7 @@ section { padding: 9rem 0; position: relative; }
     }
 }
 
-
+/* --- Section 9: Request a Demo --- */
 .contact-section {
     overflow: hidden;
     padding-top: 5rem;
@@ -1155,7 +1183,7 @@ section { padding: 9rem 0; position: relative; }
     line-height: 1.65;
 }
 
-
+/* Gradient frame + restrained VitaQ brand glow */
 .form-container {
     max-width: 800px;
     margin: 3rem auto 0;
@@ -1283,7 +1311,7 @@ section { padding: 9rem 0; position: relative; }
     font-size: 0.95rem;
 }
 
-
+/* Preserve the existing submit/loading behavior. */
 .form-wrapper .spinner {
     position: absolute;
     top: 50%;
@@ -1400,7 +1428,7 @@ section { padding: 9rem 0; position: relative; }
 
     .input-group input,
     .input-group textarea {
-        font-size: 16px;
+        font-size: 16px; /* Prevents iOS zoom on focus. */
     }
 
     .input-group textarea {
@@ -1418,56 +1446,56 @@ section { padding: 9rem 0; position: relative; }
     }
 }
 
-
+/* --- Footer --- */
 .footer { padding: 2.5rem 0; text-align: center; color: var(--text-medium); }
 .footer p { margin: 0; font-size: 0.9rem; }
 .footer-contact-link { display: inline-block; margin-top: 1rem; color: var(--text-medium); font-size: 0.9rem; text-decoration: none; }
 .footer-contact-link:hover { color: var(--text-light); }
 
-
+/* --- Responsive Design --- */
 @media (min-width: 768px) { .section-title { font-size: 3.5rem; } .hero-headline { font-size: 5.5rem; } .hero-content { transform: translateY(-4rem); } .hero-cta { flex-direction: row; align-items: center; } }
 
-@media (min-width: 768px) {
-    .testimonials { grid-template-columns: 1fr 1fr; }
-    .solution { grid-template-columns: 1fr 1fr; }
-    .white-label { grid-template-columns: 1fr 1fr; }
-    .white-label .white-label-content { order: -1; }
+@media (min-width: 768px) { 
+    .testimonials { grid-template-columns: 1fr 1fr; } /* Apply two-column grid */
+    .solution { grid-template-columns: 1fr 1fr; } 
+    .white-label { grid-template-columns: 1fr 1fr; } 
+    .white-label .white-label-content { order: -1; } 
 }
 
 @media (max-width: 767px) { .hero { display: block; text-align: center; padding-top: 10rem; padding-bottom: 4rem; margin-bottom: 0; min-height: unset; } .hero-headline { font-size: 2.5rem; } .hero-cta { align-items: center; } .hero-image-wrapper { margin-top: -3rem; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); mask-image: linear-gradient(to bottom, transparent 0%, black 40%); } .hero-image { width: 90%; max-width: 500px; margin: 0 auto; } .social-proof { margin-top: -24px; } .solution-image-wrapper img, .white-label-image-wrapper img { width: 100%; margin-left: 0; } }
-@media (max-width: 767px) {
+@media (max-width: 767px) { 
         .hero-image-wrapper { display: none;}
     .problem-grid  {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Default to a single column on mobile */
         gap: 2rem;
     }
     .use-case-grid {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Default to a single column on mobile */
         gap: 2rem;
     }
     .solution {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stack the columns */
         text-align: center;
     }
-
+    
     .solution-image-wrapper {
-        order: 2;
+        order: 2; /* Move the image below the text */
     }
-
+    
     .solution-content {
         order: 1;
     }
-
+    /* --- NEW RULES FOR DEEP DIVE MOBILE --- */
     .deep-dive-desktop {
-        display: none;
+        display: none; /* Hide the entire desktop grid */
     }
     .deep-dive-mobile {
-        display: block;
+        display: block; /* Show the mobile container */
     }
     .mobile-step {
-        margin-bottom: 4rem;
+        margin-bottom: 4rem; /* Space between each feature step */
     }
     .step-title-mobile {
         font-size: 1.8rem;
@@ -1488,21 +1516,21 @@ section { padding: 9rem 0; position: relative; }
         transform: scale(1.02);
     }
     .testimonial-card {
-        width: 300px;
-        padding: 2rem;
+        width: 300px; /* Significantly smaller card for mobile */
+        padding: 2rem; /* Reduce the padding */
     }
 
     .testimonial-card blockquote {
-        font-size: 1rem;
+        font-size: 1rem; /* Smaller text for better readability */
         line-height: 1.5;
     }
 
     .testimonial-reel {
-        gap: 1.5rem;
-        animation-duration: 80s;
+        gap: 1.5rem; /* Reduce the gap between cards */
+        animation-duration: 80s; /* Slow down the animation slightly on mobile */
     }
-
-
+    
+    /* Also adjust the client reel on mobile */
     .client-reel {
         gap: var(--client-logo-mobile-gap);
     }
@@ -1512,7 +1540,7 @@ section { padding: 9rem 0; position: relative; }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
     .hero {
-
+        /* Change from a grid to a single-column block */
         display: block;
         text-align: center;
         padding-top: 10rem;
@@ -1521,35 +1549,35 @@ section { padding: 9rem 0; position: relative; }
     }
 
     .hero-cta {
-
+        /* Center the buttons in their container */
         align-items: center;
     }
 
     .hero-image-wrapper {
-
+        /* Create the overlap effect */
         margin-top: -3rem;
         -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%);
         mask-image: linear-gradient(to bottom, transparent 0%, black 40%);
     }
 
     .hero-image {
-
+        /* Resize and center the image below the text */
         width: 90%;
-        max-width: 650px;
-        margin: 0 auto;
+        max-width: 650px; /* A bit larger than mobile for better proportions */
+        margin: 0 auto; /* This handles the centering */
     }
 
     .solution {
         grid-template-columns: 1fr 1fr;
     }
 
-
+    /* Explicitly keep the 'White-Label' section as two columns */
     .white-label {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-
+/* --- Testimonial Modal Styles --- */
 .testimonial-modal-overlay {
     position: fixed;
     top: 0;
@@ -1559,7 +1587,7 @@ section { padding: 9rem 0; position: relative; }
     background: rgba(10, 10, 16, 0.85);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    z-index: 1002;
+    z-index: 1002; /* Higher than header */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1640,7 +1668,7 @@ section { padding: 9rem 0; position: relative; }
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 2;
+    z-index: 2; /* Sits above card content */
 }
 .testimonial-expand-icon svg {
     width: 100%;
@@ -1668,8 +1696,8 @@ section { padding: 9rem 0; position: relative; }
     }
 }
 
-
-.command-center { padding-top: 0; }
+/* --- Bento Grid (Command Center) - INTERACTIVE UPGRADE --- */
+.command-center { padding-top: 0; } 
 
 .bento-grid {
     display: grid;
@@ -1680,13 +1708,13 @@ section { padding: 9rem 0; position: relative; }
     margin: 0 auto;
 }
 
+/* Card Positioning */
+.card-schedule { grid-column: 1 / 2; grid-row: 1 / 3; } 
+.card-finance { grid-column: 2 / 3; grid-row: 1 / 3; } 
+.card-events { grid-column: 3 / 4; grid-row: 1 / 2; } 
+.card-crm { grid-column: 3 / 4; grid-row: 2 / 3; } 
 
-.card-schedule { grid-column: 1 / 2; grid-row: 1 / 3; }
-.card-finance { grid-column: 2 / 3; grid-row: 1 / 3; }
-.card-events { grid-column: 3 / 4; grid-row: 1 / 2; }
-.card-crm { grid-column: 3 / 4; grid-row: 2 / 3; }
-
-
+/* Base Card Styling */
 .bento-card {
     background: var(--bg-light);
     border: 1px solid var(--border-color);
@@ -1698,11 +1726,11 @@ section { padding: 9rem 0; position: relative; }
     flex-direction: column;
     justify-content: space-between;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-
-    perspective: 1000px;
+    /* For 3D effects */
+    perspective: 1000px; 
 }
 
-
+/* Subtle Hover Lift for all cards */
 .bento-card:hover {
     transform: translateY(-5px) scale(1.005);
     border-color: rgba(255, 80, 222, 0.3);
@@ -1715,6 +1743,9 @@ section { padding: 9rem 0; position: relative; }
 .bento-card p { color: var(--text-medium); font-size: 0.95rem; line-height: 1.5; margin: 0; }
 
 
+/* =========================================
+   INTERACTION 1: THE SCHEDULE (Accordion Expansion)
+   ========================================= */
    .ui-abstract-calendar {
     margin-top: 1.5rem;
     background: rgba(10, 10, 16, 0.6);
@@ -1735,19 +1766,19 @@ section { padding: 9rem 0; position: relative; }
 .time-row { display: flex; gap: 1rem; align-items: flex-start; }
 .time-label { font-size: 0.7rem; color: var(--text-medium); font-family: monospace; padding-top: 10px; width: 35px; }
 
-
-.cal-item {
-    flex-grow: 1;
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+/* The Item Container */
+.cal-item { 
+    flex-grow: 1; 
+    border-radius: 8px; 
+    position: relative; 
+    overflow: hidden; 
+    display: flex; 
+    flex-direction: column; /* Stack main content and details */
     border-left: 3px solid;
     transition: background-color 0.3s ease;
 }
 
-
+/* Main Row Content (Always Visible) */
 .item-main {
     display: flex; justify-content: space-between; align-items: center;
     padding: 0.6rem 0.8rem;
@@ -1757,7 +1788,7 @@ section { padding: 9rem 0; position: relative; }
 
 .cal-item span { font-size: 0.8rem; font-weight: 600; z-index: 1; }
 
-
+/* Hidden Details (Reveals on Hover) */
 .item-details {
     max-height: 0;
     opacity: 0;
@@ -1768,14 +1799,14 @@ section { padding: 9rem 0; position: relative; }
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-
+/* HOVER STATE: EXPAND */
 .interactive-row:hover .item-details {
-    max-height: 50px;
+    max-height: 50px; /* Open up */
     opacity: 1;
     padding-bottom: 0.8rem;
 }
 
-
+/* Detail Tags */
 .detail-tag {
     font-size: 0.65rem;
     background: rgba(0,0,0,0.2);
@@ -1784,18 +1815,18 @@ section { padding: 9rem 0; position: relative; }
     color: rgba(255,255,255,0.8);
 }
 
-
+/* Colors */
 .pink-item { background: rgba(255, 80, 222, 0.1); border-left-color: var(--primary-pink); }
 .pink-item span { color: var(--text-light); }
 .purple-item { background: rgba(127, 0, 255, 0.1); border-left-color: var(--primary-purple); }
 .blue-item { background: rgba(0, 175, 255, 0.1); border-left-color: #00AFFF; }
 
-
+/* Active Hover Colors */
 .interactive-row:hover .pink-item { background: rgba(255, 80, 222, 0.25); box-shadow: 0 0 15px rgba(255, 80, 222, 0.2); }
 .interactive-row:hover .purple-item { background: rgba(127, 0, 255, 0.25); box-shadow: 0 0 15px rgba(127, 0, 255, 0.2); }
 .interactive-row:hover .blue-item { background: rgba(0, 175, 255, 0.25); box-shadow: 0 0 15px rgba(0, 175, 255, 0.2); }
 
-
+/* Live Badge with Pulse */
 .live-badge {
     color: #ff5f56 !important;
     font-size: 0.6rem !important;
@@ -1804,11 +1835,11 @@ section { padding: 9rem 0; position: relative; }
 }
 @keyframes pulse-red { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
 
-
+/* Avatars */
 .mini-avatars { display: flex; }
-.avatar {
-    width: 20px; height: 20px; border-radius: 50%;
-    background: #333; border: 2px solid #1e1e2d;
+.avatar { 
+    width: 20px; height: 20px; border-radius: 50%; 
+    background: #333; border: 2px solid #1e1e2d; 
     margin-left: -8px; font-size: 8px; color: #fff;
     display: flex; align-items: center; justify-content: center;
 }
@@ -1817,6 +1848,9 @@ section { padding: 9rem 0; position: relative; }
 .avatar:nth-child(3) { background: var(--primary-pink); }
 
 
+/* =========================================
+   INTERACTION 2: FINANCE (Taller & Richer)
+   ========================================= */
 .ui-finance-wrapper { display: flex; flex-direction: column; justify-content: space-between; height: 100%; margin-top: 1.5rem; }
 
 .finance-stat { display: flex; flex-direction: column; gap: 0.2rem; }
@@ -1825,14 +1859,14 @@ section { padding: 9rem 0; position: relative; }
 .stat-badge { font-size: 0.8rem; color: #00ff89; background: rgba(0, 255, 137, 0.1); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
 .stat-value { font-size: 2.2rem; font-weight: 700; color: var(--text-light); margin-top: 0.2rem; }
 
-
+/* The Graph Container */
 .ui-abstract-graph {
     display: flex; align-items: flex-end; justify-content: space-between;
-    height: 120px;
+    height: 120px; /* TALLER HEIGHT */
     width: 100%;
     position: relative;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-
+    /* Background Grid Lines */
     background-image: repeating-linear-gradient(
         0deg,
         transparent,
@@ -1841,19 +1875,19 @@ section { padding: 9rem 0; position: relative; }
     );
 }
 
-.graph-bar {
-    width: 18%;
-    background: linear-gradient(to top, var(--primary-purple), var(--primary-pink));
-    border-radius: 4px 4px 0 0; opacity: 0.8;
+.graph-bar { 
+    width: 18%; 
+    background: linear-gradient(to top, var(--primary-purple), var(--primary-pink)); 
+    border-radius: 4px 4px 0 0; opacity: 0.8; 
     transition: height 1s ease, opacity 0.3s ease, transform 0.3s ease;
-    position: relative;
+    position: relative; 
     cursor: crosshair;
     z-index: 1;
 }
 .bar-1 { height: 40%; } .bar-2 { height: 70%; } .bar-3 { height: 50%; } .bar-4 { height: 90%; }
 .trend-line-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 
-
+/* Hover Effects */
 .graph-bar:hover {
     opacity: 1;
     transform: scaleY(1.05);
@@ -1861,7 +1895,7 @@ section { padding: 9rem 0; position: relative; }
     z-index: 10;
 }
 
-
+/* Persistent Tooltip on Hover */
 .graph-bar::after {
     content: attr(data-val);
     position: absolute;
@@ -1887,6 +1921,9 @@ section { padding: 9rem 0; position: relative; }
 }
 
 
+/* =========================================
+   INTERACTION 3: EVENTS (Levitate & Tilt)
+   ========================================= */
 .ui-abstract-ticket {
     margin-top: 1.5rem; height: auto; background: #0A0A10;
     border-radius: 8px; border: 1px solid var(--border-color);
@@ -1894,7 +1931,7 @@ section { padding: 9rem 0; position: relative; }
     transform-style: preserve-3d;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
-
+/* When Card is hovered, the Ticket floats */
 .card-events:hover .ui-abstract-ticket {
     transform: translateY(-5px) rotateX(10deg);
     box-shadow: 0 15px 30px rgba(0,0,0,0.5);
@@ -1905,23 +1942,26 @@ section { padding: 9rem 0; position: relative; }
 .ticket-event { font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; }
 .ticket-tag { font-size: 0.6rem; background: var(--primary-pink); padding: 2px 6px; border-radius: 3px; font-weight: 700; }
 .ticket-barcode { position: relative; height: 30px; width: 100%; overflow: hidden; }
-.barcode-lines {
-    width: 100%; height: 100%;
-    background: repeating-linear-gradient(90deg, #555, #555 2px, transparent 2px, transparent 4px, #555 4px, #555 8px, transparent 8px, transparent 9px);
+.barcode-lines { 
+    width: 100%; height: 100%; 
+    background: repeating-linear-gradient(90deg, #555, #555 2px, transparent 2px, transparent 4px, #555 4px, #555 8px, transparent 8px, transparent 9px); 
 }
 .scan-laser {
     position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: #00ff89;
     box-shadow: 0 0 10px #00ff89;
     animation: scan 3s ease-in-out infinite;
 }
-
+/* Faster laser on hover */
 .card-events:hover .scan-laser { animation-duration: 1s; box-shadow: 0 0 15px #00ff89; width: 3px; }
 @keyframes scan { 0% { left: 0; } 50% { left: 100%; } 100% { left: 0; } }
 
 
-.ui-abstract-profile {
-    margin-top: 1.5rem; background: rgba(255,255,255,0.03);
-    padding: 1rem; border-radius: 12px;
+/* =========================================
+   INTERACTION 4: CRM (Data Reveal)
+   ========================================= */
+.ui-abstract-profile { 
+    margin-top: 1.5rem; background: rgba(255,255,255,0.03); 
+    padding: 1rem; border-radius: 12px; 
     display: flex; flex-direction: column; gap: 0.5rem;
     transition: background 0.3s ease;
 }
@@ -1929,14 +1969,14 @@ section { padding: 9rem 0; position: relative; }
 
 .profile-top { display: flex; justify-content: space-between; align-items: center; }
 .profile-header { display: flex; align-items: center; gap: 0.8rem; }
-.profile-avatar {
-    width: 36px; height: 36px; border-radius: 50%;
+.profile-avatar { 
+    width: 36px; height: 36px; border-radius: 50%; 
     background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
     display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 0.9rem;
     transition: transform 0.3s ease;
 }
-
+/* Avatar pops on hover */
 .card-crm:hover .profile-avatar { transform: scale(1.1); box-shadow: 0 0 10px var(--primary-pink); }
 
 .profile-info { display: flex; flex-direction: column; }
@@ -1944,18 +1984,18 @@ section { padding: 9rem 0; position: relative; }
 .profile-status { font-size: 0.7rem; color: #00ff89; }
 .tag { font-size: 0.6rem; border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 10px; color: var(--text-medium); }
 
-
+/* The Reveal Mechanism */
 .profile-hidden-stats {
     display: flex; justify-content: space-between;
     margin-top: 0;
-    max-height: 0; opacity: 0;
+    max-height: 0; opacity: 0; /* Hidden by default */
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 0;
 }
 
-
+/* On Card Hover, Slide Down */
 .card-crm:hover .profile-hidden-stats {
     max-height: 50px;
     opacity: 1;
@@ -1968,6 +2008,7 @@ section { padding: 9rem 0; position: relative; }
 .p-stat .val { font-size: 0.9rem; font-weight: 700; color: var(--text-light); }
 
 
+/* Mobile Response for Bento */
 @media (max-width: 991px) {
     .bento-grid {
         display: flex;
@@ -1978,12 +2019,14 @@ section { padding: 9rem 0; position: relative; }
     .card-schedule, .card-finance, .card-events, .card-crm { grid-column: auto; grid-row: auto; }
 }
 
+/* --- PHASE 1 ENHANCEMENT: Accessibility & Performance --- */
 
+/* 1. Custom, branded focus state for keyboard navigation */
 a, button, .testimonial-card, .header-menu-button, .header-logo-wrapper {
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease; /* Smooth appearance of the focus ring */
 }
 
-
+/* Apply a glowing ring only when an element is focused via keyboard */
 a:focus-visible,
 button:focus-visible,
 .testimonial-card:focus-visible,
@@ -1993,12 +2036,13 @@ button:focus-visible,
     box-shadow: 0 0 0 2px var(--bg-dark), 0 0 0 4px var(--primary-pink);
 }
 
-
+/* Ensure the primary button's existing shadow is enhanced, not replaced */
 .btn-primary:focus-visible {
     box-shadow: 0 0 0 2px var(--bg-dark), 0 0 0 4px var(--primary-pink), 0 10px 35px rgba(255, 80, 222, 0.5);
 }
 
 
+/* 2. Adaptive experience for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -2006,11 +2050,11 @@ button:focus-visible,
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-
+    /* Stop the background glows from moving */
     .aurora-glow {
         transform: none !important;
     }
-
+    /* Stop the 3D hero image from tilting */
     .hero-image {
         transform: none !important;
     }
@@ -2030,23 +2074,30 @@ button:focus-visible,
     align-items: center;
     justify-content: center;
     z-index: 99999;
-
+    /* The transition now only controls the final fade-out */
     transition: opacity 0.5s ease-in-out 0.2s, visibility 0.5s ease-in-out 0.2s;
 }
 
-
+/* While the preloader is on screen, lock scrolling. #preloader is only a
+   visual overlay (position: fixed) and never blocked touch/scroll input by
+   itself, so the page underneath was still scrollable during the logo
+   animation, before layout (fonts/images) and the GSAP ScrollTrigger
+   animations had fully settled. This removes that gap. */
 body:not(.loaded) {
     overflow: hidden;
 }
 
-
+/* This class, added by JS, is the ONLY trigger now */
 body.loaded #preloader {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 }
 
-
+/* If the main JavaScript bundle never initializes, the inline preloader
+   controller adds .loading-fallback. The page then becomes a normal static
+   landing page instead of remaining visually black because the FOUC rules in
+   index.html intentionally hide animated content before GSAP takes over. */
 body.loading-fallback .hero-preheadline,
 body.loading-fallback .hero-headline,
 body.loading-fallback .hero-subheading,
@@ -2065,7 +2116,8 @@ body.loading-fallback .step-content {
     transform: none !important;
 }
 
-
+/* Desktop deep-dive uses GSAP to choose the active title/screen. If GSAP never
+   starts, show the first state so the section still has a usable visual. */
 body.loading-fallback .step-title[data-step="1"],
 body.loading-fallback .mockup-screen[data-step="1"] {
     visibility: visible !important;
@@ -2077,62 +2129,64 @@ body.loading-fallback .mockup-screen[data-step="1"] {
     overflow: visible;
 }
 
-
+/* Performance hint for the browser */
 #preloader-logo path {
     will-change: stroke-dashoffset, fill, filter;
 }
 
-
+/* Base styles for both paths */
 #preloader-logo #logo-v-pink,
 #preloader-logo #logo-v-main {
     fill: transparent;
     stroke-width: 8px;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-dasharray: 1500;
+    stroke-dasharray: 1500; /* A value larger than any path length */
     stroke-dashoffset: 1500;
 }
 
-
+/* Individual path animations, now a single, multi-step animation */
 #preloader-logo #logo-v-pink {
     stroke: var(--primary-pink);
-
-    animation: draw 0.8s ease-out forwards,
+    /* Animation: draw for 0.8s, then fill & pulse starting after 2s */
+    animation: draw 0.8s ease-out forwards, 
                fill-and-pulse-pink 2s ease-in-out 2s infinite;
 }
 
 #preloader-logo #logo-v-main {
     stroke: var(--text-light);
-
+    /* Animation: draw for 1.2s starting after 0.6s, then fill starting after 2s */
     animation: draw 1.2s ease-out 0.6s forwards,
                fill-main 0.5s ease-out 2s forwards;
 }
 
+/* --- KEYFRAMES --- */
 
+/* Reusable keyframe for the drawing effect */
 @keyframes draw {
     to {
         stroke-dashoffset: 0;
     }
 }
 
-
+/* New, combined keyframe for the pink path to fill and then pulse */
 @keyframes fill-and-pulse-pink {
-
+    /* At 0%, the fill animation begins */
     0% {
         fill: transparent;
         filter: drop-shadow(0 0 0px var(--primary-pink));
     }
-
+    /* At 25%, the fill is complete, and it holds this state */
     25%, 100% {
         fill: var(--primary-pink);
     }
-
+    /* At 50%, the pulse reaches its peak */
     50% {
         filter: drop-shadow(0 0 20px var(--primary-pink));
     }
 }
 
-
+/* A simpler keyframe just for filling the main path */
 @keyframes fill-main {
     to {
         fill: var(--text-light);
@@ -2140,16 +2194,16 @@ body.loading-fallback .mockup-screen[data-step="1"] {
 }
 
 .main-nav {
-
+    /* Add a transition to the transform property for a smooth slide */
     transition: transform 0.4s ease-in-out, background-color 0.3s ease;
 }
 
 .main-nav.header--hidden {
-
+    /* Slide the nav up and out of view */
     transform: translateY(-200%);
 }
 
-
+/* --- FAQ --- */
 .faq {
     padding-top: 8rem;
     padding-bottom: 7rem;
@@ -2328,7 +2382,8 @@ body.loading-fallback .mockup-screen[data-step="1"] {
         line-height: 1.15;
     }
 
-
+    /* Mobile FAQ tab navigation:
+       left arrow + scrollable tabs + right arrow */
     .faq-tabs-navigation {
         display: grid;
         grid-template-columns: 38px minmax(0, 1fr) 38px;
@@ -2364,7 +2419,7 @@ body.loading-fallback .mockup-screen[data-step="1"] {
         scroll-snap-align: center;
     }
 
-
+    /* Mobile-only FAQ arrows */
     .faq-tab-arrow {
         display: flex;
         align-items: center;
@@ -2424,7 +2479,9 @@ body.loading-fallback .mockup-screen[data-step="1"] {
     }
 }
 
+/* --- Living Interface Enhancement: Step 1 (Image Reveals & Hovers) --- */
 
+/* 1. Shimmer Reveal on Scroll */
 .solution-image-wrapper,
 .white-label-image-wrapper,
 .use-case-image-wrapper {
@@ -2437,7 +2494,7 @@ body.loading-fallback .mockup-screen[data-step="1"] {
     z-index: 10;
 }
 
-
+/* The shimmer pseudo-element itself */
 .solution-image-wrapper::after,
 .white-label-image-wrapper::after,
 .use-case-image-wrapper::after {
@@ -2457,24 +2514,24 @@ body.loading-fallback .mockup-screen[data-step="1"] {
     opacity: 0;
 }
 
-
+/* The class added by JS to trigger the animation */
 .is-revealed::after {
     opacity: 1;
     animation: shimmer-wipe 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes shimmer-wipe {
-
+    /* The shimmer starts its journey, invisible */
     0% {
         transform: translateX(-101%);
         opacity: 0;
     }
-
+    /* As it reaches the middle, it is at its brightest */
     50% {
         transform: translateX(0%);
         opacity: 0.5;
     }
-
+    /* As it leaves, it has faded back to nothing */
     100% {
         transform: translateX(101%);
         opacity: 0;
@@ -2482,50 +2539,51 @@ body.loading-fallback .mockup-screen[data-step="1"] {
 }
 
 
+/* 2. 3D Tilt on Hover */
 .solution-image-wrapper,
 .white-label-image-wrapper,
 .use-case-image-wrapper,
-.mockup-container {
-    perspective: 1500px;
+.mockup-container { /* Applying to the scrollytelling container too */
+    perspective: 1500px; /* This is the key to the 3D effect */
 }
 
-
+/* Target all the images within those wrappers */
 .solution-image-wrapper img,
 .white-label-image-wrapper img,
 .use-case-image-wrapper img,
 .mockup-container img {
-    will-change: transform;
-    transition: transform 0.2s ease;
+    will-change: transform; /* Performance hint for the browser */
+    transition: transform 0.2s ease; /* A subtle fallback transition */
 }
 
-
+/* Add a smooth transition to the cursor's inner circle */
 body {
-
+    /* Target the <circle> element within the SVG cursor */
     --cursor-transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.7" style="transition: var(--cursor-transition);" /></svg>') 12 12, auto;
 }
 
-
+/* This class will be added via JS on hover */
 body.cursor-active {
-
+    /* Define the expanded state for the cursor's inner circle */
     --cursor-transform: scale(2.5);
     cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="white" fill-opacity="0.7" style="transition: var(--cursor-transition); transform-origin: center; transform: var(--cursor-transform);" /></svg>') 12 12, auto;
 }
 
-
+/* Prepare the headline containers for the reveal effect */
 .hero-headline, .section-title {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
-
+/* The individual word spans we will create with JS */
 .hero-headline span, .section-title span {
     display: inline-block;
-    will-change: transform, opacity;
+    will-change: transform, opacity; /* Performance hint */
 }
 
 .footer .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack on mobile */
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -2548,15 +2606,15 @@ body.cursor-active {
     color: var(--text-light);
 }
 
-
+/* On larger screens, align items side-by-side */
 @media (min-width: 768px) {
     .footer .container {
-        flex-direction: row;
+        flex-direction: row; /* Side-by-side on desktop */
         justify-content: space-between;
     }
 }
 
-
+/* --- HONEYPOT STYLING (Anti-Spam) --- */
 .honey-pot {
     opacity: 0;
     position: absolute;
