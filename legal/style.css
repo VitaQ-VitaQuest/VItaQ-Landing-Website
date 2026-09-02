@@ -1449,6 +1449,8 @@ section { padding: 9rem 0; position: relative; }
 /* --- Footer --- */
 .footer { padding: 2.5rem 0; text-align: center; color: var(--text-medium); }
 .footer p { margin: 0; font-size: 0.9rem; }
+.footer-contact-link { display: inline-block; margin-top: 1rem; color: var(--text-medium); font-size: 0.9rem; text-decoration: none; }
+.footer-contact-link:hover { color: var(--text-light); }
 
 /* --- Responsive Design --- */
 @media (min-width: 768px) { .section-title { font-size: 3.5rem; } .hero-headline { font-size: 5.5rem; } .hero-content { transform: translateY(-4rem); } .hero-cta { flex-direction: row; align-items: center; } }
