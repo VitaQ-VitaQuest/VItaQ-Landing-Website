@@ -154,6 +154,158 @@
 .pricing-rate-card-section {
     padding: 8rem 0;
 }
+.pricing-plan-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pricing-plan-tab {
+    position: relative;
+    padding: 0.4rem 0;
+    border: 0;
+    color: var(--text-medium);
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.pricing-plan-tab::after {
+    position: absolute;
+    right: 0;
+    bottom: -1.05rem;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
+    content: '';
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.pricing-plan-tab:hover {
+    color: var(--text-light);
+}
+
+.pricing-plan-tab[aria-selected='true'] {
+    color: var(--text-light);
+}
+
+.pricing-plan-tab[aria-selected='true']::after {
+    opacity: 1;
+}
+
+.pricing-plan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.pricing-plan-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    background: rgba(10, 10, 16, 0.78);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.pricing-plan-card:hover {
+    border-color: rgba(255, 255, 255, 0.34);
+    transform: translateY(-4px);
+}
+
+@media (min-width: 700px) {
+    .pricing-plan-card:only-child {
+        max-width: calc((100% - 1.5rem) / 2);
+    }
+}
+
+.pricing-plan-card-header h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+}
+
+.pricing-plan-card-header p {
+    margin: 0;
+    color: var(--text-medium);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.pricing-plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 1.6rem 0 0.6rem;
+}
+
+.pricing-plan-price strong {
+    font-size: 1.9rem;
+    font-weight: 900;
+}
+
+.pricing-plan-price span {
+    color: var(--text-medium);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.pricing-plan-note {
+    flex: 1;
+    margin: 0 0 1.6rem;
+    color: var(--text-medium);
+    font-size: 0.7rem;
+    line-height: 1.55;
+}
+
+.pricing-plan-features {
+    display: grid;
+    flex: 1;
+    gap: 0.7rem;
+    margin: 0.6rem 0 1.6rem;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-plan-features li {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 0.6rem;
+    align-items: start;
+    color: var(--text-medium);
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+.pricing-plan-check {
+    display: grid;
+    width: 18px;
+    height: 18px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: var(--text-light);
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+    font-size: 0.6rem;
+    font-weight: 700;
+}
+
+.pricing-plan-cta {
+    justify-content: center;
+    box-sizing: border-box;
+    text-align: center;
+}
 
 .pricing-calculator-section {
     border-top: 1px solid var(--border-color);

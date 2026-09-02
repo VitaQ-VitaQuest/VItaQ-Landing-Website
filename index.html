@@ -255,6 +255,13 @@
             } catch (err) {
                 // Non-fatal: the page has already been revealed.
             }
+
+            if (window.location.hash) {
+                var hashTarget = document.querySelector(window.location.hash);
+                if (hashTarget) {
+                    hashTarget.scrollIntoView();
+                }
+            }
         }
 
         // Normal path: preserve the existing 3-second post-load preloader timing.

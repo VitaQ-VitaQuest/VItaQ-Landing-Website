@@ -21,6 +21,7 @@ const calculatorState = {
 };
 
 let pricingData = null;
+let activePlanCategoryId = 'academies';
 
 function initializePricingCardTilt() {
     const pricingCard = document.querySelector('.pricing-logic');
@@ -452,86 +453,138 @@ function renderCurrencyControls() {
     });
 }
 
-function createMoneyRateRow(customer, rate, note = '') {
-    return {
-        customer,
-        item: rate.label,
-        basis: rate.unit,
-        usd: formatMoney('USD', rate.prices.USD),
-        aed: formatMoney('AED', rate.prices.AED),
-        note,
-    };
+function formatDualCurrency(prices) {
+    return `<strong>${escapeHtml(formatMoney('USD', prices.USD))}</strong><span class="pricing-plan-secondary-price">/ ${escapeHtml(formatMoney('AED', prices.AED))}</span>`;
 }
 
-function getRateTableRows() {
+function getPlanCategories() {
     const academy = pricingData.customers.academies;
     const camps = pricingData.customers.trainingCamps;
     const events = pricingData.customers.events;
     const brandedApplication = pricingData.addOns.brandedApplication;
 
     return [
-        createMoneyRateRow(academy.name, academy.rates.annual),
-        createMoneyRateRow(academy.name, academy.rates.monthly, `${academy.minimumMonthlyCommitmentMonths}-month minimum paid upfront`),
-        createMoneyRateRow(camps.name, camps.rates.fixed, `Registration open up to ${camps.rates.fixed.registrationWindowDaysIncluded} days before camp`),
         {
-            customer: camps.name,
-            item: camps.rates.revenueShare.label,
-            basis: camps.rates.revenueShare.unit,
-            usd: `${camps.rates.revenueShare.percentage}%`,
-            aed: `${camps.rates.revenueShare.percentage}%`,
-            note: '',
+            id: 'academies',
+            label: 'Academies',
+            items: [
+                {
+                    label: academy.rates.annual.label,
+                    amount: formatDualCurrency(academy.rates.annual.prices),
+                    basis: academy.rates.annual.unit,
+                    features: [
+                        'Unlimited trainees and staff',
+                        'Free support for the first 6 months for your staff',
+                    ],
+                },
+                {
+                    label: academy.rates.monthly.label,
+                    amount: formatDualCurrency(academy.rates.monthly.prices),
+                    basis: academy.rates.monthly.unit,
+                    features: [
+                        'Unlimited trainees and staff',
+                        `${academy.minimumMonthlyCommitmentMonths}-month minimum paid upfront`,
+                    ],
+                },
+            ],
         },
-        createMoneyRateRow(events.name, events.rates.setup),
-        createMoneyRateRow(events.name, events.rates.participant),
-        createMoneyRateRow(events.name, events.rates.accreditation),
-        createMoneyRateRow(events.name, events.rates.onGroundSpecialist),
         {
-            customer: 'All customers',
-            item: brandedApplication.name,
-            basis: brandedApplication.unit,
-            usd: formatMoney('USD', brandedApplication.prices.USD),
-            aed: formatMoney('AED', brandedApplication.prices.AED),
-            note: 'iOS, Android, and web',
+            id: 'trainingCamps',
+            label: 'Training Camps',
+            items: [
+                { label: camps.rates.fixed.label, amount: formatDualCurrency(camps.rates.fixed.prices), basis: camps.rates.fixed.unit, note: `Registration open up to ${camps.rates.fixed.registrationWindowDaysIncluded} days before camp` },
+                { label: camps.rates.revenueShare.label, amount: `<strong>${camps.rates.revenueShare.percentage}%</strong>`, basis: camps.rates.revenueShare.unit },
+            ],
+        },
+        {
+            id: 'events',
+            label: 'Events & Competitions',
+            items: [
+                { label: events.rates.setup.label, amount: formatDualCurrency(events.rates.setup.prices), basis: events.rates.setup.unit, features: [] },
+                { label: events.rates.participant.label, amount: formatDualCurrency(events.rates.participant.prices), basis: events.rates.participant.unit, features: [] },
+                { label: events.rates.accreditation.label, amount: formatDualCurrency(events.rates.accreditation.prices), basis: events.rates.accreditation.unit, features: [] },
+                { label: events.rates.onGroundSpecialist.label, amount: formatDualCurrency(events.rates.onGroundSpecialist.prices), basis: events.rates.onGroundSpecialist.unit, features: [] },
+            ],
+        },
+        {
+            id: 'brandedApplication',
+            label: 'Branded Application / White Label',
+            items: [
+                {
+                    label: brandedApplication.name,
+                    amount: formatDualCurrency(brandedApplication.prices),
+                    basis: brandedApplication.unit,
+                    features: [
+                        'Your own branded experience across web, iOS, and Android with your name, logo, colors, and identity',
+                    ],
+                },
+            ],
         },
     ];
 }
 
-function renderRateTable() {
-    const rows = getRateTableRows();
-    const tableContainer = document.querySelector('[data-rate-table]');
-    const tableRows = rows.map((row, index) => {
-        const startsGroup = index === 0 || rows[index - 1].customer !== row.customer;
-        const customerLabel = startsGroup
-            ? escapeHtml(row.customer)
-            : `<span class="pricing-visually-hidden">${escapeHtml(row.customer)}</span>`;
+function renderPlanTabs() {
+    const categories = getPlanCategories();
+    const tabsContainer = document.querySelector('[data-plan-tabs]');
+    tabsContainer.innerHTML = categories.map((category) => {
+        const isSelected = category.id === activePlanCategoryId;
         return `
-            <tr class="${startsGroup ? 'pricing-table-group-start' : ''}">
-                <th scope="row">${customerLabel}</th>
-                <td>${escapeHtml(row.item)}</td>
-                <td>
-                    <span>${escapeHtml(row.basis)}</span>
-                    ${row.note ? `<small>${escapeHtml(row.note)}</small>` : ''}
-                </td>
-                <td>${escapeHtml(row.usd)}</td>
-                <td>${escapeHtml(row.aed)}</td>
-            </tr>
+            <button
+                type="button"
+                class="pricing-plan-tab"
+                role="tab"
+                data-plan-category="${escapeHtml(category.id)}"
+                aria-selected="${isSelected}"
+                aria-controls="pricing-plan-panel"
+                tabindex="${isSelected ? 0 : -1}"
+            >${escapeHtml(category.label)}</button>
         `;
     }).join('');
+}
 
-    tableContainer.innerHTML = `
-        <table class="pricing-table">
-            <thead>
-                <tr>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Pricing basis</th>
-                    <th scope="col">USD</th>
-                    <th scope="col">AED</th>
-                </tr>
-            </thead>
-            <tbody>${tableRows}</tbody>
-        </table>
+function renderPlanCard(item) {
+    const featuresMarkup = item.features && item.features.length
+        ? `
+            <ul class="pricing-plan-features">
+                ${item.features.map((feature) => `
+                    <li>
+                        <span class="pricing-plan-check" aria-hidden="true">✓</span>
+                        <span>${escapeHtml(feature)}</span>
+                    </li>
+                `).join('')}
+            </ul>
+        `
+        : '';
+
+    return `
+        <article class="pricing-plan-card">
+            <header class="pricing-plan-card-header">
+                <h3>${escapeHtml(item.label)}</h3>
+                <p>${escapeHtml(item.basis)}</p>
+            </header>
+            <div class="pricing-plan-price">${item.amount}</div>
+            ${featuresMarkup}
+            <a href="/#contact" class="btn btn-primary btn-sm pricing-plan-cta">Get started</a>
+        </article>
     `;
+}
+
+function renderRateCards() {
+    const categories = getPlanCategories();
+    const activeCategory = categories.find((category) => category.id === activePlanCategoryId) || categories[0];
+    const container = document.querySelector('[data-rate-cards]');
+    container.id = 'pricing-plan-panel';
+    container.setAttribute('role', 'tabpanel');
+    container.innerHTML = activeCategory.items.map(renderPlanCard).join('');
+}
+
+function selectPlanCategory(categoryId) {
+    if (!pricingData) return;
+    const categories = getPlanCategories();
+    if (!categories.some((category) => category.id === categoryId)) return;
+    activePlanCategoryId = categoryId;
+    renderPlanTabs();
+    renderRateCards();
 }
 
 function renderPublishedPricing() {
@@ -548,7 +601,8 @@ function renderPublishedPricing() {
     renderCustomerSelector();
     renderConfiguration();
     renderEstimate();
-    renderRateTable();
+    renderPlanTabs();
+    renderRateCards();
 }
 
 function renderPricingError(error) {
@@ -556,7 +610,8 @@ function renderPricingError(error) {
     const errorMarkup = `<p class="pricing-data-error" role="alert"><strong>Pricing is temporarily unavailable.</strong>${escapeHtml(message)}</p>`;
     document.querySelector('[data-configuration-panel]').innerHTML = errorMarkup;
     document.querySelector('[data-estimate-panel]').innerHTML = errorMarkup;
-    document.querySelector('[data-rate-table]').innerHTML = errorMarkup;
+    document.querySelector('[data-plan-tabs]').innerHTML = '';
+    document.querySelector('[data-rate-cards]').innerHTML = errorMarkup;
     console.error('Failed to load VitaQ pricing.', error);
 }
 
@@ -618,13 +673,13 @@ function handlePricingClick(event) {
         return;
     }
 
-    const choiceButton = event.target.closest('[data-choice]');
-    if (choiceButton) {
-        calculatorState[choiceButton.dataset.choice] = choiceButton.dataset.choiceValue;
-        renderConfiguration();
-        renderEstimate();
+    const planTabButton = event.target.closest('[data-plan-category]');
+    if (planTabButton) {
+        selectPlanCategory(planTabButton.dataset.planCategory);
         return;
     }
+
+    const choiceButton = event.target.closest('[data-choice]');
 
 }
 
