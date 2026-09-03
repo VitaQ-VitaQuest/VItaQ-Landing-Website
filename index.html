@@ -282,7 +282,7 @@
             <a href="#feature-grid" class="nav-link">Features</a>
             <a href="/pricing/" class="nav-link">Pricing</a>
             <a href="#faq" class="nav-link">FAQ</a>
-            <a href="#contact" class="nav-link cta">Request a Demo</a>
+            <a href="#contact" class="nav-link cta">Book a Demo</a>
         </nav>
     </div>
 
@@ -332,16 +332,23 @@
         <section id="clients" class="social-proof">
             <div class="container">
                 <h2 class="section-title-small">Trusted by the Organizations Shaping the Future of Sport</h2>
+                <div class="client-view-toggle-wrapper">
+                    <button type="button" id="client-view-toggle" class="client-view-toggle" aria-pressed="false">
+                        <svg class="client-view-toggle-icon client-view-toggle-icon-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        <svg class="client-view-toggle-icon client-view-toggle-icon-reel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="2"></rect><line x1="7" y1="7" x2="7" y2="17"></line><line x1="17" y1="7" x2="17" y2="17"></line></svg>
+                        <span class="client-view-toggle-label">List all</span>
+                    </button>
+                </div>
             </div>
-            <div class="client-reel-container">
+            <div class="client-reel-container" id="client-reel-container">
                 <div class="client-reel">
                     <img src="rollfinity.webp" alt="Rollfinity Logo">
                     <img src="rollersider.webp" alt="Rollsiders Logo">
                     <img src="funkyrollers.webp" alt="Funky Rollers Logo">
                     <img src="madrollers.png" alt="MadRollers Logo">
                     <img src="osc.png" alt="Oasis Skating Club Logo">
-                    <img src="Alpha X sports.webp" alt="Alpha X Sports Logo">
-                    <img src="proskate.by.webp" alt="proskate.by Logo">
+                    <img src="Alpha X sports.png" alt="Alpha X Sports Logo">
+                    <img src="proskate.by.png" alt="proskate.by Logo">
                     <img src="Rolloryx 2024.webp" alt="Rolloryx 2024 Logo">
                     <img src="UAE Rollball.webp" alt="UAE Rollball Logo">
                     <img src="Shahdag.png" alt="Shahdag Mountain Resort">
@@ -351,6 +358,22 @@
                     <img src="GFSF.png" alt="Georgian Figure Skating Federation Logo">
                     
                 </div>
+            </div>
+            <div class="client-logo-grid" id="client-logo-grid" hidden>
+                <div class="client-logo-grid-item"><img src="rollfinity.webp" alt="Rollfinity Logo"></div>
+                <div class="client-logo-grid-item"><img src="rollersider.webp" alt="Rollsiders Logo"></div>
+                <div class="client-logo-grid-item"><img src="funkyrollers.webp" alt="Funky Rollers Logo"></div>
+                <div class="client-logo-grid-item"><img src="madrollers.png" alt="MadRollers Logo"></div>
+                <div class="client-logo-grid-item"><img src="osc.png" alt="Oasis Skating Club Logo"></div>
+                <div class="client-logo-grid-item"><img src="Alpha X sports.png" alt="Alpha X Sports Logo"></div>
+                <div class="client-logo-grid-item"><img src="proskate.by.png" alt="proskate.by Logo"></div>
+                <div class="client-logo-grid-item"><img src="Rolloryx 2024.webp" alt="Rolloryx 2024 Logo"></div>
+                <div class="client-logo-grid-item"><img src="UAE Rollball.webp" alt="UAE Rollball Logo"></div>
+                <div class="client-logo-grid-item"><img src="Shahdag.png" alt="Shahdag Mountain Resort"></div>
+                <div class="client-logo-grid-item"><img src="Zayed Sports City.png" alt="Zayed Sports City Logo"></div>
+                <div class="client-logo-grid-item"><img src="azerbaijan.png" alt="Azerbaijan Logo"></div>
+                <div class="client-logo-grid-item"><img src="ISMF.png" alt="International Ski Mountaineering Federation"></div>
+                <div class="client-logo-grid-item"><img src="GFSF.png" alt="Georgian Figure Skating Federation Logo"></div>
             </div>
         </section>
 
@@ -1328,7 +1351,7 @@
                                 <textarea id="message" name="message" rows="4" placeholder="Hi there! We're a [Your Sport] organization and I'm particularly interested in..."></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-large">Book My Free Demo</button>
+                            <button type="submit" class="btn btn-primary btn-large">Book a Demo</button>
                         </form>
                     </div>
                 </div>

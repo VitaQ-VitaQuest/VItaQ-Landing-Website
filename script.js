@@ -1275,4 +1275,20 @@ document.addEventListener('DOMContentLoaded', () => {
     container.addEventListener('touchmove', (e) => moveDrag(e.touches[0].clientX), { passive: true });
     container.addEventListener('touchend', endDrag);
     container.addEventListener('touchcancel', endDrag);
+
+    // View toggle: switch between the scrolling reel and the full color grid
+    const viewToggle = document.getElementById('client-view-toggle');
+    const reelContainer = document.getElementById('client-reel-container');
+    const logoGrid = document.getElementById('client-logo-grid');
+    const viewToggleLabel = viewToggle ? viewToggle.querySelector('.client-view-toggle-label') : null;
+    if (viewToggle && reelContainer && logoGrid && viewToggleLabel) {
+        viewToggle.addEventListener('click', () => {
+            const showGrid = viewToggle.getAttribute('aria-pressed') !== 'true';
+            viewToggle.setAttribute('aria-pressed', String(showGrid));
+            reelContainer.hidden = showGrid;
+            logoGrid.hidden = !showGrid;
+            isPaused = showGrid;
+            viewToggleLabel.textContent = showGrid ? 'Reel view' : 'List all';
+        });
+    }
 });
