@@ -296,6 +296,86 @@ section { padding: 9rem 0; position: relative; }
     transform: scale(var(--client-logo-hover-scale));
 }
 
+.client-view-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.client-view-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+    font-family: var(--font-family);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.client-view-toggle:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+.client-view-toggle[aria-pressed="true"] {
+    background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
+    border-color: transparent;
+}
+
+.client-view-toggle-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.client-view-toggle-icon-reel {
+    display: none;
+}
+
+.client-view-toggle[aria-pressed="true"] .client-view-toggle-icon-grid {
+    display: none;
+}
+
+.client-view-toggle[aria-pressed="true"] .client-view-toggle-icon-reel {
+    display: block;
+}
+
+.client-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 2rem var(--client-reel-padding);
+}
+
+.client-logo-grid[hidden] {
+    display: none;
+}
+
+.client-logo-grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+}
+
+.client-logo-grid-item img {
+    max-width: 100%;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+}
+
 /* Testimonials Wrapper */
 .testimonials-wrapper {
     background: rgba(10, 10, 16, 0.5);
@@ -1662,6 +1742,9 @@ section { padding: 9rem 0; position: relative; }
     }
     .client-reel img {
         height: var(--client-logo-mobile-height);
+    }
+    .client-logo-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
