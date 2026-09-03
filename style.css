@@ -446,23 +446,6 @@ section { padding: 9rem 0; position: relative; }
     }
 }
 
-/* --- Section 3: Problem --- */
-.problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Default to a single column on mobile */
-    gap: 2rem;
-}
-.problem-card { background: var(--bg-light); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.problem-icon { width: 70px; height: 70px; transition: filter 0.3s ease; }
-.problem-card h3 { font-size: 1.3rem; margin: 1rem 0; }
-.problem-card p { color: var(--text-medium); line-height: 1.7; margin: 0; }
-.problem-card:hover {
-    transform: translateY(-8px);
-    border-color: transparent; 
-    box-shadow: var(--glow-shadow); 
-}
-.problem-card:hover .problem-icon { filter: drop-shadow(var(--glow-shadow)); }
-
 /* --- Section 4: Solution --- */
 .solution { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .solution .section-subtitle { margin-bottom: 2rem; }
@@ -1671,11 +1654,6 @@ section { padding: 9rem 0; position: relative; }
 @media (max-width: 767px) { .hero { display: block; text-align: center; padding-top: 10rem; padding-bottom: 4rem; margin-bottom: 0; min-height: unset; } .hero-headline { font-size: 2.5rem; } .hero-cta { align-items: center; } .hero-image-wrapper { margin-top: -3rem; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); mask-image: linear-gradient(to bottom, transparent 0%, black 40%); } .hero-image { width: 90%; max-width: 500px; margin: 0 auto; } .social-proof { margin-top: -24px; } .solution-image-wrapper img, .white-label-image-wrapper img { width: 100%; margin-left: 0; } }
 @media (max-width: 767px) { 
         .hero-image-wrapper { display: none;}
-    .problem-grid  {
-        display: grid;
-        grid-template-columns: 1fr; /* Default to a single column on mobile */
-        gap: 2rem;
-    }
     .use-case-grid {
         display: grid;
         grid-template-columns: 1fr; /* Default to a single column on mobile */
