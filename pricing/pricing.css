@@ -154,17 +154,74 @@
 .pricing-rate-card-section {
     padding: 8rem 0;
 }
-.pricing-plan-tabs {
+.pricing-tabs-nav {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    align-items: center;
+    gap: 0.75rem;
     margin-top: 3.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
 }
 
+.pricing-tabs-arrow {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--text-light);
+    font: inherit;
+    font-size: 1.55rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.pricing-tabs-arrow:hover {
+    color: var(--primary-pink);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.pricing-tabs-arrow:active {
+    transform: scale(0.92);
+}
+
+.pricing-tabs-arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+}
+
+.pricing-tabs-scroll {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pricing-tabs-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.pricing-plan-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+}
+
 .pricing-plan-tab {
     position: relative;
+    flex: 0 0 auto;
     padding: 0.4rem 0;
     border: 0;
     color: var(--text-medium);
@@ -172,6 +229,8 @@
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: 700;
+    white-space: nowrap;
+    scroll-snap-align: start;
     transition: color 0.2s ease;
 }
 
@@ -984,7 +1043,7 @@
 }
 
 /* Calculator UX refinements */
-.pricing-calculator-tabs {
+.pricing-calculator-tabs-nav {
     margin-top: 2.25rem;
 }
 
@@ -1036,37 +1095,30 @@
 
 /* Mobile client-type navigation */
 @media (max-width: 767px) {
-    .pricing-plan-tabs {
-        flex-wrap: nowrap;
-        gap: 1.35rem;
+    .pricing-tabs-nav {
+        gap: 0.4rem;
         margin-top: 2.25rem;
-        padding: 0 0 0.85rem;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scrollbar-width: none;
-        scroll-snap-type: x proximity;
-        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.85rem;
     }
 
-    .pricing-plan-tabs::-webkit-scrollbar {
-        display: none;
+    .pricing-tabs-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 1.4rem;
+    }
+
+    .pricing-plan-tabs {
+        gap: 1.35rem;
     }
 
     .pricing-plan-tab {
-        flex: 0 0 auto;
         padding: 0.45rem 0.05rem;
         font-size: 0.8rem;
         line-height: 1.35;
-        white-space: nowrap;
-        scroll-snap-align: start;
     }
 
     .pricing-plan-tab::after {
         bottom: -0.9rem;
-    }
-
-    .pricing-calculator-tabs {
-        margin-top: 2.25rem;
     }
 }
 
@@ -1079,4 +1131,3 @@
         font-size: 0.76rem;
     }
 }
-
