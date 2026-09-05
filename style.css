@@ -227,9 +227,9 @@ section { padding: 9rem 0; position: relative; }
     --client-logo-mobile-height: 95px;
     --client-logo-mobile-gap: 3rem;
     --client-reel-padding: 6rem;
-    --client-reel-glow-left: rgba(255, 80, 222, 0.25);
+    --client-reel-glow-left: rgba(255, 80, 222, 0.6);
     --client-reel-glow-center: rgba(255, 80, 222, 0.25);
-    --client-reel-glow-right: rgba(10, 10, 16, 1);
+    --client-reel-glow-right: rgba(255, 80, 222, 0.6);
 
     background: transparent;
     border-top-left-radius: 20px;
