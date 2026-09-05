@@ -22,6 +22,7 @@ const calculatorState = {
 
 let pricingData = null;
 let activePlanCategoryId = 'academies';
+const pricingTabsNavUpdaters = [];
 
 function initializePricingCardTilt() {
     const pricingCard = document.querySelector('.pricing-logic');
@@ -602,6 +603,7 @@ function renderPublishedPricing() {
     renderEstimate();
     renderPlanTabs();
     renderRateCards();
+    requestAnimationFrame(updatePricingTabsNav);
 }
 
 function renderPricingError(error) {
@@ -720,6 +722,39 @@ function handlePricingChange(event) {
         return;
     }
 
+}
+
+function initializePricingTabsNav() {
+    document.querySelectorAll('[data-tabs-nav]').forEach((nav) => {
+        const scrollContainer = nav.querySelector('[data-tabs-scroll]');
+        const prevArrow = nav.querySelector('[data-tabs-arrow="prev"]');
+        const nextArrow = nav.querySelector('[data-tabs-arrow="next"]');
+        if (!scrollContainer || !prevArrow || !nextArrow) return;
+
+        function updateArrowState() {
+            const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+            const isScrollable = maxScrollLeft > 1;
+            prevArrow.disabled = !isScrollable || scrollContainer.scrollLeft <= 1;
+            nextArrow.disabled = !isScrollable || scrollContainer.scrollLeft >= maxScrollLeft - 1;
+        }
+
+        function scrollByStep(direction) {
+            const step = Math.max(scrollContainer.clientWidth * 0.7, 160);
+            scrollContainer.scrollBy({ left: direction * step, behavior: 'smooth' });
+        }
+
+        prevArrow.addEventListener('click', () => scrollByStep(-1));
+        nextArrow.addEventListener('click', () => scrollByStep(1));
+        scrollContainer.addEventListener('scroll', updateArrowState);
+        window.addEventListener('resize', updateArrowState);
+
+        updateArrowState();
+        pricingTabsNavUpdaters.push(updateArrowState);
+    });
+}
+
+function updatePricingTabsNav() {
+    pricingTabsNavUpdaters.forEach((updateArrowState) => updateArrowState());
 }
 
 function initializeMenu() {
@@ -880,6 +915,7 @@ window.addEventListener('hashchange', applyPricingHash);
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeMenu();
+    initializePricingTabsNav();
     initializeParticles();
     initializeAmbientMotion();
     initializeHeaderBehavior();
