@@ -856,17 +856,27 @@ function initializePageAnimations() {
     }
 }
 
+function applyPricingHash() {
+    if (!pricingData || window.location.hash !== '#white-label') return;
+    selectPlanCategory('brandedApplication');
+    requestAnimationFrame(() => {
+        document.getElementById('rate-card')?.scrollIntoView({ block: 'start' });
+    });
+}
+
 async function loadPublishedPricing() {
     const pricesUrl = document.body.dataset.pricesUrl || '/prices.json';
     const response = await fetch(pricesUrl, { cache: 'no-store' });
     if (!response.ok) throw new Error(`prices.json returned HTTP ${response.status}.`);
     pricingData = validatePrices(await response.json());
     renderPublishedPricing();
+    applyPricingHash();
 }
 
 document.addEventListener('click', handlePricingClick);
 document.addEventListener('input', handlePricingInput);
 document.addEventListener('change', handlePricingChange);
+window.addEventListener('hashchange', applyPricingHash);
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeMenu();

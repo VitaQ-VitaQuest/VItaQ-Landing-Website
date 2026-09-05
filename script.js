@@ -208,6 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Staggered Grid Animations ---
     function createStaggeredAnimation(containerSelector, elementSelector) {
+        if (!document.querySelector(containerSelector)) return;
         gsap.fromTo(elementSelector,
             { autoAlpha: 0, y: 50, scale: 0.95, rotationX: -60, transformOrigin: 'top center' },
             {
@@ -1097,7 +1098,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Living Interface Enhancement: Step 1 (Image Reveals & Hovers) ---
 
     // 1. Shimmer Reveal on Scroll
-    const revealWrappers = gsap.utils.toArray('.solution-image-wrapper, .white-label-image-wrapper, .use-case-image-wrapper');
+    const revealWrappers = gsap.utils.toArray('.white-label-image-wrapper, .use-case-image-wrapper');
     revealWrappers.forEach(wrapper => {
         ScrollTrigger.create({
             trigger: wrapper,
@@ -1118,7 +1119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // 2. 3D Tilt on Hover (Optimized)
-    const tiltWrappers = gsap.utils.toArray('.solution-image-wrapper, .white-label-image-wrapper, .use-case-visual, .mockup-container');
+    const tiltWrappers = gsap.utils.toArray('.white-label-image-wrapper, .use-case-visual, .mockup-container');
     tiltWrappers.forEach(wrapper => {
         // Keep multi-part visuals moving as one 3D composition.
         const isMockupContainer = wrapper.classList.contains('mockup-container');
