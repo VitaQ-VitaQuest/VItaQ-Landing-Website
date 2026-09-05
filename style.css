@@ -531,7 +531,7 @@ section { padding: 9rem 0; position: relative; }
     transform-style: preserve-3d;
     filter: blur(0px);
 }
-.mockup-screen { position: absolute; max-width: 90%; max-height: 90%; opacity: 0; visibility: hidden; }
+.mockup-screen { position: absolute; max-width: 98%; max-height: 98%; opacity: 0; visibility: hidden; }
 .scroll-step { min-height: 75vh; display: flex; flex-direction: column; justify-content: center; }
 .step-content { background: var(--bg-light); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.4s ease; }
 .step-content.glowing { border-color: rgba(255, 80, 222, 0.6); box-shadow: var(--glow-shadow); transform: scale(1.02); }
