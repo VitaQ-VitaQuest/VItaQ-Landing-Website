@@ -308,8 +308,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 description: 'Structure programs, evaluations, goals, and performance data around the way your organization develops athletes.',
                 howTitle: 'How High-Performance Centers Use VitaQ',
                 cta: 'Explore High-Performance Solutions',
-                image: 'screen-analytics.png',
+                image: 'High-Performance.jwebp',
                 imageAlt: 'VitaQ performance analytics for high-performance centers',
+                composition: {
+                    type: 'layered',
+                    variant: 'high-performance',
+                    // Main landscape performance-center image.
+                    dashboard: 'High-Performance.webp',
+                    // Overlapping analytics phone screen.
+                    phone: 'screen-analytics.png'
+                },
                 points: [
                     ['Digitize Your Methodology', 'Turn programs, stages, exercises, and protocols into a structured system.'],
                     ['Set Clear Benchmarks', 'Define measurable goals for development and performance.'],
@@ -319,6 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 ]
             }
         ];
+        [useCaseStates[2], useCaseStates[3]] = [useCaseStates[3], useCaseStates[2]];
 
         // Preload every Who-It's-For visual up front. Without this, switching
         // tabs sets a new <img> src that still has to be downloaded/decoded,
