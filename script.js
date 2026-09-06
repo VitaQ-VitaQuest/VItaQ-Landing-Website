@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 description: 'Structure programs, evaluations, goals, and performance data around the way your organization develops athletes.',
                 howTitle: 'How High-Performance Centers Use VitaQ',
                 cta: 'Explore High-Performance Solutions',
-                image: 'screen-analytics.webp',
+                image: 'screen-analytics.png',
                 imageAlt: 'VitaQ performance analytics for high-performance centers',
                 points: [
                     ['Digitize Your Methodology', 'Turn programs, stages, exercises, and protocols into a structured system.'],
