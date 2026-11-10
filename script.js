@@ -208,6 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Staggered Grid Animations ---
     function createStaggeredAnimation(containerSelector, elementSelector) {
+        if (!document.querySelector(containerSelector)) return;
         gsap.fromTo(elementSelector,
             { autoAlpha: 0, y: 50, scale: 0.95, rotationX: -60, transformOrigin: 'top center' },
             {
@@ -307,8 +308,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 description: 'Structure programs, evaluations, goals, and performance data around the way your organization develops athletes.',
                 howTitle: 'How High-Performance Centers Use VitaQ',
                 cta: 'Explore High-Performance Solutions',
-                image: 'screen-analytics.webp',
+                image: 'High-Performance.jwebp',
                 imageAlt: 'VitaQ performance analytics for high-performance centers',
+                composition: {
+                    type: 'layered',
+                    variant: 'high-performance',
+                    // Main landscape performance-center image.
+                    dashboard: 'High-Performance.webp',
+                    // Overlapping analytics phone screen.
+                    phone: 'screen-analytics.png'
+                },
                 points: [
                     ['Digitize Your Methodology', 'Turn programs, stages, exercises, and protocols into a structured system.'],
                     ['Set Clear Benchmarks', 'Define measurable goals for development and performance.'],
@@ -318,6 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 ]
             }
         ];
+        [useCaseStates[2], useCaseStates[3]] = [useCaseStates[3], useCaseStates[2]];
 
         // Preload every Who-It's-For visual up front. Without this, switching
         // tabs sets a new <img> src that still has to be downloaded/decoded,
@@ -1097,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Living Interface Enhancement: Step 1 (Image Reveals & Hovers) ---
 
     // 1. Shimmer Reveal on Scroll
-    const revealWrappers = gsap.utils.toArray('.solution-image-wrapper, .white-label-image-wrapper, .use-case-image-wrapper');
+    const revealWrappers = gsap.utils.toArray('.white-label-image-wrapper, .use-case-image-wrapper');
     revealWrappers.forEach(wrapper => {
         ScrollTrigger.create({
             trigger: wrapper,
@@ -1118,7 +1128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // 2. 3D Tilt on Hover (Optimized)
-    const tiltWrappers = gsap.utils.toArray('.solution-image-wrapper, .white-label-image-wrapper, .use-case-visual, .mockup-container');
+    const tiltWrappers = gsap.utils.toArray('.white-label-image-wrapper, .use-case-visual, .mockup-container');
     tiltWrappers.forEach(wrapper => {
         // Keep multi-part visuals moving as one 3D composition.
         const isMockupContainer = wrapper.classList.contains('mockup-container');

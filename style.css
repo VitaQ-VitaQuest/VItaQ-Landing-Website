@@ -227,9 +227,9 @@ section { padding: 9rem 0; position: relative; }
     --client-logo-mobile-height: 95px;
     --client-logo-mobile-gap: 3rem;
     --client-reel-padding: 6rem;
-    --client-reel-glow-left: rgba(255, 80, 222, 0.25);
+    --client-reel-glow-left: rgba(255, 80, 222, 0.6);
     --client-reel-glow-center: rgba(255, 80, 222, 0.25);
-    --client-reel-glow-right: rgba(10, 10, 16, 1);
+    --client-reel-glow-right: rgba(255, 80, 222, 0.6);
 
     background: transparent;
     border-top-left-radius: 20px;
@@ -587,28 +587,6 @@ section { padding: 9rem 0; position: relative; }
     }
 }
 
-/* --- Section 3: Problem --- */
-.problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Default to a single column on mobile */
-    gap: 2rem;
-}
-.problem-card { background: var(--bg-light); padding: 2rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.problem-icon { width: 70px; height: 70px; transition: filter 0.3s ease; }
-.problem-card h3 { font-size: 1.3rem; margin: 1rem 0; }
-.problem-card p { color: var(--text-medium); line-height: 1.7; margin: 0; }
-.problem-card:hover {
-    transform: translateY(-8px);
-    border-color: transparent; 
-    box-shadow: var(--glow-shadow); 
-}
-.problem-card:hover .problem-icon { filter: drop-shadow(var(--glow-shadow)); }
-
-/* --- Section 4: Solution --- */
-.solution { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.solution .section-subtitle { margin-bottom: 2rem; }
-.solution-image-wrapper img { width: 100%; border-radius: 16px; }
-
 /* --- Section 5: Feature Grid (Glassmorphism) --- */
 .features { background: transparent; border: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .features .section-header .section-title { text-shadow: 0 0 25px rgba(255, 80, 222, 0.3); }
@@ -669,7 +647,6 @@ section { padding: 9rem 0; position: relative; }
 }
 
 /* --- Section 6: Deep Dive Scrollytelling --- */
-.deep-dive { padding-bottom: 0rem; }
 /* Hide mobile layout by default */
 .deep-dive-mobile { display: none; }
 .deep-dive-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: flex-start; }
@@ -695,7 +672,7 @@ section { padding: 9rem 0; position: relative; }
     transform-style: preserve-3d;
     filter: blur(0px);
 }
-.mockup-screen { position: absolute; max-width: 90%; max-height: 90%; opacity: 0; visibility: hidden; }
+.mockup-screen { position: absolute; max-width: 98%; max-height: 98%; opacity: 0; visibility: hidden; }
 .scroll-step { min-height: 75vh; display: flex; flex-direction: column; justify-content: center; }
 .step-content { background: var(--bg-light); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); transition: all 0.4s ease; }
 .step-content.glowing { border-color: rgba(255, 80, 222, 0.6); box-shadow: var(--glow-shadow); transform: scale(1.02); }
@@ -710,10 +687,23 @@ section { padding: 9rem 0; position: relative; }
 }
 
 /* --- Section 7: White-Label --- */
-.white-label { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: -30vh;}
+.white-label { --white-label-image-width: 60%; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .white-label .white-label-content { order: -1; }
 .white-label .section-subtitle { margin-bottom: 2rem; }
-.white-label-image-wrapper img { width: 100%; border-radius: 16px; }
+.white-label-image-wrapper { display: flex; justify-content: center; }
+.white-label-image-wrapper img { width: var(--white-label-image-width); max-width: 100%; height: auto; display: block; border-radius: 16px; }
+.white-label .btn-primary { transition: transform 0.12s ease-out, box-shadow 0.12s ease-out; will-change: transform; touch-action: manipulation; }
+.white-label .btn-primary:active { transform: scale(0.98); }
+
+@media (max-width: 767px) {
+    .deep-dive { padding-bottom: 6rem; }
+    .white-label { --white-label-image-width: min(80%, 320px); grid-template-columns: 1fr; gap: 2.5rem; padding-top: 6rem; padding-bottom: 6rem; text-align: center; }
+    .white-label .white-label-content { order: -1; }
+    .white-label .section-title { margin-top: 0; font-size: clamp(2.15rem, 10vw, 2.75rem); }
+    .white-label .section-subtitle { max-width: 100%; margin: 0 auto 2rem; }
+    .white-label-image-wrapper { width: 100%; }
+    .white-label .btn-primary { width: 100%; box-sizing: border-box; text-align: center; }
+}
 
 /* --- Section 8: Who VitaQ Is Built For --- */
 .use-cases {
@@ -997,9 +987,9 @@ section { padding: 9rem 0; position: relative; }
  */
 .use-case-layer-scene {
     z-index: 3;
-    width: 125%;
+    width: 95%;
     right: -20%;
-    bottom: -4%;
+    bottom: 10%;
     filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.34));
 }
 
@@ -1011,8 +1001,8 @@ section { padding: 9rem 0; position: relative; }
  */
 .use-case-layer-phone {
     z-index: 5;
-    width: 49%;
-    left: -10%;
+    width: 63%;
+    left: -12%;
     bottom: 8%;
     filter:
         drop-shadow(0 26px 34px rgba(0, 0, 0, 0.48))
@@ -1058,6 +1048,36 @@ section { padding: 9rem 0; position: relative; }
 
 .use-case-composition[data-composition-variant="events"] .use-case-layer-phone {
     display: none;
+}
+
+/* High-Performance Centers: two-image composition.
+   Main performance-center image fills most of the visual stage; the
+   analytics phone screen overlaps the lower-right corner. */
+.use-case-composition[data-composition-variant="high-performance"] .use-case-layer-dashboard {
+    z-index: 1;
+    width: 116%;
+    height: 82%;
+    left: -6%;
+    top: 2%;
+    object-fit: cover;
+    object-position: center 50%;
+    border-radius: 18px;
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.24));
+}
+
+.use-case-composition[data-composition-variant="high-performance"] .use-case-layer-scene {
+    display: none;
+}
+
+.use-case-composition[data-composition-variant="high-performance"] .use-case-layer-phone {
+    z-index: 5;
+    width: 68%;
+    left: auto;
+    right: 50%;
+    bottom: 5%;
+    filter:
+        drop-shadow(0 26px 34px rgba(0, 0, 0, 0.48))
+        drop-shadow(0 0 20px rgba(127, 0, 255, 0.08));
 }
 
 .use-case-content {
@@ -1248,6 +1268,19 @@ section { padding: 9rem 0; position: relative; }
         right: -3%;
         bottom: 1%;
     }
+
+    .use-case-composition[data-composition-variant="high-performance"] .use-case-layer-dashboard {
+        width: 114%;
+        height: 78%;
+        left: -7%;
+        top: 6%;
+    }
+
+    .use-case-composition[data-composition-variant="high-performance"] .use-case-layer-phone {
+        width: 36%;
+        right: -4%;
+        bottom: -4%;
+    }
 }
 
 @media (max-width: 767px) {
@@ -1265,6 +1298,31 @@ section { padding: 9rem 0; position: relative; }
     .use-case-image--single {
         width: 100%;
         margin-left: 0;
+    }
+
+    .use-case-composition[data-composition-variant="academies"],
+    .use-case-composition[data-composition-variant="high-performance"] {
+        height: clamp(270px, 88vw, 410px);
+        min-height: 0;
+        margin-top: clamp(1.5rem, 7vw, 4rem);
+    }
+
+    .use-case-composition[data-composition-variant="academies"] .use-case-layer-dashboard {
+        width: 116%;
+        left: -8%;
+        top: 10%;
+    }
+
+    .use-case-composition[data-composition-variant="academies"] .use-case-layer-scene {
+        width: 80%;
+        right: -5%;
+        bottom: 4%;
+    }
+
+    .use-case-composition[data-composition-variant="academies"] .use-case-layer-phone {
+        width: 58%;
+        left: -5%;
+        bottom: -8%;
     }
 
     .use-case-layer-dashboard {
@@ -1304,6 +1362,19 @@ section { padding: 9rem 0; position: relative; }
 
         object-fit: cover;
         object-position: center 60%;
+    }
+
+    .use-case-composition[data-composition-variant="high-performance"] .use-case-layer-dashboard {
+        width: 100%;
+        height: 77%;
+        left: 0;
+        top: 4%;
+    }
+
+    .use-case-composition[data-composition-variant="high-performance"] .use-case-layer-phone {
+        width: 60%;
+        right: 45%;
+        bottom: 1%;
     }
 
     #use-cases-title {
@@ -1815,35 +1886,17 @@ section { padding: 9rem 0; position: relative; }
 
 @media (min-width: 768px) { 
     .testimonials { grid-template-columns: 1fr 1fr; } /* Apply two-column grid */
-    .solution { grid-template-columns: 1fr 1fr; } 
     .white-label { grid-template-columns: 1fr 1fr; } 
     .white-label .white-label-content { order: -1; } 
 }
 
-@media (max-width: 767px) { .hero { display: block; text-align: center; padding-top: 10rem; padding-bottom: 4rem; margin-bottom: 0; min-height: unset; } .hero-headline { font-size: 2.5rem; } .hero-cta { align-items: center; } .hero-image-wrapper { margin-top: -3rem; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); mask-image: linear-gradient(to bottom, transparent 0%, black 40%); } .hero-image { width: 90%; max-width: 500px; margin: 0 auto; } .social-proof { margin-top: -24px; } .solution-image-wrapper img, .white-label-image-wrapper img { width: 100%; margin-left: 0; } }
+@media (max-width: 767px) { .hero { display: block; text-align: center; padding-top: 10rem; padding-bottom: 4rem; margin-bottom: 0; min-height: unset; } .hero-headline { font-size: 2.5rem; } .hero-cta { align-items: center; } .hero-image-wrapper { margin-top: -3rem; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%); mask-image: linear-gradient(to bottom, transparent 0%, black 40%); } .hero-image { width: 90%; max-width: 500px; margin: 0 auto; } .social-proof { margin-top: -24px; } .white-label-image-wrapper img { width: var(--white-label-image-width); margin-left: 0; } }
 @media (max-width: 767px) { 
         .hero-image-wrapper { display: none;}
-    .problem-grid  {
-        display: grid;
-        grid-template-columns: 1fr; /* Default to a single column on mobile */
-        gap: 2rem;
-    }
     .use-case-grid {
         display: grid;
         grid-template-columns: 1fr; /* Default to a single column on mobile */
         gap: 2rem;
-    }
-    .solution {
-        grid-template-columns: 1fr; /* Stack the columns */
-        text-align: center;
-    }
-    
-    .solution-image-wrapper {
-        order: 2; /* Move the image below the text */
-    }
-    
-    .solution-content {
-        order: 1;
     }
     /* --- NEW RULES FOR DEEP DIVE MOBILE --- */
     .deep-dive-desktop {
@@ -1863,8 +1916,8 @@ section { padding: 9rem 0; position: relative; }
     }
     .mobile-mockup-screen {
         display: block;
-        width: 100%;
-        max-width: 400px;
+        width: min(80%, 320px);
+        max-width: 100%;
         margin: 0 auto 2rem auto;
         border-radius: 12px;
     }
@@ -1930,10 +1983,6 @@ section { padding: 9rem 0; position: relative; }
         width: 90%;
         max-width: 650px; /* A bit larger than mobile for better proportions */
         margin: 0 auto; /* This handles the centering */
-    }
-
-    .solution {
-        grid-template-columns: 1fr 1fr;
     }
 
     /* Explicitly keep the 'White-Label' section as two columns */
@@ -2816,20 +2865,17 @@ body.loaded #preloader {
 /* --- Living Interface Enhancement: Step 1 (Image Reveals & Hovers) --- */
 
 /* 1. Shimmer Reveal on Scroll */
-.solution-image-wrapper,
 .white-label-image-wrapper,
 .use-case-image-wrapper {
     position: relative;
 }
 
-.solution-image-wrapper:hover,
 .white-label-image-wrapper:hover,
 .use-case-image-wrapper:hover {
     z-index: 10;
 }
 
 /* The shimmer pseudo-element itself */
-.solution-image-wrapper::after,
 .white-label-image-wrapper::after,
 .use-case-image-wrapper::after {
     content: '';
@@ -2846,6 +2892,10 @@ body.loaded #preloader {
     );
     transform: translateX(-101%);
     opacity: 0;
+}
+
+.white-label-image-wrapper::after {
+    pointer-events: none;
 }
 
 /* The class added by JS to trigger the animation */
@@ -2874,7 +2924,6 @@ body.loaded #preloader {
 
 
 /* 2. 3D Tilt on Hover */
-.solution-image-wrapper,
 .white-label-image-wrapper,
 .use-case-image-wrapper,
 .mockup-container { /* Applying to the scrollytelling container too */
@@ -2882,7 +2931,6 @@ body.loaded #preloader {
 }
 
 /* Target all the images within those wrappers */
-.solution-image-wrapper img,
 .white-label-image-wrapper img,
 .use-case-image-wrapper img,
 .mockup-container img {
