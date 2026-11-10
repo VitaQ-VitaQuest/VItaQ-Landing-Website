@@ -31,7 +31,11 @@ class TextScramble {
 
 // --- MAIN APPLICATION SCRIPT ---
 document.addEventListener('DOMContentLoaded', function () {
-
+    const staticMotion = window.matchMedia('(max-width: 767px), (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)').matches;
+    const pointerMotion = !staticMotion;
+    if (staticMotion) {
+        document.querySelectorAll('lord-icon').forEach(icon => icon.removeAttribute('trigger'));
+    }
     const glows = document.querySelectorAll('.aurora-glow');
 
     const glowData = [
@@ -40,57 +44,46 @@ document.addEventListener('DOMContentLoaded', function () {
         { el: glows[2], factor: 25 }, // aurora-3 moves the most
     ];
 
-    let mouseX = 0, mouseY = 0;
-
-    // --- PHASE 1 ENHANCEMENT: Surgical Mobile Optimization ---
-    // Only create and animate the spotlight on non-mobile devices.
-    if (window.matchMedia("(min-width: 768px)").matches) {
+    // Pointer effects run only in response to a mouse move, never in an idle loop.
+    if (pointerMotion) {
         const spotlight = document.createElement('div');
         spotlight.classList.add('spotlight');
         document.body.appendChild(spotlight);
 
-        function moveSpotlight() {
+        window.addEventListener('mousemove', e => {
             gsap.to(spotlight, {
                 duration: 0.4,
                 ease: 'power3.out',
-                x: mouseX - spotlight.offsetWidth / 2,
-                y: mouseY - spotlight.offsetHeight / 2,
+                x: e.clientX - spotlight.offsetWidth / 2,
+                y: e.clientY - spotlight.offsetHeight / 2,
+                overwrite: 'auto',
             });
-            requestAnimationFrame(moveSpotlight);
-        }
-        // Start the animation loop only on desktop.
-        moveSpotlight();
-    }
     
-    // This listener runs on all devices for the aurora glow effect.
-    // On mobile, it sets mouseX/mouseY which is harmless as moveSpotlight() is never called.
-    window.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    
-        // Calculate the mouse position from the center of the screen (-0.5 to 0.5)
-        const xPos = (e.clientX / window.innerWidth) - 0.5;
-        const yPos = (e.clientY / window.innerHeight) - 0.5;
-    
-        // Loop through our glows and command their movement
-        glowData.forEach(glow => {
-            const targetX = -xPos * glow.factor;
-            const targetY = -yPos * glow.factor;
-    
-            // Use GSAP to smoothly animate to the target
-            gsap.to(glow.el, {
-                x: targetX,
-                y: targetY,
-                duration: 1.5, 
-                ease: 'power2.out'
+            // Calculate the mouse position from the center of the screen (-0.5 to 0.5)
+            const xPos = (e.clientX / window.innerWidth) - 0.5;
+            const yPos = (e.clientY / window.innerHeight) - 0.5;
+
+            // Loop through our glows and command their movement
+            glowData.forEach(glow => {
+                const targetX = -xPos * glow.factor;
+                const targetY = -yPos * glow.factor;
+
+                // Use GSAP to smoothly animate to the target
+                gsap.to(glow.el, {
+                    x: targetX,
+                    y: targetY,
+                    duration: 1.5,
+                    ease: 'power2.out',
+                    overwrite: 'auto',
+                });
             });
         });
-    });
+    }
 
     // --- Initialize Enhanced Particles.js  ---
     // Particles are decorative, so a CDN failure must never abort the rest of
     // the landing-page initialization.
-    if (typeof window.particlesJS === 'function') {
+    if (pointerMotion && typeof window.particlesJS === 'function') {
         try {
             window.particlesJS("particles-js", {
                 particles: {
@@ -143,86 +136,91 @@ document.addEventListener('DOMContentLoaded', function () {
     // that are only caused by mobile browser UI, not real layout changes.
     ScrollTrigger.config({ ignoreMobileResize: true });
     
-    // --- Hero Section Image Animation ---
-    const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
-    heroTimeline.fromTo('.hero-image-wrapper', { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, delay: 0.8 });
-    // .hero-cta lives in the initial viewport, so it should reveal on load, not on scroll
-    heroTimeline.fromTo('.hero-cta', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.4);
+    if (staticMotion) {
+        // Stable content on touch devices also avoids viewport-bar resize flicker.
+        gsap.set('.hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .hero-image-wrapper, .section-title, .section-subtitle, .section-title-small, .step-content, .step-title-mobile, .problem-card, .feature-card, .testimonial-card, .animate-bento, .mobile-mockup-screen, .animate-with-scrub', { autoAlpha: 1 });
+    } else {
+        // --- Hero Section Image Animation ---
+        const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
+        heroTimeline.fromTo('.hero-image-wrapper', { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, delay: 0.8 });
+        // .hero-cta lives in the initial viewport, so it should reveal on load, not on scroll
+        heroTimeline.fromTo('.hero-cta', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.4);
 
 
-    // --- UNIFIED Scroll-Triggered Text Animations ---
-    const animatedTextElements = document.querySelectorAll(
-        '.hero-preheadline, .hero-subheading, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
-    );
+        // --- UNIFIED Scroll-Triggered Text Animations ---
+        const animatedTextElements = document.querySelectorAll(
+            '.hero-preheadline, .hero-subheading, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
+        );
 
-    animatedTextElements.forEach(el => {
-        gsap.fromTo(el, { autoAlpha: 0, y: 40 }, {
-            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: "play reverse play reverse" },
-            duration: 0.8, autoAlpha: 1, y: 0, ease: 'power3.out'
-        });
-    });
-
-    const staggeredHeadlines = gsap.utils.toArray('.hero-headline, .section-title');
-
-    staggeredHeadlines.forEach(headline => {
-        const fragment = document.createDocumentFragment();
-        const childNodes = Array.from(headline.childNodes);
-
-        childNodes.forEach(node => {
-            if (node.nodeType === Node.TEXT_NODE) { // If it's a text node
-                const words = node.textContent.split(/\s+/).filter(Boolean); // Split by any whitespace
-                words.forEach(word => {
-                    const span = document.createElement('span');
-                    span.textContent = word;
-                    fragment.appendChild(span);
-                    // Add a space back after each word
-                    fragment.appendChild(document.createTextNode(' ')); 
-                });
-            } else { // If it's an element like <br>
-                fragment.appendChild(node.cloneNode(true));
-            }
+        animatedTextElements.forEach(el => {
+            gsap.fromTo(el, { autoAlpha: 0, y: 40 }, {
+                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: "play reverse play reverse" },
+                duration: 0.8, autoAlpha: 1, y: 0, ease: 'power3.out'
+            });
         });
 
-        // Replace the headline's content with our new, structured version
-        headline.innerHTML = '';
-        headline.appendChild(fragment);
+        const staggeredHeadlines = gsap.utils.toArray('.hero-headline, .section-title');
 
-        // THE FIX: Make the parent headline container visible before animating the children
-        gsap.set(headline, { autoAlpha: 1 });
+        staggeredHeadlines.forEach(headline => {
+            const fragment = document.createDocumentFragment();
+            const childNodes = Array.from(headline.childNodes);
 
-        // Animate the words in with a stagger
-        gsap.from(headline.querySelectorAll('span'), {
-            scrollTrigger: {
-                trigger: headline,
-                start: 'top 90%',
-                toggleActions: "play reverse play reverse"
-            },
-            y: 40,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            stagger: 0.05 // The magic property: delay between each word's animation
-        });
-    });
-
-
-    // --- Staggered Grid Animations ---
-    function createStaggeredAnimation(containerSelector, elementSelector) {
-        if (!document.querySelector(containerSelector)) return;
-        gsap.fromTo(elementSelector,
-            { autoAlpha: 0, y: 50, scale: 0.95, rotationX: -60, transformOrigin: 'top center' },
-            {
-                autoAlpha: 1, y: 0, scale: 1, rotationX: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15,
-                scrollTrigger: {
-                    trigger: containerSelector, start: 'top 85%', toggleActions: "play reverse play reverse",
+            childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) { // If it's a text node
+                    const words = node.textContent.split(/\s+/).filter(Boolean); // Split by any whitespace
+                    words.forEach(word => {
+                        const span = document.createElement('span');
+                        span.textContent = word;
+                        fragment.appendChild(span);
+                        // Add a space back after each word
+                        fragment.appendChild(document.createTextNode(' '));
+                    });
+                } else { // If it's an element like <br>
+                    fragment.appendChild(node.cloneNode(true));
                 }
             });
+
+            // Replace the headline's content with our new, structured version
+            headline.innerHTML = '';
+            headline.appendChild(fragment);
+
+            // THE FIX: Make the parent headline container visible before animating the children
+            gsap.set(headline, { autoAlpha: 1 });
+
+            // Animate the words in with a stagger
+            gsap.from(headline.querySelectorAll('span'), {
+                scrollTrigger: {
+                    trigger: headline,
+                    start: 'top 90%',
+                    toggleActions: "play reverse play reverse"
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                stagger: 0.05 // The magic property: delay between each word's animation
+            });
+        });
+
+
+        // --- Staggered Grid Animations ---
+        function createStaggeredAnimation(containerSelector, elementSelector) {
+            if (!document.querySelector(containerSelector)) return;
+            gsap.fromTo(elementSelector,
+                { autoAlpha: 0, y: 50, scale: 0.95, rotationX: -60, transformOrigin: 'top center' },
+                {
+                    autoAlpha: 1, y: 0, scale: 1, rotationX: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15,
+                    scrollTrigger: {
+                        trigger: containerSelector, start: 'top 85%', toggleActions: "play reverse play reverse",
+                    }
+                });
+        }
+
+        createStaggeredAnimation('.problem-grid', '.problem-card');
+        createStaggeredAnimation('#feature-grid .feature-grid', '#feature-grid .feature-card');
+        createStaggeredAnimation('.testimonials-wrapper', '.testimonial-card');
+        createStaggeredAnimation('.bento-grid', '.animate-bento');
     }
-    
-    createStaggeredAnimation('.problem-grid', '.problem-card');
-    createStaggeredAnimation('#feature-grid .feature-grid', '#feature-grid .feature-card');
-    createStaggeredAnimation('.testimonials-wrapper', '.testimonial-card');
-    createStaggeredAnimation('.bento-grid', '.animate-bento');
 
     // The dependency-free preloader controller uses this flag to distinguish a
     // healthy GSAP initialization from a failed/unsupported bundle.
@@ -266,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 description: 'Manage staff, trainees, schedules, attendance, payments, and athlete development without jumping between different tools.',
                 howTitle: 'How Academies Use VitaQ',
                 cta: 'Explore Academy & Club Solutions',
-                image: 'who-academies.png',
+                image: 'who-academies-dashboard.png',
                 imageAlt: 'VitaQ platform for sports academies and clubs',
                 composition: {
                     type: 'layered',
@@ -308,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 description: 'Structure programs, evaluations, goals, and performance data around the way your organization develops athletes.',
                 howTitle: 'How High-Performance Centers Use VitaQ',
                 cta: 'Explore High-Performance Solutions',
-                image: 'High-Performance.jwebp',
+                image: 'High-Performance.webp',
                 imageAlt: 'VitaQ performance analytics for high-performance centers',
                 composition: {
                     type: 'layered',
@@ -577,7 +575,12 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
+        let useCaseLayoutWidth = document.documentElement.clientWidth;
         window.addEventListener('resize', () => {
+            // Mobile browser bars change height while scrolling, not layout width.
+            const nextWidth = document.documentElement.clientWidth;
+            if (nextWidth === useCaseLayoutWidth) return;
+            useCaseLayoutWidth = nextWidth;
             positionUseCaseIndicator();
             centerUseCaseTab(useCaseTabs[activeUseCaseIndex]);
         });
@@ -588,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    if (window.matchMedia("(min-width: 767px)").matches) {
+    if (window.matchMedia("(min-width: 768px)").matches) {
         const scrollSteps = document.querySelectorAll('.scroll-step');
         const mockupContainer = document.querySelector('.mockup-container');
         const mockupScreens = document.querySelectorAll('.mockup-screen');
@@ -685,27 +688,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 // markers: true 
             });
         });
-    } else {
-        // --- Animate mobile mockups on scroll ---
-        gsap.utils.toArray('.mobile-mockup-screen').forEach(screen => {
-            gsap.fromTo(screen, 
-                { autoAlpha: 0, y: 50, scale: 0.9 },
-                { 
-                    autoAlpha: 1, y: 0, scale: 1,
-                    duration: 0.8, ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: screen,
-                        start: 'top 85%',
-                        toggleActions: "play reverse play reverse"
-                    }
-                }
-            );
-        });
     }
 
 
     // --- Advanced Scroll-Tied Animations (Scrubbing) (Unchanged) ---
-    const scrubbingElements = document.querySelectorAll('.animate-with-scrub');
+    const scrubbingElements = staticMotion ? [] : document.querySelectorAll('.animate-with-scrub');
     scrubbingElements.forEach(el => {
         gsap.fromTo(el, { opacity: 0.3, scale: 0.9, rotation: -5 }, {
             opacity: 1, scale: 1, rotation: 0, ease: 'none',
@@ -713,25 +700,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // --- Full-Screen 3D Hero Image (Unchanged) ---
+    // --- Full-Screen 3D Hero Image ---
     const heroImage = document.querySelector('.hero-image');
-    let targetRotateX = 0;
-    let targetRotateY = 0;
-
-    window.addEventListener('mousemove', (e) => {
-        targetRotateX = gsap.utils.mapRange(0, window.innerHeight, -8, 8, e.clientY);
-        targetRotateY = gsap.utils.mapRange(0, window.innerWidth, 8, -8, e.clientX);
-    });
-
-    gsap.ticker.add(() => {
-        gsap.to(heroImage, {
-            duration: 1.5,
-            rotationX: targetRotateX,
-            rotationY: targetRotateY,
-            transformPerspective: 1000,
-            ease: 'power3.out'
+    if (heroImage && pointerMotion) {
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(heroImage, {
+                duration: 1.5,
+                rotationX: gsap.utils.mapRange(0, window.innerHeight, -8, 8, e.clientY),
+                rotationY: gsap.utils.mapRange(0, window.innerWidth, 8, -8, e.clientX),
+                transformPerspective: 1000,
+                ease: 'power3.out',
+                overwrite: 'auto',
+            });
         });
-    });
+    }
 
     // --- Contact Form Logic (with Success Glow Trigger) ---
     const form = document.getElementById('contact-form');
@@ -1107,7 +1089,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Living Interface Enhancement: Step 1 (Image Reveals & Hovers) ---
 
     // 1. Shimmer Reveal on Scroll
-    const revealWrappers = gsap.utils.toArray('.white-label-image-wrapper, .use-case-image-wrapper');
+    const revealWrappers = staticMotion ? [] : gsap.utils.toArray('.white-label-image-wrapper, .use-case-image-wrapper');
     revealWrappers.forEach(wrapper => {
         ScrollTrigger.create({
             trigger: wrapper,
@@ -1128,7 +1110,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // 2. 3D Tilt on Hover (Optimized)
-    const tiltWrappers = gsap.utils.toArray('.white-label-image-wrapper, .use-case-visual, .mockup-container');
+    const tiltWrappers = pointerMotion ? gsap.utils.toArray('.white-label-image-wrapper, .use-case-visual, .mockup-container') : [];
     tiltWrappers.forEach(wrapper => {
         // Keep multi-part visuals moving as one 3D composition.
         const isMockupContainer = wrapper.classList.contains('mockup-container');
@@ -1154,7 +1136,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 rotationY: rotateY,
                 transformPerspective: 1000,
                 duration: 0.8,
-                ease: 'power3.out'
+                ease: 'power3.out',
+                overwrite: 'auto',
             });
         });
 
@@ -1172,7 +1155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Living Interface Enhancement: Step 2 (Interactive Cursor) ---
     
     // Only run this on devices with a fine pointer (Mouse/Trackpad)
-    if (window.matchMedia("(pointer: fine)").matches) {
+    if (pointerMotion) {
         
         const interactiveElements = document.querySelectorAll(
             'a, button, .testimonial-card, .problem-card, .feature-card, .use-case-card, .bento-card'
@@ -1383,6 +1366,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     let animationFrame = 0;
+    let inView = typeof IntersectionObserver === 'undefined';
     let lastFrameTime = null;
     let currentX = 0;
     let loopWidth = 0;
@@ -1449,7 +1433,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function tick(time) {
         animationFrame = 0;
-        if (container.hidden) return;
+        if (container.hidden || document.hidden || !inView || reducedMotion.matches) {
+            lastFrameTime = null;
+            return;
+        }
         // Cap elapsed time so returning from a background tab never fast-forwards the reel.
         const elapsed = lastFrameTime === null ? 0 : Math.min(time - lastFrameTime, 50);
         lastFrameTime = time;
@@ -1472,11 +1459,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         render();
-        animationFrame = requestAnimationFrame(tick);
+        updateAnimation();
     }
-    if (!container.hidden) {
-        animationFrame = requestAnimationFrame(tick);
+
+    function updateAnimation() {
+        if (container.hidden || document.hidden || !inView || reducedMotion.matches) {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = 0;
+            lastFrameTime = null;
+        } else if (!animationFrame) {
+            animationFrame = requestAnimationFrame(tick);
+        }
     }
+
+    if (typeof IntersectionObserver !== 'undefined') {
+        new IntersectionObserver(entries => {
+            inView = entries.some(entry => entry.isIntersecting);
+            updateAnimation();
+        }).observe(container);
+    }
+    reducedMotion.addEventListener('change', updateAnimation);
+    updateAnimation();
 
     function takeUserControl() {
         mode = 'user';
@@ -1580,6 +1583,7 @@ document.addEventListener('DOMContentLoaded', () => {
             velocity = 0;
         }
         lastFrameTime = null;
+        updateAnimation();
     });
 
     // View toggle: switch between the scrolling reel and the full color grid
@@ -1598,14 +1602,11 @@ document.addEventListener('DOMContentLoaded', () => {
             velocity = -AUTO_SCROLL_SPEED;
             lastFrameTime = null;
             viewToggleLabel.textContent = showGrid ? 'Reel view' : 'List all';
-            if (showGrid) {
-                cancelAnimationFrame(animationFrame);
-                animationFrame = 0;
-            } else {
+            if (!showGrid) {
                 measure();
                 render();
-                if (!animationFrame) animationFrame = requestAnimationFrame(tick);
             }
+            updateAnimation();
         });
     }
 });
