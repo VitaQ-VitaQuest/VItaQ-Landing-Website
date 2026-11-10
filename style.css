@@ -31,7 +31,11 @@ body.cursor-active button {
     cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke="white" stroke-width="2" fill="white" fill-opacity="0.2"/></svg>') 12 12, auto !important;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    /* Keep decorative overflow from widening the mobile layout viewport. */
+    overflow-x: clip;
+}
 
 *:focus {
     outline: none;
@@ -1618,6 +1622,7 @@ section { padding: 9rem 0; position: relative; }
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     animation: spin 1s linear infinite;
+    animation-play-state: paused;
 }
 
 .form-wrapper.sending #contact-form {
@@ -1629,6 +1634,7 @@ section { padding: 9rem 0; position: relative; }
 .form-wrapper.sending .spinner {
     opacity: 1;
     visibility: visible;
+    animation-play-state: running;
 }
 
 @keyframes spin {
@@ -2456,6 +2462,62 @@ button:focus-visible,
 }
 
 
+/* Touch devices use static decoration instead of stacked live blur surfaces. */
+@media (max-width: 767px), (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    #particles-js,
+    .spotlight {
+        display: none;
+    }
+
+    .aurora-glow {
+        filter: none;
+        transform: none;
+    }
+
+    .aurora-1 {
+        background: radial-gradient(circle, rgba(255, 80, 222, 0.7), transparent 70%);
+    }
+
+    .aurora-2 {
+        background: radial-gradient(circle, rgba(127, 0, 255, 0.7), transparent 70%);
+    }
+
+    .aurora-3 {
+        background: radial-gradient(circle, rgba(0, 175, 255, 0.7), transparent 70%);
+    }
+
+    .client-logo-grid-item,
+    .testimonials-wrapper,
+    .features,
+    .use-case-tabs-nav,
+    .use-case-panel,
+    .form-wrapper,
+    .form-success {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .client-logo-grid-item::before,
+    .client-logo-grid-item::after {
+        animation: none;
+        filter: none;
+        transform: none;
+        opacity: 0.35;
+    }
+
+    .client-reel-container,
+    .btn-primary,
+    .hero-preheadline {
+        animation: none;
+    }
+
+    .hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .hero-image-wrapper,
+    .section-title, .section-subtitle, .section-title-small,
+    .feature-card, .testimonial-card, .step-content {
+        visibility: visible;
+    }
+}
+
 /* 2. Adaptive experience for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
     * {
@@ -2505,6 +2567,12 @@ body:not(.loaded) {
 body.loaded #preloader {
     opacity: 0;
     visibility: hidden;
+}
+
+/* Hidden overlays must release their continuously animated SVG/filter layers. */
+body.loaded #preloader #preloader-logo path {
+    animation-play-state: paused;
+    will-change: auto;
 }
 
 #preloader-logo {

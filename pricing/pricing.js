@@ -25,24 +25,18 @@ let activePlanCategoryId = 'academies';
 const pricingTabsNavUpdaters = [];
 
 function initializePricingCardTilt() {
+    if (!usesPointerMotion()) return;
     const pricingCard = document.querySelector('.pricing-logic');
     if (!pricingCard) return;
 
-    let targetRotateX = 0;
-    let targetRotateY = 0;
-
     window.addEventListener('mousemove', (e) => {
-        targetRotateX = gsap.utils.mapRange(0, window.innerHeight, -8, 8, e.clientY);
-        targetRotateY = gsap.utils.mapRange(0, window.innerWidth, 8, -8, e.clientX);
-    });
-
-    gsap.ticker.add(() => {
         gsap.to(pricingCard, {
             duration: 1.5,
-            rotationX: targetRotateX,
-            rotationY: targetRotateY,
+            rotationX: gsap.utils.mapRange(0, window.innerHeight, -8, 8, e.clientY),
+            rotationY: gsap.utils.mapRange(0, window.innerWidth, 8, -8, e.clientX),
             transformPerspective: 1000,
             ease: 'power3.out',
+            overwrite: 'auto',
         });
     });
 }
@@ -775,7 +769,7 @@ function initializeMenu() {
 }
 
 function initializeParticles() {
-    if (typeof window.particlesJS !== 'function') return;
+    if (!usesPointerMotion() || typeof window.particlesJS !== 'function') return;
 
     try {
         window.particlesJS('particles-js', {
@@ -800,7 +794,12 @@ function initializeParticles() {
     }
 }
 
+function usesPointerMotion() {
+    return window.matchMedia('(min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches;
+}
+
 function initializeAmbientMotion() {
+    if (!usesPointerMotion()) return;
     const glows = Array.from(document.querySelectorAll('.aurora-glow'));
     const glowFactors = [60, 40, 25];
     const usesFinePointer = window.matchMedia('(pointer: fine)').matches;
@@ -815,7 +814,7 @@ function initializeAmbientMotion() {
             const spotlightY = event.clientY - spotlight.offsetHeight / 2;
 
             if (window.gsap) {
-                window.gsap.to(spotlight, { x: spotlightX, y: spotlightY, duration: 0.4, ease: 'power3.out' });
+                window.gsap.to(spotlight, { x: spotlightX, y: spotlightY, duration: 0.4, ease: 'power3.out', overwrite: 'auto' });
             } else {
                 spotlight.style.transform = `translate(${spotlightX}px, ${spotlightY}px)`;
             }
@@ -832,6 +831,7 @@ function initializeAmbientMotion() {
                 y: -yPosition * glowFactors[index],
                 duration: 1.5,
                 ease: 'power2.out',
+                overwrite: 'auto',
             });
         });
     });
@@ -861,7 +861,7 @@ function initializeCursorBehavior() {
 }
 
 function initializePageAnimations() {
-    if (!window.gsap) return;
+    if (!window.gsap || !usesPointerMotion()) return;
 
     if (window.ScrollTrigger) {
         window.gsap.registerPlugin(window.ScrollTrigger);

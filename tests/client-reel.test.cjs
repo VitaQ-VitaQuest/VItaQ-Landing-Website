@@ -39,7 +39,7 @@ function element() {
     };
 }
 
-function setup({ reducedMotion = false } = {}) {
+function setup({ reducedMotion = false, observeVisibility = false } = {}) {
     const document = element();
     const window = element();
     const container = element();
@@ -54,6 +54,8 @@ function setup({ reducedMotion = false } = {}) {
     let widths = [101.25, 173.5, 97.75];
     let gap = 48;
     let resize;
+    let visibility;
+    const motion = Object.assign(element(), { matches: reducedMotion });
     const originalCount = widths.length;
     const loopWidth = () => widths.reduce((sum, width) => sum + width + gap, 0);
     const offsetAt = index => {
@@ -79,7 +81,7 @@ function setup({ reducedMotion = false } = {}) {
         'client-view-toggle': toggle,
         'client-logo-grid': grid,
     })[id];
-    window.matchMedia = () => ({ matches: reducedMotion });
+    window.matchMedia = () => motion;
 
     runInNewContext(controller, {
         document,
@@ -92,6 +94,10 @@ function setup({ reducedMotion = false } = {}) {
             constructor(callback) { resize = callback; }
             observe() {}
         },
+        IntersectionObserver: observeVisibility ? class {
+            constructor(callback) { visibility = callback; }
+            observe() {}
+        } : undefined,
         requestAnimationFrame(callback) {
             frames.set(++nextFrame, callback);
             return nextFrame;
@@ -136,6 +142,11 @@ function setup({ reducedMotion = false } = {}) {
             resize();
         },
         frameCount: () => frames.size,
+        setVisible(isIntersecting) { visibility([{ isIntersecting }]); },
+        setReducedMotion(matches) {
+            motion.matches = matches;
+            motion.emit('change');
+        },
     };
 }
 
@@ -162,6 +173,9 @@ test('touch cancellation, lost capture, blur and multi-touch never count as taps
             reel.pointer('pointerdown', 120, 110, { pointerId: 2, isPrimary: false });
         } else if (cancellation === 'hidden') {
             reel.document.hidden = true;
+            reel.document.emit('visibilitychange');
+            assert.equal(reel.frameCount(), 0);
+            reel.document.hidden = false;
             reel.document.emit('visibilitychange');
         } else reel.pointer(cancellation, 100);
         reel.advance(1000);
@@ -339,15 +353,47 @@ test('auto-scroll speed is stable at 60/120 Hz and background gaps are capped', 
     }
 });
 
-test('view toggles keep one animation loop and reduced motion stays still', () => {
-    const reel = setup({ reducedMotion: true });
+test('view toggles keep one animation loop', () => {
+    const reel = setup();
     for (let i = 0; i < 5; i++) {
         reel.frame();
-        assert.equal(reel.x(), 0);
         assert.equal(reel.frameCount(), 1);
         reel.toggle.emit('click');
         assert.equal(reel.frameCount(), 0);
         reel.toggle.emit('click');
         assert.equal(reel.frameCount(), 1);
     }
+});
+
+test('reduced motion schedules no idle frames and responds to preference changes', () => {
+    const reel = setup({ reducedMotion: true });
+    assert.equal(reel.frameCount(), 0);
+    reel.advance(1000);
+    assert.equal(reel.x(), 0);
+    reel.wheel(40);
+    assert.equal(reel.x(), -40, 'manual scrolling must still work');
+    reel.setReducedMotion(false);
+    assert.equal(reel.frameCount(), 1);
+    reel.advance(1000);
+    assert.ok(reel.x() < -40);
+    reel.setReducedMotion(true);
+    assert.equal(reel.frameCount(), 0);
+});
+
+test('offscreen reels stop scheduling frames and resume without jumping', () => {
+    const reel = setup({ observeVisibility: true });
+    assert.equal(reel.frameCount(), 0);
+    reel.setVisible(true);
+    reel.advance(1000);
+    const before = reel.x();
+    reel.setVisible(false);
+    assert.equal(reel.frameCount(), 0);
+    reel.frame(60000);
+    assert.equal(reel.x(), before);
+    reel.setVisible(true);
+    assert.equal(reel.frameCount(), 1);
+    reel.frame();
+    assert.equal(reel.x(), before, 'the first visible frame must not include background time');
+    reel.frame();
+    assert.ok(reel.x() < before);
 });
