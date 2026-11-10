@@ -1198,93 +1198,389 @@ window.addEventListener("focus", () => {
     document.title = docTitle;
 });
 
+// --- Logo glass: sample each original image once, preserving its brand colors. ---
+document.addEventListener('DOMContentLoaded', () => {
+    function colorLogoCard(image) {
+        if (!image.naturalWidth || !image.naturalHeight) return;
+
+        // Small, aspect-preserving samples keep the work bounded for large assets.
+        const canvas = document.createElement('canvas');
+        const scale = 64 / Math.max(image.naturalWidth, image.naturalHeight);
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        const context = canvas.getContext('2d', { willReadFrequently: true });
+        if (!context) return;
+
+        let pixels;
+        try {
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+        } catch {
+            // Unreadable/cross-origin images retain the neutral border fallback.
+            return;
+        }
+
+        const colorBuckets = new Map();
+        for (let offset = 0; offset < pixels.length; offset += 4) {
+            // Ignore transparent padding and faint antialiasing around the artwork.
+            if (pixels[offset + 3] < 128) continue;
+            const rgb = [pixels[offset], pixels[offset + 1], pixels[offset + 2]];
+            const saturation = (Math.max(...rgb) - Math.min(...rgb)) / 255;
+            if (saturation < 0.15) continue;
+
+            const key = rgb.map(channel => channel >> 5).join(',');
+            const bucket = colorBuckets.get(key) || { color: [0, 0, 0], weight: 0 };
+            bucket.weight += saturation;
+            rgb.forEach((channel, index) => { bucket.color[index] += channel * saturation; });
+            colorBuckets.set(key, bucket);
+        }
+        const dominant = [...colorBuckets.values()].sort((a, b) => b.weight - a.weight)[0];
+        const accent = dominant
+            ? dominant.color.map(channel => Math.round(channel / dominant.weight))
+            : [148, 163, 184];
+        const card = image.closest('.client-logo-grid-item');
+        card.style.setProperty('--logo-accent', accent.join(', '));
+    }
+
+    document.querySelectorAll('.client-logo-grid-item img').forEach(image => {
+        image.draggable = false;
+        if (image.complete) {
+            colorLogoCard(image);
+        } else {
+            image.addEventListener('load', () => colorLogoCard(image), { once: true });
+        }
+    });
+});
+
+// --- Logo activation: soft press, brand-colored feedback, and a contained ripple. ---
+document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('clients');
+    if (!section) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const activeFeedback = new Map();
+    let reelPress = null;
+
+    function activateLogo(target, event) {
+        if (typeof target.animate !== 'function') return;
+        const previous = activeFeedback.get(target);
+        previous?.animations.forEach(animation => animation.cancel());
+        previous?.ripple?.remove();
+
+        const card = target.matches('.client-logo-grid-item') ? target : null;
+        const logo = card ? card.querySelector('img') : target;
+        const animations = [];
+        let ripple;
+        if (card) {
+            const style = getComputedStyle(card);
+            const shadow = style.boxShadow;
+            const accent = style.getPropertyValue('--logo-accent').trim();
+            const glow = `inset 0 1px 0 rgba(255,255,255,0.16), 0 0 0 2px rgba(${accent},0.5), 0 8px 28px rgba(${accent},0.22)`;
+            const frames = reducedMotion.matches
+                ? [{ boxShadow: shadow }, { boxShadow: glow, offset: 0.3 }, { boxShadow: shadow }]
+                : [{ scale: '1', boxShadow: shadow }, { scale: '0.985', offset: 0.18 },
+                    { scale: '1.015', boxShadow: glow, offset: 0.5 }, { scale: '1', boxShadow: shadow }];
+            animations.push(card.animate(frames, {
+                duration: reducedMotion.matches ? 240 : 520,
+                easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            }));
+
+            if (!reducedMotion.matches) {
+                const bounds = card.getBoundingClientRect();
+                const size = Math.hypot(bounds.width, bounds.height) * 2;
+                const x = event.detail ? event.clientX - bounds.left : bounds.width / 2;
+                const y = event.detail ? event.clientY - bounds.top : bounds.height / 2;
+                ripple = document.createElement('span');
+                ripple.className = 'client-logo-ripple';
+                ripple.setAttribute('aria-hidden', 'true');
+                Object.assign(ripple.style, {
+                    width: `${size}px`, height: `${size}px`,
+                    left: `${x - size / 2}px`, top: `${y - size / 2}px`,
+                });
+                card.appendChild(ripple);
+                animations.push(ripple.animate([
+                    { transform: 'scale(0)', opacity: 0.6 },
+                    { transform: 'scale(1)', opacity: 0 },
+                ], { duration: 650, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }));
+            }
+        } else {
+            const filter = getComputedStyle(logo).filter;
+            animations.push(logo.animate([
+                { filter },
+                { filter: 'grayscale(0) drop-shadow(0 0 12px rgba(255,80,222,0.45))', offset: 0.35 },
+                { filter },
+            ], { duration: reducedMotion.matches ? 240 : 520, easing: 'ease-out' }));
+        }
+
+        if (!reducedMotion.matches) {
+            animations.push(logo.animate([
+                { scale: '1' }, { scale: '0.97', offset: 0.2 },
+                { scale: '1.06', offset: 0.6 }, { scale: '1' },
+            ], { duration: 480, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }));
+        }
+        const feedback = { animations, ripple };
+        activeFeedback.set(target, feedback);
+        Promise.all(animations.map(animation => animation.finished.catch(() => {}))).then(() => {
+            ripple?.remove();
+            if (activeFeedback.get(target) === feedback) activeFeedback.delete(target);
+        });
+    }
+
+    section.querySelectorAll('.client-reel img').forEach(image => {
+        image.setAttribute('role', 'button');
+        image.tabIndex = 0;
+    });
+    section.addEventListener('click', event => {
+        const card = event.target.closest('.client-logo-grid-item');
+        if (card) activateLogo(card, event);
+    });
+    section.addEventListener('keydown', event => {
+        const logo = event.target.closest('.client-reel img');
+        if (!logo || (event.key !== 'Enter' && event.key !== ' ')) return;
+        event.preventDefault();
+        if (!event.repeat) activateLogo(logo, event);
+    });
+
+    // The reel captures pointers for dragging; remember the logo before capture.
+    section.addEventListener('pointerdown', event => {
+        const logo = event.target.closest('.client-reel img');
+        reelPress = logo && event.isPrimary && event.button === 0
+            ? { logo, id: event.pointerId, x: event.clientX, y: event.clientY } : null;
+    });
+    section.addEventListener('pointermove', event => {
+        if (reelPress && event.pointerId === reelPress.id
+            && Math.hypot(event.clientX - reelPress.x, event.clientY - reelPress.y) >= 8) reelPress = null;
+    });
+    section.addEventListener('pointerup', event => {
+        if (!reelPress || event.pointerId !== reelPress.id) return;
+        const press = reelPress;
+        reelPress = null;
+        if (Math.hypot(event.clientX - press.x, event.clientY - press.y) < 8) activateLogo(press.logo, event);
+    });
+    section.addEventListener('pointercancel', () => { reelPress = null; });
+    window.addEventListener('blur', () => { reelPress = null; });
+    reducedMotion.addEventListener('change', () => {
+        for (const feedback of activeFeedback.values()) {
+            feedback.animations.forEach(animation => animation.cancel());
+            feedback.ripple?.remove();
+        }
+        activeFeedback.clear();
+    });
+});
+
 // --- Client Logo Reel: Seamless Auto-Scroll + Click-and-Drag ---
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.client-reel-container');
     const track = document.querySelector('.client-reel');
     if (!container || !track) return;
 
-    const AUTO_SCROLL_SPEED = 0.6; // pixels per frame while idle
-    const CLICK_MOVE_THRESHOLD = 5; // px of movement below which a drag counts as a "click" instead
+    const AUTO_SCROLL_SPEED = 36; // pixels per second, independent of display refresh rate
+    const GESTURE_THRESHOLD = 8;
+    const USER_IDLE_DELAY = 650;
+    const MOMENTUM_DECAY_TIME = 250;
+    const AUTO_RESUME_TIME = 350;
+    const MIN_MOMENTUM_SPEED = 8;
+    const MAX_MOMENTUM_SPEED = 3000;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    let currentX = 0;        // unwrapped running position (can grow without limit)
-    let halfWidth = 0;       // width of ONE copy of the logo set
-    let isDragging = false;
-    let isPaused = false;    // true after a plain click/tap; stays stopped until clicked again
-    let dragStartClientX = 0;
-    let dragStartX = 0;
-    let hasMoved = false;    // did this press move past the click threshold?
+    let animationFrame = 0;
+    let lastFrameTime = null;
+    let currentX = 0;
+    let loopWidth = 0;
+    let logoOffsets = [];
+    let gesture = null;
+    let mode = 'auto';
+    let velocity = -AUTO_SCROLL_SPEED;
+    let lastUserInput = 0;
 
-    // The track contains two identical copies of the logo list back-to-back.
-    // halfWidth is the width of a single copy, measured from the real DOM
-    // so it always stays accurate even if logos are added/removed later.
+    // Duplicate only for the reel; the full list always contains one of each logo.
+    const originalLogos = [...track.querySelectorAll('img')];
+    if (!originalLogos.length) return;
+    originalLogos.forEach(image => {
+        image.draggable = false;
+        const copy = image.cloneNode(true);
+        copy.alt = '';
+        copy.setAttribute('aria-hidden', 'true');
+        copy.tabIndex = -1;
+        track.appendChild(copy);
+    });
+
     function measure() {
-        halfWidth = track.scrollWidth / 2;
+        if (container.hidden) return;
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        // Track bounds retain fractional pixels without including individual logo hover scales.
+        const nextWidth = (track.getBoundingClientRect().width + gap) / 2;
+        if (!nextWidth) return;
+        let offset = 0;
+        const nextOffsets = originalLogos.map(image => {
+            const start = offset;
+            offset += parseFloat(getComputedStyle(image).width) + gap;
+            return start;
+        });
+
+        // Keep the same logo in view when responsive sizes or image loads change the loop.
+        if (loopWidth && Math.abs(nextWidth - loopWidth) > 0.01) {
+            const position = -currentX;
+            const index = logoOffsets.findLastIndex(offset => offset <= position);
+            const start = logoOffsets[index];
+            const end = logoOffsets[index + 1] ?? loopWidth;
+            const progress = (position - start) / (end - start);
+            const nextEnd = nextOffsets[index + 1] ?? nextWidth;
+            currentX = -(nextOffsets[index] + progress * (nextEnd - nextOffsets[index]));
+        }
+        loopWidth = nextWidth;
+        logoOffsets = nextOffsets;
+        render();
     }
     measure();
-    window.addEventListener('resize', measure);
+    // Observe layout, not mobile browser bars resizing the viewport during a scroll.
+    if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(measure).observe(track);
+    } else {
+        window.addEventListener('resize', measure);
+    }
+    track.querySelectorAll('img').forEach(image => image.addEventListener('load', measure, { once: true }));
 
-    // Wraps currentX into a single copy's width so the transform always
-    // lands within the visually-identical repeating region. Using a real
-    // modulo (not CSS's -50% trick) means there is no seam or snap at the
-    // loop boundary in either scroll direction, including while dragging.
     function render() {
-        const wrapped = ((currentX % halfWidth) + halfWidth) % halfWidth;
-        track.style.transform = `translateX(${wrapped - halfWidth}px)`;
+        if (!loopWidth) return;
+        currentX %= loopWidth;
+        if (currentX > 0) currentX -= loopWidth;
+        track.style.transform = `translateX(${currentX}px)`;
     }
 
-    function tick() {
-        if (!isDragging && !isPaused) {
-            currentX -= AUTO_SCROLL_SPEED;
+    function tick(time) {
+        animationFrame = 0;
+        if (container.hidden) return;
+        // Cap elapsed time so returning from a background tab never fast-forwards the reel.
+        const elapsed = lastFrameTime === null ? 0 : Math.min(time - lastFrameTime, 50);
+        lastFrameTime = time;
+        if (reducedMotion.matches) velocity = 0;
+        if (!gesture && !reducedMotion.matches) {
+            if (mode === 'user') {
+                // Touch/mouse flings coast in the release direction before auto mode returns.
+                const decay = Math.exp(-elapsed / MOMENTUM_DECAY_TIME);
+                currentX += velocity * MOMENTUM_DECAY_TIME / 1000 * (1 - decay);
+                velocity *= decay;
+                if (Math.abs(velocity) < MIN_MOMENTUM_SPEED) velocity = 0;
+                if (!velocity && time - lastUserInput >= USER_IDLE_DELAY) mode = 'auto';
+            } else {
+                // Ease into the automatic direction, especially after an opposite-direction swipe.
+                const targetVelocity = -AUTO_SCROLL_SPEED;
+                const decay = Math.exp(-elapsed / AUTO_RESUME_TIME);
+                currentX += targetVelocity * elapsed / 1000
+                    + (velocity - targetVelocity) * AUTO_RESUME_TIME / 1000 * (1 - decay);
+                velocity = targetVelocity + (velocity - targetVelocity) * decay;
+            }
         }
         render();
-        requestAnimationFrame(tick);
+        animationFrame = requestAnimationFrame(tick);
     }
-    requestAnimationFrame(tick);
-
-    function startDrag(clientX) {
-        isDragging = true;
-        hasMoved = false;
-        dragStartClientX = clientX;
-        dragStartX = currentX;
-        container.classList.add('is-dragging');
+    if (!container.hidden) {
+        animationFrame = requestAnimationFrame(tick);
     }
 
-    function moveDrag(clientX) {
-        if (!isDragging) return;
-        if (Math.abs(clientX - dragStartClientX) > CLICK_MOVE_THRESHOLD) {
-            hasMoved = true;
+    function takeUserControl() {
+        mode = 'user';
+        velocity = 0;
+        lastUserInput = performance.now();
+    }
+
+    function startGesture(event) {
+        if (!event.isPrimary) {
+            endGesture(true);
+            return;
         }
-        currentX = dragStartX + (clientX - dragStartClientX);
+        if (event.button !== 0 || gesture) return;
+        takeUserControl();
+        gesture = {
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            startY: event.clientY,
+            lastX: event.clientX,
+            lastTime: lastUserInput,
+            velocity: 0,
+            axis: null,
+        };
+        container.setPointerCapture(event.pointerId);
+    }
+
+    function moveGesture(event) {
+        if (!gesture || event.pointerId !== gesture.pointerId) return;
+        const now = performance.now();
+        lastUserInput = now;
+        if (!gesture.axis) {
+            const deltaX = Math.abs(event.clientX - gesture.startX);
+            const deltaY = Math.abs(event.clientY - gesture.startY);
+            if (Math.max(deltaX, deltaY) < GESTURE_THRESHOLD) return;
+            gesture.axis = deltaX > deltaY ? 'horizontal' : 'vertical';
+            if (gesture.axis === 'horizontal') container.classList.add('is-dragging');
+        }
+        if (gesture.axis !== 'horizontal') return;
+        const distance = event.clientX - gesture.lastX;
+        if (!distance) return;
+        const elapsed = Math.max(now - gesture.lastTime, 1);
+        const sampleVelocity = Math.max(-MAX_MOMENTUM_SPEED,
+            Math.min(MAX_MOMENTUM_SPEED, distance * 1000 / elapsed));
+        // A reversal replaces the old direction immediately instead of carrying stale momentum.
+        const sameDirection = Math.sign(sampleVelocity) === Math.sign(gesture.velocity);
+        const blend = sameDirection ? 1 - Math.exp(-elapsed / 40) : 1;
+        gesture.velocity += (sampleVelocity - gesture.velocity) * blend;
+        currentX += distance;
+        gesture.lastX = event.clientX;
+        gesture.lastTime = now;
         render();
     }
 
-    function endDrag() {
-        if (!isDragging) return;
-        isDragging = false;
+    function endGesture(cancelled) {
+        if (!gesture) return;
+        const finishedGesture = gesture;
+        gesture = null;
         container.classList.remove('is-dragging');
-
-        // A press that never moved past the threshold counts as a plain
-        // click/tap on a logo: toggle stopped-in-place instead of treating
-        // it as a drag release.
-        if (!hasMoved) {
-            isPaused = !isPaused;
+        if (container.hasPointerCapture(finishedGesture.pointerId)) {
+            container.releasePointerCapture(finishedGesture.pointerId);
         }
+        lastUserInput = performance.now();
+        // A stationary release, vertical scroll, tap or cancellation has no fling momentum.
+        velocity = !cancelled && finishedGesture.axis === 'horizontal'
+            && lastUserInput - finishedGesture.lastTime < 100 && !reducedMotion.matches
+            ? finishedGesture.velocity : 0;
     }
 
-    // Mouse
-    container.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        startDrag(e.clientX);
-    });
-    window.addEventListener('mousemove', (e) => moveDrag(e.clientX));
-    window.addEventListener('mouseup', endDrag);
+    container.addEventListener('wheel', event => {
+        if (event.ctrlKey || gesture) return;
+        const horizontal = event.shiftKey && !event.deltaX ? event.deltaY : event.deltaX;
+        if (!horizontal || (!event.shiftKey && Math.abs(horizontal) <= Math.abs(event.deltaY))) return;
+        event.preventDefault();
+        takeUserControl();
+        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? container.clientWidth : 1;
+        // Trackpads already supply momentum events; consume those directly without a second fling.
+        currentX -= horizontal * unit;
+        render();
+    }, { passive: false });
 
-    // Touch
-    container.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX), { passive: true });
-    container.addEventListener('touchmove', (e) => moveDrag(e.touches[0].clientX), { passive: true });
-    container.addEventListener('touchend', endDrag);
-    container.addEventListener('touchcancel', endDrag);
+    // One event stream avoids the compatibility mouse events emitted after touch taps.
+    container.addEventListener('pointerdown', startGesture);
+    container.addEventListener('pointermove', moveGesture);
+    container.addEventListener('pointerup', event => {
+        if (!gesture || event.pointerId !== gesture.pointerId) return;
+        moveGesture(event);
+        endGesture(false);
+    });
+    for (const eventName of ['pointercancel', 'lostpointercapture']) {
+        container.addEventListener(eventName, event => {
+            if (gesture && event.pointerId === gesture.pointerId) endGesture(true);
+        });
+    }
+    window.addEventListener('blur', () => {
+        endGesture(true);
+        velocity = 0;
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            endGesture(true);
+            velocity = 0;
+        }
+        lastFrameTime = null;
+    });
 
     // View toggle: switch between the scrolling reel and the full color grid
     const viewToggle = document.getElementById('client-view-toggle');
@@ -1293,12 +1589,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewToggleLabel = viewToggle ? viewToggle.querySelector('.client-view-toggle-label') : null;
     if (viewToggle && reelContainer && logoGrid && viewToggleLabel) {
         viewToggle.addEventListener('click', () => {
+            endGesture(true);
             const showGrid = viewToggle.getAttribute('aria-pressed') !== 'true';
             viewToggle.setAttribute('aria-pressed', String(showGrid));
             reelContainer.hidden = showGrid;
             logoGrid.hidden = !showGrid;
-            isPaused = showGrid;
+            mode = 'auto';
+            velocity = -AUTO_SCROLL_SPEED;
+            lastFrameTime = null;
             viewToggleLabel.textContent = showGrid ? 'Reel view' : 'List all';
+            if (showGrid) {
+                cancelAnimationFrame(animationFrame);
+                animationFrame = 0;
+            } else {
+                measure();
+                render();
+                if (!animationFrame) animationFrame = requestAnimationFrame(tick);
+            }
         });
     }
 });
