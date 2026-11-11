@@ -1,0 +1,322 @@
+{
+  "HeroImage.png": {
+    "width": 1149,
+    "height": 1369,
+    "variants": [
+      {
+        "src": "assets/optimized/heroimage-1280.webp",
+        "width": 1074
+      }
+    ]
+  },
+  "white-label.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "src": "assets/optimized/white-label-640.webp",
+        "width": 640
+      },
+      {
+        "src": "assets/optimized/white-label-1024.webp",
+        "width": 1024
+      }
+    ]
+  },
+  "screen-stages.png": {
+    "width": 1024,
+    "height": 1535,
+    "variants": [
+      {
+        "src": "assets/optimized/screen-stages-640.webp",
+        "width": 640
+      },
+      {
+        "src": "assets/optimized/screen-stages-1024.webp",
+        "width": 1024
+      }
+    ]
+  },
+  "screen-library.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "src": "assets/optimized/screen-library-640.webp",
+        "width": 640
+      },
+      {
+        "src": "assets/optimized/screen-library-1024.webp",
+        "width": 1024
+      }
+    ]
+  },
+  "screen-evaluation.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "src": "assets/optimized/screen-evaluation-640.webp",
+        "width": 640
+      },
+      {
+        "src": "assets/optimized/screen-evaluation-1024.webp",
+        "width": 1024
+      }
+    ]
+  },
+  "screen-analytics.png": {
+    "width": 1024,
+    "height": 1536,
+    "variants": [
+      {
+        "src": "assets/optimized/screen-analytics-640.webp",
+        "width": 640
+      },
+      {
+        "src": "assets/optimized/screen-analytics-1024.webp",
+        "width": 1024
+      }
+    ]
+  },
+  "rollfinity.webp": {
+    "width": 3335,
+    "height": 3334,
+    "variants": [
+      {
+        "src": "assets/optimized/rollfinity-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "rollersider.webp": {
+    "width": 2084,
+    "height": 2084,
+    "variants": [
+      {
+        "src": "assets/optimized/rollersider-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "funkyrollers.webp": {
+    "width": 4267,
+    "height": 3000,
+    "variants": [
+      {
+        "src": "assets/optimized/funkyrollers-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "madrollers.png": {
+    "width": 1654,
+    "height": 951,
+    "variants": [
+      {
+        "src": "assets/optimized/madrollers-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "osc.png": {
+    "width": 320,
+    "height": 200,
+    "variants": [
+      {
+        "src": "assets/optimized/osc-384.webp",
+        "width": 320
+      }
+    ]
+  },
+  "Olympia Sports Institution.png": {
+    "width": 508,
+    "height": 500,
+    "variants": [
+      {
+        "src": "assets/optimized/olympia-sports-institution-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "Alpha X sports.png": {
+    "width": 1672,
+    "height": 941,
+    "variants": [
+      {
+        "src": "assets/optimized/alpha-x-sports-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "ProSkatingBy.png": {
+    "width": 800,
+    "height": 800,
+    "variants": [
+      {
+        "src": "assets/optimized/proskatingby-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "Ramy Squash.png": {
+    "width": 274,
+    "height": 274,
+    "variants": [
+      {
+        "src": "assets/optimized/ramy-squash-384.webp",
+        "width": 274
+      }
+    ]
+  },
+  "Rolloryx 2024.webp": {
+    "width": 2598,
+    "height": 3071,
+    "variants": [
+      {
+        "src": "assets/optimized/rolloryx-2024-384.webp",
+        "width": 325
+      }
+    ]
+  },
+  "Tiba Gymnastics.png": {
+    "width": 570,
+    "height": 570,
+    "variants": [
+      {
+        "src": "assets/optimized/tiba-gymnastics-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "UAE Rollball.webp": {
+    "width": 1414,
+    "height": 2000,
+    "variants": [
+      {
+        "src": "assets/optimized/uae-rollball-384.webp",
+        "width": 271
+      }
+    ]
+  },
+  "UAE Skateball.png": {
+    "width": 1000,
+    "height": 1000,
+    "variants": [
+      {
+        "src": "assets/optimized/uae-skateball-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "Shahdag.png": {
+    "width": 320,
+    "height": 200,
+    "variants": [
+      {
+        "src": "assets/optimized/shahdag-384.webp",
+        "width": 320
+      }
+    ]
+  },
+  "Zayed Sports City.png": {
+    "width": 320,
+    "height": 200,
+    "variants": [
+      {
+        "src": "assets/optimized/zayed-sports-city-384.webp",
+        "width": 320
+      }
+    ]
+  },
+  "azerbaijan.png": {
+    "width": 320,
+    "height": 200,
+    "variants": [
+      {
+        "src": "assets/optimized/azerbaijan-384.webp",
+        "width": 320
+      }
+    ]
+  },
+  "ISMF.png": {
+    "width": 1586,
+    "height": 992,
+    "variants": [
+      {
+        "src": "assets/optimized/ismf-384.webp",
+        "width": 384
+      }
+    ]
+  },
+  "GFSF.png": {
+    "width": 320,
+    "height": 200,
+    "variants": [
+      {
+        "src": "assets/optimized/gfsf-384.webp",
+        "width": 320
+      }
+    ]
+  },
+  "who-academies-dashboard.png": {
+    "width": 1448,
+    "height": 1086,
+    "variants": [
+      {
+        "src": "assets/optimized/who-academies-dashboard-1280.webp",
+        "width": 1280
+      }
+    ]
+  },
+  "who-academies-phone.png": {
+    "width": 1086,
+    "height": 1448,
+    "variants": [
+      {
+        "src": "assets/optimized/who-academies-phone-1280.webp",
+        "width": 960
+      }
+    ]
+  },
+  "who-academies-skaters-scene.png": {
+    "width": 1448,
+    "height": 1086,
+    "variants": [
+      {
+        "src": "assets/optimized/who-academies-skaters-scene-1280.webp",
+        "width": 1280
+      }
+    ]
+  },
+  "who-complexes-phone.png": {
+    "width": 1086,
+    "height": 1448,
+    "variants": [
+      {
+        "src": "assets/optimized/who-complexes-phone-1280.webp",
+        "width": 960
+      }
+    ]
+  },
+  "who-events-judges.jpg": {
+    "width": 1639,
+    "height": 959,
+    "variants": [
+      {
+        "src": "assets/optimized/who-events-judges-1280.webp",
+        "width": 1280
+      }
+    ]
+  },
+  "who-events-race.JPG": {
+    "width": 4000,
+    "height": 2668,
+    "variants": [
+      {
+        "src": "assets/optimized/who-events-race-1280.webp",
+        "width": 1280
+      }
+    ]
+  }
+}

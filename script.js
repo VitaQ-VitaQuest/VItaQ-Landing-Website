@@ -1,38 +1,7 @@
-// --- EMBEDDED TEXT SCRAMBLE LIBRARY (Guaranteed Alternative) ---
-class TextScramble {
-    constructor(el) { this.el = el; this.chars = '!<>-_\\/[]{}—=+*^?#________'; this.update = this.update.bind(this); }
-    setText(newText) {
-        const oldText = this.el.innerText; const length = Math.max(oldText.length, newText.length);
-        const promise = new Promise((resolve) => this.resolve = resolve); this.queue = [];
-        for (let i = 0; i < length; i++) {
-            const from = oldText[i] || ''; const to = newText[i] || ''; const start = Math.floor(Math.random() * 40);
-            const end = start + Math.floor(Math.random() * 40); this.queue.push({ from, to, start, end });
-        }
-        cancelAnimationFrame(this.frameRequest); this.frame = 0; this.update(); return promise;
-    }
-    update() {
-        let output = ''; let complete = 0;
-        for (let i = 0, n = this.queue.length; i < n; i++) {
-            let { from, to, start, end, char } = this.queue[i];
-            if (this.frame >= end) { complete++; output += to; } 
-            else if (this.frame >= start) {
-                if (!char || Math.random() < 0.28) { char = this.randomChar(); this.queue[i].char = char; }
-                output += `<span class="dud">${char}</span>`;
-            } else { output += from; }
-        }
-        this.el.innerHTML = output;
-        if (complete === this.queue.length) { this.resolve(); } 
-        else { this.frameRequest = requestAnimationFrame(this.update); this.frame++; }
-    }
-    randomChar() { return this.chars[Math.floor(Math.random() * this.chars.length)]; }
-}
-// --- END OF EMBEDDED LIBRARY ---
-
-
 // --- MAIN APPLICATION SCRIPT ---
 document.addEventListener('DOMContentLoaded', function () {
     const staticMotion = window.matchMedia('(max-width: 767px), (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)').matches;
-    const pointerMotion = !staticMotion;
+    const pointerMotion = !staticMotion && typeof window.gsap !== 'undefined';
     if (staticMotion) {
         document.querySelectorAll('lord-icon').forEach(icon => icon.removeAttribute('trigger'));
     }
@@ -124,110 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // --- Animate on Scroll with GSAP ---
-    gsap.registerPlugin(ScrollTrigger);
-
-    // iOS Safari resizes the visual viewport whenever the address bar / tab
-    // bar shows or hides while scrolling. Without this, every one of those
-    // UI-driven resizes makes ScrollTrigger think the window was resized and
-    // re-measures every trigger, which can flip already-revealed sections
-    // back to their hidden starting state mid-scroll ("appearing/disappearing"
-    // sections, or a blank page). This tells ScrollTrigger to ignore resizes
-    // that are only caused by mobile browser UI, not real layout changes.
-    ScrollTrigger.config({ ignoreMobileResize: true });
-    
-    if (staticMotion) {
-        // Stable content on touch devices also avoids viewport-bar resize flicker.
-        gsap.set('.hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .hero-image-wrapper, .section-title, .section-subtitle, .section-title-small, .step-content, .step-title-mobile, .problem-card, .feature-card, .testimonial-card, .animate-bento, .mobile-mockup-screen, .animate-with-scrub', { autoAlpha: 1 });
-    } else {
-        // --- Hero Section Image Animation ---
-        const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
-        heroTimeline.fromTo('.hero-image-wrapper', { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, delay: 0.8 });
-        // .hero-cta lives in the initial viewport, so it should reveal on load, not on scroll
-        heroTimeline.fromTo('.hero-cta', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.4);
-
-
-        // --- UNIFIED Scroll-Triggered Text Animations ---
-        const animatedTextElements = document.querySelectorAll(
-            '.hero-preheadline, .hero-subheading, .section-subtitle, .section-title-small, .step-content, .step-title-mobile'
-        );
-
-        animatedTextElements.forEach(el => {
-            gsap.fromTo(el, { autoAlpha: 0, y: 40 }, {
-                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: "play reverse play reverse" },
-                duration: 0.8, autoAlpha: 1, y: 0, ease: 'power3.out'
-            });
-        });
-
-        const staggeredHeadlines = gsap.utils.toArray('.hero-headline, .section-title');
-
-        staggeredHeadlines.forEach(headline => {
-            const fragment = document.createDocumentFragment();
-            const childNodes = Array.from(headline.childNodes);
-
-            childNodes.forEach(node => {
-                if (node.nodeType === Node.TEXT_NODE) { // If it's a text node
-                    const words = node.textContent.split(/\s+/).filter(Boolean); // Split by any whitespace
-                    words.forEach(word => {
-                        const span = document.createElement('span');
-                        span.textContent = word;
-                        fragment.appendChild(span);
-                        // Add a space back after each word
-                        fragment.appendChild(document.createTextNode(' '));
-                    });
-                } else { // If it's an element like <br>
-                    fragment.appendChild(node.cloneNode(true));
-                }
-            });
-
-            // Replace the headline's content with our new, structured version
-            headline.innerHTML = '';
-            headline.appendChild(fragment);
-
-            // THE FIX: Make the parent headline container visible before animating the children
-            gsap.set(headline, { autoAlpha: 1 });
-
-            // Animate the words in with a stagger
-            gsap.from(headline.querySelectorAll('span'), {
-                scrollTrigger: {
-                    trigger: headline,
-                    start: 'top 90%',
-                    toggleActions: "play reverse play reverse"
-                },
-                y: 40,
-                opacity: 0,
-                duration: 0.8,
-                ease: 'power3.out',
-                stagger: 0.05 // The magic property: delay between each word's animation
-            });
-        });
-
-
-        // --- Staggered Grid Animations ---
-        function createStaggeredAnimation(containerSelector, elementSelector) {
-            if (!document.querySelector(containerSelector)) return;
-            gsap.fromTo(elementSelector,
-                { autoAlpha: 0, y: 50, scale: 0.95, rotationX: -60, transformOrigin: 'top center' },
-                {
-                    autoAlpha: 1, y: 0, scale: 1, rotationX: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15,
-                    scrollTrigger: {
-                        trigger: containerSelector, start: 'top 85%', toggleActions: "play reverse play reverse",
-                    }
-                });
-        }
-
-        createStaggeredAnimation('.problem-grid', '.problem-card');
-        createStaggeredAnimation('#feature-grid .feature-grid', '#feature-grid .feature-card');
-        createStaggeredAnimation('.testimonials-wrapper', '.testimonial-card');
-        createStaggeredAnimation('.bento-grid', '.animate-bento');
-    }
-
-    // The dependency-free preloader controller uses this flag to distinguish a
-    // healthy GSAP initialization from a failed/unsupported bundle.
     window.__vitaqAnimationsReady = true;
     document.body.classList.remove('loading-fallback');
-
-
 
     // --- Who It's For: Interactive Organization Tabs ---
     const useCaseSection = document.getElementById('use-cases');
@@ -240,15 +107,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 description: 'Connect registrations, participants, schedules, competitions, ticketing, payments, and event operations from setup to event day.',
                 howTitle: 'How Organizers Use VitaQ',
                 cta: 'Explore Event & Competition Solutions',
-                image: 'who-events-race.JPG',
+                image: 'assets/optimized/who-events-race-1280.webp',
                 imageAlt: 'Event participants and event operations managed with VitaQ',
                 composition: {
                     type: 'layered',
                     variant: 'events',
                     // Main landscape event image.
-                    dashboard: 'who-events-race.JPG',
+                    dashboard: 'assets/optimized/who-events-race-1280.webp',
                     // Smaller overlapping judges / event-operations image.
-                    scene: 'who-events-judges.jpg'
+                    scene: 'assets/optimized/who-events-judges-1280.webp'
                 },
                 points: [
                     ['Manage Registrations', 'Manage registrations, accreditations, and attendee access IDs in one place.'],
@@ -264,14 +131,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 description: 'Manage staff, trainees, schedules, attendance, payments, and athlete development without jumping between different tools.',
                 howTitle: 'How Academies Use VitaQ',
                 cta: 'Explore Academy & Club Solutions',
-                image: 'who-academies-dashboard.png',
+                image: 'assets/optimized/who-academies-dashboard-1280.webp',
                 imageAlt: 'VitaQ platform for sports academies and clubs',
                 composition: {
                     type: 'layered',
                     variant: 'academies',
-                    dashboard: 'who-academies-dashboard.png',
-                    scene: 'who-academies-skaters-scene.png',
-                    phone: 'who-academies-phone.png'
+                    dashboard: 'assets/optimized/who-academies-dashboard-1280.webp',
+                    scene: 'assets/optimized/who-academies-skaters-scene-1280.webp',
+                    phone: 'assets/optimized/who-academies-phone-1280.webp'
                 },
                 points: [
                     ['Manage Coaches & Trainees', 'Keep your teams, groups, athletes, and member information organized.'],
@@ -290,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // IMPORTANT: Sports Complexes is intentionally single-image only.
                 // No layered composition is attached to this state, so Academy assets
                 // can never replace this image when the tab is selected or re-clicked.
-                image: 'who-complexes-phone.png',
+                image: 'assets/optimized/who-complexes-phone-1280.webp',
                 imageAlt: 'VitaQ white-label experience for sports complexes',
                 points: [
                     ['Launch Your Own Branded Experience', 'Deliver VitaQ with your organization’s identity for a premium member experience.'],
@@ -314,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Main landscape performance-center image.
                     dashboard: 'High-Performance.webp',
                     // Overlapping analytics phone screen.
-                    phone: 'screen-analytics.png'
+                    phone: 'assets/optimized/screen-analytics-1024.webp'
                 },
                 points: [
                     ['Digitize Your Methodology', 'Turn programs, stages, exercises, and protocols into a structured system.'],
@@ -327,23 +194,22 @@ document.addEventListener('DOMContentLoaded', function () {
         ];
         [useCaseStates[2], useCaseStates[3]] = [useCaseStates[3], useCaseStates[2]];
 
-        // Preload every Who-It's-For visual up front. Without this, switching
-        // tabs sets a new <img> src that still has to be downloaded/decoded,
-        // so the text content (set in the same tick) visibly updates before
-        // the image does. Warming the browser cache here removes that lag.
-        const useCaseImagePaths = new Set();
-        useCaseStates.forEach(state => {
-            if (state.image) useCaseImagePaths.add(state.image);
-            if (state.composition) {
-                ['dashboard', 'scene', 'phone'].forEach(layerKey => {
-                    if (state.composition[layerKey]) useCaseImagePaths.add(state.composition[layerKey]);
-                });
-            }
-        });
-        useCaseImagePaths.forEach(src => {
-            const preloadImg = new Image();
-            preloadImg.src = src;
-        });
+        // Decode only the requested tab, keeping its current visual visible while it loads.
+        const useCaseImageLoads = new Map();
+        function loadUseCaseImages(state) {
+            const sources = state.composition
+                ? Object.values(state.composition).filter(value => typeof value === 'string' && /\.(png|jpe?g|webp)$/i.test(value))
+                : [state.image];
+            return Promise.all(sources.filter(Boolean).map(src => {
+                if (!useCaseImageLoads.has(src)) {
+                    const image = new Image();
+                    image.decoding = 'async';
+                    image.src = src;
+                    useCaseImageLoads.set(src, image.decode().catch(() => {}));
+                }
+                return useCaseImageLoads.get(src);
+            }));
+        }
 
         const useCaseTabs = Array.from(useCaseSection.querySelectorAll('.use-case-tab'));
         const useCaseTabsNav = useCaseSection.querySelector('.use-case-tabs-nav');
@@ -411,6 +277,21 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
+        const useCaseImageFallbacks = {
+            "assets/optimized/screen-analytics-1024.webp": "screen-analytics.png",
+            "assets/optimized/who-academies-dashboard-1280.webp": "who-academies-dashboard.png",
+            "assets/optimized/who-academies-phone-1280.webp": "who-academies-phone.png",
+            "assets/optimized/who-academies-skaters-scene-1280.webp": "who-academies-skaters-scene.png",
+            "assets/optimized/who-complexes-phone-1280.webp": "who-complexes-phone.png",
+            "assets/optimized/who-events-judges-1280.webp": "who-events-judges.jpg",
+            "assets/optimized/who-events-race-1280.webp": "who-events-race.JPG"
+        };
+        function setUseCaseImageSource(image, source) {
+            image.dataset.fallbackSrc = useCaseImageFallbacks[source] || '';
+            image.decoding = 'async';
+            image.src = source;
+        }
+
         function applyUseCaseVisual(state) {
             if (!state || !useCaseComposition || !useCaseImage) return;
 
@@ -426,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // The single-image element always receives the selected state's exact
             // fallback/source. For Sports Complexes this is ONLY who-complexes-phone.png.
-            useCaseImage.src = state.image;
+            setUseCaseImageSource(useCaseImage, state.image);
             useCaseImage.alt = '';
 
             if (!isLayered) {
@@ -434,17 +315,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (useCaseDashboard && composition.dashboard) {
-                useCaseDashboard.src = composition.dashboard;
+                setUseCaseImageSource(useCaseDashboard, composition.dashboard);
             }
 
             if (useCaseScene && composition.scene) {
-                useCaseScene.src = composition.scene;
+                setUseCaseImageSource(useCaseScene, composition.scene);
             }
 
             // Academies uses a phone layer. Events intentionally does not.
             if (useCasePhone) {
                 if (composition.phone) {
-                    useCasePhone.src = composition.phone;
+                    setUseCaseImageSource(useCasePhone, composition.phone);
                 } else {
                     useCasePhone.removeAttribute('src');
                 }
@@ -512,17 +393,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 clearTimeout(useCaseSwitchTimer);
             }
 
-            useCasePanel.classList.add('is-switching');
+            const imagesReady = loadUseCaseImages(useCaseStates[normalizedIndex]);
 
-            // Matches the .use-case-panel.is-switching CSS transition duration
-            // (0.22s) so the fade-out finishes completely before the content
-            // swaps and the fade-in starts. Previously this fired at 180ms,
-            // cutting the fade-out short and restarting the transition mid-way,
-            // which read as a stutter/lag on every tab switch.
-            useCaseSwitchTimer = setTimeout(() => {
+            // Keep the current panel stable until the selected images are decoded.
+            useCaseSwitchTimer = setTimeout(async () => {
+                await imagesReady;
+                if (activeUseCaseIndex !== normalizedIndex) return;
                 renderUseCase(normalizedIndex);
                 useCasePanel.classList.remove('is-switching');
-            }, 220);
+            }, staticMotion ? 0 : 220);
 
             if (shouldFocus) {
                 activeTab.focus();
@@ -591,115 +470,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        const scrollSteps = document.querySelectorAll('.scroll-step');
-        const mockupContainer = document.querySelector('.mockup-container');
-        const mockupScreens = document.querySelectorAll('.mockup-screen');
-        const stepTitles = document.querySelectorAll('.step-title');
-        let isTransitioning = false;
-        let currentStep = 1;
-    
-        // Setup for the new TextScramble library
-        const textScrambles = Array.from(stepTitles).map(title => new TextScramble(title));
-        const originalTexts = Array.from(stepTitles).map(title => title.textContent);
-    
-        // Initial visibility setup
-        gsap.set(stepTitles, { autoAlpha: 0 });
-        gsap.set(mockupScreens, { autoAlpha: 0 });
-        gsap.set(stepTitles[0], { autoAlpha: 1 });
-        gsap.set(mockupScreens[0], { autoAlpha: 1 });
-        
-        if(window.innerWidth > 991) {
-            document.querySelector('.step-content').classList.add('glowing');
-        } else {
-            stepTitles[0].classList.add('active-mobile');
-        }
-    
-        function setActiveStep(stepId) {
-            if (isTransitioning || stepId == currentStep) return;
-            isTransitioning = true;
-    
-            const outgoingStep = currentStep;
-            const incomingStep = stepId;
-    
-            const outgoingTitle = document.querySelector(`.step-title[data-step="${outgoingStep}"]`);
-            const incomingTitle = document.querySelector(`.step-title[data-step="${incomingStep}"]`);
-            const incomingScramble = textScrambles[incomingStep - 1];
-    
-            const outgoingScreen = document.querySelector(`.mockup-screen[data-step="${outgoingStep}"]`);
-            const incomingScreen = document.querySelector(`.mockup-screen[data-step="${incomingStep}"]`);
-    
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    currentStep = incomingStep;
-                    isTransitioning = false;
-                }
-            });
-    
-            tl.to(outgoingTitle, {
-                autoAlpha: 0,
-                duration: 0.3,
-                ease: 'power2.in'
-            });
-    
-            tl.to(mockupContainer, {
-                rotationY: "+=180",
-                scale: 0.8,
-                filter: 'blur(5px)',
-                duration: 0.5,
-                ease: 'power4.in'
-            }, 0);
-    
-            tl.call(() => {
-                gsap.set(incomingTitle, { autoAlpha: 1 });
-                incomingScramble.setText(originalTexts[incomingStep - 1]);
-            });
-    
-            tl.set(outgoingScreen, { autoAlpha: 0 })
-              .set(incomingScreen, { autoAlpha: 1 })
-              .to(mockupContainer, {
-                  rotationY: "+=180",
-                  scale: 1,
-                  filter: 'blur(0px)',
-                  duration: 0.5,
-                  ease: 'power4.out'
-              });
-            
-            document.querySelectorAll('.step-content').forEach(card => card.classList.remove('glowing'));
-            document.querySelectorAll('.step-title').forEach(title => title.classList.remove('active-mobile'));
-            const activeCard = document.querySelector(`.scroll-step[data-step="${stepId}"] .step-content`);
-            const activeTitle = document.querySelector(`.step-title[data-step="${stepId}"]`);
-            if (activeCard) activeCard.classList.add('glowing');
-            if (activeTitle) activeTitle.classList.add('active-mobile');
-        }
-    
-        // ScrollTrigger with the buffer zone
-        scrollSteps.forEach(step => {
-            ScrollTrigger.create({
-                trigger: step,
-                start: 'top 50%',
-                end: 'bottom 50%',
-                onToggle: self => {
-                    if (self.isActive) {
-                        setActiveStep(step.dataset.step);
-                    }
-                },
-                // For debugging, you can add markers: true
-                // markers: true 
-            });
-        });
-    }
-
-
-    // --- Advanced Scroll-Tied Animations (Scrubbing) (Unchanged) ---
-    const scrubbingElements = staticMotion ? [] : document.querySelectorAll('.animate-with-scrub');
-    scrubbingElements.forEach(el => {
-        gsap.fromTo(el, { opacity: 0.3, scale: 0.9, rotation: -5 }, {
-            opacity: 1, scale: 1, rotation: 0, ease: 'none',
-            scrollTrigger: { trigger: el, start: 'top bottom', end: 'center center', scrub: 1.5 }
-        });
-    });
-
     // --- Full-Screen 3D Hero Image ---
     const heroImage = document.querySelector('.hero-image');
     if (heroImage && pointerMotion) {
@@ -750,31 +520,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 formWrapper.classList.remove('sending');
                 form.style.display = 'none';
                 successMessage.style.display = 'flex';
-                gsap.fromTo(successMessage, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' });
+                if (!staticMotion && window.gsap) gsap.fromTo(successMessage, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' });
                 formContainer.classList.add('form-success-glow');
             }, (err) => {
                 // ERROR LOGIC
                 formWrapper.classList.remove('sending');
                 alert('Message failed to send. Please try again. Error: ' + JSON.stringify(err));
             });
-    });
-
-    // --- Dynamic "Peek-a-Boo" Header ---
-    const header = document.querySelector('.main-nav');
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-
-        if (currentScrollY > lastScrollY && currentScrollY > header.offsetHeight) {
-            // Scrolling Down
-            header.classList.add('header--hidden');
-        } else {
-            // Scrolling Up
-            header.classList.remove('header--hidden');
-        }
-
-        lastScrollY = currentScrollY;
     });
 
         // --- FAQ Tabs & Accordion Logic ---
@@ -1086,39 +838,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // --- Living Interface Enhancement: Step 1 (Image Reveals & Hovers) ---
-
-    // 1. Shimmer Reveal on Scroll
-    const revealWrappers = staticMotion ? [] : gsap.utils.toArray('.white-label-image-wrapper, .use-case-image-wrapper');
-    revealWrappers.forEach(wrapper => {
-        ScrollTrigger.create({
-            trigger: wrapper,
-            start: 'top 85%',
-            once: true, // Animation runs only once
-            onEnter: () => {
-                // Add the class to start the animation
-                wrapper.classList.add('is-revealed');
-                
-                // Set a timer to remove the class after the animation is complete
-                // This is the "clean-up" that prevents the ghosting artifact.
-                setTimeout(() => {
-                    wrapper.classList.remove('is-revealed');
-                }, 1000); // The animation duration is 1s (1000ms)
-            }
-        });
-    });
-
-
     // 2. 3D Tilt on Hover (Optimized)
-    const tiltWrappers = pointerMotion ? gsap.utils.toArray('.white-label-image-wrapper, .use-case-visual, .mockup-container') : [];
+    const tiltWrappers = pointerMotion ? gsap.utils.toArray('.white-label-image-wrapper, .use-case-visual') : [];
     tiltWrappers.forEach(wrapper => {
         // Keep multi-part visuals moving as one 3D composition.
-        const isMockupContainer = wrapper.classList.contains('mockup-container');
         const isUseCaseVisual = wrapper.classList.contains('use-case-visual');
 
-        const imagesToTilt = isMockupContainer
-            ? wrapper.querySelectorAll('img')
-            : isUseCaseVisual
+        const imagesToTilt = isUseCaseVisual
                 ? wrapper.querySelector('.use-case-composition')
                 : wrapper.querySelector('img');
 
