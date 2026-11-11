@@ -81,7 +81,7 @@ for (const [name, options] of [
         assert.equal(page.calls.tweens.length, 0);
         assert.equal(page.calls.staticIcons, 2);
         assert.equal(page.window.__vitaqAnimationsReady, true);
-        assert.ok(page.calls.sets.some(call => call.selector.includes('.mobile-mockup-screen') && call.values.autoAlpha === 1));
+        assert.equal(page.calls.sets.length, 0, 'Content visibility must not depend on GSAP');
     });
 
     test(`${name} keeps pricing content static without scheduling hidden-card tweens`, () => {
@@ -125,10 +125,22 @@ test('feature icons cannot start continuous loops before the page controller ini
     assert.ok(icons.every(icon => !/trigger="loop"/.test(icon)));
 });
 
-test('organization tabs only preload image assets that exist', () => {
+test('organization tabs only reference image assets that exist', () => {
     const images = [...landingScript.matchAll(/\b(?:image|dashboard|scene|phone):\s*'([^']+)'/g)];
     assert.ok(images.length > 0);
     for (const [, path] of images) {
         assert.ok(existsSync(join(__dirname, '..', path)), `Missing organization image: ${path}`);
     }
+});
+
+
+test('landing initialization and navigation survive an unavailable GSAP CDN', () => {
+    const page = setup({ width: 1440, touch: false });
+    delete page.window.gsap;
+    delete page.context.gsap;
+    runInNewContext(landingInitialization, page.context);
+    page.context.initialize();
+    page.emitMouseMove();
+    assert.equal(page.calls.frames, 0);
+    assert.equal(page.window.__vitaqAnimationsReady, true);
 });

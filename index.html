@@ -24,19 +24,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <!-- Stylesheet -->
-    <style>
-      /* Prevents Flash of Unstyled Content (FOUC) on animated elements */
-      .hero-preheadline, .hero-headline, .hero-subheading, .hero-cta, .hero-image-wrapper,
-      .section-title, .section-subtitle, .section-title-small,
-      .feature-card, .testimonial-card, .step-content {
-        visibility: hidden;
-      }
-    </style>
-    <!-- Paste this block immediately BEFORE:
-<link rel="stylesheet" href="style.css">
--->
-
 <!-- iOS Safari Aurora rendering fix -->
     <style>
       @supports (-webkit-touch-callout: none) {
@@ -78,6 +65,8 @@
     </style>
 
     <link rel="stylesheet" href="style.css">
+    <script src="motion.js" defer></script>
+    <noscript><style>#preloader { display: none; } body { overflow: auto; } .deep-dive-desktop { display: none; } .deep-dive-mobile { display: block; }</style></noscript>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P06983P4SS"></script>
@@ -229,7 +218,7 @@
     <!-- PRELOADER CONTROLLER
          Intentionally inline and dependency-free. It starts before any external
          JavaScript at the bottom of the page can block, fail, or be rejected by
-         an older Safari parser. The original 3s timing and 8s failsafe are kept. -->
+         an older Safari parser. The 8s failsafe also handles stalled dependencies. -->
     <script>
     (function () {
         var revealed = false;
@@ -257,10 +246,8 @@
             }
         }
 
-        // Normal path: preserve the existing 3-second post-load preloader timing.
-        window.addEventListener('load', function () {
-            setTimeout(revealPage, 3000);
-        });
+        // Show usable content as soon as the DOM is ready; below-fold images load later.
+        document.addEventListener('DOMContentLoaded', revealPage);
 
         // Independent failsafe: this timer starts before any third-party scripts.
         setTimeout(revealPage, 8000);
@@ -324,7 +311,7 @@
                 </div>
             </div>
             <div class="hero-image-wrapper">
-                <img id="hero-image" src="HeroImage.png" alt="iPhone showcasing the VitaQ app's admin interface dashboard." class="hero-image">
+                <img loading="lazy" decoding="async" width="1149" height="1369" id="hero-image" src="assets/optimized/heroimage-1280.webp" data-fallback-src="HeroImage.png" alt="iPhone showcasing the VitaQ app's admin interface dashboard." class="hero-image">
             </div>
         </section>
 
@@ -342,46 +329,46 @@
             </div>
             <div class="client-reel-container" id="client-reel-container" hidden>
                 <div class="client-reel">
-                    <img src="rollfinity.webp" alt="Rollfinity Logo" width="3335" height="3334">
-                    <img src="rollersider.webp" alt="Rollsiders Logo" width="2084" height="2084">
-                    <img src="funkyrollers.webp" alt="Funky Rollers Logo" width="4267" height="3000">
-                    <img src="madrollers.png" alt="MadRollers Logo" width="1654" height="951">
-                    <img src="osc.png" alt="Oasis Skating Club Logo" width="320" height="200">
-                    <img src="Olympia Sports Institution.png" alt="Olympia Sports Institution Logo" width="508" height="500">
-                    <img src="Alpha X sports.png" alt="Alpha X Sports Logo" width="1672" height="941">
-                    <img src="ProSkatingBy.png" alt="ProSkatingBy Logo" width="800" height="800">
-                    <img src="Ramy Squash.png" alt="Ramy Squash Logo" width="274" height="274">
-                    <img src="Rolloryx 2024.webp" alt="Rolloryx 2024 Logo" width="2598" height="3071">
-                    <img src="Tiba Gymnastics.png" alt="Tiba Gymnastics Logo" width="570" height="570">
-                    <img src="UAE Rollball.webp" alt="UAE Rollball Logo" width="1414" height="2000">
-                    <img src="UAE Skateball.png" alt="UAE Skateball Logo" width="1000" height="1000">
-                    <img src="Shahdag.png" alt="Shahdag Mountain Resort" width="320" height="200">
-                    <img src="Zayed Sports City.png" alt="Zayed Sports City Logo" width="320" height="200">
-                    <img src="azerbaijan.png" alt="Azerbaijan Logo" width="320" height="200">
-                    <img src="ISMF.png" alt="International Ski Mountaineering Federation" width="1586" height="992">
-                    <img src="GFSF.png" alt="Georgian Figure Skating Federation Logo" width="320" height="200">
+                    <img loading="lazy" decoding="async" src="assets/optimized/rollfinity-384.webp" data-fallback-src="rollfinity.webp" alt="Rollfinity Logo" width="3335" height="3334">
+                    <img loading="lazy" decoding="async" src="assets/optimized/rollersider-384.webp" data-fallback-src="rollersider.webp" alt="Rollsiders Logo" width="2084" height="2084">
+                    <img loading="lazy" decoding="async" src="assets/optimized/funkyrollers-384.webp" data-fallback-src="funkyrollers.webp" alt="Funky Rollers Logo" width="4267" height="3000">
+                    <img loading="lazy" decoding="async" src="assets/optimized/madrollers-384.webp" data-fallback-src="madrollers.png" alt="MadRollers Logo" width="1654" height="951">
+                    <img loading="lazy" decoding="async" src="assets/optimized/osc-384.webp" data-fallback-src="osc.png" alt="Oasis Skating Club Logo" width="320" height="200">
+                    <img loading="lazy" decoding="async" src="assets/optimized/olympia-sports-institution-384.webp" data-fallback-src="Olympia Sports Institution.png" alt="Olympia Sports Institution Logo" width="508" height="500">
+                    <img loading="lazy" decoding="async" src="assets/optimized/alpha-x-sports-384.webp" data-fallback-src="Alpha X sports.png" alt="Alpha X Sports Logo" width="1672" height="941">
+                    <img loading="lazy" decoding="async" src="assets/optimized/proskatingby-384.webp" data-fallback-src="ProSkatingBy.png" alt="ProSkatingBy Logo" width="800" height="800">
+                    <img loading="lazy" decoding="async" src="assets/optimized/ramy-squash-384.webp" data-fallback-src="Ramy Squash.png" alt="Ramy Squash Logo" width="274" height="274">
+                    <img loading="lazy" decoding="async" src="assets/optimized/rolloryx-2024-384.webp" data-fallback-src="Rolloryx 2024.webp" alt="Rolloryx 2024 Logo" width="2598" height="3071">
+                    <img loading="lazy" decoding="async" src="assets/optimized/tiba-gymnastics-384.webp" data-fallback-src="Tiba Gymnastics.png" alt="Tiba Gymnastics Logo" width="570" height="570">
+                    <img loading="lazy" decoding="async" src="assets/optimized/uae-rollball-384.webp" data-fallback-src="UAE Rollball.webp" alt="UAE Rollball Logo" width="1414" height="2000">
+                    <img loading="lazy" decoding="async" src="assets/optimized/uae-skateball-384.webp" data-fallback-src="UAE Skateball.png" alt="UAE Skateball Logo" width="1000" height="1000">
+                    <img loading="lazy" decoding="async" src="assets/optimized/shahdag-384.webp" data-fallback-src="Shahdag.png" alt="Shahdag Mountain Resort" width="320" height="200">
+                    <img loading="lazy" decoding="async" src="assets/optimized/zayed-sports-city-384.webp" data-fallback-src="Zayed Sports City.png" alt="Zayed Sports City Logo" width="320" height="200">
+                    <img loading="lazy" decoding="async" src="assets/optimized/azerbaijan-384.webp" data-fallback-src="azerbaijan.png" alt="Azerbaijan Logo" width="320" height="200">
+                    <img loading="lazy" decoding="async" src="assets/optimized/ismf-384.webp" data-fallback-src="ISMF.png" alt="International Ski Mountaineering Federation" width="1586" height="992">
+                    <img loading="lazy" decoding="async" src="assets/optimized/gfsf-384.webp" data-fallback-src="GFSF.png" alt="Georgian Figure Skating Federation Logo" width="320" height="200">
                     
                 </div>
             </div>
             <div class="client-logo-grid" id="client-logo-grid">
-                <button type="button" class="client-logo-grid-item"><img src="rollfinity.webp" alt="Rollfinity Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="rollersider.webp" alt="Rollsiders Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="funkyrollers.webp" alt="Funky Rollers Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="madrollers.png" alt="MadRollers Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="osc.png" alt="Oasis Skating Club Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="Olympia Sports Institution.png" alt="Olympia Sports Institution Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="Alpha X sports.png" alt="Alpha X Sports Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="ProSkatingBy.png" alt="ProSkatingBy Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="Ramy Squash.png" alt="Ramy Squash Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="Rolloryx 2024.webp" alt="Rolloryx 2024 Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="Tiba Gymnastics.png" alt="Tiba Gymnastics Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="UAE Rollball.webp" alt="UAE Rollball Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="UAE Skateball.png" alt="UAE Skateball Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="Shahdag.png" alt="Shahdag Mountain Resort"></button>
-                <button type="button" class="client-logo-grid-item"><img src="Zayed Sports City.png" alt="Zayed Sports City Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="azerbaijan.png" alt="Azerbaijan Logo"></button>
-                <button type="button" class="client-logo-grid-item"><img src="ISMF.png" alt="International Ski Mountaineering Federation"></button>
-                <button type="button" class="client-logo-grid-item"><img src="GFSF.png" alt="Georgian Figure Skating Federation Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="3335" height="3334" src="assets/optimized/rollfinity-384.webp" data-fallback-src="rollfinity.webp" alt="Rollfinity Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="2084" height="2084" src="assets/optimized/rollersider-384.webp" data-fallback-src="rollersider.webp" alt="Rollsiders Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="4267" height="3000" src="assets/optimized/funkyrollers-384.webp" data-fallback-src="funkyrollers.webp" alt="Funky Rollers Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="1654" height="951" src="assets/optimized/madrollers-384.webp" data-fallback-src="madrollers.png" alt="MadRollers Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="320" height="200" src="assets/optimized/osc-384.webp" data-fallback-src="osc.png" alt="Oasis Skating Club Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="508" height="500" src="assets/optimized/olympia-sports-institution-384.webp" data-fallback-src="Olympia Sports Institution.png" alt="Olympia Sports Institution Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="1672" height="941" src="assets/optimized/alpha-x-sports-384.webp" data-fallback-src="Alpha X sports.png" alt="Alpha X Sports Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="800" height="800" src="assets/optimized/proskatingby-384.webp" data-fallback-src="ProSkatingBy.png" alt="ProSkatingBy Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="274" height="274" src="assets/optimized/ramy-squash-384.webp" data-fallback-src="Ramy Squash.png" alt="Ramy Squash Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="2598" height="3071" src="assets/optimized/rolloryx-2024-384.webp" data-fallback-src="Rolloryx 2024.webp" alt="Rolloryx 2024 Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="570" height="570" src="assets/optimized/tiba-gymnastics-384.webp" data-fallback-src="Tiba Gymnastics.png" alt="Tiba Gymnastics Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="1414" height="2000" src="assets/optimized/uae-rollball-384.webp" data-fallback-src="UAE Rollball.webp" alt="UAE Rollball Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="1000" height="1000" src="assets/optimized/uae-skateball-384.webp" data-fallback-src="UAE Skateball.png" alt="UAE Skateball Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="320" height="200" src="assets/optimized/shahdag-384.webp" data-fallback-src="Shahdag.png" alt="Shahdag Mountain Resort"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="320" height="200" src="assets/optimized/zayed-sports-city-384.webp" data-fallback-src="Zayed Sports City.png" alt="Zayed Sports City Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="320" height="200" src="assets/optimized/azerbaijan-384.webp" data-fallback-src="azerbaijan.png" alt="Azerbaijan Logo"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="1586" height="992" src="assets/optimized/ismf-384.webp" data-fallback-src="ISMF.png" alt="International Ski Mountaineering Federation"></button>
+                <button type="button" class="client-logo-grid-item"><img loading="lazy" decoding="async" width="320" height="200" src="assets/optimized/gfsf-384.webp" data-fallback-src="GFSF.png" alt="Georgian Figure Skating Federation Logo"></button>
             </div>
         </section>
 
@@ -422,25 +409,25 @@
                         data-composition-variant="events"
                     >
                         <!-- Single-image fallback used by the other client types -->
-                        <img
+                        <img loading="lazy" decoding="async" width="4000" height="2668"
                             id="use-case-image"
                             class="use-case-image use-case-image--single"
-                            src="who-events-race.JPG"
+                            src="assets/optimized/who-events-race-1280.webp" data-fallback-src="who-events-race.JPG"
                             alt=""
                         >
 
                         <!-- Reusable layered composition. Academies use dashboard + scene + phone; Events use race + judges only. -->
-                        <img
+                        <img loading="lazy" decoding="async" width="4000" height="2668"
                             id="use-case-dashboard"
                             class="use-case-layer use-case-layer-dashboard"
-                            src="who-events-race.JPG"
+                            src="assets/optimized/who-events-race-1280.webp" data-fallback-src="who-events-race.JPG"
                             alt=""
                             aria-hidden="true"
                         >
-                        <img
+                        <img loading="lazy" decoding="async" width="1639" height="959"
                             id="use-case-scene"
                             class="use-case-layer use-case-layer-scene"
-                            src="who-events-judges.jpg"
+                            src="assets/optimized/who-events-judges-1280.webp" data-fallback-src="who-events-judges.jpg"
                             alt=""
                             aria-hidden="true"
                         >
@@ -750,36 +737,36 @@
                             <div class="sticky-content-wrapper">
 
                                 <div class="step-title-container">
-                                    <h3 class="step-title" data-step="1">I. Build Your Development Pathway</h3>
+                                    <h3 class="step-title is-active" data-step="1">I. Build Your Development Pathway</h3>
                                     <h3 class="step-title" data-step="2">II. Build Your Exercise Library</h3>
                                     <h3 class="step-title" data-step="3">III. Run Evaluations in Real Time</h3>
                                     <h3 class="step-title" data-step="4">IV. Turn Progress Into Decisions</h3>
                                 </div>
 
                                 <div class="mockup-container">
-                                    <img
-                                        src="screen-stages.png"
-                                        class="mockup-screen"
+                                    <img loading="lazy" decoding="async" width="1024" height="1535"
+                                        src="assets/optimized/screen-stages-640.webp" srcset="assets/optimized/screen-stages-640.webp 640w, assets/optimized/screen-stages-1024.webp 1024w" sizes="(max-width: 991px) min(80vw, 320px), 40vw" data-fallback-src="screen-stages.png"
+                                        class="mockup-screen is-active"
                                         data-step="1"
                                         alt="VitaQ development pathway screen."
                                     >
 
-                                    <img
-                                        src="screen-library.png"
+                                    <img loading="lazy" decoding="async" width="1024" height="1536"
+                                        src="assets/optimized/screen-library-640.webp" srcset="assets/optimized/screen-library-640.webp 640w, assets/optimized/screen-library-1024.webp 1024w" sizes="(max-width: 991px) min(80vw, 320px), 40vw" data-fallback-src="screen-library.png"
                                         class="mockup-screen"
                                         data-step="2"
                                         alt="VitaQ exercise library screen."
                                     >
 
-                                    <img
-                                        src="screen-evaluation.png"
+                                    <img loading="lazy" decoding="async" width="1024" height="1536"
+                                        src="assets/optimized/screen-evaluation-640.webp" srcset="assets/optimized/screen-evaluation-640.webp 640w, assets/optimized/screen-evaluation-1024.webp 1024w" sizes="(max-width: 991px) min(80vw, 320px), 40vw" data-fallback-src="screen-evaluation.png"
                                         class="mockup-screen"
                                         data-step="3"
                                         alt="VitaQ live evaluation screen."
                                     >
 
-                                    <img
-                                        src="screen-analytics.png"
+                                    <img loading="lazy" decoding="async" width="1024" height="1536"
+                                        src="assets/optimized/screen-analytics-640.webp" srcset="assets/optimized/screen-analytics-640.webp 640w, assets/optimized/screen-analytics-1024.webp 1024w" sizes="(max-width: 991px) min(80vw, 320px), 40vw" data-fallback-src="screen-analytics.png"
                                         class="mockup-screen"
                                         data-step="4"
                                         alt="VitaQ athlete analytics screen."
@@ -950,8 +937,8 @@
                             I. Build Your Development Pathway
                         </h3>
 
-                        <img
-                            src="screen-stages.png"
+                        <img loading="lazy" decoding="async" width="1024" height="1535"
+                            src="assets/optimized/screen-stages-640.webp" srcset="assets/optimized/screen-stages-640.webp 640w, assets/optimized/screen-stages-1024.webp 1024w" sizes="(max-width: 991px) min(80vw, 320px), 40vw" data-fallback-src="screen-stages.png"
                             class="mobile-mockup-screen"
                             alt="VitaQ development pathway screen."
                         >
@@ -999,8 +986,8 @@
                             II. Build Your Exercise Library
                         </h3>
 
-                        <img
-                            src="screen-library.png"
+                        <img loading="lazy" decoding="async" width="1024" height="1536"
+                            src="assets/optimized/screen-library-640.webp" srcset="assets/optimized/screen-library-640.webp 640w, assets/optimized/screen-library-1024.webp 1024w" sizes="(max-width: 991px) min(80vw, 320px), 40vw" data-fallback-src="screen-library.png"
                             class="mobile-mockup-screen"
                             alt="VitaQ exercise library screen."
                         >
@@ -1043,8 +1030,8 @@
                             III. Run Evaluations in Real Time
                         </h3>
 
-                        <img
-                            src="screen-evaluation.png"
+                        <img loading="lazy" decoding="async" width="1024" height="1536"
+                            src="assets/optimized/screen-evaluation-640.webp" srcset="assets/optimized/screen-evaluation-640.webp 640w, assets/optimized/screen-evaluation-1024.webp 1024w" sizes="(max-width: 991px) min(80vw, 320px), 40vw" data-fallback-src="screen-evaluation.png"
                             class="mobile-mockup-screen"
                             alt="VitaQ live evaluation screen."
                         >
@@ -1092,8 +1079,8 @@
                             IV. Turn Progress Into Decisions
                         </h3>
 
-                        <img
-                            src="screen-analytics.png"
+                        <img loading="lazy" decoding="async" width="1024" height="1536"
+                            src="assets/optimized/screen-analytics-640.webp" srcset="assets/optimized/screen-analytics-640.webp 640w, assets/optimized/screen-analytics-1024.webp 1024w" sizes="(max-width: 991px) min(80vw, 320px), 40vw" data-fallback-src="screen-analytics.png"
                             class="mobile-mockup-screen"
                             alt="VitaQ athlete analytics screen."
                         >
@@ -1141,7 +1128,7 @@
         <!-- Section 8: White-Label Solution -->
         <section class="white-label container">
             <div class="white-label-image-wrapper animate-with-scrub">
-                <img src="white-label.png" alt="Demonstration of VitaQ's white-label capabilities, showing an admin area UI card floating next to a phone displaying a list of athletes.">
+                <img loading="lazy" decoding="async" width="1024" height="1536" src="assets/optimized/white-label-640.webp" srcset="assets/optimized/white-label-640.webp 640w, assets/optimized/white-label-1024.webp 1024w" sizes="(max-width: 767px) 80vw, 30vw" data-fallback-src="white-label.png" alt="Demonstration of VitaQ's white-label capabilities, showing an admin area UI card floating next to a phone displaying a list of athletes.">
             </div>
             <div class="white-label-content">
                 <h2 class="section-title">Your brand. Powered by VitaQ.</h2>
@@ -1633,19 +1620,17 @@
     </div>
     
     <!-- JAVASCRIPT LIBRARIES -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     
     <!-- GSAP Core Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     
-    <!-- GSAP ScrollTrigger Plugin -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <!-- Custom Script -->
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 
 </body>
 </html>
