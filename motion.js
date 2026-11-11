@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Decorative CSS loops only run while their section is visible.
-    const loopingSections = document.querySelectorAll('#clients, .bento-grid, .testimonials-wrapper');
+    const loopingSections = document.querySelectorAll('.bento-grid, .testimonials-wrapper');
     const visibleSections = new Set();
     function updateLoops() {
         loopingSections.forEach(section => section.classList.toggle('motion-visible',
