@@ -64,6 +64,64 @@ async function checkDesktopSteps(page) {
     }
 }
 
+async function checkClientList(page) {
+    const grid = page.locator('#client-logo-grid');
+    const toggle = page.locator('#client-view-toggle');
+    await grid.scrollIntoViewIfNeeded();
+    await grid.locator('img').last().scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => [...document.querySelectorAll('#client-logo-grid img')]
+        .every(image => image.complete && image.naturalWidth > 0));
+
+    const rendering = await grid.evaluate(element => {
+        const section = element.closest('.social-proof');
+        const cards = [...element.querySelectorAll('.client-logo-grid-item')];
+        return {
+            mask: getComputedStyle(section).maskImage,
+            cardCount: cards.length,
+            filters: cards.flatMap(card => [
+                getComputedStyle(card).backdropFilter,
+                getComputedStyle(card.querySelector('img')).filter,
+                getComputedStyle(card, '::before').filter,
+                getComputedStyle(card, '::after').filter,
+            ]),
+            animations: cards.flatMap(card => [
+                getComputedStyle(card, '::before').animationName,
+                getComputedStyle(card, '::after').animationName,
+            ]),
+        };
+    });
+    assert.equal(rendering.cardCount, 18);
+    assert.equal(rendering.mask, 'none', 'List mode must not mask the whole scrolling grid');
+    assert.ok(rendering.filters.every(filter => filter === 'none'), 'List cards must not stack backdrop, logo and smoke filters');
+    assert.ok(rendering.animations.every(animation => animation === 'none'), 'List decoration must not run continuous animations');
+
+    const trackBefore = await page.locator('.client-reel').getAttribute('style');
+    await page.evaluate(async () => {
+        const start = scrollY;
+        for (let frame = 0; frame < 30; frame++) {
+            scrollTo({ top: start + frame * 8, behavior: 'instant' });
+            await new Promise(requestAnimationFrame);
+        }
+    });
+    assert.equal(await page.locator('.client-reel').getAttribute('style'), trackBefore, 'Hidden reel must not update while the list scrolls');
+
+    await grid.locator('button').first().click();
+    await page.waitForFunction(() => document.querySelector('.client-logo-grid-item').getAnimations().length > 0);
+    await toggle.click();
+    assert.equal(await grid.isVisible(), false);
+    assert.equal(await page.locator('#client-reel-container').isVisible(), true);
+    assert.notEqual(await page.locator('.social-proof').evaluate(section => getComputedStyle(section).maskImage), 'none', 'Reel keeps its fade');
+    const position = await page.locator('.client-reel').getAttribute('style');
+    await page.waitForFunction(previous => document.querySelector('.client-reel').getAttribute('style') !== previous, position);
+    await toggle.click();
+    assert.equal(await grid.isVisible(), true);
+    assert.equal(await page.locator('.social-proof').evaluate(section => getComputedStyle(section).maskImage), 'none');
+    if (artifacts) {
+        await grid.scrollIntoViewIfNeeded();
+        await page.screenshot({ path: join(artifacts, `client-list-${page.viewportSize().width}.png`) });
+    }
+}
+
 async function runCase(browser, url, name, options = {}, failure = '') {
     if (process.env.TEST_CASE && !name.includes(process.env.TEST_CASE)) return;
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2, ...options });
@@ -89,6 +147,12 @@ async function runCase(browser, url, name, options = {}, failure = '') {
         });
         await page.goto(url, { waitUntil: 'domcontentloaded' });
         await page.waitForSelector('body.loaded');
+        if (failure === 'client-list') {
+            await checkClientList(page);
+            assert.deepEqual(errors, []);
+            console.log(`PASS ${name}`);
+            return;
+        }
         if (options.hasTouch === false && options.reducedMotion !== 'reduce') {
             await checkDesktopSteps(page);
             await page.setViewportSize({ width: 390, height: 844 });
@@ -149,6 +213,8 @@ async function main() {
     const url = `http://127.0.0.1:${server.address().port}/`;
     const chrome = await chromium.launch({ executablePath: process.env.CHROMIUM_EXECUTABLE });
     try {
+        await runCase(chrome, url, 'client-list-phone', {}, 'client-list');
+        await runCase(chrome, url, 'client-list-desktop', { viewport: { width: 1440, height: 1000 }, isMobile: false, hasTouch: false }, 'client-list');
         await runCase(chrome, url, 'phone-390');
         await runCase(chrome, url, 'phone-320', { viewport: { width: 320, height: 740 } });
         await runCase(chrome, url, 'touch-tablet', { viewport: { width: 1024, height: 1366 } });
@@ -170,6 +236,7 @@ async function main() {
     }
     const safari = await webkit.launch({ executablePath: process.env.WEBKIT_EXECUTABLE });
     try {
+        await runCase(safari, url, 'client-list-webkit', {}, 'client-list');
         await runCase(safari, url, 'webkit-phone');
     } finally {
         await safari.close();

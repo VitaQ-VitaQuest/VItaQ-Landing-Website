@@ -385,12 +385,18 @@ section { padding: 9rem 0; position: relative; }
     display: none;
 }
 
+/* The full list scrolls with the page; a section-sized alpha mask forces all
+   its cards through an extra rendering surface. Keep the fade on the reel only. */
+.social-proof:has(> .client-logo-grid:not([hidden])) {
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
 .client-logo-grid-item {
     --client-reel-glow-left: color-mix(in srgb, var(--primary-pink) 18%, transparent);
     --client-reel-glow-center: var(--client-reel-glow-left);
     --client-reel-glow-right: color-mix(in srgb, var(--bg-dark) 55%, transparent);
     --logo-accent: 148, 163, 184;
-    --smoke-delay: -3s;
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -411,8 +417,6 @@ section { padding: 9rem 0; position: relative; }
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
     transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 240ms ease, box-shadow 240ms ease;
 }
 
@@ -449,48 +453,20 @@ section { padding: 9rem 0; position: relative; }
 .client-logo-grid-item::after {
     content: '';
     position: absolute;
-    inset: -35% -25%;
+    inset: 0;
     z-index: 0;
     pointer-events: none;
     background:
         radial-gradient(ellipse 58% 24% at 28% 42%, var(--client-reel-glow-left), transparent 76%),
         radial-gradient(ellipse 48% 32% at 72% 64%, var(--client-reel-glow-center), transparent 78%);
-    filter: blur(16px);
-    opacity: 0.45;
-    animation: client-card-smoke-drift 18s ease-in-out infinite alternate;
-    animation-delay: var(--smoke-delay);
+    /* Soft gradient stops provide the glass tint without per-card blur or loops. */
+    opacity: 0.35;
 }
 
 .client-logo-grid-item::after {
     background:
         radial-gradient(ellipse 38% 58% at 62% 38%, var(--client-reel-glow-center), transparent 74%),
         radial-gradient(ellipse 62% 22% at 34% 72%, var(--client-reel-glow-left), transparent 80%);
-    animation-duration: 25s;
-    animation-direction: alternate-reverse;
-    animation-delay: calc(var(--smoke-delay) - 9s);
-}
-
-.client-logo-grid-item:nth-child(3n + 1) {
-    --smoke-delay: -11s;
-}
-
-.client-logo-grid-item:nth-child(3n + 2) {
-    --smoke-delay: -19s;
-}
-
-@keyframes client-card-smoke-drift {
-    0% {
-        transform: translate3d(-8%, 7%, 0) rotate(-9deg) scale(1.04, 0.92);
-        opacity: 0.32;
-    }
-    50% {
-        transform: translate3d(3%, -6%, 0) rotate(4deg) scale(1.16, 1.08);
-        opacity: 0.6;
-    }
-    100% {
-        transform: translate3d(8%, 3%, 0) rotate(11deg) scale(1.08, 1.16);
-        opacity: 0.4;
-    }
 }
 
 .client-logo-grid-item img {
@@ -502,7 +478,6 @@ section { padding: 9rem 0; position: relative; }
     height: auto;
     user-select: none;
     -webkit-user-drag: none;
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.28)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.16));
     transition: transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -3128,15 +3103,11 @@ body.cursor-active {
 }
 
 /* Release offscreen decorative animation work; content reveals remain independent. */
-.client-logo-grid-item::before,
-.client-logo-grid-item::after,
 .testimonial-reel,
 .live-badge,
 .scan-laser {
     animation-play-state: paused;
 }
-.motion-visible .client-logo-grid-item::before,
-.motion-visible .client-logo-grid-item::after,
 .motion-visible .testimonial-reel,
 .motion-visible .live-badge,
 .motion-visible .scan-laser {
