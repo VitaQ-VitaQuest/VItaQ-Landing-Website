@@ -3116,7 +3116,6 @@ body.cursor-active {
 .testimonial-reel-container:hover .testimonial-reel { animation-play-state: paused; }
 
 @media (max-width: 991px), (hover: none), (pointer: coarse) {
-    .main-nav-container { background: rgba(10, 10, 16, 0.96); }
     .use-case-composition img { filter: none; }
     .white-label-image-wrapper img { will-change: auto; }
 }
